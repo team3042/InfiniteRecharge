@@ -20,7 +20,7 @@ public class RotationControl extends Command {
 	
 	/** Instance Variables ****************************************************/
 	ControlPanelWheel cpwheel = Robot.cpwheel;
-	CPWheelEncoder encoder = cpwheel.getEncoder();  
+	CPWheelEncoder encoder = cpwheel.getEncoder();
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(cpwheel));
 	
 	/** Rotation Control ***************************************************
