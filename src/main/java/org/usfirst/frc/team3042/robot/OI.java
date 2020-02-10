@@ -60,7 +60,7 @@ public class OI {
 			driveAxisRight = GAMEPAD_RIGHT_Y_AXIS;
 		}
 		
-		/** PBOT Controls *****************************************************/
+		/** Controls *****************************************************/
 		gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 
 		gamepad.Y.whenPressed(new Conveyor_Reverse());

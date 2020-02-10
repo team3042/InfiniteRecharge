@@ -39,7 +39,7 @@ public class RobotMap {
 	public static final int CAN_LOWER_CONVEYOR = 0;
 	public static final int CAN_LOWER_CONVEYOR2 = 0;
 	public static final int CAN_CLIMBING_WINCH = 0;
-	public static final int CAN_CLIMBING_HOOK =0;
+	public static final int CAN_CLIMBING_HOOK = 0;
 	
 	/** PCM channels **********************************************************/
 	//public static final int INTAKE_DEPLOY_SOLENOID = 9;
@@ -79,7 +79,7 @@ public class RobotMap {
 	public static final double kP_AUTON = 0.4;
 	public static final double kI_AUTON = 0.0;
 	public static final double kD_AUTON = 0.8;
-	public static final int I_ZONE_AUTON =0;
+	public static final int I_ZONE_AUTON = 0;
 	//The rate of pushing motion profile points to the talon, in ms
 	public static final int AUTON_FRAME_RATE = 10;
 	//Parameters for calibrating the F-gain
