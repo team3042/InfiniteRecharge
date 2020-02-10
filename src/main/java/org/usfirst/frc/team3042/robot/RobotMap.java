@@ -7,15 +7,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 /** RobotMap ******************************************************************
  * The robot configuration file.
  */
-public class RobotMap {
-	/** Robot selector ********************************************************/
-	public static enum Bot {PBOT, DEFENSEBOT;}
-	// Set the bot to which you intend to push code.
-	private static Bot currentBot = Bot.PBOT;
-
-	public static final boolean IS_PBOT 	= (currentBot == Bot.PBOT);
-	public static final boolean IS_DEFENSEBOT = (currentBot == Bot.DEFENSEBOT);
-	
+public class RobotMap {	
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
@@ -34,25 +26,25 @@ public class RobotMap {
 	public static final int DIO_ULTRASONIC_ECHO = 9;
 	
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_MOTOR 	= 			IS_PBOT 	? 3 : 15;
-	public static final int CAN_RIGHT_MOTOR = 			IS_PBOT 	? 9 : 2;
-	public static final int CAN_LEFT_FOLLOWER = 		IS_PBOT 	? 3 : 17;
-	public static final int CAN_RIGHT_FOLLOWER = 		IS_PBOT 	? 9 : 19;
-	public static final int CAN_CONTROL_PANEL_WHEEL = 	IS_PBOT 	? 0 : 0;
-	public static final int CAN_TURRET = 				IS_PBOT		? 0 : 0; 
-	public static final int CAN_INTAKE = 				IS_PBOT 	? 0 : 0;
-	public static final int CAN_SHOOTER = 				IS_PBOT 	? 0 : 0;
-	public static final int CAN_UPPER_CONVEYOR = 		IS_PBOT 	? 0 : 0;
-	public static final int CAN_UPPER_CONVEYOR2 = 		IS_PBOT 	? 0 : 0;
-	public static final int CAN_LOWER_CONVEYOR = 		IS_PBOT 	? 0 : 0;
-	public static final int CAN_LOWER_CONVEYOR2 = 		IS_PBOT 	? 0 : 0;
-	public static final int CAN_CLIMBING_WINCH = 		IS_PBOT 	? 0 : 0;
-	public static final int CAN_CLIMBING_HOOK = 		IS_PBOT 	? 0 : 0;
+	public static final int CAN_LEFT_MOTOR 	= 3;
+	public static final int CAN_RIGHT_MOTOR = 9;
+	public static final int CAN_LEFT_FOLLOWER = 3;
+	public static final int CAN_RIGHT_FOLLOWER = 9;
+	public static final int CAN_CONTROL_PANEL_WHEEL = 0;
+	public static final int CAN_TURRET = 0;
+	public static final int CAN_INTAKE = 0;
+	public static final int CAN_SHOOTER = 0;
+	public static final int CAN_UPPER_CONVEYOR = 0;
+	public static final int CAN_UPPER_CONVEYOR2 = 0;
+	public static final int CAN_LOWER_CONVEYOR = 0;
+	public static final int CAN_LOWER_CONVEYOR2 = 0;
+	public static final int CAN_CLIMBING_WINCH = 0;
+	public static final int CAN_CLIMBING_HOOK =0;
 	
 	/** PCM channels **********************************************************/
-	//public static final int INTAKE_DEPLOY_SOLENOID =			(IS_PBOT) 	? 9 : 2;
-	//public static final int INTAKE_DEPLOY_SOLENOID2 =			(IS_PBOT) 	? 9 : 2;
-	//public static final int SHOOTER_HOOD_SOLENID =			(IS_PBOT) 	? 9 : 2;	
+	//public static final int INTAKE_DEPLOY_SOLENOID = 9;
+	//public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
+	//public static final int SHOOTER_HOOD_SOLENID = 9;	
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
@@ -65,12 +57,12 @@ public class RobotMap {
 	public static final boolean HAS_DRIVETRAIN = true;
 	public static final boolean HAS_FOLLOWERS = true;
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR  = 	(IS_PBOT) ? true : false;
-	public static final boolean REVERSE_RIGHT_MOTOR = 	(IS_PBOT) ? false : true;
+	public static final boolean REVERSE_LEFT_MOTOR = true;
+	public static final boolean REVERSE_RIGHT_MOTOR = false;
 	// Maximum Acceleration given in power per second
 	public static final double ACCELERATION_MAX = 1.5;
-	public static final double kF_DRIVE_LEFT = 	(IS_PBOT) 	?  0.1817180616740088  : 0.1817180616740088;
-	public static final double kF_DRIVE_RIGHT = (IS_PBOT) 	?  0.16686239968682717 : 0.16686239968682717;
+	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
+	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
 	/** Drivetrain Encoder Settings **************************************************/
 	public static final boolean HAS_ENCODERS = true;
 	//Encoder counts per revolution
@@ -78,16 +70,16 @@ public class RobotMap {
 	public static final int COUNTS_PER_REVOLUTION = 1440;
 	//How often the encoders update on the CAN, in milliseconds
 	public static final int ENCODER_FRAME_RATE = 10;
-	public static final boolean SENSOR_PHASE_LEFT = 	(IS_PBOT) ? false: false;
-	public static final boolean SENSOR_PHASE_RIGHT = 	(IS_PBOT) ? false: false;
+	public static final boolean SENSOR_PHASE_LEFT = false;
+	public static final boolean SENSOR_PHASE_RIGHT = false;
 	
 	/** Drivetrain Autonomous Settings ****************************************/
 	public static final boolean HAS_AUTON = HAS_ENCODERS;
 	public static final int AUTON_PROFILE = 0;
-	public static final double kP_AUTON = 		(IS_PBOT) 		? 0.4 : 0.0;
-	public static final double kI_AUTON = 		(IS_PBOT) 		? 0.0 : 0.0;
-	public static final double kD_AUTON = 		(IS_PBOT) 		? 0.8 : 0.0;
-	public static final int I_ZONE_AUTON =		(IS_PBOT)		? 0   : 0;
+	public static final double kP_AUTON = 0.4;
+	public static final double kI_AUTON = 0.0;
+	public static final double kD_AUTON = 0.8;
+	public static final int I_ZONE_AUTON =0;
 	//The rate of pushing motion profile points to the talon, in ms
 	public static final int AUTON_FRAME_RATE = 10;
 	//Parameters for calibrating the F-gain
@@ -126,7 +118,7 @@ public class RobotMap {
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
-	public static final boolean REVERSE_CONTROL_PANEL_WHEEL  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = false;
 	public static final NeutralMode CPWHEEL_BRAKE_MODE = NeutralMode.Brake;
 	public static final int CPWHEEL_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int CPWHEEL_PIDIDX = 0; // used for cascading PID; set to zero
@@ -142,7 +134,7 @@ public class RobotMap {
 
 	/** Turret Settings ****************************************************/
 	public static final boolean HAS_TURRET = true;
-	public static final boolean REVERSE_TURRET  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_TURRET = false;
 	public static final NeutralMode TURRET_BRAKE_MODE = NeutralMode.Brake;
 	public static final int TURRET_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int TURRET_PIDIDX = 0; // used for cascading PID; set to zero
@@ -164,7 +156,7 @@ public class RobotMap {
 
 	/** Intake Settings *******************************************************/
 	public static final boolean HAS_INTAKE = true;
-	public static final boolean REVERSE_INTAKE  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_INTAKE = false;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
 	public static final int INTAKE_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int INTAKE_PIDIDX = 0; // used for cascading PID; set to zero
@@ -174,16 +166,16 @@ public class RobotMap {
 
 	/** Upper Conveyor Settings ****************************************************/
 	public static final boolean HAS_UPPER_CONVEYOR = true;
-	public static final boolean REVERSE_UPPER_CONVEYOR  = 	(IS_PBOT) ? false : false;
-	public static final boolean REVERSE_UPPER_CONVEYOR2  = 	(IS_PBOT) ? true : true;
+	public static final boolean REVERSE_UPPER_CONVEYOR = false;
+	public static final boolean REVERSE_UPPER_CONVEYOR2 = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final int UPPER_CONVEYOR_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int UPPER_CONVEYOR_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double UPPER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
 	public static final boolean HAS_LOWER_CONVEYOR = true;
-	public static final boolean REVERSE_LOWER_CONVEYOR  = 	(IS_PBOT) ? false : false;
-	public static final boolean REVERSE_LOWER_CONVEYOR2  = 	(IS_PBOT) ? true : true;
+	public static final boolean REVERSE_LOWER_CONVEYOR = false;
+	public static final boolean REVERSE_LOWER_CONVEYOR2 = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final int LOWER_CONVEYOR_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int LOWER_CONVEYOR_PIDIDX = 0; // used for cascading PID; set to zero
@@ -194,7 +186,7 @@ public class RobotMap {
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
 	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
-	public static final boolean REVERSE_SHOOTER  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_SHOOTER = false;
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
@@ -205,14 +197,14 @@ public class RobotMap {
 
 	/** Climbing Winch Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_WINCH = true;
-	public static final boolean REVERSE_CLIMBING_WINCH  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
 	public static final int CLIMBING_WINCH_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int CLIMBING_WINCH_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double CLIMBING_WINCH_POWER = 0.33; //How much power (as a %) to give the climbing winch
 	/** Climbing Hook Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_HOOK = true;
-	public static final boolean REVERSE_CLIMBING_HOOK  = 	(IS_PBOT) ? false : false;
+	public static final boolean REVERSE_CLIMBING_HOOK = false;
 	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
 	public static final int CLIMBING_HOOK_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int CLIMBING_HOOK_PIDIDX = 0; // used for cascading PID; set to zero
