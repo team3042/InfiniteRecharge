@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
 		shooterhood.extend(); //Raise the shooter hood since we start close to the target
-		intakedeploy.activate(); //Deploy the intake
+		intakedeploy.extend(); //Deploy the intake
 		
 		autonomousCommand = chooser.getSelected();
 

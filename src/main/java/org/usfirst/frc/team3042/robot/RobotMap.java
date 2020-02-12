@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  * The robot configuration file.
  */
 public class RobotMap {	
+
+	public static final boolean TestMode = true;
+
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 

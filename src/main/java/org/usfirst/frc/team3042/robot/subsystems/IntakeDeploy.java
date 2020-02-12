@@ -26,9 +26,13 @@ public class IntakeDeploy extends Subsystem {
     	log.add("Constructor", LOG_LEVEL);
 	}
 
-	public void activate(){
+	public void extend(){
 		//intakeDeploySolenoid.set(true);
 		//intakeDeploySolenoid2.set(true);
+	}
+	public void retract() {
+		//intakeDeploySolenoid.set(false);
+		//intakeDeploySolenoid2.set(false);
 	}
 	
 	/** initDefaultCommand ****************************************************

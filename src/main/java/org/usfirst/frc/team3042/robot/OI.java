@@ -6,11 +6,15 @@ import org.usfirst.frc.team3042.robot.commands.PositionControl;
 import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.ShooterHood_Toggle;
+import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
+import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.Conveyor_Reverse;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
+import org.usfirst.frc.team3042.robot.commands.IntakeDeploy_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
+import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
@@ -31,6 +35,7 @@ public class OI {
 	private static final int GAMEPAD_LEFT_TRIGGER = Gamepad.LEFT_TRIGGER;
 	private static final int GAMEPAD_RIGHT_TRIGGER = Gamepad.RIGHT_TRIGGER;
 	private static final double JOYSTICK_DRIVE_SCALE_LOW = RobotMap.JOYSTICK_DRIVE_SCALE_LOW;
+	private static final boolean test = RobotMap.TestMode;
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(RobotMap.LOG_OI, "OI");
@@ -61,6 +66,24 @@ public class OI {
 		}
 		
 		/** Controls *****************************************************/
+		if (test) { //Test Mode Controls
+			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
+			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
+
+			gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
+			gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
+			gamepad.B.whenPressed(new RotationControl());
+
+			gamepad.LB.whileHeld(new Intake_Intake());
+			gamepad.RB.whileHeld(new Shooter_Spin());
+
+			gamepad.POVRight.whileActive(new Turret_Manual(1));
+			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+
+			gamepad.RT.whileActive(new LowerConveyor_Test());
+			gamepad.LT.whileActive(new UpperConveyor_Test());
+		}
+		else{ //Normal Match Controls
 		gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 
 		gamepad.Y.whenPressed(new Conveyor_Reverse());
@@ -77,7 +100,7 @@ public class OI {
 
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
-		
+		}
 	}
 	
 	/** Access to the driving axes values *************************************
