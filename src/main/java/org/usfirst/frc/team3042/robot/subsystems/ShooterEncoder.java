@@ -18,8 +18,8 @@ public class ShooterEncoder extends Subsystem {
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET_ENCODER;
 	private static final int FRAME_RATE = RobotMap.TURRET_ENCODER_FRAME_RATE;
 	private static final int COUNTS_PER_REV = RobotMap.TURRET_ENCODER_COUNTS_PER_REV;
-	private static final int TIMEOUT = RobotMap.TURRET_TIMEOUT;
-	private static final int PIDIDX = RobotMap.TURRET_PIDIDX;
+	private static final int TIMEOUT = RobotMap.SHOOTER_TIMEOUT;
+	private static final int PIDIDX = RobotMap.SHOOTER_PIDIDX;
 	private static final boolean SENSOR_PHASE = RobotMap.TURRET_SENSOR_PHASE;
 
 	/** Instance Variables ****************************************************/

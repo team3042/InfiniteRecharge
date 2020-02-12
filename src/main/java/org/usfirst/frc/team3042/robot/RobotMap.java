@@ -147,7 +147,6 @@ public class RobotMap {
 	public static final double TURRET_MAX_POWER = 0.4; //The maximum power (as a %) the turret will be given when running the target-tracking PID loop
 	public static final double TURRET_MANUAL_POWER = 0.2; //How much power (as a %) to give the turret when using manual control
 	public static final int TURRET_MAX_ANGLE = 180; //The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
-	public static final int TURRET_MAX_AUTON_ANGLE = 120; //The max angle the turret will search for the target at the start of autonomous mode
 	public static final double TURRET_SEARCH_POWER = 0.6; //The speed at which the turret zips around to the other side when the max angle is reached, and also the speed at which it searches for the target if the Limelight loses it
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; //If the angle of error to the target is less than this value the PID Loop will not make any corrections
 	/** Turret Encoder Settings **********************************************/
@@ -161,8 +160,6 @@ public class RobotMap {
 	public static final boolean HAS_INTAKE = true;
 	public static final boolean REVERSE_INTAKE = false;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
-	public static final int INTAKE_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int INTAKE_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double INTAKE_POWER = 0.33; //How much power (as a %) to give the intake
 	/** Intake Deploy Settings ****************************************************/
 	public static final boolean HAS_INTAKE_DEPLOY = true;
@@ -172,16 +169,12 @@ public class RobotMap {
 	public static final boolean REVERSE_UPPER_CONVEYOR = false;
 	public static final boolean REVERSE_UPPER_CONVEYOR2 = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final int UPPER_CONVEYOR_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int UPPER_CONVEYOR_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double UPPER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
 	public static final boolean HAS_LOWER_CONVEYOR = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR = false;
 	public static final boolean REVERSE_LOWER_CONVEYOR2 = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final int LOWER_CONVEYOR_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int LOWER_CONVEYOR_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double LOWER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.5; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_REVERSE_DURATION = 0.25; //How long (in seconds) to run the lower conveyor forward after the power cells are brought back down to the bottom
@@ -202,15 +195,11 @@ public class RobotMap {
 	public static final boolean HAS_CLIMBING_WINCH = true;
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
-	public static final int CLIMBING_WINCH_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int CLIMBING_WINCH_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double CLIMBING_WINCH_POWER = 0.33; //How much power (as a %) to give the climbing winch
 	/** Climbing Hook Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_HOOK = true;
 	public static final boolean REVERSE_CLIMBING_HOOK = false;
 	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
-	public static final int CLIMBING_HOOK_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int CLIMBING_HOOK_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double CLIMBING_HOOK_POWER = 0.33; //How much power (as a %) to give the climbing hook
 	
 	/** Logger Settings *******************************************************/

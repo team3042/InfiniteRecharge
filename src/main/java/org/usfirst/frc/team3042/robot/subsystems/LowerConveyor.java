@@ -61,6 +61,11 @@ public class LowerConveyor extends Subsystem {
 	 * Set the default command for the subsystem.
 	 */
 	public void initDefaultCommand() {
-		setDefaultCommand(new LowerConveyor_Advance());
+		if (!RobotMap.TestMode) {
+			setDefaultCommand(new LowerConveyor_Advance());
+		}
+		else {
+			setDefaultCommand(null);
+		}
 	}
 }
