@@ -7,6 +7,7 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
+import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 
 /** Turret Stop *******************************************************
@@ -18,6 +19,7 @@ public class Turret_Stop extends Command {
 
 	/** Instance Variables ****************************************************/
 	Turret turret = Robot.turret;
+	Shooter shooter = Robot.shooter;
 	Limelight limelight = Robot.limelight;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(turret));
 	
@@ -36,6 +38,7 @@ public class Turret_Stop extends Command {
 		log.add("Initialize", Log.Level.TRACE);
 		limelight.led.setNumber(0); //Turn off the Limelight's LEDs
 		turret.stop();
+		shooter.stop();
 	}
 
 	/** execute ***************************************************************

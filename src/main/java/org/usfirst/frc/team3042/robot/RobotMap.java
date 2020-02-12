@@ -36,7 +36,7 @@ public class RobotMap {
 	public static final int CAN_CONTROL_PANEL_WHEEL = 0;
 	public static final int CAN_TURRET = 0;
 	public static final int CAN_INTAKE = 0;
-	public static final int CAN_SHOOTER = 0;
+	public static final int CAN_SHOOTER = 10;
 	public static final int CAN_UPPER_CONVEYOR = 0;
 	public static final int CAN_UPPER_CONVEYOR2 = 0;
 	public static final int CAN_LOWER_CONVEYOR = 0;

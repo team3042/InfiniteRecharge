@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
@@ -36,18 +37,14 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
+		shooter.setPower(POWER);
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		if (limelight.returnValidTarget() == 1.0) {
-			shooter.setPower(POWER);
-		}
-		else if (limelight.returnValidTarget() == 0) {
-			shooter.stop();
-		}
+		SmartDashboard.putNumber("Speed", shooter.getEncoder().getSpeed());
 	}
 
 	/** isFinished ************************************************************	

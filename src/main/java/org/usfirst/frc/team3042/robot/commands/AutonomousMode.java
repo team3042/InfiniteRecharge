@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode extends CommandGroup {
 
   public AutonomousMode() {
+    addParallel(new Shooter_Spin());
     addParallel(new Turret_Continous()); //Search for the target and start tracking it
     //addSequential(new Shoot()); //Shoot the three pre-loaded power cells
     addSequential(new Drivetrain_GyroStraight(60.0, -40.0)); //Drive backwards off the initiation line

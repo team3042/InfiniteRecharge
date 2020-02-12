@@ -95,8 +95,10 @@ public class OI {
 		gamepad.B.whenPressed(new RotationControl());
 
 		gamepad.LB.whileHeld(new Intake_Intake());
+
 		gamepad.RB.whileHeld(new Shoot());
 		gamepad.RB.whileHeld(new Turret_Continous());
+		gamepad.RB.whileHeld(new Shooter_Spin());
 
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
