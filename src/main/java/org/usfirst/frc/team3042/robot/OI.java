@@ -6,6 +6,7 @@ import org.usfirst.frc.team3042.robot.commands.PositionControl;
 import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.ShooterHood_Toggle;
+import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.Conveyor_Reverse;
@@ -72,8 +73,10 @@ public class OI {
 		gamepad.B.whenPressed(new RotationControl());
 
 		gamepad.LB.whileHeld(new Intake_Intake());
+
 		gamepad.RB.whileHeld(new Shoot());
 		gamepad.RB.whileHeld(new Turret_Continous());
+		gamepad.RB.whileHeld(new Shooter_Spin());
 
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
