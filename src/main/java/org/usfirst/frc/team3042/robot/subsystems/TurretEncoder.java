@@ -53,7 +53,7 @@ public class TurretEncoder extends Subsystem {
 	}
 	
 	/** Get the encoder position and velocity *********************************
-	 * Encoder position returns counts, convert to revolutions for output
+	 * Encoder position returns counts
 	 * Encoder speed returns counts per 100 ms, convert to RPM for output
 	 */
 	public double getPosition() {

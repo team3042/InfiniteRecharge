@@ -2,32 +2,33 @@ package org.usfirst.frc.team3042.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
-import org.usfirst.frc.team3042.robot.subsystems.Shooter;
+import org.usfirst.frc.team3042.robot.subsystems.Turret;
+import org.usfirst.frc.team3042.robot.subsystems.TurretEncoder;
 
-/** Shooter *******************************************************
- * Sets power to the shooter
+/** Turret Zero *******************************************************
+ * Command for moving the turret back to it's zero position.
  */
-public class Shooter_Spin extends Command {
+public class Turret_Zero extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-	private static final double POWER = RobotMap.SHOOTER_POWER;
-	
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET;
+	private static final double POWER = RobotMap.TURRET_MANUAL_POWER;
+	private static final double TOLERANCE = RobotMap.ZERO_TOLERANCE;
+
 	/** Instance Variables ****************************************************/
-	Shooter shooter = Robot.shooter;
-	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
+	Turret turret = Robot.turret;
+	TurretEncoder encoder = turret.getEncoder();  
+	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(turret));
 	
-	/** Shooter ***************************************************
+	/** Turret Zero ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
-	public Shooter_Spin() {
+	public Turret_Zero() {
 		log.add("Constructor", Log.Level.TRACE);
-		
-		requires(shooter);
+		requires(turret);
 	}
 
 	/** initialize ************************************************************
@@ -35,21 +36,25 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		shooter.setPower(POWER);
+		if (encoder.getPosition() > 0) {
+			turret.setPower(-1 *POWER);
+		}
+		else if (encoder.getPosition() < 0) {
+			turret.setPower(POWER);
+		}
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		SmartDashboard.putNumber("Shooter Speed", shooter.getEncoder().getSpeed());
 	}
-
+	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
 	protected boolean isFinished() {
-		return false;
+		return Math.abs(encoder.countsToDegrees(encoder.getPosition())) <= TOLERANCE;
 	}
 	
 	/** end *******************************************************************
@@ -57,7 +62,7 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
-		shooter.stop();
+		turret.stop();
 	}
 
 	/** interrupted ***********************************************************
@@ -66,6 +71,6 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
-		shooter.stop();
+		turret.stop();
 	}
 }

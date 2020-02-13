@@ -9,6 +9,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  */
 public class RobotMap {	
 
+	/** Test Mode ******************************************************************
+	* If true, the robot will use the manual controls for testing motors and pistons.
+	* If false, the robot will use the standard competition controls.
+	* This should always be false unless you need to troubleshoot or test something!
+ 	*/
 	public static final boolean TestMode = true;
 
 	/** Robot Size Parameters *************************************************
@@ -155,6 +160,7 @@ public class RobotMap {
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
+	public static final double ZERO_TOLERANCE = 2; //How many degrees the turret can be off from it's zero position to still be considered "zeroed"
 
 	/** Intake Settings *******************************************************/
 	public static final boolean HAS_INTAKE = true;
@@ -178,6 +184,7 @@ public class RobotMap {
 	public static final double LOWER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.5; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_REVERSE_DURATION = 0.25; //How long (in seconds) to run the lower conveyor forward after the power cells are brought back down to the bottom
+	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;

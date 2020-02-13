@@ -19,9 +19,10 @@ public class LowerConveyor extends Subsystem {
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LOWER_CONVEYOR;
 	private static final int CAN_LOWER_CONVEYOR = RobotMap.CAN_LOWER_CONVEYOR;
 	private static final int CAN_LOWER_CONVEYOR2 = RobotMap.CAN_LOWER_CONVEYOR2;
-	  private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_LOWER_CONVEYOR;
-	  private static final boolean REVERSE_MOTOR2 = RobotMap.REVERSE_LOWER_CONVEYOR2;
-  	private static final NeutralMode BRAKE_MODE = RobotMap.LOWER_CONVEYOR_BRAKE_MODE;
+	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_LOWER_CONVEYOR;
+	private static final boolean REVERSE_MOTOR2 = RobotMap.REVERSE_LOWER_CONVEYOR2;
+	private static final NeutralMode BRAKE_MODE = RobotMap.LOWER_CONVEYOR_BRAKE_MODE;
+	private static final boolean test = RobotMap.TestMode;
 
 	/** Instance Variables ****************************************************/
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
@@ -61,11 +62,8 @@ public class LowerConveyor extends Subsystem {
 	 * Set the default command for the subsystem.
 	 */
 	public void initDefaultCommand() {
-		if (!RobotMap.TestMode) {
+		if (!test) {
 			setDefaultCommand(new LowerConveyor_Advance());
-		}
-		else {
-			setDefaultCommand(null);
 		}
 	}
 }

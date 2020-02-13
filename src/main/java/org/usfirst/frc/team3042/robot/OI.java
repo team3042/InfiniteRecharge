@@ -2,19 +2,20 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 
-import org.usfirst.frc.team3042.robot.commands.PositionControl;
-import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.ShooterHood_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
+import org.usfirst.frc.team3042.robot.commands.Turret_Zero;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.Conveyor_Reverse;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.IntakeDeploy_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
+import org.usfirst.frc.team3042.robot.commands.PositionControl;
+import org.usfirst.frc.team3042.robot.commands.RotationControl;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
@@ -72,6 +73,7 @@ public class OI {
 
 			gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 			gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
+
 			gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake());
@@ -79,29 +81,31 @@ public class OI {
 
 			gamepad.POVRight.whileActive(new Turret_Manual(1));
 			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+			gamepad.POVUp.whenActive(new Turret_Zero());
 
 			gamepad.RT.whileActive(new LowerConveyor_Test());
 			gamepad.LT.whileActive(new UpperConveyor_Test());
 		}
-		else{ //Normal Match Controls
-		gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
+		else { //Normal Competition Controls
+			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
+			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-		gamepad.Y.whenPressed(new Conveyor_Reverse());
+			gamepad.Y.toggleWhenPressed(new ShooterHood_Toggle());
 
-		gamepad.POVRight.whileActive(new Turret_Manual(1));
-		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+			gamepad.X.whenPressed(new Conveyor_Reverse());
 
-		gamepad.A.whenPressed(new PositionControl());
-		gamepad.B.whenPressed(new RotationControl());
+			gamepad.POVRight.whileActive(new Turret_Manual(1));
+			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+			gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
-		gamepad.LB.whileHeld(new Intake_Intake());
+			gamepad.A.whenPressed(new PositionControl());
+			gamepad.B.whenPressed(new RotationControl());
 
-		gamepad.RB.whileHeld(new Shoot());
-		gamepad.RB.whileHeld(new Turret_Continous());
-		gamepad.RB.whileHeld(new Shooter_Spin());
+			gamepad.LB.whileHeld(new Intake_Intake());
 
-		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
-		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
+			gamepad.RB.whileHeld(new Turret_Continous());
+			gamepad.RB.whileHeld(new Shooter_Spin());
+			gamepad.RB.whileHeld(new Shoot(false));
 		}
 	}
 	

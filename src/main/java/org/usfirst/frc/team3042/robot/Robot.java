@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
 	private static final boolean HAS_INTAKE_DEPLOY = RobotMap.HAS_INTAKE_DEPLOY;
 	private static final boolean HAS_SHOOTER_HOOD = RobotMap.HAS_SHOOTER_HOOD;
 	private static final boolean HAS_ULTRASONIC_SENSOR = RobotMap.HAS_ULTRASONIC_SENSOR;
+	private static final boolean TEST = RobotMap.TestMode;
 
 	/** Create Subsystems *****************************************************/
 	private Log log = new Log(LOG_LEVEL, "Robot");
@@ -97,6 +98,10 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
+		
+		if (!TEST) {
+			intakedeploy.retract(); //Retract the intake
+		}
 	}
 
 	/** disabledPeriodic ******************************************************
@@ -139,6 +144,11 @@ public class Robot extends TimedRobot {
 		log.add("Teleop Init", Log.Level.TRACE);
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
+
+		if (!TEST) {
+			shooterhood.extend(); //Raise the shooter hood since we start close to the target
+			intakedeploy.extend(); //Deploy the intake
+		}
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
