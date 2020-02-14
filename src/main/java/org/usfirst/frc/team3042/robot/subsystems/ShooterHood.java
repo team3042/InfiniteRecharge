@@ -14,11 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterHood extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER_HOOD;
-	//private static final int ID = RobotMap.SHOOTER_HOOD_SOLENID;
+	//private static final int ID = RobotMap.SHOOTER_HOOD_SOLENOID;
 
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	//Solenoid shooterHoodSolenid = new Solenoid(ID);
+	//Solenoid shooterHoodSolenoid = new Solenoid(ID);
 
 	/** ShooterHood ******************************************************/
 	public ShooterHood() {
@@ -27,11 +27,11 @@ public class ShooterHood extends Subsystem {
 	}
 
 	public void extend() {
-		//shooterHoodSolenid.set(true);
+		//shooterHoodSolenoid.set(true);
 	}
 
 	public void retract() {
-		//shooterHoodSolenid.set(false);
+		//shooterHoodSolenoid.set(false);
 	}
   
 	/** initDefaultCommand ****************************************************

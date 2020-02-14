@@ -61,7 +61,7 @@ public class Shoot extends Command {
      * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && encoder.getSpeed() >= SPEED) {
+      //if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && encoder.getSpeed() >= SPEED) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
         if (!shooting && auto) {
@@ -69,11 +69,11 @@ public class Shoot extends Command {
           shooting = true;
         }
       }
-      else {
+      /*else {
         upperconveyor.stop();
         lowerconveyor.stop();
-      }
-    }
+      }*/
+    //}
     
     /** isFinished ************************************************************	
      * Make this return true when this Command no longer needs to run execute()

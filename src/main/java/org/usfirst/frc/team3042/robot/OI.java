@@ -3,9 +3,6 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Shoot;
-import org.usfirst.frc.team3042.robot.commands.ShooterHood_Toggle;
-import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
-import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.Turret_Zero;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
@@ -24,12 +21,9 @@ public class OI {
 	private static final int USB_GAMEPAD = RobotMap.USB_GAMEPAD;
 	private static final int USB_JOY_LEFT = RobotMap.USB_JOYSTICK_LEFT;
 	private static final int USB_JOY_RIGHT = RobotMap.USB_JOYSTICK_RIGHT;
-	private static final boolean USE_JOYSTICKS = RobotMap.USE_JOYSTICKS;
 	private static final double JOYSTICK_DRIVE_SCALE = RobotMap.JOYSTICK_DRIVE_SCALE;
 	private static final double JOYSTICK_DEAD_ZONE = RobotMap.JOYSTICK_DEAD_ZONE;
 	private static final double TRIGGER_SPINNER_SCALE = RobotMap.TRIGGER_SPINNER_SCALE;
-	private static final int GAMEPAD_LEFT_Y_AXIS = Gamepad.LEFT_JOY_Y_AXIS;
-	private static final int GAMEPAD_RIGHT_Y_AXIS = Gamepad.RIGHT_JOY_Y_AXIS;
 	private static final int JOYSTICK_Y_AXIS = Gamepad.JOY_Y_AXIS;
 	private static final int GAMEPAD_LEFT_TRIGGER = Gamepad.LEFT_TRIGGER;
 	private static final int GAMEPAD_RIGHT_TRIGGER = Gamepad.RIGHT_TRIGGER;
@@ -51,31 +45,23 @@ public class OI {
 		gamepad = new Gamepad(USB_GAMEPAD);
 		
 		/** Setup Driving Controls ********************************************/
-		if (USE_JOYSTICKS) {
-			joyLeft = new Gamepad(USB_JOY_LEFT);
-			joyRight = new Gamepad(USB_JOY_RIGHT);
-			driveAxisLeft = JOYSTICK_Y_AXIS;
-			driveAxisRight = JOYSTICK_Y_AXIS;
-		}
-		else {
-			joyLeft = gamepad;
-			joyRight = gamepad;
-			driveAxisLeft = GAMEPAD_LEFT_Y_AXIS;
-			driveAxisRight = GAMEPAD_RIGHT_Y_AXIS;
-		}
+		joyLeft = new Gamepad(USB_JOY_LEFT);
+		joyRight = new Gamepad(USB_JOY_RIGHT);
+		driveAxisLeft = JOYSTICK_Y_AXIS;
+		driveAxisRight = JOYSTICK_Y_AXIS;
 		
 		/** Controls *****************************************************/
 		if (test) { //Test Mode Controls
 			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-			gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
+			//gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 			gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
 
 			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake());
-			gamepad.RB.whileHeld(new Shooter_Spin());
+			//gamepad.RB.whileHeld(new Shooter_Spin());
 
 			gamepad.POVRight.whileActive(new Turret_Manual(1));
 			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
@@ -88,9 +74,9 @@ public class OI {
 			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-			gamepad.Y.toggleWhenPressed(new ShooterHood_Toggle());
+			//gamepad.A.toggleWhenPressed(new ShooterHood_Toggle());
 
-			gamepad.X.whenPressed(new Conveyor_Reverse());
+			gamepad.Y.whenPressed(new Conveyor_Reverse());
 
 			gamepad.POVRight.whileActive(new Turret_Manual(1));
 			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
@@ -100,9 +86,10 @@ public class OI {
 			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake());
+			gamepad.LT.whileActive(new LowerConveyor_Test());
 
-			gamepad.RB.whileHeld(new Turret_Continous());
-			gamepad.RB.whileHeld(new Shooter_Spin());
+			//gamepad.RB.whileHeld(new Turret_Continous());
+			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
 		}
 	}

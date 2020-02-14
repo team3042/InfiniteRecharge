@@ -76,6 +76,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> chooser = new SendableChooser<Command>();
 
 	public String color;
+	boolean ColorRecieved = false;
 
 	/** robotInit *************************************************************
 	 * This function is run when the robot is first started up and should be
@@ -116,10 +117,11 @@ public class Robot extends TimedRobot {
 	 */
 	public void autonomousInit() {
 		log.add("Autonomous Init", Log.Level.TRACE);
+		ColorRecieved = false;
+		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
-		shooterhood.extend(); //Raise the shooter hood since we start close to the target
 		intakedeploy.extend(); //Deploy the intake
 		
 		autonomousCommand = chooser.getSelected();
@@ -142,13 +144,13 @@ public class Robot extends TimedRobot {
 	 */
 	public void teleopInit() {
 		log.add("Teleop Init", Log.Level.TRACE);
+		ColorRecieved = false;
 
 		turret.getEncoder().reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
 		if (!TEST) {
-			shooterhood.extend(); //Raise the shooter hood since we start close to the target
 			intakedeploy.extend(); //Deploy the intake
 		}
 		
@@ -169,7 +171,8 @@ public class Robot extends TimedRobot {
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();
-		if(color.length() > 0) {
+		if (color.length() > 0) {
+			ColorRecieved = true;
 			switch (color.charAt(0)) {
 				case 'B' :
 				SmartDashboard.putString("Color:", "Blue");
@@ -187,6 +190,9 @@ public class Robot extends TimedRobot {
 				SmartDashboard.putString("Color:", "ERROR");
 				break;
 			}
+		}
+		else if (!ColorRecieved) {
+			SmartDashboard.putString("Color:", "Capacity Not Reached");
 		}
 	} 
 

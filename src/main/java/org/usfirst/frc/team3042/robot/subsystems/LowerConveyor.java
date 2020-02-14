@@ -62,8 +62,8 @@ public class LowerConveyor extends Subsystem {
 	 * Set the default command for the subsystem.
 	 */
 	public void initDefaultCommand() {
-		if (!test) {
+		/*if (!test) {
 			setDefaultCommand(new LowerConveyor_Advance());
-		}
+		}*/
 	}
 }

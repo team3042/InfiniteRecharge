@@ -14,7 +14,7 @@ public class RobotMap {
 	* If false, the robot will use the standard competition controls.
 	* This should always be false unless you need to troubleshoot or test something!
  	*/
-	public static final boolean TestMode = true;
+	public static final boolean TestMode = false;
 
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
@@ -34,25 +34,25 @@ public class RobotMap {
 	public static final int DIO_ULTRASONIC_ECHO = 9;
 	
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_MOTOR 	= 3;
-	public static final int CAN_RIGHT_MOTOR = 9;
-	public static final int CAN_LEFT_FOLLOWER = 3;
-	public static final int CAN_RIGHT_FOLLOWER = 9;
+	public static final int CAN_LEFT_MOTOR 	= 29;
+	public static final int CAN_RIGHT_MOTOR = 33;
+	public static final int CAN_LEFT_FOLLOWER = 28;
+	public static final int CAN_RIGHT_FOLLOWER = 30;
 	public static final int CAN_CONTROL_PANEL_WHEEL = 0;
-	public static final int CAN_TURRET = 0;
-	public static final int CAN_INTAKE = 0;
-	public static final int CAN_SHOOTER = 0;
-	public static final int CAN_UPPER_CONVEYOR_TOP = 0;
-	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 0;
-	public static final int CAN_LOWER_CONVEYOR_TOP = 0;
-	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 0;
+	public static final int CAN_TURRET = 14;
+	public static final int CAN_INTAKE = 18;
+	public static final int CAN_SHOOTER = 34;
+	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
+	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
+	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
+	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 32;
 	public static final int CAN_CLIMBING_WINCH = 0;
 	public static final int CAN_CLIMBING_HOOK = 0;
 	
 	/** PCM channels **********************************************************/
-	//public static final int INTAKE_DEPLOY_SOLENOID = 9;
-	//public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
-	//public static final int SHOOTER_HOOD_SOLENID = 9;	
+	//public static final int INTAKE_DEPLOY_SOLENOID_RIGHT = 9;
+	//public static final int INTAKE_DEPLOY_SOLENOID_LEFT = 9;
+	//public static final int SHOOTER_HOOD_SOLENOID = 9;	
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
@@ -65,8 +65,8 @@ public class RobotMap {
 	public static final boolean HAS_DRIVETRAIN = true;
 	public static final boolean HAS_FOLLOWERS = true;
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
 	// Maximum Acceleration given in power per second
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
@@ -122,7 +122,7 @@ public class RobotMap {
 	public static final boolean HAS_LIMELIGHT = true;
 	/** Ultrasonic Sensor Settings ****************************************************/
 	public static final boolean HAS_ULTRASONIC_SENSOR = true;
-	public static final double POWER_CELL_DISTANCE = 6.0; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
+	public static final double POWER_CELL_DISTANCE = 2.0; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
@@ -164,24 +164,24 @@ public class RobotMap {
 
 	/** Intake Settings *******************************************************/
 	public static final boolean HAS_INTAKE = true;
-	public static final boolean REVERSE_INTAKE = false;
+	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
-	public static final double INTAKE_POWER = 0.33; //How much power (as a %) to give the intake
+	public static final double INTAKE_POWER = 0.5; //How much power (as a %) to give the intake
 	/** Intake Deploy Settings ****************************************************/
 	public static final boolean HAS_INTAKE_DEPLOY = true;
 
 	/** Upper Conveyor Settings ****************************************************/
 	public static final boolean HAS_UPPER_CONVEYOR = true;
-	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = false;
-	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = true;
+	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = true;
+	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the upper conveyor
+	public static final double UPPER_CONVEYOR_POWER = 0.6; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
 	public static final boolean HAS_LOWER_CONVEYOR = true;
-	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = false;
-	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = true;
+	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
+	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double LOWER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the lower conveyor
+	public static final double LOWER_CONVEYOR_POWER = 0.4; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.5; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_REVERSE_DURATION = 0.25; //How long (in seconds) to run the lower conveyor forward after the power cells are brought back down to the bottom
 	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
