@@ -50,9 +50,9 @@ public class RobotMap {
 	public static final int CAN_CLIMBING_HOOK = 0;
 	
 	/** PCM channels **********************************************************/
-	public static final int INTAKE_DEPLOY_SOLENOID = 9;
-	public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
-	public static final int SHOOTER_HOOD_SOLENID = 9;	
+	//public static final int INTAKE_DEPLOY_SOLENOID = 9;
+	//public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
+	//public static final int SHOOTER_HOOD_SOLENID = 9;	
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
