@@ -17,24 +17,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 public class LowerConveyor extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LOWER_CONVEYOR;
-	private static final int CAN_LOWER_CONVEYOR = RobotMap.CAN_LOWER_CONVEYOR;
-	private static final int CAN_LOWER_CONVEYOR2 = RobotMap.CAN_LOWER_CONVEYOR2;
-	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_LOWER_CONVEYOR;
-	private static final boolean REVERSE_MOTOR2 = RobotMap.REVERSE_LOWER_CONVEYOR2;
+	private static final int CAN_LOWER_CONVEYOR_T = RobotMap.CAN_LOWER_CONVEYOR_TOP;
+	private static final int CAN_LOWER_CONVEYOR_B = RobotMap.CAN_LOWER_CONVEYOR_BOTTOM;
+	private static final boolean REVERSE_MOTOR_T = RobotMap.REVERSE_LOWER_CONVEYOR_TOP;
+	private static final boolean REVERSE_MOTOR_B = RobotMap.REVERSE_LOWER_CONVEYOR_BOTTOM;
 	private static final NeutralMode BRAKE_MODE = RobotMap.LOWER_CONVEYOR_BRAKE_MODE;
 	private static final boolean test = RobotMap.TestMode;
 
 	/** Instance Variables ****************************************************/
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	  TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR);
-	  TalonSRX motor2 = new TalonSRX(CAN_LOWER_CONVEYOR2);
+	  TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR_T);
+	  TalonSRX motor2 = new TalonSRX(CAN_LOWER_CONVEYOR_B);
 
 	/** LowerConveyor ******************************************************/
 	public LowerConveyor() {
     	log.add("Constructor", LOG_LEVEL);
     
-		initMotor(motor, REVERSE_MOTOR);
-		initMotor(motor2, REVERSE_MOTOR2);
+		initMotor(motor, REVERSE_MOTOR_T);
+		initMotor(motor2, REVERSE_MOTOR_B);
   	}
 
   	private void initMotor(TalonSRX motor, boolean reverse) {

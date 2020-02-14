@@ -42,10 +42,10 @@ public class RobotMap {
 	public static final int CAN_TURRET = 0;
 	public static final int CAN_INTAKE = 0;
 	public static final int CAN_SHOOTER = 0;
-	public static final int CAN_UPPER_CONVEYOR = 0;
-	public static final int CAN_UPPER_CONVEYOR2 = 0;
-	public static final int CAN_LOWER_CONVEYOR = 0;
-	public static final int CAN_LOWER_CONVEYOR2 = 0;
+	public static final int CAN_UPPER_CONVEYOR_TOP = 0;
+	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 0;
+	public static final int CAN_LOWER_CONVEYOR_TOP = 0;
+	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 0;
 	public static final int CAN_CLIMBING_WINCH = 0;
 	public static final int CAN_CLIMBING_HOOK = 0;
 	
@@ -172,14 +172,14 @@ public class RobotMap {
 
 	/** Upper Conveyor Settings ****************************************************/
 	public static final boolean HAS_UPPER_CONVEYOR = true;
-	public static final boolean REVERSE_UPPER_CONVEYOR = false;
-	public static final boolean REVERSE_UPPER_CONVEYOR2 = true;
+	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = false;
+	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double UPPER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
 	public static final boolean HAS_LOWER_CONVEYOR = true;
-	public static final boolean REVERSE_LOWER_CONVEYOR = false;
-	public static final boolean REVERSE_LOWER_CONVEYOR2 = true;
+	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = false;
+	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.2; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.5; //How long (in seconds) to run the lower conveyor when a power cell is intaked

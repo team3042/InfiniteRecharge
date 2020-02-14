@@ -14,8 +14,6 @@ import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.IntakeDeploy_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.PositionControl;
-import org.usfirst.frc.team3042.robot.commands.RotationControl;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
@@ -74,7 +72,7 @@ public class OI {
 			gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 			gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
 
-			gamepad.B.whenPressed(new RotationControl());
+			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake());
 			gamepad.RB.whileHeld(new Shooter_Spin());
@@ -98,8 +96,8 @@ public class OI {
 			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 			gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
-			gamepad.A.whenPressed(new PositionControl());
-			gamepad.B.whenPressed(new RotationControl());
+			//gamepad.A.whenPressed(new PositionControl());
+			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake());
 
