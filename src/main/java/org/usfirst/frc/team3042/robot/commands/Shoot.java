@@ -72,10 +72,6 @@ public class Shoot extends Command {
       else {
         upperconveyor.stop();
         lowerconveyor.stop();
-        if (shooting && auto) {
-          timer.stop();
-          shooting = false;
-        }
       }
     }
     

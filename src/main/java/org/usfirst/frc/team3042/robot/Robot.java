@@ -143,6 +143,8 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		log.add("Teleop Init", Log.Level.TRACE);
 
+		turret.getEncoder().reset();
+
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
 		if (!TEST) {

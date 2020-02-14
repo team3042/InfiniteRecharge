@@ -41,7 +41,7 @@ public class RobotMap {
 	public static final int CAN_CONTROL_PANEL_WHEEL = 0;
 	public static final int CAN_TURRET = 0;
 	public static final int CAN_INTAKE = 0;
-	public static final int CAN_SHOOTER = 10;
+	public static final int CAN_SHOOTER = 0;
 	public static final int CAN_UPPER_CONVEYOR = 0;
 	public static final int CAN_UPPER_CONVEYOR2 = 0;
 	public static final int CAN_LOWER_CONVEYOR = 0;
@@ -50,9 +50,9 @@ public class RobotMap {
 	public static final int CAN_CLIMBING_HOOK = 0;
 	
 	/** PCM channels **********************************************************/
-	//public static final int INTAKE_DEPLOY_SOLENOID = 9;
-	//public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
-	//public static final int SHOOTER_HOOD_SOLENID = 9;	
+	public static final int INTAKE_DEPLOY_SOLENOID = 9;
+	public static final int INTAKE_DEPLOY_SOLENOID2 = 9;
+	public static final int SHOOTER_HOOD_SOLENID = 9;	
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
@@ -160,7 +160,7 @@ public class RobotMap {
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
-	public static final double ZERO_TOLERANCE = 2; //How many degrees the turret can be off from it's zero position to still be considered "zeroed"
+	public static final double ZERO_TOLERANCE = 50; //How many encoder counts the turret can be off from it's zero position to still be considered "zeroed"
 
 	/** Intake Settings *******************************************************/
 	public static final boolean HAS_INTAKE = true;
