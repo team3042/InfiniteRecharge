@@ -25,6 +25,8 @@ public class LowerConveyor_Advance extends Command {
 	LowerConveyor conveyor = Robot.lowerconveyor;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
 	Timer timer = new Timer();
+	boolean moving = false;
+	public int powerCells = 0;
 	
 	/** Advance Lower Conveyor ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
@@ -48,15 +50,26 @@ public class LowerConveyor_Advance extends Command {
 	 */
 	protected void execute() {
 		SmartDashboard.putNumber("distance", sensor.getDistance());
+		if(SmartDashboard.getNumber("Power Cells:", 5) == 0) {
+			powerCells = 0;
+		}
 		if(sensor.isPowerCellIn()){
-			conveyor.setPower(speed);
-			timer.start();
+			if (!moving) {
+				conveyor.setPower(speed);
+				timer.start();
+				powerCells += 1;
+			}
+			moving = true;
 		}
 		if(timer.get() >= duration){
 			conveyor.stop();
 			timer.stop();
 			timer.reset();
 		}
+		if (!sensor.isPowerCellIn()) {
+			moving = false;
+		}
+		SmartDashboard.putNumber("Power Cells:", powerCells);
 	}
 	
 	/** isFinished ************************************************************	

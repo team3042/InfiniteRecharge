@@ -12,6 +12,6 @@ public class AutonomousMode extends CommandGroup {
     //addParallel(new Turret_Continous()); //Search for the target and start tracking it
     //addSequential(new Shoot(true)); //Shoot the three pre-loaded power cells
     //addSequential(new Turret_Stop()); //Stop tracking the target, stop spinning the shooter, and turn off the Limelight's LEDs
-    addSequential(new Drivetrain_GyroStraight(60.0, -40.0)); //Drive backwards off the initiation line 
+    addSequential(new Drivetrain_GyroStraight(60.0, -80.0)); //Drive backwards off the initiation line
   }
 }

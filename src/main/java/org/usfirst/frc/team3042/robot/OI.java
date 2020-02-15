@@ -4,11 +4,8 @@ import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
-import org.usfirst.frc.team3042.robot.commands.Turret_Zero;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.Conveyor_Reverse;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
-import org.usfirst.frc.team3042.robot.commands.IntakeDeploy_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 
@@ -56,16 +53,16 @@ public class OI {
 			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
 			//gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
-			gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
+			//gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
 
 			//gamepad.B.whenPressed(new RotationControl());
 
-			gamepad.LB.whileHeld(new Intake_Intake());
+			gamepad.LB.whileHeld(new Intake_Intake(1));
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 
 			gamepad.POVRight.whileActive(new Turret_Manual(1));
 			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			gamepad.POVUp.whenActive(new Turret_Zero());
+			//gamepad.POVUp.whenActive(new Turret_Zero());
 
 			gamepad.RT.whileActive(new LowerConveyor_Test());
 			gamepad.LT.whileActive(new UpperConveyor_Test());
@@ -76,22 +73,20 @@ public class OI {
 
 			//gamepad.A.toggleWhenPressed(new ShooterHood_Toggle());
 
-			gamepad.Y.whenPressed(new Conveyor_Reverse());
-
-			gamepad.POVRight.whileActive(new Turret_Manual(1));
-			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
+			//gamepad.POVRight.whileActive(new Turret_Manual(1));
+			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+			//gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
 			//gamepad.A.whenPressed(new PositionControl());
 			//gamepad.B.whenPressed(new RotationControl());
 
-			gamepad.LB.whileHeld(new Intake_Intake());
-			gamepad.LT.whileActive(new LowerConveyor_Test());
+			gamepad.LB.whileHeld(new Intake_Intake(1));
+			gamepad.LT.whileActive(new Intake_Intake(-1));
 
 			//gamepad.RB.whileHeld(new Turret_Continous());
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
-			gamepad.RT.whileActive(new UpperConveyor_Test());
+			gamepad.RT.whileActive(new LowerConveyor_Test());
 		}
 	}
 	

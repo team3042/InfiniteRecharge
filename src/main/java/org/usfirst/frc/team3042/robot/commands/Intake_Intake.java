@@ -19,13 +19,14 @@ public class Intake_Intake extends Command {
 	/** Instance Variables ****************************************************/
 	Intake intake = Robot.intake;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(intake));
-	
+	int direction;
+
 	/** Intake ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
-	public Intake_Intake() {
+	public Intake_Intake(int direction) {
 		log.add("Constructor", Log.Level.TRACE);
-		
+		this.direction = direction;
 		requires(intake);
 	}
 
@@ -35,7 +36,7 @@ public class Intake_Intake extends Command {
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 
-		intake.setPower(POWER);
+		intake.setPower(POWER * direction);
 	}
 
 	/** execute ***************************************************************

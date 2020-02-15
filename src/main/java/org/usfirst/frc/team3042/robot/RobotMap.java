@@ -122,7 +122,7 @@ public class RobotMap {
 	public static final boolean HAS_LIMELIGHT = true;
 	/** Ultrasonic Sensor Settings ****************************************************/
 	public static final boolean HAS_ULTRASONIC_SENSOR = true;
-	public static final double POWER_CELL_DISTANCE = 2.0; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
+	public static final double POWER_CELL_DISTANCE = 7.0; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
@@ -166,7 +166,7 @@ public class RobotMap {
 	public static final boolean HAS_INTAKE = true;
 	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
-	public static final double INTAKE_POWER = 0.5; //How much power (as a %) to give the intake
+	public static final double INTAKE_POWER = 0.6; //How much power (as a %) to give the intake
 	/** Intake Deploy Settings ****************************************************/
 	public static final boolean HAS_INTAKE_DEPLOY = true;
 
@@ -181,9 +181,8 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double LOWER_CONVEYOR_POWER = 0.4; //How much power (as a %) to give the lower conveyor
-	public static final double CONVEYOR_ADVANCE_DURATION = 0.5; //How long (in seconds) to run the lower conveyor when a power cell is intaked
-	public static final double CONVEYOR_REVERSE_DURATION = 0.25; //How long (in seconds) to run the lower conveyor forward after the power cells are brought back down to the bottom
+	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
+	public static final double CONVEYOR_ADVANCE_DURATION = 0.1; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
