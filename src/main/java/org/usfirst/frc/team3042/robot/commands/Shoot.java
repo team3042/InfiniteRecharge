@@ -21,9 +21,9 @@ public class Shoot extends Command {
     private static final Log.Level LOG_LEVEL = RobotMap.LOG_UPPER_CONVEYOR;
     private static final double LPOWER = RobotMap.LOWER_CONVEYOR_POWER;
     private static final double UPOWER = RobotMap.UPPER_CONVEYOR_POWER;
-    private static final int SPEED = RobotMap.MIN_SHOOTER_SPEED;
+    //private static final int SPEED = RobotMap.MIN_SHOOTER_SPEED;
     private static final double TIME = RobotMap.CONVEYOR_SHOOT_DURATION;
-    private static final double TOLERANCE = RobotMap.TURRET_ANGLE_TOLERANCE * 2;
+    //private static final double TOLERANCE = RobotMap.TURRET_ANGLE_TOLERANCE * 2;
 
     /** Instance Variables ****************************************************/
     UpperConveyor upperconveyor = Robot.upperconveyor;

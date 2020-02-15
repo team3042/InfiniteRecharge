@@ -91,6 +91,7 @@ public class OI {
 			//gamepad.RB.whileHeld(new Turret_Continous());
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
+			gamepad.RT.whileActive(new UpperConveyor_Test());
 		}
 	}
 	
