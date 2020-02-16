@@ -3,7 +3,6 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Shoot;
-import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
@@ -58,14 +57,19 @@ public class OI {
 			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake(1));
+			gamepad.LT.whileActive(new Intake_Intake(-1));
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 
-			gamepad.POVRight.whileActive(new Turret_Manual(1));
-			gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			//gamepad.POVUp.whenActive(new Turret_Zero());
+			//gamepad.POVRight.whileActive(new Turret_Manual(1));
+			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+			//gamepad.Back.whenPressed(new Turret_Zero());
 
 			gamepad.RT.whileActive(new LowerConveyor_Test());
-			gamepad.LT.whileActive(new UpperConveyor_Test());
+			gamepad.RB.whileActive(new UpperConveyor_Test());
+
+			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
+			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
+			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
 		}
 		else { //Normal Competition Controls
 			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
@@ -75,7 +79,7 @@ public class OI {
 
 			//gamepad.POVRight.whileActive(new Turret_Manual(1));
 			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			//gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
+			//gamepad.Back.whenPressed(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
 			//gamepad.A.whenPressed(new PositionControl());
 			//gamepad.B.whenPressed(new RotationControl());
@@ -87,6 +91,10 @@ public class OI {
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
 			gamepad.RT.whileActive(new LowerConveyor_Test());
+
+			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
+			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
+			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
 		}
 	}
 	

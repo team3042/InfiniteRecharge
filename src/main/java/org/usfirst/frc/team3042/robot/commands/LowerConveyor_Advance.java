@@ -3,7 +3,6 @@ package org.usfirst.frc.team3042.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
@@ -26,7 +25,6 @@ public class LowerConveyor_Advance extends Command {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
 	Timer timer = new Timer();
 	boolean moving = false;
-	public int powerCells = 0;
 	
 	/** Advance Lower Conveyor ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
@@ -49,15 +47,10 @@ public class LowerConveyor_Advance extends Command {
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		SmartDashboard.putNumber("distance", sensor.getDistance());
-		if(SmartDashboard.getNumber("Power Cells:", 5) == 0) {
-			powerCells = 0;
-		}
 		if(sensor.isPowerCellIn()){
 			if (!moving) {
 				conveyor.setPower(speed);
 				timer.start();
-				powerCells += 1;
 			}
 			moving = true;
 		}
@@ -69,7 +62,6 @@ public class LowerConveyor_Advance extends Command {
 		if (!sensor.isPowerCellIn()) {
 			moving = false;
 		}
-		SmartDashboard.putNumber("Power Cells:", powerCells);
 	}
 	
 	/** isFinished ************************************************************	

@@ -1,34 +1,31 @@
 package org.usfirst.frc.team3042.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
-import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
+import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 
-/** Climbing Winch Wind ************************************************************
- * Winds the climbing winch
+/** Climbing Hook Manual ************************************************************
+ * Command for raising and lowering the climber
  */
-public class ClimbingWinch_Wind extends Command {
+public class ClimbingHook_Manual extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CLIMBING_WINCH;
-	private static final double TIME = RobotMap.WINCH_WIND_TIME;
-	private static final double POWER = RobotMap.CLIMBING_WINCH_POWER;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CLIMBING_HOOK;
+	private static final double POWER = RobotMap.CLIMBING_HOOK_POWER;
   
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, getName());
-	ClimbingWinch winch = Robot.climbingwinch;
-	Timer timer = new Timer();
-	int direction;
+	ClimbingHook hook = Robot.climbinghook;
+  	int direction;
 	
-	/** Climbing Winch Wind ********************************************************
+	/** Climbing Hook Manual ********************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
-	public ClimbingWinch_Wind(int direction) {
+	public ClimbingHook_Manual(int direction) {
 		log.add("Constructor", Log.Level.TRACE);
-    	requires(winch);
+    	requires(hook);
     	this.direction = direction;
 	}
 	
@@ -37,9 +34,7 @@ public class ClimbingWinch_Wind extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		winch.setPower(direction * POWER);
-		timer.reset();
-		timer.start();
+		hook.setPower(direction * POWER);
 	}
 
 	/** execute ***************************************************************
@@ -52,15 +47,15 @@ public class ClimbingWinch_Wind extends Command {
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
 	protected boolean isFinished() {
-		return timer.get() > TIME;
+		return false;
 	}
 
 	/** end *******************************************************************
 	 * Called once after isFinished returns true
 	 */
 	protected void end() {
-    log.add("End", Log.Level.TRACE);
-    winch.stop();
+    	log.add("End", Log.Level.TRACE);
+    	hook.stop();
 	}
 
 	/** interrupted ***********************************************************
@@ -68,7 +63,7 @@ public class ClimbingWinch_Wind extends Command {
 	 * subsystems is scheduled to run
 	 */
 	protected void interrupted() {
-    log.add("Interrupted", Log.Level.TRACE);
-    winch.stop();
+    	log.add("Interrupted", Log.Level.TRACE);
+    	hook.stop();
 	}
 }

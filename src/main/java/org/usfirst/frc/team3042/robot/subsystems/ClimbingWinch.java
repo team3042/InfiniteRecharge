@@ -18,8 +18,7 @@ public class ClimbingWinch extends Subsystem {
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CLIMBING_WINCH;
   	private static final int CAN_CLIMBING_WINCH = RobotMap.CAN_CLIMBING_WINCH;
   	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_CLIMBING_WINCH;
-	private static final NeutralMode BRAKE_MODE = RobotMap.CLIMBING_WINCH_BRAKE_MODE;
-	private static final double POWER = RobotMap.CLIMBING_WINCH_POWER;  
+	private static final NeutralMode BRAKE_MODE = RobotMap.CLIMBING_WINCH_BRAKE_MODE; 
 
 	/** Instance Variables ****************************************************/
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
@@ -51,10 +50,6 @@ public class ClimbingWinch extends Subsystem {
 		power = Math.max(-1.0, power);
 		return power;
 	}
-
-	public void wind(int direction) {
-    	setPower(direction * POWER);
-    }
 	
 	/** initDefaultCommand ****************************************************
 	 * Set the default command for the subsystem.
