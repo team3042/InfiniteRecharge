@@ -175,7 +175,7 @@ public class RobotMap {
 	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.6; //How much power (as a %) to give the upper conveyor
+	public static final double UPPER_CONVEYOR_POWER = 0.4; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
 	public static final boolean HAS_LOWER_CONVEYOR = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
@@ -192,7 +192,7 @@ public class RobotMap {
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double SHOOTER_POWER = 0.4; //How much power (as a %) to give the shooter
+	public static final double SHOOTER_POWER = 0.8; //How much power (as a %) to give the shooter
 	public static final int MIN_SHOOTER_SPEED = 5000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/
@@ -202,7 +202,8 @@ public class RobotMap {
 	public static final boolean HAS_CLIMBING_WINCH = true;
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
-	public static final double CLIMBING_WINCH_POWER = 0.33; //How much power (as a %) to give the climbing winch
+	public static final double CLIMBING_WINCH_POWER = 0.8; //How much power (as a %) to give the climbing winch
+	public static final double WINCH_WIND_TIME = 0.1; //How long (in seconds) to wind the winch for
 	/** Climbing Hook Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_HOOK = true;
 	public static final boolean REVERSE_CLIMBING_HOOK = false;
