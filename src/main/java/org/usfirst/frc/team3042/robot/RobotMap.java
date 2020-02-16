@@ -194,6 +194,7 @@ public class RobotMap {
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double SHOOTER_POWER = 0.4; //How much power (as a %) to give the shooter
 	public static final int MIN_SHOOTER_SPEED = 5000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
+	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/
 	public static final boolean HAS_SHOOTER_HOOD = true;
 
