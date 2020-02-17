@@ -122,7 +122,7 @@ public class RobotMap {
 	public static final boolean HAS_LIMELIGHT = true;
 	/** Ultrasonic Sensor Settings ****************************************************/
 	public static final boolean HAS_ULTRASONIC_SENSOR = true;
-	public static final double POWER_CELL_DISTANCE = 7.0; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
+	public static final double POWER_CELL_DISTANCE = 7.5; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
@@ -192,7 +192,7 @@ public class RobotMap {
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double SHOOTER_POWER = 0.8; //How much power (as a %) to give the shooter
+	public static final double SHOOTER_POWER = 0.9; //How much power (as a %) to give the shooter
 	public static final int MIN_SHOOTER_SPEED = 5000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/
