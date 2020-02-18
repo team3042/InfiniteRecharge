@@ -64,8 +64,8 @@ public class OI {
 			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 			//gamepad.Back.whenPressed(new Turret_Zero());
 
-			gamepad.RT.whileActive(new LowerConveyor_Test());
-			gamepad.RB.whileActive(new UpperConveyor_Test());
+			gamepad.RT.whileActive(new LowerConveyor_Test(1));
+			gamepad.RB.whileActive(new UpperConveyor_Test(1));
 
 			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
 			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
@@ -85,12 +85,14 @@ public class OI {
 			//gamepad.B.whenPressed(new RotationControl());
 
 			gamepad.LB.whileHeld(new Intake_Intake(1));
-			gamepad.LT.whileActive(new Intake_Intake(-1));
+
+			gamepad.LT.whileActive(new LowerConveyor_Test(-1));
+			gamepad.LT.whileActive(new UpperConveyor_Test(-1));
 
 			//gamepad.RB.whileHeld(new Turret_Continous());
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
-			gamepad.RT.whileActive(new LowerConveyor_Test());
+			gamepad.RT.whileActive(new LowerConveyor_Test(1));
 
 			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
 			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));

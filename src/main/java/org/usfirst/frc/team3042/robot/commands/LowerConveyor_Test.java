@@ -19,13 +19,14 @@ public class LowerConveyor_Test extends Command {
 	/** Instance Variables ****************************************************/
 	LowerConveyor conveyor = Robot.lowerconveyor;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
+	int direction;
 	
 	/** Testing Lower Conveyor ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
-	public LowerConveyor_Test() {
+	public LowerConveyor_Test(int direction) {
 		log.add("Constructor", Log.Level.TRACE);
-		
+		this.direction = direction;
 		requires(conveyor);
 	}
 
@@ -34,7 +35,7 @@ public class LowerConveyor_Test extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		conveyor.setPower(speed);
+		conveyor.setPower(direction * speed);
 	}
 
 	/** execute ***************************************************************

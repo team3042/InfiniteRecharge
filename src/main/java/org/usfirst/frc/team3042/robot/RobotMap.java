@@ -57,7 +57,7 @@ public class RobotMap {
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
 	public static final double JOYSTICK_DRIVE_SCALE = 0.8;
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2;
+	public static final double JOYSTICK_DRIVE_SCALE_LOW = 1.1;
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 
@@ -122,7 +122,7 @@ public class RobotMap {
 	public static final boolean HAS_LIMELIGHT = true;
 	/** Ultrasonic Sensor Settings ****************************************************/
 	public static final boolean HAS_ULTRASONIC_SENSOR = true;
-	public static final double POWER_CELL_DISTANCE = 7.5; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
+	public static final double POWER_CELL_DISTANCE = 8; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
@@ -182,7 +182,7 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
-	public static final double CONVEYOR_ADVANCE_DURATION = 0.1; //How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double CONVEYOR_ADVANCE_DURATION = 0.15; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
