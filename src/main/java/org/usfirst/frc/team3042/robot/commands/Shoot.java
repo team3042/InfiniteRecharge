@@ -72,6 +72,10 @@ public class Shoot extends Command {
       /*else {
         upperconveyor.stop();
         lowerconveyor.stop();
+        if (shooting && auto) {
+          timer.stop();
+          shooting = false;
+        }
       }*/
     //}
     
@@ -96,6 +100,7 @@ public class Shoot extends Command {
       lowerconveyor.stop();
       if (auto) {
         timer.stop();
+        timer.reset();
         shooting = false;
       }
     }
@@ -110,6 +115,7 @@ public class Shoot extends Command {
       lowerconveyor.stop();
       if (auto) {
         timer.stop();
+        timer.reset();
         shooting = false;
       }
     }

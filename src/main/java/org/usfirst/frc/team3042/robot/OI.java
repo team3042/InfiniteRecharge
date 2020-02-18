@@ -23,7 +23,7 @@ public class OI {
 	private static final int JOYSTICK_Y_AXIS = Gamepad.JOY_Y_AXIS;
 	private static final int GAMEPAD_LEFT_TRIGGER = Gamepad.LEFT_TRIGGER;
 	private static final int GAMEPAD_RIGHT_TRIGGER = Gamepad.RIGHT_TRIGGER;
-	private static final double JOYSTICK_DRIVE_SCALE_LOW = RobotMap.JOYSTICK_DRIVE_SCALE_LOW;
+	private static final double JOYSTICK_DRIVE_SCALE_HIGH = RobotMap.JOYSTICK_DRIVE_SCALE_HIGH;
 	private static final boolean test = RobotMap.TestMode;
 	
 	/** Instance Variables ****************************************************/
@@ -31,7 +31,7 @@ public class OI {
 	public Gamepad gamepad, joyLeft, joyRight;
 	int driveAxisLeft, driveAxisRight;
 	public static double CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
-	public static boolean isHighScale = true;
+	public static boolean isHighScale = false;
 
 	/** OI ********************************************************************
 	 * Assign commands to the buttons and triggers*/
@@ -51,7 +51,6 @@ public class OI {
 			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-			//gamepad.X.toggleWhenPressed(new ShooterHood_Toggle());
 			//gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
 
 			//gamepad.B.whenPressed(new RotationControl());
@@ -72,29 +71,33 @@ public class OI {
 			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
 		}
 		else { //Normal Competition Controls
+			//Drivetrain Controls
 			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-			//gamepad.A.toggleWhenPressed(new ShooterHood_Toggle());
-
+			//Turret Controls
 			//gamepad.POVRight.whileActive(new Turret_Manual(1));
 			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 			//gamepad.Back.whenPressed(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
+			//Control Panel Controls
 			//gamepad.A.whenPressed(new PositionControl());
 			//gamepad.B.whenPressed(new RotationControl());
 
+			//Intake Controls
 			gamepad.LB.whileHeld(new Intake_Intake(1));
-
+			//Ideally we shouldn't need these
 			gamepad.LT.whileActive(new LowerConveyor_Test(-1));
 			gamepad.LT.whileActive(new UpperConveyor_Test(-1));
+			gamepad.RT.whileActive(new LowerConveyor_Test(1));
 
+			//Shooting Controls
 			//gamepad.RB.whileHeld(new Turret_Continous());
 			//gamepad.RB.whileHeld(new Shooter_Spin());
 			gamepad.RB.whileHeld(new Shoot(false));
-			gamepad.RT.whileActive(new LowerConveyor_Test(1));
 
-			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
+			//Climbing Controls
+			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
 			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
 			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
 		}
@@ -119,17 +122,17 @@ public class OI {
 		joystickValue *= -1.0;
 		return joystickValue;
 	}
-	public void setHighScale(){
+	public void setNormalScale(){
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
-    	isHighScale = true;
-    }
-    public void setLowScale(){
-    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_LOW;
     	isHighScale = false;
+    }
+    public void setHighScale(){
+    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_HIGH;
+    	isHighScale = true;
     }
     public void toggleScale(){
     	if (isHighScale){
-    		setLowScale();
+    		setNormalScale();
     	}
     	else {
     		setHighScale();

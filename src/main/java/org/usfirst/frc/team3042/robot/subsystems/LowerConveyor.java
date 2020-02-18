@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.RobotMap;
-//import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
+import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
@@ -22,12 +22,12 @@ public class LowerConveyor extends Subsystem {
 	private static final boolean REVERSE_MOTOR_T = RobotMap.REVERSE_LOWER_CONVEYOR_TOP;
 	private static final boolean REVERSE_MOTOR_B = RobotMap.REVERSE_LOWER_CONVEYOR_BOTTOM;
 	private static final NeutralMode BRAKE_MODE = RobotMap.LOWER_CONVEYOR_BRAKE_MODE;
-	//private static final boolean test = RobotMap.TestMode;
+	private static final boolean test = RobotMap.TestMode;
 
 	/** Instance Variables ****************************************************/
-  	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	  TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR_T);
-	  TalonSRX motor2 = new TalonSRX(CAN_LOWER_CONVEYOR_B);
+  		Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+	  	TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR_T);
+	  	TalonSRX motor2 = new TalonSRX(CAN_LOWER_CONVEYOR_B);
 
 	/** LowerConveyor ******************************************************/
 	public LowerConveyor() {
@@ -62,8 +62,8 @@ public class LowerConveyor extends Subsystem {
 	 * Set the default command for the subsystem.
 	 */
 	public void initDefaultCommand() {
-		/*if (!test) {
+		if (!test) {
 			setDefaultCommand(new LowerConveyor_Advance());
-		}*/
+		}
 	}
 }
