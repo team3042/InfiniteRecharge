@@ -24,7 +24,6 @@ public class OI {
 	private static final int GAMEPAD_LEFT_TRIGGER = Gamepad.LEFT_TRIGGER;
 	private static final int GAMEPAD_RIGHT_TRIGGER = Gamepad.RIGHT_TRIGGER;
 	private static final double JOYSTICK_DRIVE_SCALE_HIGH = RobotMap.JOYSTICK_DRIVE_SCALE_HIGH;
-	private static final boolean test = RobotMap.TestMode;
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(RobotMap.LOG_OI, "OI");
@@ -47,60 +46,35 @@ public class OI {
 		driveAxisRight = JOYSTICK_Y_AXIS;
 		
 		/** Controls *****************************************************/
-		if (test) { //Test Mode Controls
-			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
-			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
+		//Drivetrain Controls
+		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
+		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-			//gamepad.Y.toggleWhenPressed(new IntakeDeploy_Toggle());
+		//Turret Controls
+		//gamepad.POVRight.whileActive(new Turret_Manual(1));
+		//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
+		//gamepad.Back.whenPressed(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
 
-			//gamepad.B.whenPressed(new RotationControl());
+		//Control Panel Controls
+		//gamepad.A.whenPressed(new PositionControl());
+		//gamepad.B.whenPressed(new RotationControl());
 
-			gamepad.LB.whileHeld(new Intake_Intake(1));
-			gamepad.LT.whileActive(new Intake_Intake(-1));
-			//gamepad.RB.whileHeld(new Shooter_Spin());
+		//Intake Controls
+		gamepad.LB.whileHeld(new Intake_Intake(1));
+		//Ideally we shouldn't need these
+		gamepad.LT.whileActive(new LowerConveyor_Test(-1));
+		gamepad.LT.whileActive(new UpperConveyor_Test(-1));
+		gamepad.RT.whileActive(new LowerConveyor_Test(1));
 
-			//gamepad.POVRight.whileActive(new Turret_Manual(1));
-			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			//gamepad.Back.whenPressed(new Turret_Zero());
+		//Shooting Controls
+		//gamepad.RB.whileHeld(new Turret_Continous());
+		//gamepad.RB.whileHeld(new Shooter_Spin());
+		gamepad.RB.whileHeld(new Shoot(false));
 
-			gamepad.RT.whileActive(new LowerConveyor_Test(1));
-			gamepad.RB.whileActive(new UpperConveyor_Test(1));
-
-			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); //Climbing Controls
-			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
-			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
-		}
-		else { //Normal Competition Controls
-			//Drivetrain Controls
-			joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
-			joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
-
-			//Turret Controls
-			//gamepad.POVRight.whileActive(new Turret_Manual(1));
-			//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-			//gamepad.Back.whenPressed(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
-
-			//Control Panel Controls
-			//gamepad.A.whenPressed(new PositionControl());
-			//gamepad.B.whenPressed(new RotationControl());
-
-			//Intake Controls
-			gamepad.LB.whileHeld(new Intake_Intake(1));
-			//Ideally we shouldn't need these
-			gamepad.LT.whileActive(new LowerConveyor_Test(-1));
-			gamepad.LT.whileActive(new UpperConveyor_Test(-1));
-			gamepad.RT.whileActive(new LowerConveyor_Test(1));
-
-			//Shooting Controls
-			//gamepad.RB.whileHeld(new Turret_Continous());
-			//gamepad.RB.whileHeld(new Shooter_Spin());
-			gamepad.RB.whileHeld(new Shoot(false));
-
-			//Climbing Controls
-			//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
-			//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
-			//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
-		}
+		//Climbing Controls
+		//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
+		//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
+		//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
 	}
 	
 	/** Access to the driving axes values *************************************

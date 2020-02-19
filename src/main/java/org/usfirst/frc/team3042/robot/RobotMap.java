@@ -9,13 +9,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  */
 public class RobotMap {	
 
-	/** Test Mode ******************************************************************
-	* If true, the robot will use the manual controls for testing motors and pistons.
-	* If false, the robot will use the standard competition controls.
-	* This should always be false unless you need to troubleshoot or test something!
- 	*/
-	public static final boolean TestMode = false;
-
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
