@@ -69,7 +69,7 @@ public class OI {
 		//Climbing Controls
 		//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
 		//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
-		//gamepad.Start.whenPressed(new ClimbingWinch_Wind(1));
+		//gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));
 	}
 	
 	/** Access to the driving axes values *************************************

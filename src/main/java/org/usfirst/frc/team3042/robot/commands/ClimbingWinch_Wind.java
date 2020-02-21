@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3042.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team3042.lib.Log;
@@ -14,13 +14,13 @@ import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 public class ClimbingWinch_Wind extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CLIMBING_WINCH;
-	private static final double TIME = RobotMap.WINCH_WIND_TIME;
+	//private static final double TIME = RobotMap.WINCH_WIND_TIME;
 	private static final double POWER = RobotMap.CLIMBING_WINCH_POWER;
   
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, getName());
 	ClimbingWinch winch = Robot.climbingwinch;
-	Timer timer = new Timer();
+	//Timer timer = new Timer();
 	int direction;
 	
 	/** Climbing Winch Wind ********************************************************
@@ -38,8 +38,8 @@ public class ClimbingWinch_Wind extends Command {
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		winch.setPower(direction * POWER);
-		timer.reset();
-		timer.start();
+		//timer.reset();
+		//timer.start();
 	}
 
 	/** execute ***************************************************************
@@ -52,15 +52,16 @@ public class ClimbingWinch_Wind extends Command {
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
 	protected boolean isFinished() {
-		return timer.get() > TIME;
+		//return timer.get() > TIME;
+		return false;
 	}
 
 	/** end *******************************************************************
 	 * Called once after isFinished returns true
 	 */
 	protected void end() {
-    log.add("End", Log.Level.TRACE);
-    winch.stop();
+    	log.add("End", Log.Level.TRACE);
+    	winch.stop();
 	}
 
 	/** interrupted ***********************************************************
@@ -68,7 +69,7 @@ public class ClimbingWinch_Wind extends Command {
 	 * subsystems is scheduled to run
 	 */
 	protected void interrupted() {
-    log.add("Interrupted", Log.Level.TRACE);
-    winch.stop();
+    	log.add("Interrupted", Log.Level.TRACE);
+    	winch.stop();
 	}
 }
