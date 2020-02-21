@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
 		
-		intakedeploy.retract(); //Retract the intake
+		//intakedeploy.retract(); //Retract the intake
 	}
 
 	/** disabledPeriodic ******************************************************
@@ -119,7 +119,7 @@ public class Robot extends TimedRobot {
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
-		intakedeploy.extend(); //Deploy the intake
+		//intakedeploy.extend(); //Deploy the intake
 		
 		autonomousCommand = chooser.getSelected();
 
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
-		intakedeploy.extend(); //Deploy the intake
+		//intakedeploy.extend(); //Deploy the intake
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -164,7 +164,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		SmartDashboard.putNumber("distance", ultrasonicsensor.getDistance());
+		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
+		SmartDashboard.putNumber("Shooter Speed:", shooter.getEncoder().getSpeed());
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();

@@ -2,11 +2,9 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 
-import org.usfirst.frc.team3042.robot.commands.Shoot;
-import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
+import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
-import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
@@ -57,19 +55,16 @@ public class OI {
 
 		//Control Panel Controls
 		//gamepad.A.whenPressed(new PositionControl());
+		//gamepad.A.whileHeld(new PositionControl_Manual());
 		//gamepad.B.whenPressed(new RotationControl());
 
 		//Intake Controls
 		gamepad.LB.whileHeld(new Intake_Intake(1));
-		//Ideally we shouldn't need these
-		gamepad.LT.whileActive(new LowerConveyor_Test(-1));
-		gamepad.LT.whileActive(new UpperConveyor_Test(-1));
-		gamepad.RT.whileActive(new LowerConveyor_Test(1));
 
 		//Shooting Controls
-		//gamepad.RB.whileHeld(new Turret_Continous());
+		gamepad.RB.whileHeld(new Turret_Continous());
 		//gamepad.RB.whileHeld(new Shooter_Spin());
-		gamepad.RB.whileHeld(new Shoot(false));
+		//gamepad.RB.whileHeld(new Shoot(false));
 
 		//Climbing Controls
 		//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 

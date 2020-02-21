@@ -6,31 +6,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
-import org.usfirst.frc.team3042.robot.subsystems.Limelight;
-import org.usfirst.frc.team3042.robot.subsystems.Shooter;
+import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 
-/** Shooter *******************************************************
- * Sets power to the shooter
+/** Position Control Manual *******************************************************
+ * Command for rotating the control panel to the assigned color manually (Without the use of a color sensor)
  */
-public class Shooter_Spin extends Command {
+public class PositionControl_Manual extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-	private static final double POWER = RobotMap.SHOOTER_POWER;
-	//private static final double POWER_CONSTANT = RobotMap.SHOOTER_POWER_CONSTANT;
-	//private static final double INITIAL_ERROR = RobotMap.INITIAL_VERTICAL_ERROR;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CONTROL_PANEL_WHEEL;
+	private static final double POWER = RobotMap.POSITION_CONTROL_POWER / 2;
 	
 	/** Instance Variables ****************************************************/
-	Shooter shooter = Robot.shooter;
-	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
-	Limelight limelight = Robot.limelight;
+  	ControlPanelWheel cpwheel = Robot.cpwheel;
+  	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(cpwheel));
 	
-	/** Shooter ***************************************************
+	/** Position Control Manual***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
-	public Shooter_Spin() {
+	public PositionControl_Manual() {
 		log.add("Constructor", Log.Level.TRACE);
 		
-		requires(shooter);
+		requires(cpwheel);
 	}
 
 	/** initialize ************************************************************
@@ -38,22 +34,15 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		shooter.setPower(POWER);
+    	cpwheel.setPower(POWER);
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		/*if (limelight.returnValidTarget() == 1) {
-			double newPower = POWER - POWER_CONSTANT * (limelight.returnVerticalError() - INITIAL_ERROR); 
-
-			newPower = Math.min(newPower, 1);
-
-			shooter.setPower(newPower);
-		}*/
 	}
-
+	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
@@ -66,7 +55,7 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
-		shooter.stop();
+		cpwheel.stop();
 	}
 
 	/** interrupted ***********************************************************
@@ -75,6 +64,6 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
-		shooter.stop();
+		cpwheel.stop();
 	}
 }

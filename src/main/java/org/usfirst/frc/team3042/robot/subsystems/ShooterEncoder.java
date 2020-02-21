@@ -62,7 +62,9 @@ public class ShooterEncoder extends Subsystem {
 	public double getSpeed() {
 		int cp100ms = encoder.getSelectedSensorVelocity(PIDIDX);
 		
-		return (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
+		double rpm = (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
+
+		return rpm * 2; //The shooter is geared so that the rpm is double what the encoder thinks it is
 	}
 	public double getPositionZero() {
 		return positionZero;
