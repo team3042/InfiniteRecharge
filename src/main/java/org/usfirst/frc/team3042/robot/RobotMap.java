@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  * The robot configuration file.
  */
 public class RobotMap {	
-
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
@@ -18,8 +17,8 @@ public class RobotMap {
 	public static final double ROBOT_WIDTH = 27.0;
 	
 	/** USB ports *************************************************************/					
-	public static final int USB_JOYSTICK_LEFT 	= 0;
-	public static final int USB_JOYSTICK_RIGHT 	= 1;
+	public static final int USB_JOYSTICK_LEFT 	= 1;
+	public static final int USB_JOYSTICK_RIGHT 	= 0;
 	public static final int USB_GAMEPAD 		= 2;
 
 	/** DIO channels **********************************************************/
@@ -31,15 +30,15 @@ public class RobotMap {
 	public static final int CAN_RIGHT_MOTOR = 33;
 	public static final int CAN_LEFT_FOLLOWER = 28;
 	public static final int CAN_RIGHT_FOLLOWER = 30;
-	public static final int CAN_CONTROL_PANEL_WHEEL = 0;
-	public static final int CAN_TURRET = 14;
+	public static final int CAN_CONTROL_PANEL_WHEEL = 14;
+	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
-	public static final int CAN_SHOOTER = 34;
+	public static final int CAN_SHOOTER = 1;
 	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
 	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
 	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
 	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 32;
-	public static final int CAN_CLIMBING_WINCH = 0;
+	public static final int CAN_CLIMBING_WINCH = 4;
 	public static final int CAN_CLIMBING_HOOK = 0;
 	
 	/** PCM channels **********************************************************/
@@ -49,8 +48,8 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = 0.8;
-	public static final double JOYSTICK_DRIVE_SCALE_HIGH = 1.1;
+	public static final double JOYSTICK_DRIVE_SCALE = -0.8;
+	public static final double JOYSTICK_DRIVE_SCALE_HIGH = -1.1;
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 
@@ -145,7 +144,7 @@ public class RobotMap {
 	public static final double kD_TURRET = 0.0; //D constant for the target-tracking PID loop
 	public static final double TURRET_MAX_POWER = 0.4; //The maximum power (as a %) the turret will be given when running the target-tracking PID loop
 	public static final double TURRET_MANUAL_POWER = 0.2; //How much power (as a %) to give the turret when using manual control
-	public static final int TURRET_MAX_ANGLE = 180; //The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
+	public static final int TURRET_MAX_ANGLE = 80; //The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
 	public static final double TURRET_SEARCH_POWER = 0.6; //The speed at which the turret zips around to the other side when the max angle is reached, and also the speed at which it searches for the target if the Limelight loses it
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; //If the angle of error to the target is less than this value the PID Loop will not make any corrections
 	/** Turret Encoder Settings **********************************************/
@@ -176,17 +175,18 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
-	public static final double CONVEYOR_ADVANCE_DURATION = 0.15; //How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double CONVEYOR_ADVANCE_DURATION = 0.35; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
 	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
+	public static final int SHOOTER_ENCODER_COUNTS_PER_REVOLUTION = 1024;
 	public static final boolean REVERSE_SHOOTER = false;
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double SHOOTER_POWER = 0.2; //How much power (as a %) to give the shooter
+	public static final double SHOOTER_POWER = 1.0; //How much power (as a %) to give the shooter
 	public static final int MIN_SHOOTER_SPEED = 5000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/

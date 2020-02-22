@@ -57,7 +57,7 @@ public class TurretEncoder extends Subsystem {
 	 * Encoder speed returns counts per 100 ms, convert to RPM for output
 	 */
 	public double getPosition() {
-		return (encoder.getSelectedSensorPosition(PIDIDX) - positionZero) * -1;
+		return (encoder.getSelectedSensorPosition(PIDIDX) - positionZero);
 	}
 	public double getSpeed() {
 		int cp100ms = encoder.getSelectedSensorVelocity(PIDIDX);

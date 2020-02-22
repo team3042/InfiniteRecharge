@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode;
+import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Trench;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
@@ -86,7 +87,7 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
-		//chooser.addOption("My Auto", new ExampleCommand());
+		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		SmartDashboard.putData("Auto Mode", chooser);
 	}
 
@@ -163,8 +164,7 @@ public class Robot extends TimedRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
-		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
+		
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getEncoder().getSpeed());
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard

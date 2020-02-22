@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
@@ -54,7 +55,7 @@ public class Turret_Continous extends Command {
 		log.add("Initialize", Log.Level.TRACE);
 		limelight.led.setNumber(3); //Turn on the Limelight's LEDs
 		if (limelight.returnValidTarget() == 0) {
-			turret.setPower(searchPower);
+			turret.setPower(-1 * searchPower);
 		}
 	}
 
@@ -63,13 +64,14 @@ public class Turret_Continous extends Command {
 	 */
 	protected void execute() {
 		error = limelight.returnHorizontalError(); //Read the angle of error from the Limelight
+		SmartDashboard.putNumber("turret", encoder.countsToDegrees(encoder.getPosition()));
 		if(encoder.countsToDegrees(encoder.getPosition()) + error > maxAngle) { //Max positive angle of the turret has been reached
 			turret.setPower(-1 * searchPower);
 		}
 		else if(encoder.countsToDegrees(encoder.getPosition()) + error < -1 * maxAngle) { //Max negative angle of the turret has been reached
 			turret.setPower(searchPower);
 		}
-		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
+		else if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
 			integral += error * 0.2; //Add the current error to the integral
 			derivative = (error - previousError) / .02;
 
