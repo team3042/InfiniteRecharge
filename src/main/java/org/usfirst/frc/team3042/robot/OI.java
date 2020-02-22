@@ -48,11 +48,6 @@ public class OI {
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-		//Turret Controls
-		//gamepad.POVRight.whileActive(new Turret_Manual(1));
-		//gamepad.POVLeft.whileActive(new Turret_Manual(-1));
-		//gamepad.Back.whenPressed(new Turret_Zero()); //Zeroes the turret, should be used at the end of the match
-
 		//Control Panel Controls
 		//gamepad.A.whenPressed(new PositionControl());
 		//gamepad.A.whileHeld(new PositionControl_Manual());
@@ -67,6 +62,7 @@ public class OI {
 		//gamepad.RB.whileHeld(new Shoot(false));
 
 		//Climbing Controls
+		//gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret so that it will be ready for the next match
 		//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
 		//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
 		//gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));

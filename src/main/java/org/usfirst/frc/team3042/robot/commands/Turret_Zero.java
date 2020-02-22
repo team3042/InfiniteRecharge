@@ -15,7 +15,7 @@ import org.usfirst.frc.team3042.robot.subsystems.TurretEncoder;
 public class Turret_Zero extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET;
-	private static final double POWER = RobotMap.TURRET_MANUAL_POWER / 4;
+	private static final double POWER = RobotMap.TURRET_MANUAL_POWER / 2;
 	private static final double TOLERANCE = RobotMap.ZERO_TOLERANCE;
 
 	/** Instance Variables ****************************************************/
@@ -37,10 +37,10 @@ public class Turret_Zero extends Command {
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		if (encoder.getPosition() > 0) {
-			turret.setPower(POWER);
+			turret.setPower(-1 * POWER);
 		}
 		else if (encoder.getPosition() < 0) {
-			turret.setPower(-1 * POWER);
+			turret.setPower(POWER);
 		}
 	}
 
