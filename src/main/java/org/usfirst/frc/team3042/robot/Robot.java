@@ -4,6 +4,7 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Trench;
+import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
@@ -74,6 +75,7 @@ public class Robot extends TimedRobot {
 	public static final UltrasonicSensor ultrasonicsensor = (HAS_ULTRASONIC_SENSOR)	 ? new UltrasonicSensor()	: null;
 	public static OI oi;
 	Command autonomousCommand;
+	Command stopAutonomous = new Turret_Stop();
 	SendableChooser<Command> chooser = new SendableChooser<Command>();
 
 	public String color;
@@ -120,6 +122,8 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
+		turret.getEncoder().reset();
+
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
 		//intakedeploy.extend(); //Deploy the intake
@@ -137,6 +141,8 @@ public class Robot extends TimedRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+
+		SmartDashboard.putNumber("Shooter Speed:", shooter.getEncoder().getSpeed());
 	}
 	
 	/** teleopInit ************************************************************
@@ -146,7 +152,7 @@ public class Robot extends TimedRobot {
 		log.add("Teleop Init", Log.Level.TRACE);
 		ColorRecieved = false;
 
-		turret.getEncoder().reset();
+		stopAutonomous.start();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
@@ -168,6 +174,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getEncoder().getSpeed());
+		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();

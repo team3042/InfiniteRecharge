@@ -5,9 +5,13 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
+import org.usfirst.frc.team3042.robot.commands.ClimbingHook_Manual;
+import org.usfirst.frc.team3042.robot.commands.ClimbingWinch_Wind;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
+import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
+import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 
@@ -54,9 +58,8 @@ public class OI {
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
 		//Control Panel Controls
-		//gamepad.A.whenPressed(new PositionControl());
-		//gamepad.A.whileHeld(new PositionControl_Manual());
-		//gamepad.B.whenPressed(new RotationControl());
+		gamepad.A.whenPressed(new RotationControl());
+		gamepad.B.whileHeld(new PositionControl_Manual());
 
 		//Intake Controls
 		gamepad.LB.whileHeld(new Intake_Intake(1));
@@ -66,17 +69,16 @@ public class OI {
 		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 
 		//Shooting Controls
-		//gamepad.RB.whileHeld(new Turret_Continous());
+		gamepad.RB.whileHeld(new Turret_Continous());
 		gamepad.RB.whileHeld(new Shooter_Spin());
-		gamepad.RB.whileHeld(new Shoot(false));
+		gamepad.RB.whileActive(new Shoot(false));
 		gamepad.RT.whileActive(new UpperConveyor_Test(-1));
 		gamepad.RT.whileActive(new LowerConveyor_Test(-1));
 
 		//Climbing Controls
-		//gamepad.POVUp.whenActive(new Turret_Zero()); //Zeroes the turret so that it will be ready for the next match
-		//gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
-		//gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
-		//gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));
+		gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
+		gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
+		gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));
 	}
 	
 	/** Access to the driving axes values *************************************

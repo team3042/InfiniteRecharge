@@ -17,8 +17,8 @@ public class RobotMap {
 	public static final double ROBOT_WIDTH = 27.0;
 	
 	/** USB ports *************************************************************/					
-	public static final int USB_JOYSTICK_LEFT 	= 1;
-	public static final int USB_JOYSTICK_RIGHT 	= 0;
+	public static final int USB_JOYSTICK_LEFT 	= 0;
+	public static final int USB_JOYSTICK_RIGHT 	= 1;
 	public static final int USB_GAMEPAD 		= 2;
 
 	/** DIO channels **********************************************************/
@@ -176,7 +176,7 @@ public class RobotMap {
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.35; //How long (in seconds) to run the lower conveyor when a power cell is intaked
-	public static final double CONVEYOR_SHOOT_DURATION = 5; //How long (in seconds) to run the conveyors while autonomously shooting
+	public static final double CONVEYOR_SHOOT_DURATION = 1.2; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
@@ -186,8 +186,9 @@ public class RobotMap {
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double SHOOTER_POWER = 1.0; //How much power (as a %) to give the shooter
-	public static final int MIN_SHOOTER_SPEED = 5000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
+	public static final double SHOOTER_POWER = 0.90; //How much power (as a %) to give the shooter
+	public static final int MIN_SHOOTER_SPEED = 4000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
+	public static final int MIN_AUTO_SHOOTER_SPEED = 3750; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/
 	public static final boolean HAS_SHOOTER_HOOD = true;
