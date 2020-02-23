@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode;
+import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Trench;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
+		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 		SmartDashboard.putData("Auto Mode", chooser);
 	}
 
