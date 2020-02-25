@@ -57,8 +57,8 @@ public class RobotMap {
 	public static final boolean HAS_DRIVETRAIN = true;
 	public static final boolean HAS_FOLLOWERS = true;
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = false;
-	public static final boolean REVERSE_RIGHT_MOTOR = true;
+	public static final boolean REVERSE_LEFT_MOTOR = true;
+	public static final boolean REVERSE_RIGHT_MOTOR = false;
 	// Maximum Acceleration given in power per second
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
@@ -182,11 +182,11 @@ public class RobotMap {
 	public static final boolean HAS_SHOOTER = true;
 	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REVOLUTION = 1024;
-	public static final boolean REVERSE_SHOOTER = false;
+	public static final boolean REVERSE_SHOOTER = true;
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double SHOOTER_POWER = 0.90; //How much power (as a %) to give the shooter
+	public static final double SHOOTER_POWER = 0.9; //How much power (as a %) to give the shooter
 	public static final int MIN_SHOOTER_SPEED = 4000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final int MIN_AUTO_SHOOTER_SPEED = 3750; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error

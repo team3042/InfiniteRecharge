@@ -64,7 +64,7 @@ public class ShooterEncoder extends Subsystem {
 		
 		double rpm = (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
 
-		return rpm / 2;
+		return (rpm * -1) / 2;
 	}
 	public double getPositionZero() {
 		return positionZero;
