@@ -20,7 +20,6 @@ public class Shooter extends Subsystem {
   	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
   	private static final NeutralMode BRAKE_MODE = RobotMap.SHOOTER_BRAKE_MODE;
 	private static final boolean HAS_ENCODER = RobotMap.HAS_SHOOTER_ENCODER;
-	private static final double POWER = RobotMap.SHOOTER_VELOCITY;
 
 	private static final int SPEED_PROFILE = RobotMap.SHOOTER_SPEED_PROFILE;
 	private static final double kP_SPEED = RobotMap.kP_SHOOTER_SPEED;
@@ -31,14 +30,11 @@ public class Shooter extends Subsystem {
 	private static final double COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REV;
 	private static final int TIMEOUT = RobotMap.SHOOTER_TIMEOUT;
 	private static final int PIDIDX = RobotMap.SHOOTER_PIDIDX;
-	//private static final int CRUISE = RobotMap.SHOOTER_CRUISE;
-	//private static final int ACCEL = RobotMap.SHOOTER_ACCEL;
 
 	/** Instance Variables ****************************************************/
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
   	public TalonSRX motor = new TalonSRX(CAN_SHOOTER);
-	  ShooterEncoder encoder;
-	  public boolean spinning = false;
+	ShooterEncoder encoder;
 
 	/** Shooter ******************************************************/
 	public Shooter() {
@@ -62,22 +58,20 @@ public class Shooter extends Subsystem {
 		motor.setInverted(reverse); 	// affects percent Vbus mode
   }
   
-  /** Methods for setting the motor in Percent Vbus mode ********************/
-  	public void setSpeed(double rpm) {
-		log.add("Speed", rpm, LOG_LEVEL);
-
-		if (rpm == 0) {
-			spinning = false;
-		}
-		else if (rpm != 0) {
-			spinning = true;
-		}
-		
+  /** Closed-Loop Control *******************************************
+	* Input units for speed is RPM, convert to counts per 100ms for talon*/
+  	public void setSpeed(double rpm) {		
 		double cp100ms = rpmToCp100ms(rpm);
 
 		motor.selectProfileSlot(SPEED_PROFILE, PIDIDX);
 		motor.set(ControlMode.Velocity, cp100ms);
 	}
+	private double rpmToCp100ms(double rpm) {
+		double cp100ms = rpm * (double)COUNTS_PER_REV / 600.0;
+		return cp100ms;
+	}
+
+	/** Methods for setting the motor in Percent Vbus mode ********************/
 	public void setPower(double Power) {
 		Power = safetyCheck(Power);
 				
@@ -90,10 +84,6 @@ public class Shooter extends Subsystem {
 		power = Math.min(1.0, power);
 		power = Math.max(-1.0, power);
 		return power;
-	}
-	private double rpmToCp100ms(double rpm) {
-		double cp100ms = rpm * (double)COUNTS_PER_REV / 600.0;
-		return cp100ms;
 	}
 	
 	/** initDefaultCommand ****************************************************

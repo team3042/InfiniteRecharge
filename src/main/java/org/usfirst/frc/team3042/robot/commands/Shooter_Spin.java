@@ -15,7 +15,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 public class Shooter_Spin extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-	private static final double POWER = RobotMap.SHOOTER_POWER;
+	private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
 	//private static final double POWER_CONSTANT = RobotMap.SHOOTER_POWER_CONSTANT;
 	//private static final double INITIAL_ERROR = RobotMap.INITIAL_VERTICAL_ERROR;
 	
@@ -38,7 +38,7 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		shooter.setSpeed(POWER);
+		shooter.setSpeed(SPEED);
 	}
 
 	/** execute ***************************************************************
