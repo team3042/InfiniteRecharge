@@ -2,7 +2,6 @@ package org.usfirst.frc.team3042.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
@@ -73,7 +72,6 @@ public class Turret_Continous extends Command {
 	 */
 	protected void execute() {
 		error = limelight.returnHorizontalError(); //Read the angle of error from the Limelight
-		SmartDashboard.putNumber("turret", encoder.countsToDegrees(encoder.getPosition()));
 		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
 			integral += error * 0.2; //Add the current error to the integral
 			derivative = (error - previousError) / .02;

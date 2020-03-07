@@ -20,8 +20,7 @@ public class Shoot extends Command {
     private static final Log.Level LOG_LEVEL = RobotMap.LOG_UPPER_CONVEYOR;
     private static final double LPOWER = RobotMap.LOWER_CONVEYOR_POWER;
     private static final double UPOWER = RobotMap.UPPER_CONVEYOR_POWER;
-    private static final int SPEED = RobotMap.MIN_SHOOTER_SPEED;
-    private static final int AUTO_SPEED = RobotMap.MIN_AUTO_SHOOTER_SPEED;
+    private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
     private static final double TOLERANCE = RobotMap.TURRET_ANGLE_TOLERANCE;
 
     /** Instance Variables ****************************************************/
@@ -32,16 +31,11 @@ public class Shoot extends Command {
     Limelight limelight = Robot.limelight;
     Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
 
-    boolean auto;
-    int speed;
-
     /** Shoot ***************************************************
      * Required subsystems will cancel commands when this command is run.
      */
-    public Shoot(boolean autonomous) {
+    public Shoot() {
       log.add("Constructor", Log.Level.TRACE);
-      
-      auto = autonomous;
 
       requires(upperconveyor);
       requires(lowerconveyor);
@@ -52,19 +46,13 @@ public class Shoot extends Command {
      */
     protected void initialize() {
       log.add("Initialize", Log.Level.TRACE);
-      if (auto) {
-        speed = AUTO_SPEED;
-      }
-      else {
-        speed = SPEED;
-      }
     }
 
     /** execute ***************************************************************
      * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && encoder.getSpeed() >= speed) {
+      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(encoder.getSpeed() - SPEED) <= 100) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
       }

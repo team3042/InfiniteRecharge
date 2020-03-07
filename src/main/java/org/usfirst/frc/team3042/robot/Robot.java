@@ -132,8 +132,6 @@ public class Robot extends TimedRobot {
 		turret.getEncoder().reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
-
-		//intakedeploy.extend(); //Deploy the intake
 		
 		autonomousCommand = chooser.getSelected();
 
@@ -163,7 +161,7 @@ public class Robot extends TimedRobot {
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
-		//intakedeploy.extend(); //Deploy the intake
+		turret.getEncoder().reset();
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -182,6 +180,7 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getEncoder().getSpeed());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
+		SmartDashboard.putNumber("turret", turret.getEncoder().countsToDegrees(turret.getEncoder().getPosition()));
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();

@@ -17,7 +17,7 @@ public class ShooterEncoder extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET_ENCODER;
 	private static final int FRAME_RATE = RobotMap.TURRET_ENCODER_FRAME_RATE;
-	private static final int COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REVOLUTION;
+	private static final int COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REV;
 	private static final int TIMEOUT = RobotMap.SHOOTER_TIMEOUT;
 	private static final int PIDIDX = RobotMap.SHOOTER_PIDIDX;
 	private static final boolean SENSOR_PHASE = RobotMap.TURRET_SENSOR_PHASE;
@@ -64,7 +64,7 @@ public class ShooterEncoder extends Subsystem {
 		
 		double rpm = (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
 
-		return (rpm * -1) * (16/9) / 1.7;
+		return (rpm * -1) / 1.6; //1.6 makes actual rpm equal encoder rpm
 		}
 	public double getPositionZero() {
 		return positionZero;

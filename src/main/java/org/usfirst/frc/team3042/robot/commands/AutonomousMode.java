@@ -11,6 +11,6 @@ public class AutonomousMode extends CommandGroup {
     addParallel(new Shooter_Spin()); //Spin up the shooter
     addParallel(new Turret_Continous(true)); //Search for the target and start tracking it
     addSequential(new Drivetrain_GyroStraight(12.0, -80.0)); //Drive forwards off the initiation line
-    addSequential(new Shoot(true)); //Shoot the three pre-loaded power cells
+    addSequential(new Shoot()); //Shoot the three pre-loaded power cells
   }
 }
