@@ -181,7 +181,7 @@ public class RobotMap {
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
 	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
-	public static final int SHOOTER_ENCODER_COUNTS_PER_REVOLUTION = 1440;
+	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 1440;
 	public static final boolean REVERSE_SHOOTER = true;
 	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Coast;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
@@ -190,6 +190,15 @@ public class RobotMap {
 	public static final int MIN_SHOOTER_SPEED = 4500; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final int MIN_AUTO_SHOOTER_SPEED = 4500; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
+	public static final double SHOOTER_VELOCITY = 5000;//Shooter velocity for for the shooter PID loop
+	public static final int SHOOTER_SPEED_PROFILE = 1;
+	public static final double kP_SHOOTER_SPEED = 0.05;
+	public static final double kI_SHOOTER_SPEED = 0.0;
+	public static final double kD_SHOOTER_SPEED = 0.5;
+	public static final double kF_SHOOTER_SPEED = 0.036;
+	public static final int I_ZONE_SHOOTER_SPEED = 0;
+	//public static final int SHOOTER_CRUISE = 500; //RPM
+	//public static final int SHOOTER_ACCEL = 500; //RPM per sec
 	/** Shooter Hood Settings **********************************************/
 	public static final boolean HAS_SHOOTER_HOOD = true;
 
