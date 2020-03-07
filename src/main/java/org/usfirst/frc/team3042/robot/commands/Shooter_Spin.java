@@ -38,7 +38,7 @@ public class Shooter_Spin extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		shooter.setPower(POWER);
+		shooter.setSpeed(POWER);
 	}
 
 	/** execute ***************************************************************
