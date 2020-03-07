@@ -14,7 +14,7 @@ import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 public class PositionControl_Manual extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_CONTROL_PANEL_WHEEL;
-	private static final double POWER = RobotMap.POSITION_CONTROL_POWER / 2;
+	private static final double POWER = RobotMap.POSITION_CONTROL_POWER;
 	
 	/** Instance Variables ****************************************************/
   	ControlPanelWheel cpwheel = Robot.cpwheel;

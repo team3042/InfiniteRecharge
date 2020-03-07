@@ -38,6 +38,7 @@ public class ClimbingWinch_Wind extends Command {
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		winch.setPower(direction * POWER);
+		
 		//timer.reset();
 		//timer.start();
 	}

@@ -11,7 +11,6 @@ import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
-import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 
@@ -58,22 +57,23 @@ public class OI {
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
 		//Control Panel Controls
-		gamepad.A.whenPressed(new RotationControl());
 		gamepad.B.whileHeld(new PositionControl_Manual());
 
 		//Intake Controls
 		gamepad.LB.whileHeld(new Intake_Intake(1));
+		gamepad.LT.whileActive(new Intake_Intake(-1));
+		gamepad.RT.whileActive(new UpperConveyor_Test(-1));
+		gamepad.RT.whileActive(new LowerConveyor_Test(-1));
+		gamepad.Y.whileHeld(new UpperConveyor_Test(1));
 
 		//Turret Controls
 		gamepad.POVRight.whileActive(new Turret_Manual(1));
 		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 
 		//Shooting Controls
-		gamepad.RB.whileHeld(new Turret_Continous());
+		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
 		gamepad.RB.whileActive(new Shoot(false));
-		gamepad.RT.whileActive(new UpperConveyor_Test(-1));
-		gamepad.RT.whileActive(new LowerConveyor_Test(-1));
 
 		//Climbing Controls
 		gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 

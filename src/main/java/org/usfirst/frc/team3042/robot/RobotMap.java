@@ -33,13 +33,13 @@ public class RobotMap {
 	public static final int CAN_CONTROL_PANEL_WHEEL = 14;
 	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
-	public static final int CAN_SHOOTER = 1;
+	public static final int CAN_SHOOTER = 5;
 	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
 	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
 	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
 	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 32;
 	public static final int CAN_CLIMBING_WINCH = 4;
-	public static final int CAN_CLIMBING_HOOK = 0;
+	public static final int CAN_CLIMBING_HOOK = 26;
 	
 	/** PCM channels **********************************************************/
 	//public static final int INTAKE_DEPLOY_SOLENOID_RIGHT = 9;
@@ -119,12 +119,12 @@ public class RobotMap {
 
 	/** Control Panel Wheel Settings ****************************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
-	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = false;
+	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = true;
 	public static final NeutralMode CPWHEEL_BRAKE_MODE = NeutralMode.Brake;
 	public static final int CPWHEEL_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int CPWHEEL_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final int CPWHEEL_REVOLUTIONS = 25; //Number of revolutions for wheel to spin when performing rotation control
-	public static final double POSITION_CONTROL_POWER = .2; //How much power (as a %) to give the Control Panel Wheel when performing position control
+	public static final double POSITION_CONTROL_POWER = .4; //How much power (as a %) to give the Control Panel Wheel when performing position control
 	public static final double ROTATION_CONTROL_POWER = .4; //How much power (as a %) to give the Control Panel Wheel when performing rotation control
 	/** Control Panel Wheel Encoder Settings **********************************************/
 	public static final boolean HAS_CONTROL_PANEL_WHEEL_ENCODER = HAS_CONTROL_PANEL_WHEEL;
@@ -175,20 +175,20 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
-	public static final double CONVEYOR_ADVANCE_DURATION = 0.35; //How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_SHOOT_DURATION = 1.2; //How long (in seconds) to run the conveyors while autonomously shooting
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
 	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
-	public static final int SHOOTER_ENCODER_COUNTS_PER_REVOLUTION = 1024;
+	public static final int SHOOTER_ENCODER_COUNTS_PER_REVOLUTION = 1440;
 	public static final boolean REVERSE_SHOOTER = true;
-	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Brake;
+	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Coast;
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double SHOOTER_POWER = 0.9; //How much power (as a %) to give the shooter
-	public static final int MIN_SHOOTER_SPEED = 4000; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
-	public static final int MIN_AUTO_SHOOTER_SPEED = 3750; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
+	public static final int MIN_SHOOTER_SPEED = 4500; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
+	public static final int MIN_AUTO_SHOOTER_SPEED = 4500; //Minimum speed (in RPM) the shooter must be spinning at in order to shoot
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
 	/** Shooter Hood Settings **********************************************/
 	public static final boolean HAS_SHOOTER_HOOD = true;
@@ -197,13 +197,13 @@ public class RobotMap {
 	public static final boolean HAS_CLIMBING_WINCH = true;
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
-	public static final double CLIMBING_WINCH_POWER = 0.8; //How much power (as a %) to give the climbing winch
+	public static final double CLIMBING_WINCH_POWER = 0.95; //How much power (as a %) to give the climbing winch
 	public static final double WINCH_WIND_TIME = 0.1; //How long (in seconds) to wind the winch for
 	/** Climbing Hook Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_HOOK = true;
-	public static final boolean REVERSE_CLIMBING_HOOK = false;
+	public static final boolean REVERSE_CLIMBING_HOOK = true;
 	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
-	public static final double CLIMBING_HOOK_POWER = 0.33; //How much power (as a %) to give the climbing hook
+	public static final double CLIMBING_HOOK_POWER = 0.6; //How much power (as a %) to give the climbing hook
 	
 	/** Logger Settings *******************************************************/
 	public static final String 		LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";

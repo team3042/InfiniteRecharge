@@ -9,6 +9,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
+import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
 /** Advance Lower Conveyor *******************************************************
  * Advances the Lower Conveyor once it detects a power cell
@@ -22,6 +23,7 @@ public class LowerConveyor_Advance extends Command {
 	/** Instance Variables ****************************************************/
 	UltrasonicSensor sensor = Robot.ultrasonicsensor;
 	LowerConveyor conveyor = Robot.lowerconveyor;
+	UpperConveyor upperConveyor = Robot.upperconveyor;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
 	Timer timer = new Timer();
 	boolean moving = false;

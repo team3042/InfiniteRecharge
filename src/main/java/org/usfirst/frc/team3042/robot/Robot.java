@@ -25,6 +25,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
@@ -77,6 +79,8 @@ public class Robot extends TimedRobot {
 	Command stopAutonomous = new Turret_Stop();
 	SendableChooser<Command> chooser = new SendableChooser<Command>();
 
+	UsbCamera camera1;
+
 	public String color;
 	boolean ColorRecieved = false;
 
@@ -92,6 +96,10 @@ public class Robot extends TimedRobot {
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 		SmartDashboard.putData("Auto Mode", chooser);
+
+		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
+		camera1.setResolution(320, 240);
+		camera1.setFPS(15);
 	}
 
 	/** disabledInit **********************************************************

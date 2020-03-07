@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
  */
 public class Shooter extends Subsystem {
 	/** Configuration Constants ***********************************************/
-  private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-  private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
-  private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
-  private static final NeutralMode BRAKE_MODE = RobotMap.SHOOTER_BRAKE_MODE;
-  private static final boolean HAS_ENCODER = RobotMap.HAS_SHOOTER_ENCODER;
+  	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
+  	private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
+  	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
+  	private static final NeutralMode BRAKE_MODE = RobotMap.SHOOTER_BRAKE_MODE;
+  	private static final boolean HAS_ENCODER = RobotMap.HAS_SHOOTER_ENCODER;
 	/** Instance Variables ****************************************************/
-  Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-  TalonSRX motor = new TalonSRX(CAN_SHOOTER);
-  ShooterEncoder encoder;
+  	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+  	public TalonSRX motor = new TalonSRX(CAN_SHOOTER);
+  	ShooterEncoder encoder;
 
 	/** Shooter ******************************************************/
 	public Shooter() {
@@ -33,7 +33,7 @@ public class Shooter extends Subsystem {
 		encoder = new ShooterEncoder(motor);
 	}
 
-    initMotor(motor, REVERSE_MOTOR);
+	initMotor(motor, REVERSE_MOTOR);
   }
 
   private void initMotor(TalonSRX motor, boolean reverse) {
