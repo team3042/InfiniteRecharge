@@ -11,6 +11,7 @@ import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
+import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 //import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
@@ -59,6 +60,7 @@ public class OI {
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
 		//Control Panel Controls
+		gamepad.A.whenPressed(new RotationControl());
 		gamepad.B.whileHeld(new PositionControl_Manual());
 
 		//Intake Controls
