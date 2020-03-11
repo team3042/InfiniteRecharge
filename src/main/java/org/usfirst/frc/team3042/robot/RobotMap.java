@@ -193,7 +193,7 @@ public class RobotMap {
 	public static final double kD_SHOOTER_SPEED = 0.0;
 	public static final double kF_SHOOTER_SPEED = 0.05; 
 	public static final int I_ZONE_SHOOTER_SPEED = 0;
-	public static final double SHOOTER_VELOCITY_TOLERANCE = 150; //If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
+	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; //If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
 	/** Shooter Hood Settings **********************************************/
 	public static final boolean HAS_SHOOTER_HOOD = true;
 
@@ -202,7 +202,6 @@ public class RobotMap {
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
 	public static final double CLIMBING_WINCH_POWER = 0.95; //How much power (as a %) to give the climbing winch
-	public static final double WINCH_WIND_TIME = 0.1; //How long (in seconds) to wind the winch for
 	/** Climbing Hook Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_HOOK = true;
 	public static final boolean REVERSE_CLIMBING_HOOK = true;
