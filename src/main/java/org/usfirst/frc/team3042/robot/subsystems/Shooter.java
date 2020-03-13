@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3042.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.RobotMap;
@@ -16,74 +18,71 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 public class Shooter extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-  	private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
-  	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
-  	private static final NeutralMode BRAKE_MODE = RobotMap.SHOOTER_BRAKE_MODE;
-	private static final boolean HAS_ENCODER = RobotMap.HAS_SHOOTER_ENCODER;
-
-	private static final int SPEED_PROFILE = RobotMap.SHOOTER_SPEED_PROFILE;
-	private static final double kP_SPEED = RobotMap.kP_SHOOTER_SPEED;
-	private static final double kI_SPEED = RobotMap.kI_SHOOTER_SPEED;
-	private static final double kD_SPEED = RobotMap.kD_SHOOTER_SPEED;
-	private static final double kF_SPEED = RobotMap.kF_SHOOTER_SPEED;
-	private static final int I_ZONE_SPEED = RobotMap.I_ZONE_SHOOTER_SPEED;
-	private static final double COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REV;
-	private static final int TIMEOUT = RobotMap.SHOOTER_TIMEOUT;
-	private static final int PIDIDX = RobotMap.SHOOTER_PIDIDX;
+	  private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
+	  private static final int CAN_FOLLOWER = RobotMap.CAN_SHOOTER_FOLLOWER;
+	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
+	private static final boolean REVERSE_FOLLOWER = RobotMap.REVERSE_SHOOTER_FOLLOWER;
+	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
+	private static final double kI = RobotMap.kI_SHOOTER_SPEED;
+	private static final double kD = RobotMap.kD_SHOOTER_SPEED;
+	private static final double kFF = RobotMap.kF_SHOOTER_SPEED;
+	private static final int kIz = RobotMap.I_ZONE_SHOOTER_SPEED;
 
 	/** Instance Variables ****************************************************/
-  	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-  	public TalonSRX motor = new TalonSRX(CAN_SHOOTER);
-	ShooterEncoder encoder;
+	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+	public CANSparkMax motor = new CANSparkMax(CAN_SHOOTER, MotorType.kBrushless); //initialize motor
+	public CANSparkMax follower = new CANSparkMax(CAN_FOLLOWER, MotorType.kBrushless); //initialize follower motor
+	CANEncoder encoder;
+	CANEncoder followerEncoder;
+	CANPIDController pidController;
+	CANPIDController followerPidController;
 
 	/** Shooter ******************************************************/
 	public Shooter() {
 		log.add("Constructor", LOG_LEVEL);
-		
-			if (HAS_ENCODER) {
-				encoder = new ShooterEncoder(motor);
-			}
+
+		/**In order to use PID functionality for a controller, a CANPIDController object
+		 * is constructed by calling the getPIDController() method on an existing
+		 * CANSparkMax object
+		 */
+		pidController = motor.getPIDController();
+		followerPidController = follower.getPIDController();
+
+		// Encoder object created to display position values
+		encoder = motor.getEncoder();
+		followerEncoder = follower.getEncoder();
 
 		initMotor(motor, REVERSE_MOTOR);
+		initMotor(follower, REVERSE_FOLLOWER);
 
-		motor.config_kP(SPEED_PROFILE, kP_SPEED, TIMEOUT);
-		motor.config_kI(SPEED_PROFILE, kI_SPEED, TIMEOUT);
-		motor.config_kD(SPEED_PROFILE, kD_SPEED, TIMEOUT);
-		motor.config_kF(SPEED_PROFILE, kF_SPEED, TIMEOUT);
-		motor.config_IntegralZone(SPEED_PROFILE, I_ZONE_SPEED, TIMEOUT);
+		// set PID coefficients
+		setPID(motor);
+		setPID(follower);
+
+		follower.follow(motor);
 	}
 
- 	private void initMotor(TalonSRX motor, boolean reverse) {
-		motor.setNeutralMode(BRAKE_MODE);
+	private void initMotor(CANSparkMax motor, boolean reverse) {
 		motor.setInverted(reverse); 	// affects percent Vbus mode
+	}
+
+	// set PID coefficients
+ 	private void setPID(CANSparkMax motor) {
+		pidController.setP(kP);
+		pidController.setI(kI);
+		pidController.setD(kD);
+		pidController.setIZone(kIz);
+		pidController.setFF(kFF);
+		pidController.setOutputRange(-1, 1);
   }
   
   /** Closed-Loop Control *******************************************
-	* Input units for speed is RPM, convert to counts per 100ms for talon*/
-  	public void setSpeed(double rpm) {		
-		double cp100ms = rpmToCp100ms(rpm);
-
-		motor.selectProfileSlot(SPEED_PROFILE, PIDIDX);
-		motor.set(ControlMode.Velocity, cp100ms);
-	}
-	private double rpmToCp100ms(double rpm) {
-		double cp100ms = rpm * (double)COUNTS_PER_REV / 600.0;
-		return cp100ms;
-	}
-
-	/** Methods for setting the motor in Percent Vbus mode ********************/
-	public void setPower(double Power) {
-		Power = safetyCheck(Power);
-				
-		motor.set(ControlMode.PercentOutput, Power);		
+	* Input units for speed is RPM*/
+  	public void setSpeed(double rpm) {
+		pidController.setReference(rpm, ControlType.kVelocity);
 	}
 	public void stop() {
-		setPower(0.0);
-	}
-	private double safetyCheck(double power) {
-		power = Math.min(1.0, power);
-		power = Math.max(-1.0, power);
-		return power;
+		pidController.setReference(0.0, ControlType.kVelocity);
 	}
 	
 	/** initDefaultCommand ****************************************************
@@ -91,11 +90,5 @@ public class Shooter extends Subsystem {
 	 */
 	public void initDefaultCommand() {
 		setDefaultCommand(null);
-	}
-	
-  	/** Command Methods *******************************************************/
-  	/** Provide commands access to the encoder ********************************/
-	public ShooterEncoder getEncoder() {
-		return encoder;
 	}
 }

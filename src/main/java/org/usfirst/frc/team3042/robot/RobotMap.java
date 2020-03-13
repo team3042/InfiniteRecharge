@@ -33,7 +33,8 @@ public class RobotMap {
 	public static final int CAN_CONTROL_PANEL_WHEEL = 14;
 	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
-	public static final int CAN_SHOOTER = 5;
+	public static final int CAN_SHOOTER = 0;
+	public static final int CAN_SHOOTER_FOLLOWER = 0;
 	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
 	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
 	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
@@ -179,19 +180,15 @@ public class RobotMap {
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean HAS_SHOOTER = true;
-	public static final boolean HAS_SHOOTER_ENCODER = HAS_SHOOTER;
-	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 1440;
 	public static final boolean REVERSE_SHOOTER = true;
-	public static final NeutralMode SHOOTER_BRAKE_MODE = NeutralMode.Coast;
-	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
+	public static final boolean REVERSE_SHOOTER_FOLLOWER = true;
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
-	public static final double SHOOTER_VELOCITY = 5000; //Shooter velocity in RPM
+	public static final double SHOOTER_VELOCITY = 2500; //Shooter velocity in RPM
 	public static final int SHOOTER_SPEED_PROFILE = 1;
-	public static final double kP_SHOOTER_SPEED = 0.0005;
+	public static final double kP_SHOOTER_SPEED = 0.0;
 	public static final double kI_SHOOTER_SPEED = 0.0;
 	public static final double kD_SHOOTER_SPEED = 0.0;
-	public static final double kF_SHOOTER_SPEED = 0.05; 
+	public static final double kF_SHOOTER_SPEED = 0.0025;
 	public static final int I_ZONE_SHOOTER_SPEED = 0;
 	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; //If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
 	/** Shooter Hood Settings **********************************************/
