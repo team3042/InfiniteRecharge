@@ -9,7 +9,6 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
-import org.usfirst.frc.team3042.robot.subsystems.ShooterEncoder;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
 /** Shoot *******************************************************
@@ -28,7 +27,6 @@ public class Shoot extends Command {
     UpperConveyor upperconveyor = Robot.upperconveyor;
     LowerConveyor lowerconveyor = Robot.lowerconveyor;
     Shooter shooter = Robot.shooter;
-    ShooterEncoder encoder = shooter.getEncoder();
     Limelight limelight = Robot.limelight;
     Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
 
@@ -53,7 +51,7 @@ public class Shoot extends Command {
      * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(encoder.getSpeed() - SPEED) <= VELOCITY_TOLERANCE) {
+      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(shooter.motor.getEncoder().getVelocity() - SPEED) <= VELOCITY_TOLERANCE) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
       }
