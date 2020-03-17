@@ -11,11 +11,9 @@ import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
-import org.usfirst.frc.team3042.robot.subsystems.IntakeDeploy;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
-import org.usfirst.frc.team3042.robot.subsystems.ShooterHood;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
@@ -52,8 +50,6 @@ public class Robot extends TimedRobot {
 	private static final boolean HAS_UPPER_CONVEYOR = RobotMap.HAS_UPPER_CONVEYOR;
 	private static final boolean HAS_CLIMBING_WINCH = RobotMap.HAS_CLIMBING_WINCH;
 	private static final boolean HAS_CLIMBING_HOOK = RobotMap.HAS_CLIMBING_HOOK;
-	private static final boolean HAS_INTAKE_DEPLOY = RobotMap.HAS_INTAKE_DEPLOY;
-	private static final boolean HAS_SHOOTER_HOOD = RobotMap.HAS_SHOOTER_HOOD;
 	private static final boolean HAS_ULTRASONIC_SENSOR = RobotMap.HAS_ULTRASONIC_SENSOR;
 
 	/** Create Subsystems *****************************************************/
@@ -71,8 +67,6 @@ public class Robot extends TimedRobot {
 	public static final PowerDistributionPanel pdp	= new PowerDistributionPanel();
 	public static final ClimbingWinch climbingwinch = (HAS_CLIMBING_WINCH)		 ? new ClimbingWinch()	: null;
 	public static final ClimbingHook climbinghook	= (HAS_CLIMBING_HOOK)		 ? new ClimbingHook()	: null;
-	public static final IntakeDeploy intakedeploy	= (HAS_INTAKE_DEPLOY)		 ? new IntakeDeploy()	: null;
-	public static final ShooterHood shooterhood  	= (HAS_SHOOTER_HOOD)		 ? new ShooterHood()	: null;
 	public static final UltrasonicSensor ultrasonicsensor = (HAS_ULTRASONIC_SENSOR)	 ? new UltrasonicSensor()	: null;
 	public static OI oi;
 	Command autonomousCommand;

@@ -41,11 +41,6 @@ public class RobotMap {
 	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 32;
 	public static final int CAN_CLIMBING_WINCH = 4;
 	public static final int CAN_CLIMBING_HOOK = 26;
-	
-	/** PCM channels **********************************************************/
-	//public static final int INTAKE_DEPLOY_SOLENOID_RIGHT = 9;
-	//public static final int INTAKE_DEPLOY_SOLENOID_LEFT = 9;
-	//public static final int SHOOTER_HOOD_SOLENOID = 9;	
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
