@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
-		turret.getEncoder().reset();
+		turret.reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 		
@@ -155,7 +155,7 @@ public class Robot extends TimedRobot {
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
 
-		turret.getEncoder().reset();
+		turret.reset();
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -174,7 +174,7 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getEncoder().getVelocity());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
-		SmartDashboard.putNumber("turret", turret.getEncoder().countsToDegrees(turret.getEncoder().getPosition()));
+		SmartDashboard.putNumber("turret", turret.countsToDegrees(turret.getPosition()));
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();

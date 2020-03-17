@@ -9,7 +9,6 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
-import org.usfirst.frc.team3042.robot.subsystems.TurretEncoder;
 
 /** Turret Continous *******************************************************
  * Command for correcting the reported angle of error with the turret
@@ -27,7 +26,6 @@ public class Turret_Continous extends Command {
 
 	/** Instance Variables ****************************************************/
 	Turret turret = Robot.turret;
-	TurretEncoder encoder = turret.getEncoder();
 
 	Limelight limelight = Robot.limelight; 
 
@@ -51,7 +49,7 @@ public class Turret_Continous extends Command {
 	public Turret_Continous(boolean auto) {
 		log.add("Constructor", Log.Level.TRACE);
 		requires(turret);
-		encoder.reset();
+		turret.reset();
 		autonomous = auto;
 	}
 
@@ -83,20 +81,20 @@ public class Turret_Continous extends Command {
 			turret.setPower(correction);
 		}
 		else if (counter < 5) {
-			if(encoder.countsToDegrees(encoder.getPosition()) > maxAngle) { //Max positive angle of the turret has been reached
+			if(turret.countsToDegrees(turret.getPosition()) > maxAngle) { //Max positive angle of the turret has been reached
 				turret.setPower(-1 * searchPower);
 			}
-			else if(encoder.countsToDegrees(encoder.getPosition()) < -1 * maxAngle) { //Max negative angle of the turret has been reached
+			else if(turret.countsToDegrees(turret.getPosition()) < -1 * maxAngle) { //Max negative angle of the turret has been reached
 				turret.setPower(searchPower);
 			}
 			previousError = error; //set the previous error equal to the current error before starting the loop over and getting a new current error
-			if (previousReading == encoder.getSpeed()) {
+			if (previousReading == turret.getSpeed()) {
 				counter += 1;
 			}
 			else {
 				counter = 0;
 			}
-			previousReading = encoder.getSpeed();
+			previousReading = turret.getSpeed();
 		}
 		else {
 			if(!autonomous) {

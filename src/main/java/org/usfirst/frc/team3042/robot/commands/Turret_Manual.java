@@ -7,7 +7,6 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
-import org.usfirst.frc.team3042.robot.subsystems.TurretEncoder;
 
 /** Turret Manual *******************************************************
  * Command for manually moving the turret.
@@ -19,7 +18,6 @@ public class Turret_Manual extends Command {
 
 	/** Instance Variables ****************************************************/
 	Turret turret = Robot.turret;
-	TurretEncoder encoder = turret.getEncoder();  
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(turret));
 	int direction;
 	

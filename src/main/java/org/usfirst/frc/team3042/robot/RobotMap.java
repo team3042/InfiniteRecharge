@@ -122,8 +122,6 @@ public class RobotMap {
 	public static final int CPWHEEL_REVOLUTIONS = 25; //Number of revolutions for wheel to spin when performing rotation control
 	public static final double POSITION_CONTROL_POWER = .4; //How much power (as a %) to give the Control Panel Wheel when performing position control
 	public static final double ROTATION_CONTROL_POWER = .4; //How much power (as a %) to give the Control Panel Wheel when performing rotation control
-	/** Control Panel Wheel Encoder Settings **********************************************/
-	public static final boolean HAS_CONTROL_PANEL_WHEEL_ENCODER = HAS_CONTROL_PANEL_WHEEL;
 	public static final int CPWHEEL_ENCODER_FRAME_RATE = 10;
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_CPWHEEL_ENCODER = false;
@@ -143,8 +141,6 @@ public class RobotMap {
 	public static final int TURRET_MAX_ANGLE = 80; //The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
 	public static final double TURRET_SEARCH_POWER = 0.6; //The speed at which the turret zips around to the other side when the max angle is reached, and also the speed at which it searches for the target if the Limelight loses it
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; //If the angle of error to the target is less than this value the PID Loop will not make any corrections
-	/** Turret Encoder Settings **********************************************/
-	public static final boolean HAS_TURRET_ENCODER = HAS_TURRET;
 	public static final int TURRET_ENCODER_FRAME_RATE = 10;
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_TURRET_ENCODER = false;
@@ -220,10 +216,8 @@ public class RobotMap {
 	public static final Log.Level	LOG_GYROSCOPE						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_COLOR_SENSOR					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_CONTROL_PANEL_WHEEL				= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CONTROL_PANEL_WHEEL_ENCODER		= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LIMELIGHT						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_TURRET							= Log.Level.DEBUG;
-	public static final Log.Level	LOG_TURRET_ENCODER					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_INTAKE							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_SHOOTER							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LOWER_CONVEYOR					= Log.Level.DEBUG;
