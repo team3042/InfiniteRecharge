@@ -151,8 +151,6 @@ public class RobotMap {
 	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
 	public static final double INTAKE_POWER = 0.6; //How much power (as a %) to give the intake
-	/** Intake Deploy Settings ****************************************************/
-	public static final boolean HAS_INTAKE_DEPLOY = true;
 
 	/** Upper Conveyor Settings ****************************************************/
 	public static final boolean HAS_UPPER_CONVEYOR = true;
@@ -182,8 +180,6 @@ public class RobotMap {
 	public static final double kF_SHOOTER_SPEED = 0.0025;
 	public static final int I_ZONE_SHOOTER_SPEED = 0;
 	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; //If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
-	/** Shooter Hood Settings **********************************************/
-	public static final boolean HAS_SHOOTER_HOOD = true;
 
 	/** Climbing Winch Settings ****************************************************/
 	public static final boolean HAS_CLIMBING_WINCH = true;
@@ -224,7 +220,5 @@ public class RobotMap {
 	public static final Log.Level	LOG_UPPER_CONVEYOR					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_CLIMBING_WINCH					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_CLIMBING_HOOK					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_INTAKE_DEPLOY					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_SHOOTER_HOOD					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_ULTRASONIC_SENSOR				= Log.Level.DEBUG;
 }

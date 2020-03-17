@@ -104,8 +104,6 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
-		
-		//intakedeploy.retract(); //Retract the intake
 	}
 
 	/** disabledPeriodic ******************************************************
@@ -125,7 +123,7 @@ public class Robot extends TimedRobot {
 
 		turret.reset();
 
-		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
+		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 		
 		autonomousCommand = chooser.getSelected();
 
@@ -153,7 +151,7 @@ public class Robot extends TimedRobot {
 
 		stopAutonomous.start();
 
-		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
+		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 
 		turret.reset();
 		

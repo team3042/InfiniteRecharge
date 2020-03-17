@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 public class Shooter extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-	  private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
-	  private static final int CAN_FOLLOWER = RobotMap.CAN_SHOOTER_FOLLOWER;
+	private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
+	private static final int CAN_FOLLOWER = RobotMap.CAN_SHOOTER_FOLLOWER;
 	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
 	private static final boolean REVERSE_FOLLOWER = RobotMap.REVERSE_SHOOTER_FOLLOWER;
 	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
