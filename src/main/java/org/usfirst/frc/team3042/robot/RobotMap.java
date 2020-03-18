@@ -49,9 +49,7 @@ public class RobotMap {
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 
-	/** Drivetrain Settings *****************************************************/
-	public static final boolean HAS_DRIVETRAIN = true;
-	public static final boolean HAS_FOLLOWERS = true;
+	/** Drivetrain Settings *******************************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
@@ -59,8 +57,7 @@ public class RobotMap {
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
-	/** Drivetrain Encoder Settings **************************************************/
-	public static final boolean HAS_ENCODERS = true;
+	/** Drivetrain Encoder Settings **********************************************************/
 	//Encoder counts per revolution
 	//In quadrature mode, actual counts will be 4x this; e.g., 360 -> 1440
 	public static final int COUNTS_PER_REVOLUTION = 1440;
@@ -68,9 +65,7 @@ public class RobotMap {
 	public static final int ENCODER_FRAME_RATE = 10;
 	public static final boolean SENSOR_PHASE_LEFT = false;
 	public static final boolean SENSOR_PHASE_RIGHT = false;
-	
-	/** Drivetrain Autonomous Settings ****************************************/
-	public static final boolean HAS_AUTON = HAS_ENCODERS;
+	/** Drivetrain Autonomous Settings ******************************************************/
 	public static final int AUTON_PROFILE = 0;
 	public static final double kP_AUTON = 0.4;
 	public static final double kI_AUTON = 0.0;
@@ -92,29 +87,17 @@ public class RobotMap {
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final int AUTON_HEADING = 0; //unimplemented feature; set to zero
-	
-	/** Drivetrain Gyro Drive Settings ****************************************/
+	/** Drivetrain Gyro Drive Settings ***************************************************/
 	public static final double kP_GYRO = 0.0175;
 	public static final double kI_GYRO = 0.0;
 	public static final double kD_GYRO = 0.0170;
 	public static final double ANGLE_TOLERANCE = 2.0;
 	public static final double MAX_POWER_GYRO = 0.4;
 	public static final double kI_GYRO_INTERVAL = 0.0;
-	/** Gyroscope Settings ****************************************************/
-	public static final boolean HAS_GYROSCOPE = true;
+	/** Gyroscope Settings ***************************************************************/
 	public static final double GYROSCOPE_SCALE = 1.0; //Constant for scaling values returned by the gyroscope, leave at 1.0 by default
 
-	/** Color Sensor Settings ****************************************************/
-	public static final boolean HAS_COLOR_SENSOR = true;
-	/** Limelight Settings *********************************************************/
-	public static final boolean HAS_LIMELIGHT = true;
-	public static final double INITIAL_VERTICAL_ERROR = 20.5; //This is the reported vertical angle of error when the robot is in our optimal shooting position
-	/** Ultrasonic Sensor Settings ****************************************************/
-	public static final boolean HAS_ULTRASONIC_SENSOR = true;
-	public static final double POWER_CELL_DISTANCE = 8; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
-
 	/** Control Panel Wheel Settings ****************************************************/
-	public static final boolean HAS_CONTROL_PANEL_WHEEL = true;
 	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = true;
 	public static final NeutralMode CPWHEEL_BRAKE_MODE = NeutralMode.Brake;
 	public static final int CPWHEEL_TIMEOUT = 0; // timeout in ms; set to zero
@@ -126,9 +109,9 @@ public class RobotMap {
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_CPWHEEL_ENCODER = false;
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
+	/** Color Sensor Settings ****************************************************/
 
 	/** Turret Settings ****************************************************/
-	public static final boolean HAS_TURRET = true;
 	public static final boolean REVERSE_TURRET = false;
 	public static final NeutralMode TURRET_BRAKE_MODE = NeutralMode.Brake;
 	public static final int TURRET_TIMEOUT = 0; // timeout in ms; set to zero
@@ -145,30 +128,30 @@ public class RobotMap {
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; //The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
+	/** Limelight Settings *********************************************************/
+	public static final double INITIAL_VERTICAL_ERROR = 20.5; //This is the reported vertical angle of error when the robot is in our optimal shooting position
 
 	/** Intake Settings *******************************************************/
-	public static final boolean HAS_INTAKE = true;
 	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
 	public static final double INTAKE_POWER = 0.6; //How much power (as a %) to give the intake
 
 	/** Upper Conveyor Settings ****************************************************/
-	public static final boolean HAS_UPPER_CONVEYOR = true;
 	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double UPPER_CONVEYOR_POWER = 0.4; //How much power (as a %) to give the upper conveyor
 	/** Lower Conveyer Settings ****************************************************/
-	public static final boolean HAS_LOWER_CONVEYOR = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; //How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double CONVEYOR_SHOOT_DURATION = 1.2; //How long (in seconds) to run the conveyors while autonomously shooting
+	/** Ultrasonic Sensor Settings ****************************************************/
+	public static final double POWER_CELL_DISTANCE = 8; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Shooter Settings ****************************************************/
-	public static final boolean HAS_SHOOTER = true;
 	public static final boolean REVERSE_SHOOTER = true;
 	public static final boolean REVERSE_SHOOTER_FOLLOWER = true;
 	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
@@ -182,12 +165,10 @@ public class RobotMap {
 	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; //If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
 
 	/** Climbing Winch Settings ****************************************************/
-	public static final boolean HAS_CLIMBING_WINCH = true;
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
 	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
 	public static final double CLIMBING_WINCH_POWER = 0.95; //How much power (as a %) to give the climbing winch
 	/** Climbing Hook Settings ****************************************************/
-	public static final boolean HAS_CLIMBING_HOOK = true;
 	public static final boolean REVERSE_CLIMBING_HOOK = true;
 	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
 	public static final double CLIMBING_HOOK_POWER = 0.6; //How much power (as a %) to give the climbing hook
