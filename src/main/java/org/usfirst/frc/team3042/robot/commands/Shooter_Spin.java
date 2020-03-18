@@ -6,25 +6,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
-import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 
-/** Shooter *******************************************************
- * Sets power to the shooter
+/** Shooter Spin *******************************************************
+ * Spins up the shooter to the desired velocity
  */
 public class Shooter_Spin extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
 	private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
-	//private static final double POWER_CONSTANT = RobotMap.SHOOTER_POWER_CONSTANT;
-	//private static final double INITIAL_ERROR = RobotMap.INITIAL_VERTICAL_ERROR;
 	
 	/** Instance Variables ****************************************************/
 	Shooter shooter = Robot.shooter;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
-	Limelight limelight = Robot.limelight;
 	
-	/** Shooter ***************************************************
+	/** Shooter Spin ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public Shooter_Spin() {
@@ -45,13 +41,6 @@ public class Shooter_Spin extends Command {
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		/*if (limelight.returnValidTarget() == 1) {
-			double newPower = POWER - POWER_CONSTANT * (limelight.returnVerticalError() - INITIAL_ERROR); 
-
-			newPower = Math.min(newPower, 1);
-
-			shooter.setPower(newPower);
-		}*/
 	}
 
 	/** isFinished ************************************************************	

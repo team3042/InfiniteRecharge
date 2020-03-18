@@ -129,7 +129,6 @@ public class RobotMap {
 	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	/** Limelight Settings *********************************************************/
-	public static final double INITIAL_VERTICAL_ERROR = 20.5; //This is the reported vertical angle of error when the robot is in our optimal shooting position
 
 	/** Intake Settings *******************************************************/
 	public static final boolean REVERSE_INTAKE = true;
@@ -147,16 +146,13 @@ public class RobotMap {
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; //How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; //How long (in seconds) to run the lower conveyor when a power cell is intaked
-	public static final double CONVEYOR_SHOOT_DURATION = 1.2; //How long (in seconds) to run the conveyors while autonomously shooting
 	/** Ultrasonic Sensor Settings ****************************************************/
 	public static final double POWER_CELL_DISTANCE = 8; //If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** Shooter Settings ****************************************************/
 	public static final boolean REVERSE_SHOOTER = true;
-	public static final boolean REVERSE_SHOOTER_FOLLOWER = true;
-	public static final double SHOOTER_POWER_CONSTANT = 0.01; //How much power (as a %) to increase the shooter power per degree of vertical error
+	public static final boolean REVERSE_SHOOTER_FOLLOWER = false;
 	public static final double SHOOTER_VELOCITY = 2500; //Shooter velocity in RPM
-	public static final int SHOOTER_SPEED_PROFILE = 1;
 	public static final double kP_SHOOTER_SPEED = 0.0;
 	public static final double kI_SHOOTER_SPEED = 0.0;
 	public static final double kD_SHOOTER_SPEED = 0.0;
