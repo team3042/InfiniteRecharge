@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** DrivetrainEncoders ***********************************************************
+/** DrivetrainEncoders ********************************************************
  * The encoders for the drivetrain.
  */
 public class DrivetrainEncoders extends Subsystem {
@@ -41,11 +41,9 @@ public class DrivetrainEncoders extends Subsystem {
 		reset();
 	}
 	private void initEncoder(TalonSRX encoder, boolean sensorPhase) {
-		encoder.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 
-				PIDIDX, TIMEOUT);
-		encoder.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 
-				FRAME_RATE, TIMEOUT);
-		encoder.setSensorPhase(sensorPhase); 	// affects closed-loop mode
+		encoder.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PIDIDX, TIMEOUT);
+		encoder.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, FRAME_RATE, TIMEOUT);
+		encoder.setSensorPhase(sensorPhase); // affects closed-loop mode
 	}
 	
 	/** initDefaultCommand ****************************************************

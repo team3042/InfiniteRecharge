@@ -10,7 +10,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.DrivetrainEncoders;
 import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 
-/** Drivetrain Gyro Straight ***************************************************
+/** Drivetrain Gyro Straight **************************************************
  * Command for driving straight using gyroscope feedback.
  */
 public class Drivetrain_GyroStraight extends Command {
@@ -32,7 +32,7 @@ public class Drivetrain_GyroStraight extends Command {
 	double leftPower, rightPower, lastError, integralError;
 	double goalAngle, goalDistance;
 	
-	/** Drivetrain Gyro Straight ***********************************************
+	/** Drivetrain Gyro Straight **********************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 * 
 	 * distance is given in physical units matching the wheel diameter unit
@@ -44,10 +44,10 @@ public class Drivetrain_GyroStraight extends Command {
 		log.add("Constructor", Log.Level.TRACE);
 		requires(drivetrain);
 		
-		/** convert distance to revolutions *************************/
+		// convert distance to revolutions
 		goalDistance = distance / CIRCUMFRENCE;
 		
-		/** Find the power level for the given speed ****************/
+		// Find the power level for the given speed
 		double rpm = speed * 60.0 / CIRCUMFRENCE;		
 		leftPower = encoders.rpmToPower(rpm, kF_LEFT);
 		rightPower = encoders.rpmToPower(rpm, kF_RIGHT);

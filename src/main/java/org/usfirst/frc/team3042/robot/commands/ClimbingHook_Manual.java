@@ -7,7 +7,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 
-/** Climbing Hook Manual ************************************************************
+/** Climbing Hook Manual ******************************************************
  * Command for raising and lowering the climber
  */
 public class ClimbingHook_Manual extends Command {
@@ -20,7 +20,7 @@ public class ClimbingHook_Manual extends Command {
 	ClimbingHook hook = Robot.climbinghook;
   	int direction;
 	
-	/** Climbing Hook Manual ********************************************************
+	/** Climbing Hook Manual **************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public ClimbingHook_Manual(int direction) {

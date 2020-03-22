@@ -9,7 +9,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
 import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 
-/** Position Control *******************************************************
+/** Position Control **********************************************************
  * Command for rotating the control panel to the assigned color
  */
 public class PositionControl extends Command {
@@ -25,7 +25,7 @@ public class PositionControl extends Command {
   	String color;
   	String targetColor;
 	
-	/** Position Control ***************************************************
+	/** Position Control ******************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public PositionControl() {

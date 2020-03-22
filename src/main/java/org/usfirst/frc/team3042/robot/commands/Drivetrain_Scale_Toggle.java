@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  * Drivetrain Scale Toggle
  */
 public class Drivetrain_Scale_Toggle extends InstantCommand {
-  /**
-   * Scales up the speed of the drivetrain so the driver can traverse the field faster
-   */
+  // Scales up the speed of the drivetrain so the driver can traverse the field faster
   public Drivetrain_Scale_Toggle() {
     super();
   }

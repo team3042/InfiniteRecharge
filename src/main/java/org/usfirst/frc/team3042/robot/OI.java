@@ -50,7 +50,7 @@ public class OI {
 		driveAxisLeft = JOYSTICK_Y_AXIS;
 		driveAxisRight = JOYSTICK_Y_AXIS;
 		
-		/** Controls *****************************************************/
+		/** Controls **********************************************************/
 		//Drivetrain Controls
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
@@ -81,7 +81,7 @@ public class OI {
 		gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));
 	}
 	
-	/** Access to the driving axes values *************************************
+	/** Access to the driving axes values *****************************
 	 * A negative has been added to make pushing forward positive.
 	 */
 	public double getDriveLeft() {
@@ -100,16 +100,16 @@ public class OI {
 		joystickValue *= -1.0;
 		return joystickValue;
 	}
-	public void setNormalScale(){
+	public void setNormalScale() {
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
     	isHighScale = false;
     }
-    public void setHighScale(){
+    public void setHighScale() {
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_HIGH;
     	isHighScale = true;
     }
     public void toggleScale(){
-    	if (isHighScale){
+    	if (isHighScale) {
     		setNormalScale();
     	}
     	else {
@@ -117,16 +117,18 @@ public class OI {
 		}
 	}	
 	private double checkDeadZone(double joystickValue) {
-		if (Math.abs(joystickValue) < JOYSTICK_DEAD_ZONE) joystickValue = 0.0;
+		if (Math.abs(joystickValue) < JOYSTICK_DEAD_ZONE) {
+			joystickValue = 0.0;
+		}
 		return joystickValue;
 	}
 	
-	/** Access the POV value **************************************************/
+	/** Access the POV value *******************************************/
 	public int getPOV() {
 		return gamepad.getPOV();
 	}
 	
-	/** Access the Trigger Values *********************************************/
+	/** Access the Trigger Values **************************************/
 	public double getTriggerDifference() {
 		double leftTrigger = gamepad.getRawAxis(GAMEPAD_LEFT_TRIGGER);
 		double rightTrigger = gamepad.getRawAxis(GAMEPAD_RIGHT_TRIGGER);

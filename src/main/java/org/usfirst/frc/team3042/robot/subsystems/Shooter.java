@@ -12,7 +12,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** Shooter ****************************************************************
+/** Shooter *******************************************************************
  * Subsystem for the Shooter
  */
 public class Shooter extends Subsystem {
@@ -37,7 +37,7 @@ public class Shooter extends Subsystem {
 	CANPIDController pidController;
 	CANPIDController followerPidController;
 
-	/** Shooter ******************************************************/
+	/** Shooter ***************************************************************/
 	public Shooter() {
 		log.add("Constructor", LOG_LEVEL);
 
@@ -76,7 +76,7 @@ public class Shooter extends Subsystem {
 		pidController.setOutputRange(-1, 1);
   }
   
-  /** Closed-Loop Control *******************************************
+  /** Closed-Loop Control *****************************************************
 	* Input units for speed is RPM*/
   	public void setSpeed(double rpm) {
 		pidController.setReference(rpm, ControlType.kVelocity);

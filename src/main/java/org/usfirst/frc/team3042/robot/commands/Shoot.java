@@ -11,7 +11,7 @@ import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
-/** Shoot *******************************************************
+/** Shoot *********************************************************************
  * Command for pushing power cells into the shooter
  */
 public class Shoot extends Command {
@@ -30,7 +30,7 @@ public class Shoot extends Command {
     Limelight limelight = Robot.limelight;
     Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
 
-    /** Shoot ***************************************************
+    /** Shoot *****************************************************************
      * Required subsystems will cancel commands when this command is run.
      */
     public Shoot() {
@@ -40,7 +40,7 @@ public class Shoot extends Command {
       requires(lowerconveyor);
     }
 
-	/** initialize ************************************************************
+	/** initialize **************************************************************
      * Called just before this Command runs the first time
      */
     protected void initialize() {

@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 
-/** Rotation Control *******************************************************
+/** Rotation Control **********************************************************
  * Command for rotating the control panel 3-5 rotations
  */
 public class RotationControl extends Command {
@@ -21,7 +21,7 @@ public class RotationControl extends Command {
 	ControlPanelWheel cpwheel = Robot.cpwheel;
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(cpwheel));
 	
-	/** Rotation Control ***************************************************
+	/** Rotation Control ******************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public RotationControl() {

@@ -11,7 +11,7 @@ import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
-/** Advance Lower Conveyor *******************************************************
+/** Advance Lower Conveyor ****************************************************
  * Advances the Lower Conveyor once it detects a power cell
  */
 public class LowerConveyor_Advance extends Command {
@@ -28,7 +28,7 @@ public class LowerConveyor_Advance extends Command {
 	Timer timer = new Timer();
 	boolean moving = false;
 	
-	/** Advance Lower Conveyor ***************************************************
+	/** Advance Lower Conveyor ************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public LowerConveyor_Advance() {

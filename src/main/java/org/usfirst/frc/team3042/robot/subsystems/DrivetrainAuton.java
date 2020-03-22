@@ -28,7 +28,7 @@ public class DrivetrainAuton extends Subsystem {
 	private static final double kF_RIGHT = RobotMap.kF_DRIVE_RIGHT;
 	private static final int I_ZONE = RobotMap.I_ZONE_AUTON;
 	private static final int DT_MS = RobotMap.AUTON_DT_MS;
-	//The Frame Rate is given in ms
+	// The Frame Rate is given in ms
 	private static final int FRAME_RATE = RobotMap.AUTON_FRAME_RATE;
 	private static final int TIMEOUT = RobotMap.AUTON_TIMEOUT;
 	private static final int PIDIDX = RobotMap.AUTON_PIDIDX;
@@ -61,16 +61,15 @@ public class DrivetrainAuton extends Subsystem {
 		initMotor(leftMotor, kF_LEFT);
 		initMotor(rightMotor, kF_RIGHT);;
 
-		/** Starting talons processing motion profile **/
-		//Convert from ms to sec for the notifier
+		// Starting talons processing motion profile
+		// Convert from ms to sec for the notifier
 		double frameRateSec = (double)FRAME_RATE / 1000.0;
 		notifier = new Notifier(new PeriodicRunnable());
 		notifier.startPeriodic(frameRateSec);
 	}
 	private void initMotor(TalonSRX motor, double kF) {
 		motor.changeMotionControlFramePeriod(FRAME_RATE);
-		motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 
-				FRAME_RATE, TIMEOUT);
+		motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, FRAME_RATE, TIMEOUT);
 		motor.configMotionProfileTrajectoryPeriod(DT_MS, TIMEOUT); 
 
 		motor.config_kP(PROFILE, kP, TIMEOUT);
@@ -87,7 +86,7 @@ public class DrivetrainAuton extends Subsystem {
 		setDefaultCommand(null);
 	}
 
-	/** prepareMotionProfile *****************************************************
+	/** prepareMotionProfile **************************************************
 	 * Clears out any old trajectories and prepares to receive new trajectory 
 	 * points.
 	 */
@@ -104,8 +103,7 @@ public class DrivetrainAuton extends Subsystem {
 	}
 	
 	/** Motion Profile command methods ****************************************/
-	public void pushPoints(	TrajectoryPoint leftPoint, 
-			TrajectoryPoint rightPoint) {
+	public void pushPoints(	TrajectoryPoint leftPoint, TrajectoryPoint rightPoint) {
 		leftMotor.pushMotionProfileTrajectory(leftPoint);
 		rightMotor.pushMotionProfileTrajectory(rightPoint);
 	}
