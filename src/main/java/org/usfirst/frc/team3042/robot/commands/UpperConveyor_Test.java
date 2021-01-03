@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
-/** Testing Upper Conveyor *******************************************************
+/** Testing Upper Conveyor ****************************************************
  * Test Upper Conveyor
  */
 public class UpperConveyor_Test extends Command {
@@ -21,7 +21,7 @@ public class UpperConveyor_Test extends Command {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
 	int direction;
 
-	/** Testing Upper Conveyor ***************************************************
+	/** Testing Upper Conveyor ************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public UpperConveyor_Test(int direction) {

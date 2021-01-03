@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 
-/** Shooter Spin *******************************************************
+/** Shooter Spin **************************************************************
  * Spins up the shooter to the desired velocity
  */
 public class Shooter_Spin extends Command {
@@ -20,7 +20,7 @@ public class Shooter_Spin extends Command {
 	Shooter shooter = Robot.shooter;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
 	
-	/** Shooter Spin ***************************************************
+	/** Shooter Spin **********************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public Shooter_Spin() {

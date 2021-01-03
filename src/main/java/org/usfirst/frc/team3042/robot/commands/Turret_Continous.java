@@ -10,7 +10,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 
-/** Turret Continous *******************************************************
+/** Turret Continous **********************************************************
  * Command for correcting the reported angle of error with the turret
  */
 public class Turret_Continous extends Command {
@@ -34,8 +34,8 @@ public class Turret_Continous extends Command {
 	Shooter shooter = Robot.shooter;
 	double error;
 	double correction;
-	double derivative; //Derivative is the difference of the current error and the previous error
-	double integral = 0; //Integral is the sum of all errors
+	double derivative; // Derivative is the difference of the current error and the previous error
+	double integral = 0; // Integral is the sum of all errors
 	double previousError;
 
 	boolean autonomous;
@@ -43,7 +43,7 @@ public class Turret_Continous extends Command {
 	double previousReading;
 	int counter = 0;
 	
-	/** Turret Continous ***************************************************
+	/** Turret Continous ******************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public Turret_Continous(boolean auto) {
@@ -58,7 +58,7 @@ public class Turret_Continous extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		limelight.led.setNumber(3); //Turn on the Limelight's LEDs
+		limelight.led.setNumber(3); // Turn on the Limelight's LEDs
 		counter = 0;
 		if (limelight.returnValidTarget() == 0) {
 			turret.setPower(-1 * searchPower);
@@ -69,9 +69,9 @@ public class Turret_Continous extends Command {
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		error = limelight.returnHorizontalError(); //Read the angle of error from the Limelight
+		error = limelight.returnHorizontalError(); // Read the angle of error from the Limelight
 		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
-			integral += error * 0.2; //Add the current error to the integral
+			integral += error * 0.2; // Add the current error to the integral
 			derivative = (error - previousError) / .02;
 
 			correction = (kP * error) + (kI * integral) + (kD * derivative);
@@ -81,13 +81,13 @@ public class Turret_Continous extends Command {
 			turret.setPower(correction);
 		}
 		else if (counter < 5) {
-			if(turret.countsToDegrees(turret.getPosition()) > maxAngle) { //Max positive angle of the turret has been reached
+			if(turret.countsToDegrees(turret.getPosition()) > maxAngle) { // Max positive angle of the turret has been reached
 				turret.setPower(-1 * searchPower);
 			}
 			else if(turret.countsToDegrees(turret.getPosition()) < -1 * maxAngle) { //Max negative angle of the turret has been reached
 				turret.setPower(searchPower);
 			}
-			previousError = error; //set the previous error equal to the current error before starting the loop over and getting a new current error
+			previousError = error; // set the previous error equal to the current error before starting the loop over and getting a new current error
 			if (previousReading == turret.getSpeed()) {
 				counter += 1;
 			}

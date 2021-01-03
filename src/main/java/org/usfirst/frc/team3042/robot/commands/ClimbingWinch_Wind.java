@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 
-/** Climbing Winch Wind ************************************************************
+/** Climbing Winch Wind *******************************************************
  * Winds the climbing winch
  */
 public class ClimbingWinch_Wind extends Command {
@@ -23,7 +23,7 @@ public class ClimbingWinch_Wind extends Command {
 	//Timer timer = new Timer();
 	int direction;
 	
-	/** Climbing Winch Wind ********************************************************
+	/** Climbing Winch Wind ***************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public ClimbingWinch_Wind(int direction) {

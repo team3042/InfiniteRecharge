@@ -12,7 +12,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** Turret ****************************************************************
+/** Turret ********************************************************************
  * Subsystem for the rotation of the turret
  */
 public class Turret extends Subsystem {
@@ -32,7 +32,7 @@ public class Turret extends Subsystem {
 	TalonSRX motor = new TalonSRX(CAN_TURRET);
 	double positionZero;
 
-	/** Turret ******************************************************/
+	/** Turret ****************************************************************/
 	public Turret() {
     	log.add("Constructor", LOG_LEVEL);
 
@@ -64,7 +64,7 @@ public class Turret extends Subsystem {
 		return power;
 	}
 
-	/** Reset the encoder zero position ****************************************/
+	/** Reset the encoder zero position ***************************************/
 	public void reset() {
 		positionZero = motor.getSelectedSensorPosition(PIDIDX);
 	}

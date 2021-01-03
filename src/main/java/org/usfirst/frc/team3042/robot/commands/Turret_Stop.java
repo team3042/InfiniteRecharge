@@ -10,7 +10,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 
-/** Turret Stop *******************************************************
+/** Turret Stop ***************************************************************
  * Command for stopping the turret at the end of autonomous mode
  */
 public class Turret_Stop extends Command {
@@ -23,7 +23,7 @@ public class Turret_Stop extends Command {
 	Limelight limelight = Robot.limelight;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(turret));
 	
-	/** Turret Stop ***************************************************
+	/** Turret Stop ***********************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public Turret_Stop() {

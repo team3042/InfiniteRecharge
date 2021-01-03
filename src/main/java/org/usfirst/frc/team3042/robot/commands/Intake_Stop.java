@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 
-/** Intake Stop*******************************************************
+/** Intake Stop ***************************************************************
  * Stops the intake
  */
 public class Intake_Stop extends Command {

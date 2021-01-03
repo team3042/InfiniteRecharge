@@ -28,7 +28,7 @@ public class DrivetrainAuton_Drive extends Command {
 	MotionProfile leftMotionProfile, rightMotionProfile;
 	boolean isLast;
 	
-	/** Drivetrain Auton Drive ******************************************************/
+	/** Drivetrain Auton Drive ************************************************/
 	public DrivetrainAuton_Drive(Path path) {
 		log.add("Constructor", Log.Level.TRACE);
 		requires(drivetrain);
@@ -46,8 +46,7 @@ public class DrivetrainAuton_Drive extends Command {
 		auton.initMotionProfile();
 		
 		for (int n=0; n<leftMotionProfile.getLength(); n++) {
-			auton.pushPoints(leftMotionProfile.getPoint(n), 
-					rightMotionProfile.getPoint(n));
+			auton.pushPoints(leftMotionProfile.getPoint(n), rightMotionProfile.getPoint(n));
 		}
 	}
 	

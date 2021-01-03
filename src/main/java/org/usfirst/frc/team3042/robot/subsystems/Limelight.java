@@ -9,7 +9,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** Limelight ****************************************************************
+/** Limelight *****************************************************************
  * Subsystem for the Limelight camera
  */
 public class Limelight extends Subsystem {
@@ -26,7 +26,7 @@ public class Limelight extends Subsystem {
 	public NetworkTableEntry pipeline = table.getEntry("pipeline");
 	public NetworkTableEntry led = table.getEntry("ledMode");
 	
-	/** Limelight ******************************************************/
+	/** Limelight ************************************************************/
 	public Limelight() {
 		log.add("Constructor", LOG_LEVEL);
 		pipeline.setNumber(0);

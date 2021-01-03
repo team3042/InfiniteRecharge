@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 
-/** Intake *******************************************************
+/** Intake *******************************************************************
  * Sets power to the intake
  */
 public class Intake_Intake extends Command {
@@ -21,7 +21,7 @@ public class Intake_Intake extends Command {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(intake));
 	int direction;
 
-	/** Intake ***************************************************
+	/** Intake ****************************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public Intake_Intake(int direction) {

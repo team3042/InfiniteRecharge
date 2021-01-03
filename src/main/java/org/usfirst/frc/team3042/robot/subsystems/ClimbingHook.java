@@ -10,7 +10,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** Climbing Hook ****************************************************************
+/** Climbing Hook *************************************************************
  * Subsystem for raising the hook used for climbing
  */
 public class ClimbingHook extends Subsystem {
@@ -24,7 +24,7 @@ public class ClimbingHook extends Subsystem {
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
   	TalonSRX motor = new TalonSRX(CAN_CLIMBING_HOOK);
 
-	/** Climbing Hook ******************************************************/
+	/** Climbing Hook *********************************************************/
 	public ClimbingHook() {
     log.add("Constructor", LOG_LEVEL);
     
