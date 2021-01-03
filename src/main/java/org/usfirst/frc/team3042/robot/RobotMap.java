@@ -142,10 +142,10 @@ public class RobotMap {
 	public static final boolean REVERSE_SHOOTER = true;
 	public static final boolean REVERSE_SHOOTER_FOLLOWER = false;
 	public static final double SHOOTER_VELOCITY = 2500; // Shooter velocity in RPM
-	public static final double kP_SHOOTER_SPEED = 0.0;
+	public static final double kP_SHOOTER_SPEED = 0.00006;
 	public static final double kI_SHOOTER_SPEED = 0.0;
 	public static final double kD_SHOOTER_SPEED = 0.0;
-	public static final double kF_SHOOTER_SPEED = 0.0025;
+	public static final double kF_SHOOTER_SPEED = 0.000015;
 	public static final int I_ZONE_SHOOTER_SPEED = 0;
 	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; // If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
 	
