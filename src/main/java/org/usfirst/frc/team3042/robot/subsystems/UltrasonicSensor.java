@@ -24,7 +24,7 @@ public class UltrasonicSensor extends Subsystem {
 	/** Ultrasonic Sensor *****************************************************/
 	public UltrasonicSensor() {
 		log.add("Constructor", LOG_LEVEL);
-		ultra.setAutomaticMode(true);
+		Ultrasonic.setAutomaticMode(true); // Changed from ultra.setAutomaticMode(true);
 	}
 	
 	/** initDefaultCommand ****************************************************
