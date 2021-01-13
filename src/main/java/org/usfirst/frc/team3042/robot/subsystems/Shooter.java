@@ -30,9 +30,7 @@ public class Shooter extends Subsystem {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 	public CANSparkMax motor = new CANSparkMax(CAN_SHOOTER, MotorType.kBrushless); //initialize motor
 	CANEncoder encoder;
-	CANEncoder followerEncoder;
 	CANPIDController pidController;
-	CANPIDController followerPidController;
 
 	/** Shooter ***************************************************************/
 	public Shooter() {
