@@ -25,7 +25,6 @@ public class RobotMap {
 	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
 	public static final int CAN_SHOOTER = 0;
-	public static final int CAN_SHOOTER_FOLLOWER = 0;
 	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
 	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
 	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
@@ -140,14 +139,13 @@ public class RobotMap {
 	
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true;
-	public static final boolean REVERSE_SHOOTER_FOLLOWER = false;
 	public static final double SHOOTER_VELOCITY = 2500; // Shooter velocity in RPM
 	public static final double kP_SHOOTER_SPEED = 0.00006;
 	public static final double kI_SHOOTER_SPEED = 0.0;
 	public static final double kD_SHOOTER_SPEED = 0.0;
 	public static final double kF_SHOOTER_SPEED = 0.000015;
 	public static final int I_ZONE_SHOOTER_SPEED = 0;
-	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; // If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
+	public static final double SHOOTER_VELOCITY_TOLERANCE = 150; // If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
 	
 	/** Turret Settings *******************************************************/
 	public static final boolean REVERSE_TURRET = false;

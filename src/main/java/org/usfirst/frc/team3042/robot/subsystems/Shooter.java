@@ -19,9 +19,7 @@ public class Shooter extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
 	private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
-	private static final int CAN_FOLLOWER = RobotMap.CAN_SHOOTER_FOLLOWER;
 	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
-	private static final boolean REVERSE_FOLLOWER = RobotMap.REVERSE_SHOOTER_FOLLOWER;
 	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
 	private static final double kI = RobotMap.kI_SHOOTER_SPEED;
 	private static final double kD = RobotMap.kD_SHOOTER_SPEED;
@@ -31,7 +29,6 @@ public class Shooter extends Subsystem {
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 	public CANSparkMax motor = new CANSparkMax(CAN_SHOOTER, MotorType.kBrushless); //initialize motor
-	public CANSparkMax follower = new CANSparkMax(CAN_FOLLOWER, MotorType.kBrushless); //initialize follower motor
 	CANEncoder encoder;
 	CANEncoder followerEncoder;
 	CANPIDController pidController;
@@ -46,20 +43,14 @@ public class Shooter extends Subsystem {
 		 * CANSparkMax object
 		 */
 		pidController = motor.getPIDController();
-		followerPidController = follower.getPIDController();
 
 		// Encoder object created to display position values
 		encoder = motor.getEncoder();
-		followerEncoder = follower.getEncoder();
 
 		initMotor(motor, REVERSE_MOTOR);
-		initMotor(follower, REVERSE_FOLLOWER);
 
 		// set PID coefficients
 		setPID(motor);
-		setPID(follower);
-
-		follower.follow(motor);
 	}
 
 	private void initMotor(CANSparkMax motor, boolean reverse) {
