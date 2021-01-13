@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 
-		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getEncoder().getVelocity());
+		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getSelectedSensorVelocity(RobotMap.SHOOTER_PIDIDX));
 	}
 	
 	/** teleopInit ************************************************************
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getEncoder().getVelocity());
+		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getSelectedSensorVelocity(RobotMap.SHOOTER_PIDIDX));
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
 		SmartDashboard.putNumber("turret", turret.countsToDegrees(turret.getPosition()));
 

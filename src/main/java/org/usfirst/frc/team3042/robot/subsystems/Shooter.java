@@ -1,10 +1,9 @@
 package org.usfirst.frc.team3042.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.RobotMap;
@@ -13,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** Shooter *******************************************************************
- * Subsystem for the Shooter
- */
+ * Subsystem for the Shooter */
 public class Shooter extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
@@ -23,60 +21,57 @@ public class Shooter extends Subsystem {
 	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
 	private static final double kI = RobotMap.kI_SHOOTER_SPEED;
 	private static final double kD = RobotMap.kD_SHOOTER_SPEED;
-	private static final double kFF = RobotMap.kF_SHOOTER_SPEED;
-	private static final int kIz = RobotMap.I_ZONE_SHOOTER_SPEED;
+	private static final double kF = RobotMap.kF_SHOOTER_SPEED;
+	private static final int kPIDLoopIdx = RobotMap.SHOOTER_PIDIDX;
+	private static final int kTimeoutMs = RobotMap.SHOOTER_TIMEOUT;
 
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	public CANSparkMax motor = new CANSparkMax(CAN_SHOOTER, MotorType.kBrushless); //initialize motor
-	CANEncoder encoder;
-	CANPIDController pidController;
+	public TalonSRX motor = new WPI_TalonSRX(CAN_SHOOTER); //initialize motor
 
 	/** Shooter ***************************************************************/
 	public Shooter() {
 		log.add("Constructor", LOG_LEVEL);
 
-		/**In order to use PID functionality for a controller, a CANPIDController object
-		 * is constructed by calling the getPIDController() method on an existing
-		 * CANSparkMax object
-		 */
-		pidController = motor.getPIDController();
+		/* Factory Default all hardware to prevent unexpected behaviour */
+		motor.configFactoryDefault();
+		
+		/* Config sensor used for Velocity control */
+		motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
+		
+		/*Phase sensor accordingly: Positive/Forward Sensor Reading should match Green (blinking) Leds on Talon*/
+		motor.setSensorPhase(true);
 
-		// Encoder object created to display position values
-		encoder = motor.getEncoder();
+		motor.setInverted(REVERSE_MOTOR); 
 
-		initMotor(motor, REVERSE_MOTOR);
+		//Set minimum and maximum output values
+		motor.configNominalOutputForward(0, kTimeoutMs);
+		motor.configNominalOutputReverse(0, kTimeoutMs);
+		motor.configPeakOutputForward(1, kTimeoutMs);
+		motor.configPeakOutputReverse(-1, kTimeoutMs);
 
 		// set PID coefficients
-		setPID(motor);
+		motor.config_kF(kPIDLoopIdx, kF, kTimeoutMs);
+		motor.config_kP(kPIDLoopIdx, kP, kTimeoutMs);
+		motor.config_kI(kPIDLoopIdx, kI, kTimeoutMs);
+		motor.config_kD(kPIDLoopIdx, kD, kTimeoutMs);
 	}
-
-	private void initMotor(CANSparkMax motor, boolean reverse) {
-		motor.setInverted(reverse); 	// affects percent Vbus mode
-	}
-
-	// set PID coefficients
- 	private void setPID(CANSparkMax motor) {
-		pidController.setP(kP);
-		pidController.setI(kI);
-		pidController.setD(kD);
-		pidController.setIZone(kIz);
-		pidController.setFF(kFF);
-		pidController.setOutputRange(-1, 1);
-  }
   
-  /** Closed-Loop Control *****************************************************
-	* Input units for speed is RPM*/
+  /** Velocity Control *****************************************************/
   	public void setSpeed(double rpm) {
-		pidController.setReference(rpm, ControlType.kVelocity);
+		/* Convert specified RPM to units / 100ms.
+		* 4096 Units/Rev * RPM / 600 100ms/min
+		* velocity setpoint is in units/100ms */
+		double targetVelocity_UnitsPer100ms = rpm * 4096 / 600;
+
+		motor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 	}
+
 	public void stop() {
-		pidController.setReference(0.0, ControlType.kVelocity);
+		motor.set(ControlMode.PercentOutput, 0.0);
 	}
 	
-	/** initDefaultCommand ****************************************************
-	 * Set the default command for the subsystem.
-	 */
+	/** initDefaultCommand *****************************************************/
 	public void initDefaultCommand() {
 		setDefaultCommand(null);
 	}

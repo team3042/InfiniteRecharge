@@ -51,7 +51,7 @@ public class Shoot extends Command {
      * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(shooter.motor.getEncoder().getVelocity() - SPEED) <= VELOCITY_TOLERANCE) {
+      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(shooter.motor.getSelectedSensorVelocity(RobotMap.SHOOTER_PIDIDX) - SPEED) <= VELOCITY_TOLERANCE) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
       }
