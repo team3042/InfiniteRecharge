@@ -57,16 +57,23 @@ public class Shooter extends Subsystem {
 		motor.config_kD(kPIDLoopIdx, kD, kTimeoutMs);
 	}
   
-  /** Velocity Control *****************************************************/
+    /** Velocity Control *****************************************************/
   	public void setSpeed(double rpm) {
-		/* Convert specified RPM to units / 100ms.
-		* 4096 Units/Rev * RPM / 600 100ms/min
-		* velocity setpoint is in units/100ms */
+		/*** Convert specified RPM to encoder units per 100ms ***/
 		double targetVelocity_UnitsPer100ms = rpm * 4096 / 600;
 
 		motor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 	}
+	public double getSpeed() {
+		double targetVelocity_UnitsPer100ms = motor.getSelectedSensorVelocity(kPIDLoopIdx);
 
+		return targetVelocity_UnitsPer100ms * 600 / 4096;
+	}
+
+    /** % Power Control ********************************************************/
+	public void setPower(double percentPower) {
+		motor.set(ControlMode.PercentOutput, percentPower);
+	}
 	public void stop() {
 		motor.set(ControlMode.PercentOutput, 0.0);
 	}
