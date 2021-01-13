@@ -12,8 +12,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
 /** Shoot *********************************************************************
- * Command for pushing power cells into the shooter
- */
+ * Command for pushing power cells into the shooter wheels */
 public class Shoot extends Command {
     /** Configuration Constants ***********************************************/
     private static final Log.Level LOG_LEVEL = RobotMap.LOG_UPPER_CONVEYOR;
@@ -31,8 +30,7 @@ public class Shoot extends Command {
     Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
 
     /** Shoot *****************************************************************
-     * Required subsystems will cancel commands when this command is run.
-     */
+     * Required subsystems will cancel commands when this command is run. */
     public Shoot() {
       log.add("Constructor", Log.Level.TRACE);
 
@@ -40,16 +38,14 @@ public class Shoot extends Command {
       requires(lowerconveyor);
     }
 
-	/** initialize **************************************************************
-     * Called just before this Command runs the first time
-     */
+	  /** initialize **************************************************************
+     * Called just before this Command runs the first time */
     protected void initialize() {
       log.add("Initialize", Log.Level.TRACE);
     }
 
     /** execute ***************************************************************
-     * Called repeatedly when this Command is scheduled to run
-     */
+     * Called repeatedly when this Command is scheduled to run */
     protected void execute() {
       if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(shooter.getSpeed() - SPEED) <= VELOCITY_TOLERANCE) {
         lowerconveyor.setPower(LPOWER);
@@ -62,15 +58,13 @@ public class Shoot extends Command {
     }
     
     /** isFinished ************************************************************	
-     * Make this return true when this Command no longer needs to run execute()
-     */
+     * Make this return true when this Command no longer needs to run execute() */
     protected boolean isFinished() {
       return false;
     }
     
     /** end *******************************************************************
-     * Called once after isFinished returns true
-     */
+     * Called once after isFinished returns true */
     protected void end() {
       log.add("End", Log.Level.TRACE);
       upperconveyor.stop();
@@ -78,9 +72,7 @@ public class Shoot extends Command {
     }
 
     /** interrupted ***********************************************************
-     * Called when another command which requires one or more of the same
-     * subsystems is scheduled to run
-     */
+     * Called when another command which requires one or more of the same subsystems is scheduled to run */
     protected void interrupted() {
       log.add("Interrupted", Log.Level.TRACE);
       upperconveyor.stop();

@@ -42,7 +42,7 @@ public class Shooter extends Subsystem {
 		/*Phase sensor accordingly: Positive/Forward Sensor Reading should match Green (blinking) Leds on Talon*/
 		motor.setSensorPhase(true);
 
-		motor.setInverted(REVERSE_MOTOR); 
+		motor.setInverted(REVERSE_MOTOR); //Reverse motor if needed
 
 		//Set minimum and maximum output values
 		motor.configNominalOutputForward(0, kTimeoutMs);
