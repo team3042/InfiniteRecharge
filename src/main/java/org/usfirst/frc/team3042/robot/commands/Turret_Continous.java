@@ -11,8 +11,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 
 /** Turret Continous **********************************************************
- * Command for correcting the reported angle of error with the turret
- */
+ * Command for correcting the reported angle of error with the turret */
 public class Turret_Continous extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET;
@@ -34,7 +33,7 @@ public class Turret_Continous extends Command {
 	Shooter shooter = Robot.shooter;
 	double error;
 	double correction;
-	double derivative; // Derivative is the difference of the current error and the previous error
+	double derivative; // Derivative is the instantaneous rate of change in error
 	double integral = 0; // Integral is the sum of all errors
 	double previousError;
 
@@ -44,8 +43,7 @@ public class Turret_Continous extends Command {
 	int counter = 0;
 	
 	/** Turret Continous ******************************************************
-	 * Required subsystems will cancel commands when this command is run.
-	 */
+	 * Required subsystems will cancel commands when this command is run. */
 	public Turret_Continous(boolean auto) {
 		log.add("Constructor", Log.Level.TRACE);
 		requires(turret);
@@ -54,8 +52,7 @@ public class Turret_Continous extends Command {
 	}
 
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		limelight.led.setNumber(3); // Turn on the Limelight's LEDs
@@ -66,8 +63,7 @@ public class Turret_Continous extends Command {
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		error = limelight.returnHorizontalError(); // Read the angle of error from the Limelight
 		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
@@ -107,15 +103,13 @@ public class Turret_Continous extends Command {
 	}
 
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return false;
 	}
 	
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 		turret.stop();
@@ -124,8 +118,7 @@ public class Turret_Continous extends Command {
 
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 		turret.stop();
