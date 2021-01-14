@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -24,6 +25,7 @@ public class Shooter extends Subsystem {
 	private static final double kF = RobotMap.kF_SHOOTER_SPEED;
 	private static final int kPIDLoopIdx = RobotMap.SHOOTER_PIDIDX;
 	private static final int kTimeoutMs = RobotMap.SHOOTER_TIMEOUT;
+	private static final int COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REV;
 
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
@@ -33,16 +35,18 @@ public class Shooter extends Subsystem {
 	public Shooter() {
 		log.add("Constructor", LOG_LEVEL);
 
-		/* Factory Default all hardware to prevent unexpected behaviour */
+		/* Factory Default all hardware to prevent unexpected behavior */
 		motor.configFactoryDefault();
 		
 		/* Config sensor used for Velocity control */
 		motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
 		
-		/*Phase sensor accordingly: Positive/Forward Sensor Reading should match Green (blinking) Leds on Talon*/
+		/* Phase sensor accordingly: Positive/Forward Sensor Reading should match Green (blinking) LEDs on Talon */
 		motor.setSensorPhase(true);
 
 		motor.setInverted(REVERSE_MOTOR); //Reverse motor if needed
+
+		motor.setNeutralMode(NeutralMode.Coast);
 
 		//Set minimum and maximum output values
 		motor.configNominalOutputForward(0, kTimeoutMs);
@@ -60,14 +64,14 @@ public class Shooter extends Subsystem {
     /** Velocity Control *****************************************************/
   	public void setSpeed(double rpm) {
 		/*** Convert specified RPM to encoder units per 100ms ***/
-		double targetVelocity_UnitsPer100ms = rpm * 4096 / 600;
+		double targetVelocity_UnitsPer100ms = rpm * COUNTS_PER_REV / 600;
 
 		motor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 	}
 	public double getSpeed() {
 		double targetVelocity_UnitsPer100ms = motor.getSelectedSensorVelocity(kPIDLoopIdx);
 
-		return targetVelocity_UnitsPer100ms * 600 / 4096;
+		return targetVelocity_UnitsPer100ms * 600 / COUNTS_PER_REV;
 	}
 
     /** % Power Control ********************************************************/
