@@ -5,14 +5,12 @@ import org.usfirst.frc.team3042.lib.Log;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /** RobotMap ******************************************************************
- * The robot configuration file.
- */
+ * The robot configuration file. */
 public class RobotMap {	
 	/** Robot Size Parameters *************************************************
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
-	 * in inches, position will be in inches and speed in inches per second.
-	 */
+	 * in inches, position will be in inches and speed in inches per second. */
 	public static final double WHEEL_DIAMETER = 6.0;
 	public static final double ROBOT_WIDTH = 27.0;
 	
@@ -41,8 +39,6 @@ public class RobotMap {
 	public static final boolean REVERSE_CLIMBING_HOOK = true;
 	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
 	public static final double CLIMBING_HOOK_POWER = 0.6; // How much power (as a %) to give the climbing hook
-	
-	/** Color Sensor Settings *************************************************/
 
 	/** Control Panel Wheel Settings ******************************************/
 	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = true;
@@ -78,13 +74,13 @@ public class RobotMap {
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
-	// Maximum Acceleration given in power per second
+	// Maximum Acceleration given in power(volts?) per second
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
 	/** Drivetrain Encoder Settings *******************************************/
 	// Encoder counts per revolution
-	// In quadrature mode, actual counts will be 4x this; e.g., 360 -> 1440
+	// In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
 	public static final int COUNTS_PER_REVOLUTION = 1440;
 	// How often the encoders update on the CAN, in milliseconds
 	public static final int ENCODER_FRAME_RATE = 10;
@@ -127,8 +123,6 @@ public class RobotMap {
 	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
 	public static final double INTAKE_POWER = 0.6; // How much power (as a %) to give the intake
-	
-	/** Limelight Settings ****************************************************/
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
@@ -138,15 +132,15 @@ public class RobotMap {
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
 	/** Shooter Settings ******************************************************/
-	public static final boolean REVERSE_SHOOTER = true;
+	public static final boolean REVERSE_SHOOTER = true; //Used to reverse the direction of the shooter motor
 	public static final double SHOOTER_VELOCITY = 1000; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_SHOOTER_SPEED = 0.25;
-	public static final double kI_SHOOTER_SPEED = 0.001;
-	public static final double kD_SHOOTER_SPEED = 0.0;
-	public static final double kF_SHOOTER_SPEED = 0.14;
-	public static final double SHOOTER_VELOCITY_TOLERANCE = 150; // If the velocity of the shooter is within this close to the target velocity then it is okay to shoot
+	public static final double kP_SHOOTER_SPEED = 0.0; //Proportional term, tune this 2nd
+	public static final double kI_SHOOTER_SPEED = 0.0; //Intergal term, most likely this won't be needed, keep at 0
+	public static final double kD_SHOOTER_SPEED = 0.0; //Derivative term, tune this last
+	public static final double kF_SHOOTER_SPEED = 0.15; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; // If the velocity of the shooter is within this range of the target velocity then it is okay to shoot
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
