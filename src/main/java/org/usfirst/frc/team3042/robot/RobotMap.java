@@ -22,7 +22,7 @@ public class RobotMap {
 	public static final int CAN_CONTROL_PANEL_WHEEL = 14;
 	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
-	public static final int CAN_SHOOTER = 0;
+	public static final int CAN_SHOOTER = 5;
 	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
 	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
 	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
@@ -139,7 +139,7 @@ public class RobotMap {
 	public static final double kP_SHOOTER_SPEED = 0.0; //Proportional term, tune this 2nd
 	public static final double kI_SHOOTER_SPEED = 0.0; //Intergal term, most likely this won't be needed, keep at 0
 	public static final double kD_SHOOTER_SPEED = 0.0; //Derivative term, tune this last
-	public static final double kF_SHOOTER_SPEED = 0.15; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kF_SHOOTER_SPEED = 0.025; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final double SHOOTER_VELOCITY_TOLERANCE = 100; // If the velocity of the shooter is within this range of the target velocity then it is okay to shoot
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
