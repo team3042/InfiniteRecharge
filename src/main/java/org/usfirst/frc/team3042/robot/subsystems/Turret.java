@@ -77,7 +77,7 @@ public class Turret extends Subsystem {
 		return (motor.getSelectedSensorPosition(PIDIDX) - positionZero);
 	}
 	public double getSpeed() {
-		int cp100ms = motor.getSelectedSensorVelocity(PIDIDX);
+		int cp100ms = (int)(motor.getSelectedSensorVelocity(PIDIDX));
 		
 		return (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
 	}

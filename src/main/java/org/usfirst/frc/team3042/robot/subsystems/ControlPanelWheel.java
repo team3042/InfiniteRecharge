@@ -68,7 +68,7 @@ public class ControlPanelWheel extends Subsystem {
   
   /** Reset the encoder zero position ****************************************/
 	public void reset() {
-		int counts = motor.getSelectedSensorPosition(PIDIDX);
+		int counts = (int)(motor.getSelectedSensorPosition(PIDIDX));
 		positionZero = countsToRev(counts);
   }
   
@@ -77,14 +77,14 @@ public class ControlPanelWheel extends Subsystem {
 	 * Encoder speed returns counts per 100 ms, convert to RPM for output
 	 */
 	public double getPosition() {
-		int counts = motor.getSelectedSensorPosition(PIDIDX);
+		int counts = (int)(motor.getSelectedSensorPosition(PIDIDX));
 		return countsToRev(counts) - positionZero;
 	}
 	private double countsToRev(int counts) {
 		return (double)counts / COUNTS_PER_REV;
 	}
 	public double getSpeed() {
-		int cp100ms = motor.getSelectedSensorVelocity(PIDIDX);
+		int cp100ms = (int)(motor.getSelectedSensorVelocity(PIDIDX));
 		
 		return (double)cp100ms * 10.0 * 60.0 / COUNTS_PER_REV;
 	}
