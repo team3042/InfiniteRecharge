@@ -11,7 +11,9 @@ import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
 import org.usfirst.frc.team3042.robot.commands.RotationControl;
+import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
+import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
@@ -71,9 +73,9 @@ public class OI {
 		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 
 		//Shooting Controls
-		//gamepad.RB.whileHeld(new Turret_Continous(false));
+		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
-		//gamepad.RB.whileActive(new Shoot());
+		gamepad.RB.whileActive(new Shoot());
 
 		//Climbing Controls
 		gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
