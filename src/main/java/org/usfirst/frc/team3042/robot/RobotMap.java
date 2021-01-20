@@ -136,7 +136,7 @@ public class RobotMap {
 	public static final double SHOOTER_VELOCITY = 3750; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_SHOOTER_SPEED = 0.0; //Proportional term, tune this 2nd
+	public static final double kP_SHOOTER_SPEED = 0.0005; //Proportional term, tune this 2nd
 	public static final double kI_SHOOTER_SPEED = 0.0; //Intergal term, most likely this won't be needed, keep at 0
 	public static final double kD_SHOOTER_SPEED = 0.0; //Derivative term, tune this last
 	public static final double kF_SHOOTER_SPEED = 0.030; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
