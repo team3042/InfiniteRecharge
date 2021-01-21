@@ -6,10 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
-import org.usfirst.frc.team3042.robot.subsystems.CPWheelEncoder;
 import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 
-/** Rotation Control *******************************************************
+/** Rotation Control **********************************************************
  * Command for rotating the control panel 3-5 rotations
  */
 public class RotationControl extends Command {
@@ -20,10 +19,9 @@ public class RotationControl extends Command {
 	
 	/** Instance Variables ****************************************************/
 	ControlPanelWheel cpwheel = Robot.cpwheel;
-	CPWheelEncoder encoder = cpwheel.getEncoder();
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(cpwheel));
 	
-	/** Rotation Control ***************************************************
+	/** Rotation Control ******************************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public RotationControl() {
@@ -37,7 +35,7 @@ public class RotationControl extends Command {
 	 */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		encoder.reset();
+		cpwheel.reset();
     	cpwheel.setPower(POWER);
 	}
 
@@ -51,7 +49,7 @@ public class RotationControl extends Command {
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
 	protected boolean isFinished() {
-		return encoder.getPosition() >= REVOLUTIONS;
+		return cpwheel.getPosition() >= REVOLUTIONS;
 	}
 	
 	/** end *******************************************************************

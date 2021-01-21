@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
-import org.usfirst.frc.team3042.robot.commands.AutonomousMode;
-import org.usfirst.frc.team3042.robot.commands.AutonomousMode_Delayed;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -11,11 +11,9 @@ import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
-import org.usfirst.frc.team3042.robot.subsystems.IntakeDeploy;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
-import org.usfirst.frc.team3042.robot.subsystems.ShooterHood;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
@@ -35,45 +33,27 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
- * directory.
- */
+ * directory. */
 public class Robot extends TimedRobot { 
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
-	private static final boolean HAS_DRIVETRAIN = RobotMap.HAS_DRIVETRAIN;
-	private static final boolean HAS_GYROSCOPE = RobotMap.HAS_GYROSCOPE;
-	private static final boolean HAS_COLOR_SENSOR = RobotMap.HAS_COLOR_SENSOR;
-	private static final boolean HAS_LIMELIGHT = RobotMap.HAS_LIMELIGHT;
-	private static final boolean HAS_CONTROL_PANEL_WHEEL = RobotMap.HAS_CONTROL_PANEL_WHEEL;
-	private static final boolean HAS_TURRET = RobotMap.HAS_TURRET;
-	private static final boolean HAS_INTAKE = RobotMap.HAS_INTAKE;
-	private static final boolean HAS_SHOOTER = RobotMap.HAS_SHOOTER;
-	private static final boolean HAS_LOWER_CONVEYOR = RobotMap.HAS_LOWER_CONVEYOR;
-	private static final boolean HAS_UPPER_CONVEYOR = RobotMap.HAS_UPPER_CONVEYOR;
-	private static final boolean HAS_CLIMBING_WINCH = RobotMap.HAS_CLIMBING_WINCH;
-	private static final boolean HAS_CLIMBING_HOOK = RobotMap.HAS_CLIMBING_HOOK;
-	private static final boolean HAS_INTAKE_DEPLOY = RobotMap.HAS_INTAKE_DEPLOY;
-	private static final boolean HAS_SHOOTER_HOOD = RobotMap.HAS_SHOOTER_HOOD;
-	private static final boolean HAS_ULTRASONIC_SENSOR = RobotMap.HAS_ULTRASONIC_SENSOR;
 
 	/** Create Subsystems *****************************************************/
 	private Log log = new Log(LOG_LEVEL, "Robot");
-	public static final Drivetrain 	drivetrain 	   = (HAS_DRIVETRAIN) 			 ? new Drivetrain() 	: null;
-	public static final Gyroscope 	gyroscope 	   = (HAS_GYROSCOPE) 			 ? new Gyroscope() 	: null;
-	public static final ColorSensor colorsensor    = (HAS_COLOR_SENSOR)          ? new ColorSensor() : null;
-	public static final ControlPanelWheel cpwheel  = (HAS_CONTROL_PANEL_WHEEL)   ? new ControlPanelWheel() : null;
-	public static final Limelight limelight        = (HAS_LIMELIGHT)             ? new Limelight() : null;
-	public static final Turret turret 			   = (HAS_TURRET)				 ? new Turret()	: null;
-	public static final Intake intake 			   = (HAS_INTAKE)				 ? new Intake()	: null;
-	public static final Shooter shooter			   = (HAS_SHOOTER)				 ? new Shooter()	: null;
-	public static final LowerConveyor lowerconveyor = (HAS_LOWER_CONVEYOR)		 ? new LowerConveyor()	: null;
-  	public static final UpperConveyor upperconveyor = (HAS_UPPER_CONVEYOR)		 ? new UpperConveyor()	: null;
-	public static final PowerDistributionPanel pdp	= new PowerDistributionPanel();
-	public static final ClimbingWinch climbingwinch = (HAS_CLIMBING_WINCH)		 ? new ClimbingWinch()	: null;
-	public static final ClimbingHook climbinghook	= (HAS_CLIMBING_HOOK)		 ? new ClimbingHook()	: null;
-	public static final IntakeDeploy intakedeploy	= (HAS_INTAKE_DEPLOY)		 ? new IntakeDeploy()	: null;
-	public static final ShooterHood shooterhood  	= (HAS_SHOOTER_HOOD)		 ? new ShooterHood()	: null;
-	public static final UltrasonicSensor ultrasonicsensor = (HAS_ULTRASONIC_SENSOR)	 ? new UltrasonicSensor()	: null;
+	public static final Drivetrain drivetrain 			  = new Drivetrain();
+	public static final Gyroscope gyroscope 	   		  = new Gyroscope();
+	public static final ColorSensor colorsensor    		  = new ColorSensor();
+	public static final ControlPanelWheel cpwheel  		  = new ControlPanelWheel();
+	public static final Limelight limelight        		  = new Limelight();
+	public static final Turret turret 			  		  = new Turret();
+	public static final Intake intake 			  		  = new Intake();
+	public static final Shooter shooter			   		  = new Shooter();
+	public static final LowerConveyor lowerconveyor 	  = new LowerConveyor();
+  	public static final UpperConveyor upperconveyor 	  = new UpperConveyor();
+	public static final PowerDistributionPanel pdp		  = new PowerDistributionPanel();
+	public static final ClimbingWinch climbingwinch		  = new ClimbingWinch();
+	public static final ClimbingHook climbinghook		  = new ClimbingHook();
+	public static final UltrasonicSensor ultrasonicsensor = new UltrasonicSensor();
 	public static OI oi;
 	Command autonomousCommand;
 	Command stopAutonomous = new Turret_Stop();
@@ -86,8 +66,7 @@ public class Robot extends TimedRobot {
 
 	/** robotInit *************************************************************
 	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
+	 * used for any initialization code. */
 	public void robotInit() {
 		log.add("Robot Init", Log.Level.TRACE);
 
@@ -105,33 +84,28 @@ public class Robot extends TimedRobot {
 	/** disabledInit **********************************************************
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-	 */
+	 * the robot is disabled. */
 	public void disabledInit() {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
-		
-		//intakedeploy.retract(); //Retract the intake
 	}
 
 	/** disabledPeriodic ******************************************************
-	 * Called repeatedly while the robot is is disabled mode.
-	 */
+	 * Called repeatedly while the robot is is disabled mode. */
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
 	/** autonomousInit ********************************************************
-	 * Runs once at the start of autonomous mode.
-	 */
+	 * Runs once at the start of autonomous mode. */
 	public void autonomousInit() {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
-		turret.getEncoder().reset();
+		turret.reset();
 
-		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
+		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 		
 		autonomousCommand = chooser.getSelected();
 
@@ -142,45 +116,41 @@ public class Robot extends TimedRobot {
 	}
 
 	/** autonomousPeriodic ****************************************************
-	 * This function is called periodically during autonomous
-	 */
+	 * This function is called periodically during autonomous */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 
-		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getEncoder().getVelocity());
+		SmartDashboard.putNumber("Shooter Speed:", shooter.getSpeed());
+		SmartDashboard.putNumber("Turret Position:", turret.countsToDegrees(turret.getPosition()));
 	}
 	
 	/** teleopInit ************************************************************
-	 * This function is called when first entering teleop mode.
-	 */
+	 * This function is called when first entering teleop mode. */
 	public void teleopInit() {
 		log.add("Teleop Init", Log.Level.TRACE);
 		ColorRecieved = false;
 
 		stopAutonomous.start();
 
-		limelight.pipeline.setNumber(0); //Set the Limelight to the default (not zoomed-in) pipeline
+		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 
-		turret.getEncoder().reset();
+		turret.reset();
 		
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		// This makes sure that the autonomous command stops running when teleop starts. 
+		//If you want the autonomous command to continue until interrupted by another command, remove this line or comment it out.
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
 	}
 
 	/** teleopPeriodic ********************************************************
-	 * This function is called periodically during operator control
-	 */
+	 * This function is called periodically during operator control */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Shooter Speed:", shooter.motor.getEncoder().getVelocity());
+		SmartDashboard.putNumber("Shooter Speed:", shooter.getSpeed());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
-		SmartDashboard.putNumber("turret", turret.getEncoder().countsToDegrees(turret.getEncoder().getPosition()));
+		SmartDashboard.putNumber("Turret Position:", turret.countsToDegrees(turret.getPosition()));
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();
@@ -208,10 +178,4 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putString("Color:", "Capacity Not Reached");
 		}
 	} 
-
-	/** testPeriodic **********************************************************
-	 * This function is called periodically during test mode
-	 */
-	public void testPeriodic() {
-	}
 }

@@ -10,33 +10,33 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** Intake ****************************************************************
+/** Intake ********************************************************************
  * Subsystem for the Intake
  */
 public class Intake extends Subsystem {
 	/** Configuration Constants ***********************************************/
-  private static final Log.Level LOG_LEVEL = RobotMap.LOG_INTAKE;
-  private static final int CAN_INTAKE = RobotMap.CAN_INTAKE;
-  private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_INTAKE;
-  private static final NeutralMode BRAKE_MODE = RobotMap.INTAKE_BRAKE_MODE;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_INTAKE;
+	private static final int CAN_INTAKE = RobotMap.CAN_INTAKE;
+	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_INTAKE;
+	private static final NeutralMode BRAKE_MODE = RobotMap.INTAKE_BRAKE_MODE;
 
 	/** Instance Variables ****************************************************/
-  Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-  TalonSRX motor = new TalonSRX(CAN_INTAKE);
+	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+	TalonSRX motor = new TalonSRX(CAN_INTAKE);
 
-	/** Intake ******************************************************/
+	/** Intake ****************************************************************/
 	public Intake() {
-    log.add("Constructor", LOG_LEVEL);
-    
-    initMotor(motor, REVERSE_MOTOR);
+		log.add("Constructor", LOG_LEVEL);
+		
+		initMotor(motor, REVERSE_MOTOR);
   }
 
   private void initMotor(TalonSRX motor, boolean reverse) {
 		motor.setNeutralMode(BRAKE_MODE);
-		motor.setInverted(reverse); 	// affects percent Vbus mode
+		motor.setInverted(reverse); // affects percent Vbus mode
   }
   
-  /** Methods for setting the motor in Percent Vbus mode ********************/
+  /** Methods for setting the motor in Percent Vbus mode **********************/
 	public void setPower(double Power) {
 		Power = safetyCheck(Power);
 				

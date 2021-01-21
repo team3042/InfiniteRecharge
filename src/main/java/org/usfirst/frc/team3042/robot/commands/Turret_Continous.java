@@ -9,11 +9,9 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
-import org.usfirst.frc.team3042.robot.subsystems.TurretEncoder;
 
-/** Turret Continous *******************************************************
- * Command for correcting the reported angle of error with the turret
- */
+/** Turret Continous **********************************************************
+ * Command for correcting the reported angle of error with the turret */
 public class Turret_Continous extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET;
@@ -27,7 +25,6 @@ public class Turret_Continous extends Command {
 
 	/** Instance Variables ****************************************************/
 	Turret turret = Robot.turret;
-	TurretEncoder encoder = turret.getEncoder();
 
 	Limelight limelight = Robot.limelight; 
 
@@ -36,8 +33,8 @@ public class Turret_Continous extends Command {
 	Shooter shooter = Robot.shooter;
 	double error;
 	double correction;
-	double derivative; //Derivative is the difference of the current error and the previous error
-	double integral = 0; //Integral is the sum of all errors
+	double derivative; // Derivative is the instantaneous rate of change in error
+	double integral = 0; // Integral is the sum of all errors
 	double previousError;
 
 	boolean autonomous;
@@ -45,22 +42,20 @@ public class Turret_Continous extends Command {
 	double previousReading;
 	int counter = 0;
 	
-	/** Turret Continous ***************************************************
-	 * Required subsystems will cancel commands when this command is run.
-	 */
+	/** Turret Continous ******************************************************
+	 * Required subsystems will cancel commands when this command is run. */
 	public Turret_Continous(boolean auto) {
 		log.add("Constructor", Log.Level.TRACE);
 		requires(turret);
-		encoder.reset();
+		turret.reset();
 		autonomous = auto;
 	}
 
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		limelight.led.setNumber(3); //Turn on the Limelight's LEDs
+		limelight.led.setNumber(3); // Turn on the Limelight's LEDs
 		counter = 0;
 		if (limelight.returnValidTarget() == 0) {
 			turret.setPower(-1 * searchPower);
@@ -68,12 +63,11 @@ public class Turret_Continous extends Command {
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		error = limelight.returnHorizontalError(); //Read the angle of error from the Limelight
+		error = limelight.returnHorizontalError(); // Read the angle of error from the Limelight
 		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
-			integral += error * 0.2; //Add the current error to the integral
+			integral += error * 0.2; // Add the current error to the integral
 			derivative = (error - previousError) / .02;
 
 			correction = (kP * error) + (kI * integral) + (kD * derivative);
@@ -83,20 +77,20 @@ public class Turret_Continous extends Command {
 			turret.setPower(correction);
 		}
 		else if (counter < 5) {
-			if(encoder.countsToDegrees(encoder.getPosition()) > maxAngle) { //Max positive angle of the turret has been reached
+			if(turret.countsToDegrees(turret.getPosition()) > maxAngle) { // Max positive angle of the turret has been reached
 				turret.setPower(-1 * searchPower);
 			}
-			else if(encoder.countsToDegrees(encoder.getPosition()) < -1 * maxAngle) { //Max negative angle of the turret has been reached
+			else if(turret.countsToDegrees(turret.getPosition()) < -1 * maxAngle) { //Max negative angle of the turret has been reached
 				turret.setPower(searchPower);
 			}
-			previousError = error; //set the previous error equal to the current error before starting the loop over and getting a new current error
-			if (previousReading == encoder.getSpeed()) {
+			previousError = error; // set the previous error equal to the current error before starting the loop over and getting a new current error
+			if (previousReading == turret.getSpeed()) {
 				counter += 1;
 			}
 			else {
 				counter = 0;
 			}
-			previousReading = encoder.getSpeed();
+			previousReading = turret.getSpeed();
 		}
 		else {
 			if(!autonomous) {
@@ -109,15 +103,13 @@ public class Turret_Continous extends Command {
 	}
 
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return false;
 	}
 	
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 		turret.stop();
@@ -126,8 +118,7 @@ public class Turret_Continous extends Command {
 
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 		turret.stop();

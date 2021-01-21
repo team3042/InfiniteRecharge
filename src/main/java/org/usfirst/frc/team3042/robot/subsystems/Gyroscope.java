@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
  * Gyroscope subsystem
  */
 public class Gyroscope extends Subsystem {
-	/** Configuration Constants ***********************************************/
+	// Configuration Constants
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_GYROSCOPE;
 	private static final double GYROSCOPE_SCALE = RobotMap.GYROSCOPE_SCALE;
 	
-	/** Instance Variables ****************************************************/
+	// Instance Variables
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 	ADXRS450_Gyro gyroscope = new ADXRS450_Gyro(); 
 	
-	/** Gyroscope ******************************************************/
+	/** Gyroscope *************************************************************/
 	public Gyroscope() {
 		log.add("Constructor", LOG_LEVEL);
 		reset();

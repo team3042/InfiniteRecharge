@@ -11,7 +11,7 @@ import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
-/** LowerConveyor ****************************************************************
+/** LowerConveyor *************************************************************
  * Subsystem for the Lower Conveyor that rolls the power cells to the upper conveyor
  */
 public class LowerConveyor extends Subsystem {
@@ -28,7 +28,7 @@ public class LowerConveyor extends Subsystem {
 	  	TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR_T);
 	  	TalonSRX motor2 = new TalonSRX(CAN_LOWER_CONVEYOR_B);
 
-	/** LowerConveyor ******************************************************/
+	/** LowerConveyor *********************************************************/
 	public LowerConveyor() {
     	log.add("Constructor", LOG_LEVEL);
     
@@ -41,7 +41,7 @@ public class LowerConveyor extends Subsystem {
 		motor.setInverted(reverse); 	// affects percent Vbus mode
   	}
   
-  	/** Methods for setting the motors in Percent Vbus mode ********************/
+  	/** Methods for setting the motors in Percent Vbus mode *******************/
 	public void setPower(double Power) {
 		Power = safetyCheck(Power);
 				

@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 
-/** Position Control Manual *******************************************************
+/** Position Control Manual ***************************************************
  * Command for rotating the control panel to the assigned color manually (Without the use of a color sensor)
  */
 public class PositionControl_Manual extends Command {
@@ -20,7 +20,7 @@ public class PositionControl_Manual extends Command {
   	ControlPanelWheel cpwheel = Robot.cpwheel;
   	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(cpwheel));
 	
-	/** Position Control Manual***************************************************
+	/** Position Control Manual ***********************************************
 	 * Required subsystems will cancel commands when this command is run.
 	 */
 	public PositionControl_Manual() {

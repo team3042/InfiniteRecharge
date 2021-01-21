@@ -1,4 +1,10 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.autonomous;
+
+import org.usfirst.frc.team3042.robot.commands.Drivetrain_GyroStraight;
+import org.usfirst.frc.team3042.robot.commands.Shoot;
+import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
+import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
+import org.usfirst.frc.team3042.robot.commands.Wait;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
