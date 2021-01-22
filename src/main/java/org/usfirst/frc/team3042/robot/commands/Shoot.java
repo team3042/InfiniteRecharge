@@ -20,7 +20,6 @@ public class Shoot extends Command {
     private static final double UPOWER = RobotMap.UPPER_CONVEYOR_POWER;
     private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
     private static final double TOLERANCE = RobotMap.TURRET_ANGLE_TOLERANCE;
-    private static final double VELOCITY_TOLERANCE = RobotMap.SHOOTER_VELOCITY_TOLERANCE;
 
     /** Instance Variables ****************************************************/
     UpperConveyor upperconveyor = Robot.upperconveyor;
@@ -47,7 +46,7 @@ public class Shoot extends Command {
     /** execute ***************************************************************
      * Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && Math.abs(shooter.getSpeed() - SPEED) <= VELOCITY_TOLERANCE) {
+      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && shooter.getSpeed() >= SPEED) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
       }
