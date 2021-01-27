@@ -126,8 +126,8 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = -0.8;
-	public static final double JOYSTICK_DRIVE_SCALE_HIGH = -1.1;
+	public static final double JOYSTICK_DRIVE_SCALE = -1.1;
+	public static final double JOYSTICK_DRIVE_SCALE_HIGH = -0.8;
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
@@ -139,7 +139,7 @@ public class RobotMap {
 	public static final double kP_SHOOTER_SPEED = 0.02; //Proportional term, tune this 2nd so the loop can respond to change more quickly
 	public static final double kI_SHOOTER_SPEED = 0.0; //Intergal term, keep at 0 if not using, but if using it should be around 1/4 * kP
 	public static final double kD_SHOOTER_SPEED = 0.05; //Derivative term, keep at 0 if not using, but if using it should be around 5 * kP
-	public static final double kF_SHOOTER_SPEED = 0.031; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kF_SHOOTER_SPEED = 0.032; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
