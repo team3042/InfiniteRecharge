@@ -136,10 +136,10 @@ public class RobotMap {
 	public static final double SHOOTER_VELOCITY = 3700; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_SHOOTER_SPEED = 0.01; //Proportional term, tune this 2nd so the loop can respond to change more quickly
+	public static final double kP_SHOOTER_SPEED = 0.02; //Proportional term, tune this 2nd so the loop can respond to change more quickly
 	public static final double kI_SHOOTER_SPEED = 0.0; //Intergal term, keep at 0 if not using, but if using it should be around 1/4 * kP
 	public static final double kD_SHOOTER_SPEED = 0.05; //Derivative term, keep at 0 if not using, but if using it should be around 5 * kP
-	public static final double kF_SHOOTER_SPEED = 0.028; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kF_SHOOTER_SPEED = 0.031; //Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
