@@ -30,7 +30,7 @@ public class OI {
 	private static final int JOYSTICK_Y_AXIS = Gamepad.JOY_Y_AXIS;
 	private static final int GAMEPAD_LEFT_TRIGGER = Gamepad.LEFT_TRIGGER;
 	private static final int GAMEPAD_RIGHT_TRIGGER = Gamepad.RIGHT_TRIGGER;
-	private static final double JOYSTICK_DRIVE_SCALE_HIGH = RobotMap.JOYSTICK_DRIVE_SCALE_HIGH;
+	private static final double JOYSTICK_DRIVE_SCALE_LOW = RobotMap.JOYSTICK_DRIVE_SCALE_LOW;
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(RobotMap.LOG_OI, "OI");
@@ -106,8 +106,8 @@ public class OI {
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
     	isHighScale = false;
     }
-    public void setHighScale() {
-    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_HIGH;
+    public void setLowScale() {
+    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_LOW;
     	isHighScale = true;
     }
     public void toggleScale(){
@@ -115,7 +115,7 @@ public class OI {
     		setNormalScale();
     	}
     	else {
-    		setHighScale();
+    		setLowScale();
 		}
 	}	
 	private double checkDeadZone(double joystickValue) {
