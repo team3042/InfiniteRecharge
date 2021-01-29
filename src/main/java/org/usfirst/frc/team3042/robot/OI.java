@@ -37,7 +37,7 @@ public class OI {
 	public Gamepad gamepad, joyLeft, joyRight;
 	int driveAxisLeft, driveAxisRight;
 	public static double CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
-	public static boolean isHighScale = false;
+	public static boolean isLowScale = false;
 
 	/** OI ********************************************************************
 	 * Assign commands to the buttons and triggers*/
@@ -104,14 +104,14 @@ public class OI {
 	}
 	public void setNormalScale() {
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
-    	isHighScale = false;
+    	isLowScale = false;
     }
     public void setLowScale() {
     	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_LOW;
-    	isHighScale = true;
+    	isLowScale = true;
     }
     public void toggleScale(){
-    	if (isHighScale) {
+    	if (isLowScale) {
     		setNormalScale();
     	}
     	else {
