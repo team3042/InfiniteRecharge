@@ -39,14 +39,9 @@ public class Shooter_Spit extends Command {
      * Called just before this Command runs the first time */
     protected void initialize() {
       log.add("Initialize", Log.Level.TRACE);
-      if (shooter.getSpeed() >= SPEED) {
-        lowerconveyor.setPower(LPOWER);
-        upperconveyor.setPower(UPOWER);
-      }
-      else {
-        upperconveyor.stop();
-        lowerconveyor.stop();
-      }
+      lowerconveyor.setPower(LPOWER);
+      upperconveyor.setPower(UPOWER);
+      shooter.setSpeed(SPEED);
     }
 
     /** execute ***************************************************************
