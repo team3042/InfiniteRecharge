@@ -30,19 +30,15 @@ public class Shooter_Spit extends Command {
     public Shooter_Spit() {
       log.add("Constructor", Log.Level.TRACE);
 
-      requires(upperconveyor);
       requires(lowerconveyor);
+      requires(upperconveyor);
+      requires(shooter);
     }
 
     /** initialize **************************************************************
      * Called just before this Command runs the first time */
     protected void initialize() {
       log.add("Initialize", Log.Level.TRACE);
-    }
-
-    /** execute ***************************************************************
-     * Called repeatedly when this Command is scheduled to run */
-    protected void execute() {
       if (shooter.getSpeed() >= SPEED) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
@@ -51,6 +47,11 @@ public class Shooter_Spit extends Command {
         upperconveyor.stop();
         lowerconveyor.stop();
       }
+    }
+
+    /** execute ***************************************************************
+     * Called repeatedly when this Command is scheduled to run */
+    protected void execute() {
     }
     
     /** isFinished ************************************************************	
@@ -63,15 +64,17 @@ public class Shooter_Spit extends Command {
      * Called once after isFinished returns true */
     protected void end() {
       log.add("End", Log.Level.TRACE);
-      upperconveyor.stop();
       lowerconveyor.stop();
+      upperconveyor.stop();
+      shooter.stop();
     }
 
     /** interrupted ***********************************************************
      * Called when another command which requires one or more of the same subsystems is scheduled to run */
     protected void interrupted() {
       log.add("Interrupted", Log.Level.TRACE);
-      upperconveyor.stop();
       lowerconveyor.stop();
+      upperconveyor.stop();
+      shooter.stop();
     }
 }
