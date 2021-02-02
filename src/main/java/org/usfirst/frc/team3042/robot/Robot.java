@@ -151,6 +151,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getSpeed());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
 		SmartDashboard.putNumber("Turret Position:", turret.countsToDegrees(turret.getPosition()));
+		SmartDashboard.putNumber("Drivetrain Speed", drivetrain.getEncoders().getLeftSpeed());
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();
