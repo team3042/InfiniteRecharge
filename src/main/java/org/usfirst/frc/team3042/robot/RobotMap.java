@@ -134,7 +134,6 @@ public class RobotMap {
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true; // Used to reverse the direction of the shooter motor
 	public static final double SHOOTER_VELOCITY = 3700; // Shooter velocity in RPM
-	public static final double SHOOTER_SPIT_VELOCITY = 500; // Shooter_Spit velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
