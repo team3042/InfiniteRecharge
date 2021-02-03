@@ -18,6 +18,8 @@ import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,6 +29,11 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
+import edu.wpi.first.wpilibj.trajectory.*;
+import java.nio.file.Path;
+import java.io.IOException;
+import edu.wpi.first.wpilibj.Filesystem;
 
 /** Robot *********************************************************************
  * The VM is configured to automatically run this class, and to call the
@@ -102,7 +109,14 @@ public class Robot extends TimedRobot {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
-
+		String trajectoryJSON = "../../Pathweaver/AutoNav1.wpilib.json";
+		Trajectory trajectory = new Trajectory();
+		try {
+		  Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}
 		turret.reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
