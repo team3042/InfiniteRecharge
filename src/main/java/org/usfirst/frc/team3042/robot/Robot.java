@@ -3,6 +3,9 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
+import org.usfirst.frc.team3042.robot.paths.BarrelRacing;
+import org.usfirst.frc.team3042.robot.paths.PathBuilder;
+import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -32,6 +35,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 import edu.wpi.first.wpilibj.trajectory.*;
 import java.nio.file.Path;
+import java.io.FileInputStream;
 import java.io.IOException;
 import edu.wpi.first.wpilibj.Filesystem;
 
@@ -81,11 +85,32 @@ public class Robot extends TimedRobot {
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+		chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
+		//chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
+		//chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
+
+		String filePathNav1 = "../../Pathweaver/Paths/AutoNav1.path";
+		PathBuilder builder = new PathBuilder();
+		try {
+			Path filePath = Filesystem.getDeployDirectory().toPath().resolve(filePathNav1);
+			FileInputStream stream = new FileInputStream(filePathNav1);
+		  } catch (IOException ex) {
+			DriverStation.reportError("Unable to open path: " + filePathNav1, ex.getStackTrace());
+		  }
+
+		String trajectoryJSON = "../../Pathweaver/AutoNav1.wpilib.json";
+		Trajectory trajectory = new Trajectory();
+		try {
+		  Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}
 	}
 
 	/** disabledInit **********************************************************
@@ -109,14 +134,7 @@ public class Robot extends TimedRobot {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
-		String trajectoryJSON = "../../Pathweaver/AutoNav1.wpilib.json";
-		Trajectory trajectory = new Trajectory();
-		try {
-		  Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-		} catch (IOException ex) {
-		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-		}
+
 		turret.reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
