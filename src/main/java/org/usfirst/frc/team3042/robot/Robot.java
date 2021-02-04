@@ -4,7 +4,9 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.paths.BarrelRacing;
+import org.usfirst.frc.team3042.robot.paths.Bounce;
 import org.usfirst.frc.team3042.robot.paths.PathBuilder;
+import org.usfirst.frc.team3042.robot.paths.Slalom;
 import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
@@ -85,9 +87,11 @@ public class Robot extends TimedRobot {
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+
 		chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
-		//chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
-		//chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
+		chooser.addOption("Slalom", new DrivetrainAuton_Drive(new Slalom().buildPath()));
+		chooser.addOption("Bounce", new DrivetrainAuton_Drive(new Bounce().buildPath()));
+
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
