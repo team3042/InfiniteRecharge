@@ -84,7 +84,9 @@ public class Robot extends TimedRobot {
 		log.add("Robot Init", Log.Level.TRACE);
 
 		oi = new OI();
+
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
+		
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
