@@ -27,6 +27,7 @@ public class Shoot extends Command {
     Shooter shooter = Robot.shooter;
     Limelight limelight = Robot.limelight;
     Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
+    boolean onTarget = false;
 
     /** Shoot *****************************************************************
      * Required subsystems will cancel commands when this command is run. */
@@ -41,16 +42,22 @@ public class Shoot extends Command {
      * Called just before this Command runs the first time */
     protected void initialize() {
       log.add("Initialize", Log.Level.TRACE);
+      onTarget = false;
     }
 
     /** execute ***************************************************************
      * Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-      if (limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && shooter.getSpeed() >= SPEED) {
+      if (!onTarget && limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && shooter.getSpeed() >= SPEED) {
+        lowerconveyor.setPower(LPOWER);
+        upperconveyor.setPower(UPOWER);
+        onTarget = true;
+      }
+      else if (onTarget && shooter.getSpeed() >= SPEED) {
         lowerconveyor.setPower(LPOWER);
         upperconveyor.setPower(UPOWER);
       }
-      else {
+      else if (shooter.getSpeed() < SPEED) {
         upperconveyor.stop();
         lowerconveyor.stop();
       }
