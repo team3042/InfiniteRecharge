@@ -98,6 +98,8 @@ public class Robot extends TimedRobot {
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
 
+		//Experimental fileStream stuff for reading waypoints from a PathWeaver file - not complete yet
+
 		String filePathNav1 = "../../Pathweaver/Paths/AutoNav1.path";
 		PathBuilder builder = new PathBuilder();
 		try {
