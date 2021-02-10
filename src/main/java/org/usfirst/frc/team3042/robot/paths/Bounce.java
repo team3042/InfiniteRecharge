@@ -13,17 +13,14 @@ public class Bounce implements PathContainer {
     @Override
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
-        waypoints.add(new Waypoint(4.0,-10.0,0,60));
-        waypoints.add(new Waypoint(260,247,15,60));
-        waypoints.add(new Waypoint(282,247,0,60));
-        waypoints.add(new Waypoint(230,242,0,60));
-        waypoints.add(new Waypoint(260,247,15,60));
-        waypoints.add(new Waypoint(282,247,0,60));
-        waypoints.add(new Waypoint(230,242,0,60));
-        waypoints.add(new Waypoint(260,247,15,60));
-        waypoints.add(new Waypoint(282,247,0,60));
-        waypoints.add(new Waypoint(230,242,0,60));
-        waypoints.add(new Waypoint(260,247,15,60));
+        waypoints.add(new Waypoint(2.5,-7.5,0,60));
+        waypoints.add(new Waypoint(7.5,-2.5,15,60));
+        waypoints.add(new Waypoint(11.73,-11.27,0,60));
+        waypoints.add(new Waypoint(15.0,-2.5,0,60));
+        waypoints.add(new Waypoint(16.73,-10.77,15,60));
+        waypoints.add(new Waypoint(20.0,-10.77,0,60));
+        waypoints.add(new Waypoint(22.5,-2.5,0,60));
+        waypoints.add(new Waypoint(27.5,-7.5,15,60));
 
         return PathBuilder.buildPathFromWaypoints(waypoints);
     }
