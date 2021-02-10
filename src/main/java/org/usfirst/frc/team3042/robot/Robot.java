@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3042.robot;
 
-import org.graalvm.compiler.virtual.phases.ea.PartialEscapePhase;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
 import org.usfirst.frc.team3042.lib.math.Translation2d;
@@ -22,12 +21,9 @@ import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-=======
->>>>>>> 4cb13e0c05cf6b8854eae7ccd623cbc0eacb1617
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -156,7 +152,7 @@ public class Robot extends TimedRobot {
 
 				/**************PUT YOUR CODE HERE FOR EACH LINE ******************8*/
 				//Here is the math part so we don't need to mess with it.
-				radius = (previousX-x)/(Math.cos(previousTangent-tangent));
+				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
 				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
 			}
 			//After it's all read, build:
@@ -169,8 +165,6 @@ public class Robot extends TimedRobot {
 		} catch (IOException ex) {
 			DriverStation.reportError("Unable to open trajectory: " + waypointFile, ex.getStackTrace());
 		}
-
-		
 
 		//Don't worry about this stuff, we will use it later.
 		/*
