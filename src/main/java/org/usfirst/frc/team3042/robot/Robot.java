@@ -22,9 +22,12 @@ import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+=======
+>>>>>>> 4cb13e0c05cf6b8854eae7ccd623cbc0eacb1617
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -94,6 +97,29 @@ public class Robot extends TimedRobot {
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
+<<<<<<< HEAD
+=======
+
+		//Experimental fileStream stuff for reading waypoints from a PathWeaver file - not complete yet
+
+		String filePathNav1 = "../../Pathweaver/Paths/AutoNav1.path";
+		PathBuilder builder = new PathBuilder();
+		try {
+			Path filePath = Filesystem.getDeployDirectory().toPath().resolve(filePathNav1);
+			FileInputStream stream = new FileInputStream(filePathNav1);
+		  } catch (IOException ex) {
+			DriverStation.reportError("Unable to open path: " + filePathNav1, ex.getStackTrace());
+		  }
+
+		String trajectoryJSON = "../../Pathweaver/AutoNav1.wpilib.json";
+		Trajectory trajectory = new Trajectory();
+		try {
+		  Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}
+>>>>>>> 4cb13e0c05cf6b8854eae7ccd623cbc0eacb1617
 	}
 
 	/** disabledInit **********************************************************
