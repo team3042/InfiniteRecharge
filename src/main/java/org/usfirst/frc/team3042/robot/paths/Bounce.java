@@ -22,7 +22,7 @@ public class Bounce implements PathContainer {
         waypoints.add(new Waypoint(22.5,-2.5,0,60));
         waypoints.add(new Waypoint(27.5,-7.5,15,60));
 
-        return PathBuilder.buildPathFromWaypoints(waypoints);
+        return PathUtil.buildPathFromWaypoints(waypoints);
     }
     
     @Override
