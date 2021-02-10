@@ -7,7 +7,7 @@ import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
 import org.usfirst.frc.team3042.lib.math.Rotation2d;
 import org.usfirst.frc.team3042.lib.math.Translation2d;
 
-public class PathBuilder {
+public class PathUtil {
 
     private static final double kEpsilon = 1E-9;
     private static final double kReallyBigNumber = 1E9;
@@ -39,7 +39,7 @@ public class PathBuilder {
      * these waypoints is used by the PathBuilder class to generate Paths. Waypoints also contain an optional marker
      * that is used by the WaitForPathMarkerAction.
      *
-     * @see PathBuilder
+     * @see PathUtil
      * @see WaitForPathMarkerAction
      */
     public static class Waypoint {
