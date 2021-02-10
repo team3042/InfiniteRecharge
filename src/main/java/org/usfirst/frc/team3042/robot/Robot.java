@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 		
-		String waypointFile = "../../Pathweaver/Path/AutoNav1.path";
+		String waypointFile = "../../Pathweaver/Path/BarrelRacingPath";
 		String s;
 		//TODO2-8:
 		//Leave the speed like this for now -- we an get smarter later.
