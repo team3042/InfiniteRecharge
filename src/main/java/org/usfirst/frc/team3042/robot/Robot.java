@@ -1,13 +1,12 @@
 package org.usfirst.frc.team3042.robot;
 
+import org.graalvm.compiler.virtual.phases.ea.PartialEscapePhase;
 import org.usfirst.frc.team3042.lib.Log;
+import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
+import org.usfirst.frc.team3042.lib.math.Translation2d;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
-import org.usfirst.frc.team3042.robot.paths.BarrelRacing;
-import org.usfirst.frc.team3042.robot.paths.Bounce;
-import org.usfirst.frc.team3042.robot.paths.PathBuilder;
-import org.usfirst.frc.team3042.robot.paths.Slalom;
-import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
+import org.usfirst.frc.team3042.robot.paths.PathContainer;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -23,6 +22,12 @@ import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
+<<<<<<< HEAD
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+=======
+>>>>>>> 4cb13e0c05cf6b8854eae7ccd623cbc0eacb1617
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -33,11 +38,13 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
+import org.usfirst.frc.team3042.robot.paths.*;
+import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
+import org.usfirst.frc.team3042.lib.Path;
 import edu.wpi.first.wpilibj.trajectory.*;
-import java.nio.file.Path;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import edu.wpi.first.wpilibj.Filesystem;
+import static org.usfirst.frc.team3042.lib.math.Util.epsilonEquals;
 
 /** Robot *********************************************************************
  * The VM is configured to automatically run this class, and to call the
@@ -82,21 +89,16 @@ public class Robot extends TimedRobot {
 		log.add("Robot Init", Log.Level.TRACE);
 
 		oi = new OI();
-
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
-		
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
-
-		chooser.addOption("Barrel Racing", new DrivetrainAuton_Drive(new BarrelRacing().buildPath()));
-		chooser.addOption("Slalom", new DrivetrainAuton_Drive(new Slalom().buildPath()));
-		chooser.addOption("Bounce", new DrivetrainAuton_Drive(new Bounce().buildPath()));
-
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
+<<<<<<< HEAD
+=======
 
 		//Experimental fileStream stuff for reading waypoints from a PathWeaver file - not complete yet
 
@@ -117,6 +119,7 @@ public class Robot extends TimedRobot {
 		} catch (IOException ex) {
 		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
 		}
+>>>>>>> 4cb13e0c05cf6b8854eae7ccd623cbc0eacb1617
 	}
 
 	/** disabledInit **********************************************************
@@ -140,6 +143,68 @@ public class Robot extends TimedRobot {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
+		
+		String waypointFile = "../../Pathweaver/Path/AutoNav1.path";
+		String s;
+		//TODO2-8:
+		//Leave the speed like this for now -- we an get smarter later.
+		double speed = 1;
+		String[] splits;
+
+		try {
+			BufferedReader br = new(BufferedReader(new FileReader(waypointFile));
+			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
+			//Read one line to move the pointer forward
+			br.readLine();
+			//Now we need the start position so we can make the pathbuilder. Read the second line:
+			s = br.readLine();
+			//I want to get the x,y from the second line, so I am going to split up the line like this:
+			splits = s.split(",");
+			//This breaks it up into an array of strings instead based on commas.
+			// "123" | "456" | "789" |
+			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+			double x = Double.parseDouble(splits[0]);
+			double y =  Double.parseDouble(splits[1]);
+			PathBuilder pb = new PathBuilder(x,y, false);
+			//These are here as a hint:
+			double previousTangent = 0;
+			double previousX = x;
+
+			//And here are more variables you will need
+			double tangent;
+			double radius;
+			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
+			//We will need to track outside of just reading the line: 
+			while((s = br.readLine()) != null){
+
+				/**************PUT YOUR CODE HERE FOR EACH LINE ******************8*/
+				//Here is the math part so we don't need to mess with it.
+				radius = (previousX-x)/(Math.cos(previousTangent-tangent));
+				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
+			}
+			//After it's all read, build:
+			Path pathToDrive = pb.buildPath();
+		
+
+		//and drive:
+		//TODO:2-8 : we want to use DrivetrainAuton_Drive(Path path) with the path we just created... see if you can figure out how.
+				
+		} catch (IOException ex) {
+			DriverStation.reportError("Unable to open trajectory: " + waypointFile, ex.getStackTrace());
+		}
+
+		
+
+		//Don't worry about this stuff, we will use it later.
+		/*
+		String trajectoryJSON = "../../Pathweaver/AutoNav1.wpilib.json";
+		Trajectory trajectory = new Trajectory();
+		try {
+		  //Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}*/
 
 		turret.reset();
 

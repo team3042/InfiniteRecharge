@@ -2,7 +2,7 @@ package org.usfirst.frc.team3042.robot.paths;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team3042.robot.paths.PathBuilder.Waypoint;
+import org.usfirst.frc.team3042.robot.paths.PathUtil.Waypoint;
 import org.usfirst.frc.team3042.lib.Path;
 import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
 import org.usfirst.frc.team3042.lib.math.Rotation2d;
@@ -25,7 +25,7 @@ public class BarrelRacing implements PathContainer {
         waypoints.add(new Waypoint(25.0,-9.0,0,60));
         waypoints.add(new Waypoint(.4942607615710384,-7.755735061305697,15,60));
 
-        return PathBuilder.buildPathFromWaypoints(waypoints);
+        return PathUtil.buildPathFromWaypoints(waypoints);
     }
     
     @Override
