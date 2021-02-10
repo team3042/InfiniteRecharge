@@ -152,7 +152,7 @@ public class Robot extends TimedRobot {
 		String[] splits;
 
 		try {
-			BufferedReader br = new(BufferedReader(new FileReader(waypointFile));
+			BufferedReader br = new BufferedReader(new FileReader(waypointFile));
 			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
 			//Read one line to move the pointer forward
 			br.readLine();
