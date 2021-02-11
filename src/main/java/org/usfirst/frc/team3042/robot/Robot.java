@@ -5,7 +5,7 @@ import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
 import org.usfirst.frc.team3042.lib.math.Translation2d;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
-import org.usfirst.frc.team3042.robot.paths.PathContainer;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_DoPath;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -35,6 +35,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 import org.usfirst.frc.team3042.robot.paths.*;
+import org.usfirst.frc.team3042.robot.paths.Forward10Around360;
 import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
 import org.usfirst.frc.team3042.lib.Path;
 import edu.wpi.first.wpilibj.trajectory.*;
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+		chooser.addOption("Forward10Around360", new AutonomousMode_DoPath(new Forward10Around360()));
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -144,8 +146,8 @@ public class Robot extends TimedRobot {
 			double previousX = x;
 
 			//And here are more variables you will need
-			double tangent;
-			double radius;
+			double tangent = 0;
+			double radius = 0;
 			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
 			//We will need to track outside of just reading the line: 
 			while((s = br.readLine()) != null){
@@ -159,9 +161,11 @@ public class Robot extends TimedRobot {
 			Path pathToDrive = pb.buildPath();
 		
 
-		//and drive:
-		//TODO:2-8 : we want to use DrivetrainAuton_Drive(Path path) with the path we just created... see if you can figure out how.
+			//and drive:
+			//TODO:2-8 : we want to use DrivetrainAuton_Drive(Path path) with the path we just created... see if you can figure out how.
 				
+			//we have to close the file. it's good practice. It may automatically do it for us, but if we don't, this will only run once.
+			br.close();
 		} catch (IOException ex) {
 			DriverStation.reportError("Unable to open trajectory: " + waypointFile, ex.getStackTrace());
 		}
