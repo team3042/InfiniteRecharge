@@ -13,17 +13,25 @@ public class Slalom implements PathContainer {
     @Override
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
-        waypoints.add(new Waypoint(0,0.0,0,20));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
+        waypoints.add(new Waypoint(0,0.0,0,45));
 
         return PathUtil.buildPathFromWaypoints(waypoints);
     }
