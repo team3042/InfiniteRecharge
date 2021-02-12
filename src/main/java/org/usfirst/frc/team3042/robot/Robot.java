@@ -5,7 +5,7 @@ import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
 import org.usfirst.frc.team3042.lib.math.Translation2d;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
-import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_DoPath;
+import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -35,7 +35,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 import org.usfirst.frc.team3042.robot.paths.*;
-import org.usfirst.frc.team3042.robot.paths.Forward10Around360;
 import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
 import org.usfirst.frc.team3042.lib.Path;
 import edu.wpi.first.wpilibj.trajectory.*;
@@ -89,7 +88,7 @@ public class Robot extends TimedRobot {
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
-		chooser.addOption("Forward10Around360", new AutonomousMode_DoPath(new Forward10Around360()));
+		chooser.addOption("Forward10Around360", new DrivetrainAuton_Drive(new Forward10Around360().buildPath()));
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
