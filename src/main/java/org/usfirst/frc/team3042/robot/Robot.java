@@ -89,6 +89,63 @@ public class Robot extends TimedRobot {
 		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 		chooser.addOption("Forward10Around360", new DrivetrainAuton_Drive(new Forward10Around360().buildPath()));
+		String waypointFile = "../../Pathweaver/Path/BarrelRacingPath";
+		String s;
+		//TODO2-8:
+		//Leave the speed like this for now -- we an get smarter later.
+		double speed = 1;
+		String[] splits;
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(waypointFile));
+			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
+			//Read one line to move the pointer forward
+			br.readLine();
+			//Now we need the start position so we can make the pathbuilder. Read the second line:
+			s = br.readLine();
+			//I want to get the x,y from the second line, so I am going to split up the line like this:
+			splits = s.split(",");
+			//This breaks it up into an array of strings instead based on commas.
+			// "123" | "456" | "789" |
+			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+			double x = Double.parseDouble(splits[0]);
+			double y =  Double.parseDouble(splits[1]);
+			PathBuilder pb = new PathBuilder(x,y, false);
+			//These are here as a hint:
+			double previousTangent = 0;
+			double previousX = x;
+
+			//And here are more variables you will need
+			double tangent = 0;
+			double radius = 0;
+			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
+			//We will need to track outside of just reading the line: 
+			while((s = br.readLine()) != null){
+
+				/**************PUT YOUR CODE HERE FOR EACH LINE ******************8*/
+				//Here is the math part so we don't need to mess with it.
+				splits = s.split(",");
+				//This breaks it up into an array of strings instead based on commas.
+				// "123" | "456" | "789" |
+				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+				x = Double.parseDouble(splits[0]);
+				y =  Double.parseDouble(splits[1]);
+				tangent =  Double.parseDouble(splits[4]);
+				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
+				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
+				previousX = x;
+				previousTangent = tangent;
+			}
+			//After it's all read, build:
+			Path pathToDrive = pb.buildPath();
+			chooser.addOption("GeneratedFile", new DrivetrainAuton_Drive(pathToDrive));
+
+			//we have to close the file. it's good practice. It may automatically do it for us, but if we don't, this will only run once.
+			br.close();
+		} catch (IOException ex) {
+			DriverStation.reportError("Unable to open trajectory: " + waypointFile, ex.getStackTrace());
+		}
+		
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -153,8 +210,17 @@ public class Robot extends TimedRobot {
 
 				/**************PUT YOUR CODE HERE FOR EACH LINE ******************8*/
 				//Here is the math part so we don't need to mess with it.
+				splits = s.split(",");
+				//This breaks it up into an array of strings instead based on commas.
+				// "123" | "456" | "789" |
+				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+				x = Double.parseDouble(splits[0]);
+				y =  Double.parseDouble(splits[1]);
+				tangent =  Double.parseDouble(splits[4]);
 				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
 				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
+				previousX = x;
+				previousTangent = tangent;
 			}
 			//After it's all read, build:
 			Path pathToDrive = pb.buildPath();
