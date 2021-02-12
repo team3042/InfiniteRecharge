@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
-import org.usfirst.frc.team3042.lib.math.RigidTransform2d;
-import org.usfirst.frc.team3042.lib.math.Translation2d;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
@@ -21,9 +19,6 @@ import org.usfirst.frc.team3042.robot.subsystems.Turret;
 import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -37,10 +32,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import org.usfirst.frc.team3042.robot.paths.*;
 import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
 import org.usfirst.frc.team3042.lib.Path;
-import edu.wpi.first.wpilibj.trajectory.*;
 import java.io.*;
-import edu.wpi.first.wpilibj.Filesystem;
-import static org.usfirst.frc.team3042.lib.math.Util.epsilonEquals;
 
 /** Robot *********************************************************************
  * The VM is configured to automatically run this class, and to call the
