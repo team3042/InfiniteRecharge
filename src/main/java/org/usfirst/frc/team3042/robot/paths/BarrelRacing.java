@@ -14,16 +14,16 @@ public class BarrelRacing implements PathContainer {
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
         waypoints.add(new Waypoint(4.0,-10.0,0,45));
-        waypoints.add(new Waypoint(13.5,-9.0,15,45));
+        waypoints.add(new Waypoint(13.5,-9.0,0,45));
         waypoints.add(new Waypoint(12.5,-11.0,0,45));
         waypoints.add(new Waypoint(11.5,-10.0,0,45));
-        waypoints.add(new Waypoint(20.0,-6.0,15,45));
+        waypoints.add(new Waypoint(20.0,-6.0,0,45));
         waypoints.add(new Waypoint(20.0,-4.0,0,45));
         waypoints.add(new Waypoint(18.0,-5.0,0,45));
-        waypoints.add(new Waypoint(25.0,-11.0,15,45));
+        waypoints.add(new Waypoint(25.0,-11.0,0,45));
         waypoints.add(new Waypoint(26.0,-10.0,0,45));
         waypoints.add(new Waypoint(25.0,-9.0,0,45));
-        waypoints.add(new Waypoint(.4942457615710384,-7.755735061305697,15,45));
+        waypoints.add(new Waypoint(.4942457615710384,-7.755735061305697,0,45));
 
         return PathUtil.buildPathFromWaypoints(waypoints);
     }

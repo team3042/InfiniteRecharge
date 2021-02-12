@@ -14,7 +14,7 @@ public class enterTrench implements PathContainer {
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
         waypoints.add(new Waypoint(138.0,-95.9412881878966,0,45));
-        waypoints.add(new Waypoint(220.61247819643293,-28.41242497537855,15,45));
+        waypoints.add(new Waypoint(220.61247819643293,-28.41242497537855,0,45));
         waypoints.add(new Waypoint(317.9334869438854,-27.4193534575474,0,45));
 
         return PathUtil.buildPathFromWaypoints(waypoints);
