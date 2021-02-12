@@ -3,6 +3,7 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
 import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
@@ -77,10 +78,12 @@ public class Robot extends TimedRobot {
 		log.add("Robot Init", Log.Level.TRACE);
 
 		oi = new OI();
+		
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
-		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
+		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 		chooser.addOption("Forward10Around360", new DrivetrainAuton_Drive(new Forward10Around360().buildPath()));
+
 		String waypointFile = "../../Pathweaver/Path/BarrelRacingPath";
 		String s;
 		//TODO2-8:
