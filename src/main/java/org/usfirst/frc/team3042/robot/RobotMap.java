@@ -50,7 +50,6 @@ public class RobotMap {
 	public static final double ROTATION_CONTROL_POWER = .4; // How much power (as a %) to give the Control Panel Wheel when performing rotation control
 	public static final int CPWHEEL_ENCODER_FRAME_RATE = 10;
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_CPWHEEL_ENCODER = false;
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
 	/** Conveyor Settings ****************************************************/
@@ -157,7 +156,6 @@ public class RobotMap {
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; // If the angle of error to the target is less than this value the PID Loop will not make any corrections
 	public static final int TURRET_ENCODER_FRAME_RATE = 10;
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
 	/** Ultrasonic Sensor Settings ********************************************/
