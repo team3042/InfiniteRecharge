@@ -3,7 +3,6 @@ package org.usfirst.frc.team3042.robot.commands.autonomous;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_GyroStraight;
 import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
-import org.usfirst.frc.team3042.robot.commands.Intake_Stop;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
@@ -31,7 +30,7 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     addParallel(new Intake_Intake(1)); //Start running the intake
     addSequential(new DrivetrainAuton_Drive(new enterTrench().buildPath())); //Drive into the trench to collect more power cells
-    addSequential(new Intake_Stop()); //Stop running the intake
+    addSequential(new Intake_Intake(0)); //Stop running the intake
     addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
     addSequential(new DrivetrainAuton_Drive(new exitTrench().buildPath())); //Drive back to the optimal shooting location
     addSequential(new Shoot()); //Shoot the three power cells from the trench
