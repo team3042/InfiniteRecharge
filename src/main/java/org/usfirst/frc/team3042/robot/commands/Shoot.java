@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3042.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
@@ -27,12 +28,28 @@ public class Shoot extends Command {
   Shooter shooter = Robot.shooter;
   Limelight limelight = Robot.limelight;
   Log log = new Log(LOG_LEVEL, SendableRegistry.getName(upperconveyor));
+  Timer timer = new Timer();
+
   boolean onTarget = false;
+  boolean timedShoot;
+  int time;
 
   /** Shoot *****************************************************************
    * Required subsystems will cancel commands when this command is run. */
   public Shoot() {
     log.add("Constructor", Log.Level.TRACE);
+
+    timedShoot = false;
+
+    requires(upperconveyor);
+    requires(lowerconveyor);
+  }
+  //Overloaded constructor that allows us to shoot for a set amount of time, useful for autonomous shooting
+  public Shoot(int t) {
+    log.add("Constructor", Log.Level.TRACE);
+
+    time = t;
+    timedShoot = true;
 
     requires(upperconveyor);
     requires(lowerconveyor);
@@ -51,7 +68,10 @@ public class Shoot extends Command {
     if (!onTarget && limelight.returnValidTarget() == 1.0 && Math.abs(limelight.returnHorizontalError()) <= TOLERANCE && shooter.getSpeed() >= SPEED) {
       lowerconveyor.setPower(LPOWER);
       upperconveyor.setPower(UPOWER);
+
       onTarget = true;
+      timer.reset();
+		  timer.start();
     }
     else if (onTarget && shooter.getSpeed() >= SPEED) {
       lowerconveyor.setPower(LPOWER);
@@ -66,7 +86,12 @@ public class Shoot extends Command {
   /** isFinished ************************************************************	
    * Make this return true when this Command no longer needs to run execute() */
   protected boolean isFinished() {
-    return false;
+    if (timedShoot) {
+      return timer.get() >= time;
+    }
+    else {
+      return false;
+    }
   }
   
   /** end *******************************************************************
@@ -75,6 +100,11 @@ public class Shoot extends Command {
     log.add("End", Log.Level.TRACE);
     upperconveyor.stop();
     lowerconveyor.stop();
+
+    if(timedShoot){
+      timer.stop();
+		  timer.reset();
+    }
   }
 
   /** interrupted ***********************************************************
@@ -83,5 +113,10 @@ public class Shoot extends Command {
     log.add("Interrupted", Log.Level.TRACE);
     upperconveyor.stop();
     lowerconveyor.stop();
+
+    if(timedShoot){
+      timer.stop();
+		  timer.reset();
+    }
   }
 }
