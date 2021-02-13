@@ -13,7 +13,6 @@ import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
 import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
-import org.usfirst.frc.team3042.robot.commands.Shooter_Spit;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 
 /** OI ************************************************************************
@@ -67,7 +66,6 @@ public class OI {
 		gamepad.LT.whileActive(new Intake_Intake(-1));
 		gamepad.RT.whileActive(new UpperConveyor_Test(-1));
 		gamepad.RT.whileActive(new LowerConveyor_Test(-1));
-		gamepad.Y.whileHeld(new UpperConveyor_Test(1));
 
 		//Turret Controls
 		gamepad.POVRight.whileActive(new Turret_Manual(1));
@@ -77,7 +75,6 @@ public class OI {
 		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
 		gamepad.RB.whileActive(new Shoot());
-		gamepad.X.whileHeld(new Shooter_Spit());
 
 		//Climbing Controls
 		gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
