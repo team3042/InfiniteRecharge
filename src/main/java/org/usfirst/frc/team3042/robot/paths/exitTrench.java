@@ -15,6 +15,7 @@ public class exitTrench implements PathContainer {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
         waypoints.add(new Waypoint(318,-27,0,0));
         waypoints.add(new Waypoint(221,-27,0,45));
+        waypoints.add(new Waypoint(183,-66,15,45));
         waypoints.add(new Waypoint(132,-96,15,45));
 
         return PathUtil.buildPathFromWaypoints(waypoints);
