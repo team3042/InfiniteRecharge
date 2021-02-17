@@ -13,16 +13,16 @@ public class enterTrench implements PathContainer {
     @Override
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
-        waypoints.add(new Waypoint(138.0,-95.9412881878966,0,0));
-        waypoints.add(new Waypoint(220.61247819643293,-28.41242497537855,15,45));
-        waypoints.add(new Waypoint(317.9334869438854,-27.4193534575474,0,45));
+        waypoints.add(new Waypoint(132,-96,0,0));
+        waypoints.add(new Waypoint(221,-27,15,45));
+        waypoints.add(new Waypoint(318,-27,0,45));
 
         return PathUtil.buildPathFromWaypoints(waypoints);
     }
     
     @Override
     public RigidTransform2d getStartPose() {
-        return new RigidTransform2d(new Translation2d(138.0,-95.9412881878966), Rotation2d.fromDegrees(180.0)); 
+        return new RigidTransform2d(new Translation2d(132,-96), Rotation2d.fromDegrees(180)); 
     }
 
     @Override

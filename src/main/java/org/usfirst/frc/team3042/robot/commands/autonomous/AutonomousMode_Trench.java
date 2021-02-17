@@ -18,11 +18,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {
-    addParallel(new Shooter_Spin()); //Spin up the shooter
     addParallel(new Turret_Continous(true)); //Search for the target and start tracking it
+    addParallel(new Shooter_Spin()); //Spin up the shooter
     addSequential(new Drivetrain_GyroStraight(12.0, -80.0)); //Drive forwards off the initiation line
-    addSequential(new Shoot(4)); //Shoot the three pre-loaded power cells; parameter is time in seconds
-    addSequential(new Turret_Stop()); //Stop tracking the target when we don't need to
+    addSequential(new Shoot(3)); //Shoot the three pre-loaded power cells; parameter is time in seconds
+    addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
 
     // Attempt to knock down the intake using inertia //
     addSequential(new Drivetrain_GyroStraight(-18.0, -140.0)); //Drive backwards
@@ -32,7 +32,8 @@ public class AutonomousMode_Trench extends CommandGroup {
     addSequential(new DrivetrainAuton_Drive(new enterTrench().buildPath())); //Drive into the trench to collect more power cells
     addSequential(new Intake_Intake(0)); //Stop running the intake
     addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
+    addParallel(new Shooter_Spin()); //Spin up the shooter again
     addSequential(new DrivetrainAuton_Drive(new exitTrench().buildPath())); //Drive back to the optimal shooting location
-    addSequential(new Shoot(4)); //Shoot the three power cells from the trench; parameter is time in seconds
+    addSequential(new Shoot(3)); //Shoot the three power cells from the trench; parameter is time in seconds
   }
 }

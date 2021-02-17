@@ -20,11 +20,11 @@ public class PathBuilder implements PathContainer{
         Waypoints  = new ArrayList<Waypoint>();
     }
     public PathBuilder(double x, double y, boolean isReversed){
-        //TODO 2-8: Look at the RigidTransform2d and find out how to make one from X,Y coordinates (knowing that we want the Rotation2d with angle 0).
+        //TODO 2-8: Look at the RigidTransform2d and find out how to make one from X,Y coordinates (knowing that we want the Rotation2d with angle 180).
         //Here's an example Start2d:
         //public RigidTransform2d getStartPose() {
-        //return new RigidTransform2d(new Translation2d(230, 242), Rotation2d.fromDegrees(180.0)); 
-        StartPose = new RigidTransform2d(new Translation2d(Math.floor(x), Math.floor(y)), Rotation2d.fromDegrees(0));
+        //return new RigidTransform2d(new Translation2d(230, 242), Rotation2d.fromDegrees(180)); 
+        StartPose = new RigidTransform2d(new Translation2d(Math.floor(x), Math.floor(y)), Rotation2d.fromDegrees(180));
         IsReversed = isReversed;
         Waypoints  = new ArrayList<Waypoint>();
     }
