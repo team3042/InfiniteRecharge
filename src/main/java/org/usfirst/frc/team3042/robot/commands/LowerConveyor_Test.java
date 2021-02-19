@@ -7,17 +7,20 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
+import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 
-/** Testing Lower Conveyor ****************************************************
+/**
+ * Testing Lower Conveyor ****************************************************
  * Move Lower Conveyor
  */
 public class LowerConveyor_Test extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_COLOR_SENSOR;
 	private static final double speed = RobotMap.LOWER_CONVEYOR_POWER;
-	
+
 	/** Instance Variables ****************************************************/
 	LowerConveyor conveyor = Robot.lowerconveyor;
+	UltrasonicSensor ultrasonic = Robot.ultrasonicsensor;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(conveyor));
 	int direction;
 	
@@ -28,6 +31,7 @@ public class LowerConveyor_Test extends Command {
 		log.add("Constructor", Log.Level.TRACE);
 		this.direction = direction;
 		requires(conveyor);
+		requires(ultrasonic); //This will interrupt the default command of the ultrasonic sensor so that it doesn't pull the balls back in
 	}
 
 	/** initialize ************************************************************

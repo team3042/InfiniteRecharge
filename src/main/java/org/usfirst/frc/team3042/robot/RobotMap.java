@@ -50,7 +50,6 @@ public class RobotMap {
 	public static final double ROTATION_CONTROL_POWER = .4; // How much power (as a %) to give the Control Panel Wheel when performing rotation control
 	public static final int CPWHEEL_ENCODER_FRAME_RATE = 10;
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_CPWHEEL_ENCODER = false;
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
 	/** Conveyor Settings ****************************************************/
@@ -134,7 +133,6 @@ public class RobotMap {
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true; // Used to reverse the direction of the shooter motor
 	public static final double SHOOTER_VELOCITY = 3700; // Shooter velocity in RPM
-	public static final double SHOOTER_SPIT_VELOCITY = 500; // Shooter_Spit velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
@@ -158,7 +156,6 @@ public class RobotMap {
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; // If the angle of error to the target is less than this value the PID Loop will not make any corrections
 	public static final int TURRET_ENCODER_FRAME_RATE = 10;
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
 	/** Ultrasonic Sensor Settings ********************************************/
