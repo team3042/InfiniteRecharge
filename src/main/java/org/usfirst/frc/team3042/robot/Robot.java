@@ -4,10 +4,6 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
-import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
-import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
-import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
-import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
@@ -42,8 +38,6 @@ public class Robot extends TimedRobot {
 	private Log log = new Log(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain 			  = new Drivetrain();
 	public static final Gyroscope gyroscope 	   		  = new Gyroscope();
-	public static final ColorSensor colorsensor    		  = new ColorSensor();
-	public static final ControlPanelWheel cpwheel  		  = new ControlPanelWheel();
 	public static final Limelight limelight        		  = new Limelight();
 	public static final Turret turret 			  		  = new Turret();
 	public static final Intake intake 			  		  = new Intake();
@@ -51,8 +45,6 @@ public class Robot extends TimedRobot {
 	public static final LowerConveyor lowerconveyor 	  = new LowerConveyor();
   	public static final UpperConveyor upperconveyor 	  = new UpperConveyor();
 	public static final PowerDistributionPanel pdp		  = new PowerDistributionPanel();
-	public static final ClimbingWinch climbingwinch		  = new ClimbingWinch();
-	public static final ClimbingHook climbinghook		  = new ClimbingHook();
 	public static final UltrasonicSensor ultrasonicsensor = new UltrasonicSensor();
 	public static OI oi;
 	Command autonomousCommand;
