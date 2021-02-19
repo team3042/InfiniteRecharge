@@ -3,6 +3,8 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
+import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -27,6 +29,11 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
+import org.usfirst.frc.team3042.robot.paths.*;
+import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
+import org.usfirst.frc.team3042.lib.Path;
+import java.io.*;
 
 /** Robot *********************************************************************
  * The VM is configured to automatically run this class, and to call the
@@ -71,9 +78,20 @@ public class Robot extends TimedRobot {
 		log.add("Robot Init", Log.Level.TRACE);
 
 		oi = new OI();
+
+		String barrelRacingFile = "../../Pathweaver/Paths/BarrelRacingPath";
+		String bounceFile = "../../Pathweaver/Paths/BouncePath";
+		String slalomFile = "../../Pathweaver/Paths/SlalomPath";
+		
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
-		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
+		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+		chooser.addOption("Forward 100 Inches", new DrivetrainAuton_Drive(new Forward100().buildPath()));
+
+		buildPath("Barrel Racing", barrelRacingFile);
+		buildPath("Bounce", bounceFile);
+		buildPath("Slalom", slalomFile);
+		
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -102,6 +120,17 @@ public class Robot extends TimedRobot {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
+		
+		//Don't worry about this stuff, we might use it later.
+
+		/* String trajectoryJSON = "../../Pathweaver/output/BarrelRacingPath.wpilib.json";
+		Trajectory trajectory = new Trajectory();
+		try {
+		  //Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		} */
 
 		turret.reset();
 
@@ -179,4 +208,69 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putString("Color:", "Capacity Not Reached");
 		}
 	} 
+
+	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable path
+	private void buildPath(String name, String waypointFile) {
+		String s;
+
+		//TODO2-8:
+		//Leave the speed like this for now -- we can get smarter later.
+		double speed = 45;
+		String[] splits = new String[6];
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(waypointFile));
+			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
+			//Read one line to move the pointer forward
+			br.readLine();
+
+			//Now we need the start position so we can make the pathbuilder. Read the second line:
+			s = br.readLine();
+
+			//I want to get the x,y from the second line, so I am going to split up the line like this:
+			splits = s.split(",");
+
+			//This breaks it up into an array of strings instead based on commas.
+			// "123" | "456" | "789" |
+			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+			double x = Double.parseDouble(splits[0]);
+			double y =  Double.parseDouble(splits[1]);
+			PathBuilder pb = new PathBuilder(x,y, false);
+
+			//These are here as a hint:
+			double previousTangent = 0;
+			double previousX = x;
+
+			//And here are more variables you will need
+			double tangent = 0;
+			double radius = 0;
+
+			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
+			//We will need to track outside of just reading the line: 
+			while((s = br.readLine()) != null) {
+				//Here is the math part so we don't need to mess with it.
+				splits = s.split(",");
+
+				//This breaks it up into an array of strings instead based on commas.
+				// "123" | "456" | "789" |
+				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
+				x = Double.parseDouble(splits[0]) * 12; //Multiply by 12 to convert from feet to inches
+				y =  Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
+				tangent =  Double.parseDouble(splits[4]);
+				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
+				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
+				previousX = x;
+				previousTangent = tangent;
+			}
+
+			//After it's all read, build:
+			Path pathToDrive = pb.buildPath();
+			chooser.addOption(name, new DrivetrainAuton_Drive(pathToDrive));
+
+			//we have to close the file. it's good practice. It may automatically do it for us, but if we don't, this will only run once.
+			br.close();
+		} catch (IOException ex) {
+			DriverStation.reportError("Unable to open file: " + waypointFile, ex.getStackTrace());
+		}
+	}
 }

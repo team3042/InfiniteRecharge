@@ -11,7 +11,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.Turret;
 
 /** Turret Stop ***************************************************************
- * Command for stopping the turret at the end of autonomous mode
+ * Command for stopping the turret and shooter at the end of autonomous mode
  */
 public class Turret_Stop extends Command {
 	/** Configuration Constants ***********************************************/

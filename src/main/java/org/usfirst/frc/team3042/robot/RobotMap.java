@@ -71,8 +71,8 @@ public class RobotMap {
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
 	// Maximum Acceleration given in power(volts?) per second
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
@@ -125,8 +125,8 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = -1.1; // Determines normal driving speed of the robot
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = -0.25; // Determines driving speed of the robot when in slow mode
+	public static final double JOYSTICK_DRIVE_SCALE = 1.1; // Determines driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.25; // Determines driving speed of the robot when in slow mode
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
