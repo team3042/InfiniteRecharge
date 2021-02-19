@@ -23,10 +23,8 @@ public class RobotMap {
 	public static final int CAN_TURRET = 34;
 	public static final int CAN_INTAKE = 18;
 	public static final int CAN_SHOOTER = 5;
-	public static final int CAN_UPPER_CONVEYOR_TOP = 8;
-	public static final int CAN_UPPER_CONVEYOR_BOTTOM = 25;
-	public static final int CAN_LOWER_CONVEYOR_TOP = 7;
-	public static final int CAN_LOWER_CONVEYOR_BOTTOM = 32;
+	public static final int CAN_UPPER_CONVEYOR = 8;
+	public static final int CAN_LOWER_CONVEYOR = 7;
 	public static final int CAN_CLIMBING_WINCH = 4;
 	public static final int CAN_CLIMBING_HOOK = 26;
 	
@@ -54,13 +52,11 @@ public class RobotMap {
 	
 	/** Conveyor Settings ****************************************************/
 	// Upper Conveyer Settings
-	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = true;
-	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = false;
+	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double UPPER_CONVEYOR_POWER = 0.4; // How much power (as a %) to give the upper conveyor
 	// Lower Conveyer Settings
-	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
-	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
+	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.5; // How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked

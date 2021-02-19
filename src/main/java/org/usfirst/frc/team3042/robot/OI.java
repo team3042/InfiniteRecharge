@@ -4,13 +4,9 @@ import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.ClimbingHook_Manual;
-import org.usfirst.frc.team3042.robot.commands.ClimbingWinch_Wind;
 import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
-import org.usfirst.frc.team3042.robot.commands.RotationControl;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
@@ -57,9 +53,6 @@ public class OI {
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-		//Control Panel Controls
-		gamepad.A.whenPressed(new RotationControl());
-		gamepad.B.whileHeld(new PositionControl_Manual());
 
 		//Intake Controls
 		gamepad.LB.whileHeld(new Intake_Intake(1)); //run intake
@@ -78,11 +71,6 @@ public class OI {
 		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
 		gamepad.RB.whileActive(new Shoot());
-
-		//Climbing Controls
-		gamepad.POVUp.whileActive(new ClimbingHook_Manual(1)); 
-		gamepad.POVDown.whileActive(new ClimbingHook_Manual(-1));
-		gamepad.Start.whileHeld(new ClimbingWinch_Wind(1));
 	}
 	
 	/** Access to the driving axes values *****************************
