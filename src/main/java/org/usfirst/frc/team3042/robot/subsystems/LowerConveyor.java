@@ -2,7 +2,7 @@ package org.usfirst.frc.team3042.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.RobotMap;
@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** LowerConveyor *************************************************************
- * Subsystem for the Lower Conveyor that rolls the power cells to the upper conveyor
- */
+ * Subsystem for the Lower Conveyor that rolls the power cells to the upper conveyor */
 public class LowerConveyor extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LOWER_CONVEYOR;
@@ -23,7 +22,7 @@ public class LowerConveyor extends Subsystem {
 
 	/** Instance Variables ****************************************************/
   		Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	  	TalonSRX motor = new TalonSRX(CAN_LOWER_CONVEYOR);
+	  	VictorSPX motor = new VictorSPX(CAN_LOWER_CONVEYOR);
 
 	/** LowerConveyor *********************************************************/
 	public LowerConveyor() {
@@ -32,7 +31,7 @@ public class LowerConveyor extends Subsystem {
 		initMotor(motor, REVERSE_MOTOR);
   	}
 
-  	private void initMotor(TalonSRX motor, boolean reverse) {
+  	private void initMotor(VictorSPX motor, boolean reverse) {
 		motor.setNeutralMode(BRAKE_MODE);
 		motor.setInverted(reverse); 	// affects percent Vbus mode
   	}
@@ -53,8 +52,7 @@ public class LowerConveyor extends Subsystem {
 	}
 	
 	/** initDefaultCommand ****************************************************
-	 * Set the default command for the subsystem.
-	 */
+	 * Set the default command for the subsystem. */
 	public void initDefaultCommand() {
 		setDefaultCommand(new LowerConveyor_Advance());
 	}
