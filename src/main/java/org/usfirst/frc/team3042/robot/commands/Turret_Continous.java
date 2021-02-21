@@ -25,12 +25,11 @@ public class Turret_Continous extends Command {
 
 	/** Instance Variables ****************************************************/
 	Turret turret = Robot.turret;
-
+	Shooter shooter = Robot.shooter;
 	Limelight limelight = Robot.limelight; 
 
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(turret));
-	  
-	Shooter shooter = Robot.shooter;
+
 	double error;
 	double correction;
 	double derivative; // Derivative is the instantaneous rate of change in error
@@ -46,8 +45,9 @@ public class Turret_Continous extends Command {
 	 * Required subsystems will cancel commands when this command is run. */
 	public Turret_Continous(boolean auto) {
 		log.add("Constructor", Log.Level.TRACE);
+
 		requires(turret);
-		turret.reset();
+		turret.reset(); // Reset the turret encoder to 0
 		autonomous = auto;
 	}
 
@@ -55,8 +55,11 @@ public class Turret_Continous extends Command {
 	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
+
 		limelight.led.setNumber(3); // Turn on the Limelight's LEDs
 		counter = 0;
+		integral = 0;
+
 		if (limelight.returnValidTarget() == 0) {
 			turret.setPower(-1 * searchPower);
 		}
@@ -67,10 +70,13 @@ public class Turret_Continous extends Command {
 	protected void execute() {
 		error = limelight.returnHorizontalError(); // Read the angle of error from the Limelight
 		if (limelight.returnValidTarget() == 1 && Math.abs(error) > tolerance) { //PID Loop for tracking the target
-			integral += error * 0.2; // Add the current error to the integral
-			derivative = (error - previousError) / .02;
+
+			integral += error * .02; // Integral is increased by the error*time (each code cycle is .02 seconds using TimedRobot)
+			derivative = (error - previousError) / .02; // Derivative is calculated using change in error/time (each code cycle is .02 seconds using TimedRobot)
 
 			correction = (kP * error) + (kI * integral) + (kD * derivative);
+
+			// This ensures that the power we give to the turret motor is never greater than the maximum power we want it to have
 			correction = Math.min(maxPower, correction);
 			correction = Math.max(-1 * maxPower, correction);
 
@@ -112,8 +118,9 @@ public class Turret_Continous extends Command {
 	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
+
 		turret.stop();
-		limelight.led.setNumber(0);
+		limelight.led.setNumber(0); // Turn off the Limelight's LEDs
 	}
 
 	/** interrupted ***********************************************************
@@ -121,7 +128,8 @@ public class Turret_Continous extends Command {
 	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
+
 		turret.stop();
-		limelight.led.setNumber(0);
+		limelight.led.setNumber(0); // Turn off the Limelight's LEDs
 	}
 }
