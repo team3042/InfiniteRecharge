@@ -11,8 +11,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.DrivetrainEncoders;
 
 /** Drivetrain Calibrate ******************************************************
- * Determine the F-Gain for the left and right motors of the drivetrain.
- */
+ * Determine the F-Gain for the left and right motors of the drivetrain. */
 public class Drivetrain_Calibrate extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN_AUTON;
@@ -36,8 +35,7 @@ public class Drivetrain_Calibrate extends Command {
 	}
 	
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		
@@ -50,8 +48,7 @@ public class Drivetrain_Calibrate extends Command {
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		if (timer.get() > CALIBRATE_TIME) {
 			leftSum += encoders.getLeftSpeed();
@@ -61,18 +58,16 @@ public class Drivetrain_Calibrate extends Command {
 	}
 	
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return count >= COUNT_AVERAGE;
 	}
 
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
-		terminate();
+		drivetrain.stop();
 		
 		log.add("Left kF", findF(leftSum), LOG_LEVEL);
 		log.add("Right kF", findF(rightSum), LOG_LEVEL);
@@ -85,15 +80,9 @@ public class Drivetrain_Calibrate extends Command {
 	
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
-		terminate();
-	}
-	
-	/** Graceful End **********************************************************/
-	private void terminate() {
 		drivetrain.stop();
 	}
 }

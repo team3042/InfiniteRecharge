@@ -8,8 +8,7 @@ import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /** Autonomous Mode ******************************************************
- * Autonomous Mode for driving forwards and then shooting the three pre-loaded balls
- */
+ * Default autonomous mode for driving forwards and then shooting the three pre-loaded balls */
 public class AutonomousMode extends CommandGroup {
 
   public AutonomousMode() {

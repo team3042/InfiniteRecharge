@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** Turret ********************************************************************
- * Subsystem for the rotation of the turret
- */
+ * Subsystem for the rotation of the turret */
 public class Turret extends Subsystem {
   	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_TURRET;
@@ -71,8 +70,7 @@ public class Turret extends Subsystem {
 
 	/** Get the encoder position and velocity *********************************
 	 * Encoder position returns counts
-	 * Encoder speed returns counts per 100 ms, convert to RPM for output
-	 */
+	 * Encoder speed returns counts per 100 ms, convert to RPM for output */
 	public double getPosition() {
 		return (motor.getSelectedSensorPosition(PIDIDX) - positionZero);
 	}
@@ -92,8 +90,7 @@ public class Turret extends Subsystem {
 	}
 	
 	/** initDefaultCommand ****************************************************
-	 * Set the default command for the subsystem.
-	 */
+	 * Set the default command for the subsystem. */
 	public void initDefaultCommand() {
 		setDefaultCommand(null); 
 	}

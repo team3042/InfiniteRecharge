@@ -11,8 +11,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
 /** Drivetrain Tank Drive *****************************************************
- * Use joystick input to drive the robot.
- */
+ * Use joystick input to drive the robot. */
 public class Drivetrain_TankDrive extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
@@ -26,8 +25,7 @@ public class Drivetrain_TankDrive extends Command {
 	Timer timer = new Timer();
 	
 	/** Drivetrain Tank Drive *************************************************
-	 * Required subsystems will cancel commands when this command is run.
-	 */
+	 * Required subsystems will cancel commands when this command is run. */
 	public Drivetrain_TankDrive() {
 		log.add("Constructor", Log.Level.TRACE);
 		
@@ -35,8 +33,7 @@ public class Drivetrain_TankDrive extends Command {
 	}
 
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 				
@@ -49,8 +46,7 @@ public class Drivetrain_TankDrive extends Command {
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		double leftPower = oi.getDriveLeft();
 		double rightPower = oi.getDriveRight();
@@ -68,7 +64,7 @@ public class Drivetrain_TankDrive extends Command {
 	
 	/** restrictAcceleration **************************************************/
 	private double restrictAcceleration(double goalPower, 
-			double currentPower, double dt) {
+		double currentPower, double dt) {
 		double maxDeltaPower = ACCELERATION_MAX * dt;
 		double deltaPower = Math.abs(goalPower - currentPower);
 		double deltaSign = (goalPower < currentPower) ? -1.0 : 1.0;
@@ -80,15 +76,13 @@ public class Drivetrain_TankDrive extends Command {
 	}
 	
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return false;
 	}
 
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 		terminate();
@@ -96,8 +90,7 @@ public class Drivetrain_TankDrive extends Command {
 
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 		terminate();

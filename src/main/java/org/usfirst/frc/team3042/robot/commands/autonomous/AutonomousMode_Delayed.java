@@ -9,8 +9,7 @@ import org.usfirst.frc.team3042.robot.commands.Wait;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /** Autonomous Mode Delayed ******************************************************
- * Autonomous Mode for driving forwards and then shooting the three pre-loaded balls after waiting a certain number of seconds
- */
+ * Autonomous mode for driving forwards and then shooting the three pre-loaded balls after waiting a certain number of seconds */
 public class AutonomousMode_Delayed extends CommandGroup {
 
   public AutonomousMode_Delayed() {

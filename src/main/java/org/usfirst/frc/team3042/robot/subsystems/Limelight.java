@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** Limelight *****************************************************************
- * Subsystem for the Limelight camera
- */
+ * Subsystem for the Limelight camera */
 public class Limelight extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LIMELIGHT;
@@ -33,8 +32,7 @@ public class Limelight extends Subsystem {
 	}
 	
 	/** initDefaultCommand ****************************************************
-	 * Set the default command for the subsystem.
-	 */
+	 * Set the default command for the subsystem. */
 	public void initDefaultCommand() {
 		setDefaultCommand(null); 
 	}

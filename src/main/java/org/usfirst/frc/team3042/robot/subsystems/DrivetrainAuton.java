@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** DrivetrainAuton ***********************************************************
- * The methods and information necessary for autonomous motion profile driving.
- */
+ * The methods and information necessary for autonomous motion profile driving. */
 public class DrivetrainAuton extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN_AUTON;
@@ -34,8 +33,7 @@ public class DrivetrainAuton extends Subsystem {
 	private static final int PIDIDX = RobotMap.AUTON_PIDIDX;
 	
 	/** Periodic Runnable *****************************************************
-	 * Create a separate thread to push motion profile points out to the Talon
-	 */
+	 * Create a separate thread to push motion profile points out to the Talon */
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() { 
 			leftMotor.processMotionProfileBuffer();
@@ -80,16 +78,13 @@ public class DrivetrainAuton extends Subsystem {
 	}
 	
 	/** initDefaultCommand ****************************************************
-	 * Set the default command for the subsystem.
-	 */
+	 * Set the default command for the subsystem. */
 	public void initDefaultCommand() {
 		setDefaultCommand(null);
 	}
 
 	/** prepareMotionProfile **************************************************
-	 * Clears out any old trajectories and prepares to receive new trajectory 
-	 * points.
-	 */
+	 * Clears out any old trajectories and prepares to receive new trajectory points. */
 	public void initMotionProfile() {		
 		initMotor(leftMotor);
 		initMotor(rightMotor);

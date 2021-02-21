@@ -14,8 +14,7 @@ import org.usfirst.frc.team3042.robot.subsystems.DrivetrainAuton;
 import com.ctre.phoenix.motion.MotionProfileStatus;
 
 /** Drivetrain Auton Drive *****************************************************
- * Autonomous driving using motion profile.
- */
+ * Autonomous driving using motion profile. */
 public class DrivetrainAuton_Drive extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN_AUTON;
@@ -38,8 +37,7 @@ public class DrivetrainAuton_Drive extends Command {
 	}	
 	
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		
@@ -51,8 +49,7 @@ public class DrivetrainAuton_Drive extends Command {
 	}
 	
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		MotionProfileStatus leftStatus = auton.getLeftStatus();
 		MotionProfileStatus rightStatus = auton.getRightStatus();
@@ -74,15 +71,13 @@ public class DrivetrainAuton_Drive extends Command {
 	}
 	
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return isLast;
 	}
 
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 		terminate();
@@ -90,8 +85,7 @@ public class DrivetrainAuton_Drive extends Command {
 	
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 		terminate();

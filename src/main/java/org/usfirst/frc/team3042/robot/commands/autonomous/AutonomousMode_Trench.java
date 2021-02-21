@@ -10,8 +10,7 @@ import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /** Autonomous Mode Trench ******************************************************
- * Drive forwards, shoot the three pre-loaded balls, drive forwards and collect three from the trench and shoot those
- */
+ * Drive forwards, shoot the three pre-loaded balls, drive forwards and collect three from the trench and shoot those */
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {

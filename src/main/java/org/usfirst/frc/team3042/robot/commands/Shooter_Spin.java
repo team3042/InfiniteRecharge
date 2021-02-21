@@ -9,8 +9,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 
 /** Shooter Spin **************************************************************
- * Spins up the shooter to the desired velocity
- */
+ * Spins up the shooter to the desired velocity */
 public class Shooter_Spin extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
@@ -21,8 +20,7 @@ public class Shooter_Spin extends Command {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
 	
 	/** Shooter Spin **********************************************************
-	 * Required subsystems will cancel commands when this command is run.
-	 */
+	 * Required subsystems will cancel commands when this command is run. */
 	public Shooter_Spin() {
 		log.add("Constructor", Log.Level.TRACE);
 		
@@ -30,29 +28,25 @@ public class Shooter_Spin extends Command {
 	}
 
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		shooter.setSpeed(SPEED);
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 	}
 
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return false;
 	}
 	
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 		shooter.stop();
@@ -60,8 +54,7 @@ public class Shooter_Spin extends Command {
 
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 		shooter.stop();

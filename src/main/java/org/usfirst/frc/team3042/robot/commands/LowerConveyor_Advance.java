@@ -12,8 +12,7 @@ import org.usfirst.frc.team3042.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
 /** Advance Lower Conveyor ****************************************************
- * Advances the Lower Conveyor once it detects a power cell
- */
+ * Advances the Lower Conveyor once it detects a power cell */
 public class LowerConveyor_Advance extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_COLOR_SENSOR;
@@ -29,8 +28,7 @@ public class LowerConveyor_Advance extends Command {
 	boolean moving = false;
 	
 	/** Advance Lower Conveyor ************************************************
-	 * Required subsystems will cancel commands when this command is run.
-	 */
+	 * Required subsystems will cancel commands when this command is run. */
 	public LowerConveyor_Advance() {
 		log.add("Constructor", Log.Level.TRACE);
 		
@@ -38,16 +36,14 @@ public class LowerConveyor_Advance extends Command {
 	}
 
 	/** initialize ************************************************************
-	 * Called just before this Command runs the first time
-	 */
+	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		timer.reset();
 	}
 
 	/** execute ***************************************************************
-	 * Called repeatedly when this Command is scheduled to run
-	 */
+	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		if(sensor.isPowerCellIn()){
 			if (!moving) {
@@ -67,23 +63,20 @@ public class LowerConveyor_Advance extends Command {
 	}
 	
 	/** isFinished ************************************************************	
-	 * Make this return true when this Command no longer needs to run execute()
-	 */
+	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
 		return false;
 	}
 	
 	/** end *******************************************************************
-	 * Called once after isFinished returns true
-	 */
+	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
 	}
 
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
-	 * subsystems is scheduled to run
-	 */
+	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
 	}
