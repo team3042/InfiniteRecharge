@@ -79,9 +79,9 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		String barrelRacingFile = "../../Pathweaver/Paths/BarrelRacingPath";
-		String bounceFile = "../../Pathweaver/Paths/BouncePath";
-		String slalomFile = "../../Pathweaver/Paths/SlalomPath";
+		String barrelRacingFile = "paths/BarrelRacingPath";
+		String bounceFile = "paths/BouncePath";
+		String slalomFile = "paths/SlalomPath";
 		
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
@@ -215,7 +215,7 @@ public class Robot extends TimedRobot {
 
 		//TODO2-8:
 		//Leave the speed like this for now -- we can get smarter later.
-		double speed = 45;
+		double speed = 60;
 		String[] splits = new String[6];
 
 		try {
