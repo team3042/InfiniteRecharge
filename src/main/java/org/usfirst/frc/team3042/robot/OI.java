@@ -6,7 +6,7 @@ import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.ClimbingHook_Manual;
 import org.usfirst.frc.team3042.robot.commands.ClimbingWinch_Wind;
-import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.PositionControl_Manual;
