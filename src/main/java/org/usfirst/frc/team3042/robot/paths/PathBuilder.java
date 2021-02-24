@@ -28,7 +28,7 @@ public class PathBuilder implements PathContainer{
         IsReversed = isReversed;
         Waypoints  = new ArrayList<Waypoint>();
     }
-    public void AddWaypoint(Waypoint newPoint){
+    public void addWaypoint(Waypoint newPoint){
         
         Waypoints.add(newPoint);
     }

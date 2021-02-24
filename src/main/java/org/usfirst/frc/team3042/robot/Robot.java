@@ -1,11 +1,9 @@
 package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
-import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
-import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
-import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
-import org.usfirst.frc.team3042.robot.commands.DrivetrainAuton_Drive;
+import org.usfirst.frc.team3042.robot.commands.autonomous.*;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
@@ -258,9 +256,12 @@ public class Robot extends TimedRobot {
 				y =  Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
 				tangent =  Double.parseDouble(splits[4]);
 				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
-				pb.AddWaypoint(new Waypoint(x, y, radius, speed));
+				pb.addWaypoint(new Waypoint(x, y, radius, speed));
 				previousX = x;
 				previousTangent = tangent;
+				if (x == 1) 
+					y = 2;
+
 			}
 
 			//After it's all read, build:
