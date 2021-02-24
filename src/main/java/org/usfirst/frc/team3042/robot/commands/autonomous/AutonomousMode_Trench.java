@@ -32,11 +32,11 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     //addSequential(new DrivetrainAuton_Drive(new enterTrench().buildPath())); //Drive into the trench to collect more power cells
 
-    //Drive into the trench to collect more power cells
+    // Drive into the trench to collect more power cells //
     addSequential(new Drivetrain_GyroTurn(-45));
-    addSequential(new Drivetrain_GyroStraight(250, 100));
+    addSequential(new Drivetrain_GyroStraight(140, 120));
     addSequential(new Drivetrain_GyroTurn(45));
-    addSequential(new Drivetrain_GyroStraight(100, 100));
+    addSequential(new Drivetrain_GyroStraight(120, 60));
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
     /* addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
@@ -44,10 +44,10 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     //addSequential(new DrivetrainAuton_Drive(new exitTrench().buildPath())); //Drive back to the optimal shooting location
 
-    //Drive back to the optimal shooting location
-    addSequential(new Drivetrain_GyroStraight(100, -100));
+    // Drive back to the optimal shooting location //
+    addSequential(new Drivetrain_GyroStraight(120, -120));
     addSequential(new Drivetrain_GyroTurn(-45));
-    addSequential(new Drivetrain_GyroStraight(250, -100));
+    addSequential(new Drivetrain_GyroStraight(140, -120));
     addSequential(new Drivetrain_GyroTurn(45));
 
     addSequential(new Shoot()); //Shoot the three power cells from the trench */
