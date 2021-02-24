@@ -136,9 +136,9 @@ public class RobotMap {
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
-	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term, keep at 0 if not using, but if using it should be around 1/4 * kP
-	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term, keep at 0 if not using, but if using it should be around 5 * kP
-	public static final double kF_SHOOTER_SPEED = 0.032; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term; keep at 0 for shooters
+	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term; used to reduce oscillation of shooter speed
+	public static final double kF_SHOOTER_SPEED = 0.033; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
@@ -147,8 +147,8 @@ public class RobotMap {
 	public static final int TURRET_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int TURRET_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_TURRET = 0.016; // P constant for the target-tracking PID loop
-	public static final double kI_TURRET = 0.004; // I constant for the target-tracking PID loop
-	public static final double kD_TURRET = 0.0; // D constant for the target-tracking PID loop
+	public static final double kI_TURRET = 0.08; // I constant for the target-tracking PID loop
+	public static final double kD_TURRET = 0.0; // D constant for the target-tracking PID loop; keep at 0 if not using
 	public static final double TURRET_MAX_POWER = 0.4; // The maximum power (as a %) the turret will be given when running the target-tracking PID loop
 	public static final double TURRET_MANUAL_POWER = 0.2; // How much power (as a %) to give the turret when using manual control
 	public static final int TURRET_MAX_ANGLE = 80; // The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
