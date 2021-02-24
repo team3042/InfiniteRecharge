@@ -20,7 +20,6 @@ public class Intake_Intake extends Command {
 	Intake intake = Robot.intake;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(intake));
 	int direction;
-	Boolean stop = false;
 
 	/** Intake ****************************************************************
 	 * Required subsystems will cancel commands when this command is run.
@@ -28,11 +27,6 @@ public class Intake_Intake extends Command {
 	public Intake_Intake(int direction) {
 		log.add("Constructor", Log.Level.TRACE);
 		this.direction = direction;
-		requires(intake);
-	}
-	public Intake_Intake(Boolean stop) {
-		log.add("Constructor", Log.Level.TRACE);
-		this.stop = stop;
 		requires(intake);
 	}
 
@@ -55,7 +49,7 @@ public class Intake_Intake extends Command {
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
 	protected boolean isFinished() {
-		if(stop) {
+		if(direction == 0) {
 			return true;
 		}
 		else {

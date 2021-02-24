@@ -30,7 +30,7 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     addParallel(new Intake_Intake(1)); //Start running the intake
     addSequential(new DrivetrainAuton_Drive(new enterTrench().buildPath())); //Drive into the trench to collect more power cells
-    addSequential(new Intake_Intake(true)); //Stop running the intake
+    addSequential(new Intake_Intake(0)); //Stop running the intake
     addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
     addParallel(new Shooter_Spin()); //Spin up the shooter again
     addSequential(new DrivetrainAuton_Drive(new exitTrench().buildPath())); //Drive back to the optimal shooting location
