@@ -50,7 +50,6 @@ public class RobotMap {
 	public static final double ROTATION_CONTROL_POWER = .4; // How much power (as a %) to give the Control Panel Wheel when performing rotation control
 	public static final int CPWHEEL_ENCODER_FRAME_RATE = 10;
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_CPWHEEL_ENCODER = false;
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
 	/** Conveyor Settings ****************************************************/
@@ -72,8 +71,8 @@ public class RobotMap {
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
 	// Maximum Acceleration given in power(volts?) per second
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
@@ -126,20 +125,19 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = -1.1; // Determines driving speed of the robot
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = -0.7; // Determines driving speed of the robot when in slow mode
+	public static final double JOYSTICK_DRIVE_SCALE = 1.1; // Determines driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.25; // Determines driving speed of the robot when in slow mode
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true; // Used to reverse the direction of the shooter motor
 	public static final double SHOOTER_VELOCITY = 3700; // Shooter velocity in RPM
-	public static final double SHOOTER_SPIT_VELOCITY = 500; // Shooter_Spit velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
-	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term, keep at 0 if not using, but if using it should be around 1/4 * kP
-	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term, keep at 0 if not using, but if using it should be around 5 * kP
+	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term; keep at 0 for shooters
+	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term; used to reduce oscillation of shooter speed
 	public static final double kF_SHOOTER_SPEED = 0.032; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
@@ -149,8 +147,8 @@ public class RobotMap {
 	public static final int TURRET_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int TURRET_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_TURRET = 0.016; // P constant for the target-tracking PID loop
-	public static final double kI_TURRET = 0.004; // I constant for the target-tracking PID loop
-	public static final double kD_TURRET = 0.0; // D constant for the target-tracking PID loop
+	public static final double kI_TURRET = 0.08; // I constant for the target-tracking PID loop
+	public static final double kD_TURRET = 0.0; // D constant for the target-tracking PID loop; keep at 0 if not using
 	public static final double TURRET_MAX_POWER = 0.4; // The maximum power (as a %) the turret will be given when running the target-tracking PID loop
 	public static final double TURRET_MANUAL_POWER = 0.2; // How much power (as a %) to give the turret when using manual control
 	public static final int TURRET_MAX_ANGLE = 80; // The maximum angle the turret can turn to in either direction (to prevent tangling of wires)
@@ -158,7 +156,6 @@ public class RobotMap {
 	public static final double TURRET_ANGLE_TOLERANCE = 0.25; // If the angle of error to the target is less than this value the PID Loop will not make any corrections
 	public static final int TURRET_ENCODER_FRAME_RATE = 10;
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean REVERSE_TURRET_ENCODER = false;
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
 	/** Ultrasonic Sensor Settings ********************************************/

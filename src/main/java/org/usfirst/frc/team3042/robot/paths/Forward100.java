@@ -14,7 +14,7 @@ public class Forward100 implements PathContainer {
     public Path buildPath() {
         ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
         waypoints.add(new Waypoint(0,0,0,0));
-        waypoints.add(new Waypoint(100,0,0,45));
+        waypoints.add(new Waypoint(100,0,0,60));
         return PathUtil.buildPathFromWaypoints(waypoints);
     }
     

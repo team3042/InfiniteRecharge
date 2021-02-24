@@ -62,10 +62,13 @@ public class OI {
 		gamepad.B.whileHeld(new PositionControl_Manual());
 
 		//Intake Controls
-		gamepad.LB.whileHeld(new Intake_Intake(1));
-		gamepad.LT.whileActive(new Intake_Intake(-1));
-		gamepad.RT.whileActive(new UpperConveyor_Test(-1));
-		gamepad.RT.whileActive(new LowerConveyor_Test(-1));
+		gamepad.LB.whileHeld(new Intake_Intake(1)); //run intake
+		gamepad.LT.whileActive(new Intake_Intake(-1)); //reverse intake
+
+		//Spit out balls
+		gamepad.RT.whileActive(new UpperConveyor_Test(-1)); //reverse upper conveyor
+		gamepad.RT.whileActive(new LowerConveyor_Test(-1)); //reverse lower conveyor
+		gamepad.RT.whileActive(new Intake_Intake(-1)); //reverse intake
 
 		//Turret Controls
 		gamepad.POVRight.whileActive(new Turret_Manual(1));
