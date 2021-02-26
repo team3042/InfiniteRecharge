@@ -108,10 +108,10 @@ public class RobotMap {
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final int AUTON_HEADING = 0; // unimplemented feature; set to zero
 	/** Drivetrain Gyro Drive Settings ****************************************/
-	public static final double kP_GYRO = 0.0175;
+	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;
 	public static final double kD_GYRO = 0.0170;
-	public static final double ANGLE_TOLERANCE = 2.0;
+	public static final double ANGLE_TOLERANCE = 12.0;
 	public static final double MAX_POWER_GYRO = 0.4;
 	public static final double kI_GYRO_INTERVAL = 0.0;
 

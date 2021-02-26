@@ -6,8 +6,6 @@ import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
-import org.usfirst.frc.team3042.robot.paths.enterTrench;
-import org.usfirst.frc.team3042.robot.paths.exitTrench;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -28,26 +26,22 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     addParallel(new Intake_Intake(1)); //Start running the intake
 
-    //addSequential(new DrivetrainAuton_Drive(new enterTrench().buildPath())); //Drive into the trench to collect more power cells
-
     // Drive into the trench to collect more power cells //
-    addSequential(new Drivetrain_GyroTurn(-45));
-    addSequential(new Drivetrain_GyroStraight(140, 120));
-    addSequential(new Drivetrain_GyroTurn(45));
-    addSequential(new Drivetrain_GyroStraight(120, 60));
+    addSequential(new Drivetrain_GyroTurn(-75));
+    addSequential(new Drivetrain_GyroStraight(160, 120));
+    addSequential(new Drivetrain_GyroTurn(75));
+    addSequential(new Drivetrain_GyroStraight(100, 60));
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
-    /* addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
+    //addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
     addParallel(new Shooter_Spin()); //Spin up the shooter again
 
-    //addSequential(new DrivetrainAuton_Drive(new exitTrench().buildPath())); //Drive back to the optimal shooting location
-
     // Drive back to the optimal shooting location //
+    addSequential(new Drivetrain_GyroStraight(100, -120));
+    addSequential(new Drivetrain_GyroTurn(-75));
     addSequential(new Drivetrain_GyroStraight(120, -120));
-    addSequential(new Drivetrain_GyroTurn(-45));
-    addSequential(new Drivetrain_GyroStraight(140, -120));
-    addSequential(new Drivetrain_GyroTurn(45));
+    addSequential(new Drivetrain_GyroTurn(75));
 
-    addSequential(new Shoot()); //Shoot the three power cells from the trench */
+    addSequential(new Shoot()); //Shoot the three power cells from the trench
   }
 }
