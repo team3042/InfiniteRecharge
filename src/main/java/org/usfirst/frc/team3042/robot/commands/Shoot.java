@@ -39,16 +39,28 @@ public class Shoot extends Command {
   public Shoot() {
     log.add("Constructor", Log.Level.TRACE);
 
+    onTarget = false;
     timedShoot = false;
 
     requires(upperconveyor);
     requires(lowerconveyor);
   }
   //Overloaded constructor that allows us to shoot for a set amount of time, useful for autonomous shooting
-  public Shoot(int t) {
+  public Shoot(int t, boolean aligned) {
     log.add("Constructor", Log.Level.TRACE);
 
     time = t;
+    onTarget = aligned;
+    timedShoot = true;
+
+    requires(upperconveyor);
+    requires(lowerconveyor);
+  }
+  //Overloaded constructor that allows us to shoot without waiting for the alignment of the turret to be perfect
+  public Shoot(boolean aligned) {
+    log.add("Constructor", Log.Level.TRACE);
+
+    onTarget = aligned;
     timedShoot = true;
 
     requires(upperconveyor);
@@ -59,7 +71,6 @@ public class Shoot extends Command {
    * Called just before this Command runs the first time */
   protected void initialize() {
     log.add("Initialize", Log.Level.TRACE);
-    onTarget = false;
   }
 
   /** execute ***************************************************************

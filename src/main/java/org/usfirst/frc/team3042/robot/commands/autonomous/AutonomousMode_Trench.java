@@ -17,7 +17,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     //addParallel(new Turret_Continous(true)); //Search for the target and start tracking it
     //addParallel(new Shooter_Spin()); //Spin up the shooter
     addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
-    //addSequential(new Shoot(3)); //Shoot the three pre-loaded power cells; parameter is time in seconds
+    //addSequential(new Shoot(3, true)); //Shoot the three pre-loaded power cells; parameter is time in seconds
     //addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
 
     // Attempt to knock down the intake using inertia //
@@ -41,8 +41,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     addSequential(new Drivetrain_GyroStraight(160, -120));
     addSequential(new Drivetrain_GyroTurn(75));
 
-    //addParallel(new Turret_Continous(true)); //Search for the target and start tracking it again
-
-    addSequential(new Shoot()); //Shoot the three power cells from the trench
+    //addParallel(new Turret_Continous(true)); //Start tracking the target again
+    addSequential(new Shoot(true)); //Shoot the three power cells from the trench
   }
 }
