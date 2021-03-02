@@ -14,26 +14,26 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {
-    //addParallel(new Turret_Continous(true)); //Search for the target and start tracking it
+    //addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
     //addParallel(new Shooter_Spin()); //Spin up the shooter
     addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
-    //addSequential(new Shoot(3, true)); //Shoot the three pre-loaded power cells; parameter is time in seconds
+    //addSequential(new Shoot(3, true)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
     //addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
 
-    // Attempt to knock down the intake using inertia //
+    // Knock down the intake using inertia //
     addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards
     addSequential(new Drivetrain_GyroStraight(12.0, -120.0)); //Drive backwards
 
     addParallel(new Intake_Intake(1)); //Start running the intake
 
-    // Drive into the trench to collect more power cells //
+    // Drive into the trench to collect 3 power cells //
     addSequential(new Drivetrain_GyroTurn(-75));
     addSequential(new Drivetrain_GyroStraight(160, 120));
     addSequential(new Drivetrain_GyroTurn(75));
     addSequential(new Drivetrain_GyroStraight(100, 60));
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
-    addParallel(new Shooter_Spin()); //Spin up the shooter again
+    addParallel(new Shooter_Spin()); //Spin up the shooter
 
     // Drive back to the optimal shooting location //
     addSequential(new Drivetrain_GyroStraight(100, -120));
@@ -41,7 +41,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     addSequential(new Drivetrain_GyroStraight(160, -120));
     addSequential(new Drivetrain_GyroTurn(75));
 
-    //addParallel(new Turret_Continous(true)); //Start tracking the target again
-    addSequential(new Shoot(true)); //Shoot the three power cells from the trench
+    //addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
+    addSequential(new Shoot(true)); //Shoot the 3 power cells we collected from the trench
   }
 }
