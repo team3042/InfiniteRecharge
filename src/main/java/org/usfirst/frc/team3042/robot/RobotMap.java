@@ -62,7 +62,7 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double LOWER_CONVEYOR_POWER = 0.5; // How much power (as a %) to give the lower conveyor
+	public static final double LOWER_CONVEYOR_POWER = 0.7; // How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
 	
 	/** DIO channels **********************************************************/
@@ -110,9 +110,9 @@ public class RobotMap {
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;
-	public static final double kD_GYRO = 0.0170;
-	public static final double ANGLE_TOLERANCE = 12.0;
-	public static final double MAX_POWER_GYRO = 0.4;
+	public static final double kD_GYRO = 0.017;
+	public static final double ANGLE_TOLERANCE = 14.0;
+	public static final double MAX_POWER_GYRO = 0.48;
 	public static final double kI_GYRO_INTERVAL = 0.0;
 
 	/** Gyroscope Settings ****************************************************/
@@ -138,7 +138,7 @@ public class RobotMap {
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
 	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term; keep at 0 for shooters
 	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term; used to reduce oscillation of shooter speed
-	public static final double kF_SHOOTER_SPEED = 0.032; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kF_SHOOTER_SPEED = 0.034; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
