@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot.commands.autonomous;
 
 import org.usfirst.frc.team3042.robot.commands.drivetrain.*;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
+import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
@@ -14,10 +15,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {
+    addParallel(new LowerConveyor_Advance());
+
     addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
     addParallel(new Shooter_Spin()); //Spin up the shooter
-    addSequential(new Drivetrain_GyroStraight(12.0, 100.0)); //Drive forwards off the initiation line
-    addSequential(new Shoot(3)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
+    addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
+    addSequential(new Shoot(2.6)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
     addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
 
     // Knock down the intake using inertia //
@@ -28,20 +31,20 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     // Drive into the trench to collect 3 power cells //
     addSequential(new Drivetrain_GyroTurn(-70));
-    addSequential(new Drivetrain_GyroStraight(82, 100));
+    addSequential(new Drivetrain_GyroStraight(82, 120));
     addSequential(new Drivetrain_GyroTurn(70));
-    addSequential(new Drivetrain_GyroStraight(100, 60));
+    addSequential(new Drivetrain_GyroStraight(120, 80));
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
 
     // Drive back to the optimal shooting location //
-    addSequential(new Drivetrain_GyroStraight(100, -100));
-    addSequential(new Drivetrain_GyroTurn(-70));
-    addSequential(new Drivetrain_GyroStraight(82, -100));
-    addSequential(new Drivetrain_GyroTurn(70));
+    addSequential(new Drivetrain_GyroStraight(80, -120));
+    //addSequential(new Drivetrain_GyroTurn(-70));
+    //addSequential(new Drivetrain_GyroStraight(82, -120));
+    //addSequential(new Drivetrain_GyroTurn(70));
 
-    //addParallel(new Shooter_Spin()); //Spin up the shooter
-    //addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
-    //addSequential(new Shoot()); //Shoot the 3 power cells we collected from the trench
+    addParallel(new Shooter_Spin()); //Spin up the shooter
+    addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
+    addSequential(new Shoot()); //Shoot the 3 power cells we collected from the trench
   }
 }

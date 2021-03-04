@@ -32,7 +32,7 @@ public class Shoot extends Command {
 
   boolean onTarget = false;
   boolean timedShoot;
-  int time;
+  double time;
 
   /** Shoot *****************************************************************
    * Required subsystems will cancel commands when this command is run. */
@@ -41,19 +41,13 @@ public class Shoot extends Command {
 
     onTarget = false;
     timedShoot = false;
-
-    requires(upperconveyor);
-    requires(lowerconveyor);
   }
   //Overloaded constructor that allows us to shoot for a set amount of time, useful for autonomous shooting
-  public Shoot(int t) {
+  public Shoot(double t) {
     log.add("Constructor", Log.Level.TRACE);
 
     time = t;
     timedShoot = true;
-
-    requires(upperconveyor);
-    requires(lowerconveyor);
   }
 
   /** initialize **************************************************************
