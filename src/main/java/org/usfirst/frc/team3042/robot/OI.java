@@ -13,8 +13,7 @@ import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 
 /** OI ************************************************************************
  * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
+ * interface to the commands and command groups that allow control of the robot. */
 public class OI {	
 	/** Configuration Constants ***********************************************/
 	private static final int USB_GAMEPAD = RobotMap.USB_GAMEPAD;
@@ -53,7 +52,6 @@ public class OI {
 		joyLeft.button1.whenPressed(new Drivetrain_Scale_Toggle());
 		joyLeft.button1.whenReleased(new Drivetrain_Scale_Toggle());
 
-
 		//Intake Controls
 		gamepad.LB.whileHeld(new Intake_Intake(1)); //run intake
 		gamepad.LT.whileActive(new Intake_Intake(-1)); //reverse intake
@@ -74,8 +72,7 @@ public class OI {
 	}
 	
 	/** Access to the driving axes values *****************************
-	 * A negative has been added to make pushing forward positive.
-	 */
+	 * A negative has been added to make pushing forward positive. */
 	public double getDriveLeft() {
 		double joystickValue = joyLeft.getRawAxis(driveAxisLeft);
 		joystickValue = scaleJoystick(joystickValue);
