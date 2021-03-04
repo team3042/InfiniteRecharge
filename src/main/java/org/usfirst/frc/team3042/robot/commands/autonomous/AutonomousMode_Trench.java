@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {
-    addParallel(new LowerConveyor_Advance());
+    addParallel(new LowerConveyor_Advance()); //Call the conveyor default command since it has been interrupted by this command group
 
     addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
     addParallel(new Shooter_Spin()); //Spin up the shooter
@@ -37,8 +37,8 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
 
-    // Drive back to the optimal shooting location //
-    addSequential(new Drivetrain_GyroStraight(80, -120));
+    // Drive to the optimal shooting location //
+    addSequential(new Drivetrain_GyroStraight(80, -120)); //addSequential(new Drivetrain_GyroStraight(120, -120));
     //addSequential(new Drivetrain_GyroTurn(-70));
     //addSequential(new Drivetrain_GyroStraight(82, -120));
     //addSequential(new Drivetrain_GyroTurn(70));
