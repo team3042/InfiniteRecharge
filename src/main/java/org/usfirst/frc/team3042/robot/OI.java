@@ -69,6 +69,11 @@ public class OI {
 		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
 		gamepad.RB.whileActive(new Shoot());
+
+		//Initial Testing
+		gamepad.X.whileHeld(new UpperConveyor_Test(1));
+		gamepad.Y.whileHeld(new LowerConveyor_Test(1));
+
 	}
 	
 	/** Access to the driving axes values *****************************

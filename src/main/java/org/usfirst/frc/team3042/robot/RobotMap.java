@@ -15,18 +15,15 @@ public class RobotMap {
 	public static final double ROBOT_WIDTH = 27.0;
 	
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_MOTOR 	= 29;
-	public static final int CAN_RIGHT_MOTOR = 33;
-	public static final int CAN_LEFT_FOLLOWER = 28;
-	public static final int CAN_RIGHT_FOLLOWER = 30;
-	public static final int CAN_CONTROL_PANEL_WHEEL = 14;
-	public static final int CAN_TURRET = 34;
-	public static final int CAN_INTAKE = 18;
-	public static final int CAN_SHOOTER = 5;
-	public static final int CAN_UPPER_CONVEYOR = 8;
-	public static final int CAN_LOWER_CONVEYOR = 7;
-	public static final int CAN_CLIMBING_WINCH = 4;
-	public static final int CAN_CLIMBING_HOOK = 26;
+	public static final int CAN_LEFT_MOTOR 	= 17;
+	public static final int CAN_RIGHT_MOTOR = 19;
+	public static final int CAN_LEFT_FOLLOWER = 2;
+	public static final int CAN_RIGHT_FOLLOWER = 15;
+	public static final int CAN_TURRET = 26;
+	public static final int CAN_INTAKE = 13;
+	public static final int CAN_SHOOTER = 32;
+	public static final int CAN_UPPER_CONVEYOR = 11;
+	public static final int CAN_LOWER_CONVEYOR = 0;
 	
 	/** Climbing Winch Settings ***********************************************/
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
@@ -58,7 +55,7 @@ public class RobotMap {
 	// Lower Conveyer Settings
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double LOWER_CONVEYOR_POWER = 0.5; // How much power (as a %) to give the lower conveyor
+	public static final double LOWER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
 	
 	/** DIO channels **********************************************************/
