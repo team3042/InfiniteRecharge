@@ -24,6 +24,9 @@ public class RobotMap {
 	public static final int CAN_SHOOTER = 32;
 	public static final int CAN_UPPER_CONVEYOR = 11;
 	public static final int CAN_LOWER_CONVEYOR = 0;
+
+	/** PCM channels **********************************************************/
+	public static final int DRIVETRAIN_SOLENOID = 0;
 	
 	/** Climbing Winch Settings ***********************************************/
 	public static final boolean REVERSE_CLIMBING_WINCH = false;
