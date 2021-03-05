@@ -33,6 +33,8 @@ public class Drivetrain extends Subsystem {
 	DrivetrainFollowers followers;
 	DrivetrainEncoders encoders;
 	DrivetrainAuton auton;
+
+	Boolean isHighGear = false;
 	
 	/** Drivetrain ************************************************************
 	 * Set up the talons for desired behavior. */
@@ -45,6 +47,8 @@ public class Drivetrain extends Subsystem {
 		
 		initMotor(leftMotor, REVERSE_LEFT_MOTOR);
 		initMotor(rightMotor, REVERSE_RIGHT_MOTOR);
+
+		setLowGear();
 	}
 	private void initMotor(TalonSRX motor, boolean reverse) {
 		motor.setNeutralMode(BRAKE_MODE);
@@ -73,6 +77,24 @@ public class Drivetrain extends Subsystem {
 		power = Math.max(-1.0, power);
 		return power;
 	}
+
+	/* Methods for the pneumatic gearbox shifter */
+	public void setHighGear(){
+    	shifter.set(true);
+    	isHighGear = true;
+    }
+    public void setLowGear(){
+    	shifter.set(false);
+    	isHighGear = false;
+    }
+    public void toggleGear(){
+    	if (isHighGear){
+    		setLowGear();
+    	}
+    	else {
+    		setHighGear();
+    	}
+    }
 	
 	/** Provide commands access to the encoders and autonomous ****************/
 	public DrivetrainEncoders getEncoders() {
