@@ -118,17 +118,6 @@ public class Robot extends TimedRobot {
 		log.add("Autonomous Init", Log.Level.TRACE);
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
-		
-		//Don't worry about this stuff, we might use it later.
-
-		/* String trajectoryJSON = "../../Pathweaver/output/BarrelRacingPath.wpilib.json";
-		Trajectory trajectory = new Trajectory();
-		try {
-		  //Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-		  trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-		} catch (IOException ex) {
-		  DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-		} */
 
 		turret.reset();
 
