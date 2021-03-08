@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 import org.usfirst.frc.team3042.robot.paths.*;
@@ -70,8 +71,7 @@ public class Robot extends TimedRobot {
 	boolean ColorRecieved = false;
 
 	/** robotInit *************************************************************
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code. */
+	 * This function is run when the robot is first started up and should be used for any initialization code. */
 	public void robotInit() {
 		log.add("Robot Init", Log.Level.TRACE);
 
@@ -99,8 +99,7 @@ public class Robot extends TimedRobot {
 
 	/** disabledInit **********************************************************
 	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled. */
+	 * You can use it to reset any subsystem information you want to clear when the robot is disabled. */
 	public void disabledInit() {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
@@ -200,16 +199,14 @@ public class Robot extends TimedRobot {
 	private void buildPath(String name, String waypointFile) {
 		String s;
 
-		//TODO2-8:
 		//Leave the speed like this for now -- we can get smarter later.
 		double speed = 60;
 		String[] splits = new String[6];
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(waypointFile));
+			BufferedReader br = new BufferedReader(new FileReader(Filesystem.getDeployDirectory().toPath().resolve(waypointFile).toFile()));
 			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
-			//Read one line to move the pointer forward
-			br.readLine();
+			br.readLine(); //Read one line to move the pointer forward
 
 			//Now we need the start position so we can make the pathbuilder. Read the second line:
 			s = br.readLine();
@@ -235,29 +232,31 @@ public class Robot extends TimedRobot {
 			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
 			//We will need to track outside of just reading the line: 
 			while((s = br.readLine()) != null) {
-				//Here is the math part so we don't need to mess with it.
+				//This breaks it up into an array of strings instead based on commas.
+				//Example: "123" | "456" | "789"
 				splits = s.split(",");
 
-				//This breaks it up into an array of strings instead based on commas.
-				// "123" | "456" | "789" |
 				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
 				x = Double.parseDouble(splits[0]) * 12; //Multiply by 12 to convert from feet to inches
 				y =  Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
+
+				//Here is the math part so we don't need to manually do the math each time.
 				tangent =  Double.parseDouble(splits[4]);
 				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
 				pb.addWaypoint(new Waypoint(x, y, radius, speed));
 				previousX = x;
 				previousTangent = tangent;
-				if (x == 1) 
+				if (x == 1) {
 					y = 2;
+				}
 
 			}
 
-			//After it's all read, build:
+			//After the file has been read, build a drivable path:
 			Path pathToDrive = pb.buildPath();
 			chooser.addOption(name, new DrivetrainAuton_Drive(pathToDrive));
 
-			//we have to close the file. it's good practice. It may automatically do it for us, but if we don't, this will only run once.
+			//we have to close the file, it's good practice. It may automatically do it for us, but if we don't, this will only run once.
 			br.close();
 		} catch (IOException ex) {
 			DriverStation.reportError("Unable to open file: " + waypointFile, ex.getStackTrace());
