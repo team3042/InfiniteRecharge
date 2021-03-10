@@ -241,7 +241,7 @@ public class Robot extends TimedRobot {
 				y =  Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
 
 				//Here is the math part so we don't need to manually do the math each time.
-				tangent =  Double.parseDouble(splits[4]);
+				tangent =  Double.parseDouble(splits[3]);
 				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
 				pb.addWaypoint(new Waypoint(x, y, radius, speed));
 				previousX = x;
