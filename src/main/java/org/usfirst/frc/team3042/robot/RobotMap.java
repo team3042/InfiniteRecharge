@@ -62,8 +62,8 @@ public class RobotMap {
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
 	
 	/** DIO channels **********************************************************/
-	public static final int DIO_ULTRASONIC_PING = 8;
-	public static final int DIO_ULTRASONIC_ECHO = 9;
+	public static final int DIO_ULTRASONIC_PING = 1;
+	public static final int DIO_ULTRASONIC_ECHO = 0;
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
@@ -155,7 +155,7 @@ public class RobotMap {
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
 	/** Ultrasonic Sensor Settings ********************************************/
-	public static final double POWER_CELL_DISTANCE = 8; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
+	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
