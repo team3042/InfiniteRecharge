@@ -62,8 +62,8 @@ public class RobotMap {
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
 	
 	/** DIO channels **********************************************************/
-	public static final int DIO_ULTRASONIC_PING = 1;
-	public static final int DIO_ULTRASONIC_ECHO = 0;
+	public static final int DIO_ULTRASONIC_PING = 8;
+	public static final int DIO_ULTRASONIC_ECHO = 9;
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
