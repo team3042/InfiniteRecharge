@@ -200,6 +200,7 @@ public class Robot extends TimedRobot {
 		String s;
 
 		double speed = 75;
+		double radius = 0; //turn radius
 
 		String[] splits = new String[6];
 
@@ -220,9 +221,11 @@ public class Robot extends TimedRobot {
 			double y = Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
 			PathBuilder pb = new PathBuilder(x,y, false);
 
-			double previousX = x, previousY = y;
-			double radius = 0;
+			pb.addWaypoint(new Waypoint(x, y, radius, speed));
 
+			double previousX = x;
+			double previousY = y;
+			
 			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
 			//We will need to track outside of just reading the line: 
 			while((s = br.readLine()) != null) {
