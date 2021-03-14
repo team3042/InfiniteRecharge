@@ -80,6 +80,7 @@ public class Robot extends TimedRobot {
 		String barrelRacingFile = "paths/BarrelRacingPath";
 		String bounceFile = "paths/BouncePath";
 		String slalomFile = "paths/SlalomPath";
+		String turnFile = "paths/Turn";
 		
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
@@ -89,6 +90,7 @@ public class Robot extends TimedRobot {
 		buildPath("Barrel Racing", barrelRacingFile);
 		buildPath("Bounce", bounceFile);
 		buildPath("Slalom", slalomFile);
+		buildPath("Turn", turnFile);
 		
 		SmartDashboard.putData("Auto Mode", chooser);
 
@@ -199,8 +201,8 @@ public class Robot extends TimedRobot {
 	private void buildPath(String name, String waypointFile) {
 		String s;
 
-		//Leave the speed like this for now -- we can get smarter later.
 		double speed = 60;
+
 		String[] splits = new String[6];
 
 		try {
@@ -217,16 +219,11 @@ public class Robot extends TimedRobot {
 			//This breaks it up into an array of strings instead based on commas.
 			// "123" | "456" | "789" |
 			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
-			double x = Double.parseDouble(splits[0]);
-			double y =  Double.parseDouble(splits[1]);
+			double x = Double.parseDouble(splits[0]) * 12;
+			double y = Double.parseDouble(splits[1]) * 12;;
 			PathBuilder pb = new PathBuilder(x,y, false);
 
-			//These are here as a hint:
-			double previousTangent = 0;
-			double previousX = x;
-
-			//And here are more variables you will need
-			double tangent = 0;
+			double previousX = x, previousY = y;
 			double radius = 0;
 
 			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
@@ -237,19 +234,16 @@ public class Robot extends TimedRobot {
 				splits = s.split(",");
 
 				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
-				x = Double.parseDouble(splits[0]) * 12; //Multiply by 12 to convert from feet to inches
-				y =  Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
+				x = Double.parseDouble(splits[0]) * 12;; //Multiply by 12 to convert from feet to inches
+				y =  Double.parseDouble(splits[1]) * 12;; //Multiply by 12 to convert from feet to inches
 
 				//Here is the math part so we don't need to manually do the math each time.
-				tangent =  Double.parseDouble(splits[3]);
-				radius = (previousX-x)/(Math.cos(previousTangent - tangent));
-				pb.addWaypoint(new Waypoint(x, y, radius, speed));
-				previousX = x;
-				previousTangent = tangent;
-				if (x == 1) {
-					y = 2;
-				}
+				radius = (Math.sqrt(Math.pow(x - previousX, 2) + Math.pow(y - previousY, 2)))/(2 * Math.cos(70));
 
+				pb.addWaypoint(new Waypoint(x, y, radius, speed));
+
+				previousX = x;
+				previousY = y;
 			}
 
 			//After the file has been read, build a drivable path:
