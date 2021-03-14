@@ -207,6 +207,7 @@ public class Robot extends TimedRobot {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(Filesystem.getDeployDirectory().toPath().resolve(waypointFile).toFile()));
+
 			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
 			br.readLine(); //Read one line to move the pointer forward
 
@@ -214,13 +215,11 @@ public class Robot extends TimedRobot {
 			s = br.readLine();
 
 			//I want to get the x,y from the second line, so I am going to split up the line like this:
-			splits = s.split(",");
-
-			//This breaks it up into an array of strings instead based on commas.
-			// "123" | "456" | "789" |
+			splits = s.split(","); //This breaks it up into an array of strings instead based on commas. For Example: "123" | "456" | "789"
+			
 			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
-			double x = Double.parseDouble(splits[0]) * 12;
-			double y = Double.parseDouble(splits[1]) * 12;;
+			double x = Double.parseDouble(splits[0]) * 12; //Multiply by 12 to convert from feet to inches
+			double y = Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
 			PathBuilder pb = new PathBuilder(x,y, false);
 
 			double previousX = x, previousY = y;

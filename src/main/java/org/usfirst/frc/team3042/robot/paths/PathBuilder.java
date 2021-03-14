@@ -25,7 +25,6 @@ public class PathBuilder implements PathContainer{
         Waypoints  = new ArrayList<Waypoint>();
     }
     public void addWaypoint(Waypoint newPoint){
-        
         Waypoints.add(newPoint);
     }
 
