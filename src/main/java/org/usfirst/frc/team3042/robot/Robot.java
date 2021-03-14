@@ -77,11 +77,10 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		String barrelRacingFile = "paths/BarrelRacingPath";
-		String bounceFile = "paths/BouncePath";
-		String slalomFile = "paths/SlalomPath";
-		String turnFile = "paths/Turn";
-		
+		String barrelRacingFile = "PathWeaver/Paths/BarrelRacingPath";
+		String bounceFile = "PathWeaver/Paths/BouncePath";
+		String slalomFile = "PathWeaver/Paths/SlalomPath";
+
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
@@ -90,8 +89,7 @@ public class Robot extends TimedRobot {
 		buildPath("Barrel Racing", barrelRacingFile);
 		buildPath("Bounce", bounceFile);
 		buildPath("Slalom", slalomFile);
-		buildPath("Turn", turnFile);
-		
+				
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
