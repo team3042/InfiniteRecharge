@@ -201,7 +201,7 @@ public class Robot extends TimedRobot {
 	private void buildPath(String name, String waypointFile) {
 		String s;
 
-		double speed = 60;
+		double speed = 75;
 
 		String[] splits = new String[6];
 
