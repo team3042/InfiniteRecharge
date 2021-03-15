@@ -1,188 +1,141 @@
-// // TEAM 3042 
-// // INFINITE RECHARGE - AUTONAV
-// //  https://docs.wpilib.org/en/stable/docs/software/examples-tutorials/trajectory-tutorial/creating-drive-subsystem.html
+package org.usfirst.frc.team3042.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 
-// package org.usfirst.frc.team3042.robot.subsystems;
+import org.usfirst.frc.team3042.robot.RobotMap;
 
-// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-// import edu.wpi.first.wpilibj.Encoder;
-// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-// import edu.wpi.first.wpilibj.SpeedControllerGroup;
-// import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-// import edu.wpi.first.wpilibj.geometry.Pose2d;
-// import edu.wpi.first.wpilibj.interfaces.Gyro;
-// import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
-// import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-// import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-// import org.usfirst.frc.team3042.lib.Log;
-// import org.usfirst.frc.team3042.robot.RobotMap;
+public class DriveSubsystem extends Subsystem {
+  // The motors on the left side of the drive.
+  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(new PWMTalonSRX(RobotMap.CAN_LEFT_MOTOR), new PWMTalonSRX(RobotMap.CAN_LEFT_FOLLOWER));
 
+  // The motors on the right side of the drive.
+  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(new PWMTalonSRX(RobotMap.CAN_RIGHT_MOTOR), new PWMTalonSRX(RobotMap.CAN_RIGHT_FOLLOWER));
 
-// public class DriveSubsystem(TalonSRX leftmotor, TalonSRX rightmotor, DrivetrainEncoders encoders) extends Subsystem {
-//   // The motors on the left side of the drive.
-//   private final SpeedControllerGroup m_leftMotors = leftmotor;
+  // The robot's drive
+  private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
-//   // The motors on the right side of the drive.
-//   private final SpeedControllerGroup m_rightMotors =
-//       new SpeedControllerGroup(new TalonSRX(RobotMap.kRightMotor1Port),
-//                                new TalonSRX(RobotMap.kRightMotor2Port));
+  // The left-side drive encoder
+  private final Encoder m_leftEncoder = new Encoder(RobotMap.CAN_LEFT_MOTOR, RobotMap.CAN_LEFT_MOTOR); //TODO correctly define this
 
-//   // The robot's drive
-//   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+  // The right-side drive encoder
+  private final Encoder m_rightEncoder = new Encoder(RobotMap.CAN_RIGHT_MOTOR, RobotMap.CAN_RIGHT_MOTOR); //TODO correctly define this
 
-//   // The left-side drive encoder
-//   private final Encoder m_leftEncoder =
-//       new Encoder(RobotMap.kLeftEncoderPorts[0], RobotMap.kLeftEncoderPorts[1],
-//       RobotMap.kLeftEncoderReversed);
+  // The gyro sensor
+  private final Gyro m_gyro = new ADXRS450_Gyro();
 
-//   // The right-side drive encoder
-//   private final Encoder m_rightEncoder =
-//       new Encoder(RobotMap.kRightEncoderPorts[0], RobotMap.kRightEncoderPorts[1],
-//       RobotMap.kRightEncoderReversed);
+  // Odometry class for tracking robot pose
+  private final DifferentialDriveOdometry m_odometry;
 
-//   // The gyro sensor
-//   private final Gyro m_gyro = new ADXRS450_Gyro();
+  /** Creates a new DriveSubsystem. */
+  public DriveSubsystem() {
+    // Sets the distance per pulse for the encoders
+    m_leftEncoder.setDistancePerPulse(RobotMap.COUNTS_PER_REVOLUTION); //TODO correctly define this
+    m_rightEncoder.setDistancePerPulse(RobotMap.COUNTS_PER_REVOLUTION); //TODO correctly define this
 
-//   // Odometry class for tracking robot pose
-//   private final DifferentialDriveOdometry m_odometry;
+    resetEncoders();
+    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
+  }
 
-//   /**
-//    * Creates a new DriveSubsystem.
-//    */
-//   public DriveSubsystem() {
-//     // Sets the distance per pulse for the encoders
-//     m_leftEncoder.setDistancePerPulse(RobotMap.kEncoderDistancePerPulse);
-//     m_rightEncoder.setDistancePerPulse(RobotMap.kEncoderDistancePerPulse);
+  @Override
+  public void periodic() {
+    // Update the odometry in the periodic block
+    m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+  }
 
-//     resetEncoders();
-//     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
-//   }
+  /** Returns the currently-estimated pose of the robot.
+   * @return The pose. */
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
 
-//   @Override
-//   public void periodic() {
-//     // Update the odometry in the periodic block
-//     m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(),
-//                       m_rightEncoder.getDistance());
-//   }
+  /** Returns the current wheel speeds of the robot.
+   * @return The current wheel speeds. */
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+  }
 
-//   /**
-//    * Returns the currently-estimated pose of the robot.
-//    *
-//    * @return The pose.
-//    */
-//   public Pose2d getPose() {
-//     return m_odometry.getPoseMeters();
-//   }
+  /** * Resets the odometry to the specified pose.
+   * @param pose The pose to which to set the odometry. */
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+  }
 
-//   /**
-//    * Returns the current wheel speeds of the robot.
-//    *
-//    * @return The current wheel speeds.
-//    */
-//   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-//     return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
-//   }
+  /** Drives the robot using arcade controls.
+   * @param fwd the commanded forward movement
+   * @param rot the commanded rotation */
+  public void arcadeDrive(double fwd, double rot) {
+    m_drive.arcadeDrive(fwd, rot);
+  }
 
-//   /**
-//    * Resets the odometry to the specified pose.
-//    *
-//    * @param pose The pose to which to set the odometry.
-//    */
-//   public void resetOdometry(Pose2d pose) {
-//     resetEncoders();
-//     m_odometry.resetPosition(pose, m_gyro.getRotation2d());
-//   }
+  /** Controls the left and right sides of the drive directly with voltages.
+   * @param leftVolts  the commanded left output
+   * @param rightVolts the commanded right output */
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    m_leftMotors.setVoltage(leftVolts);
+    m_rightMotors.setVoltage(-rightVolts);
+    m_drive.feed();
+  }
 
-//   /**
-//    * Drives the robot using arcade controls.
-//    *
-//    * @param fwd the commanded forward movement
-//    * @param rot the commanded rotation
-//    */
-//   public void arcadeDrive(double fwd, double rot) {
-//     m_drive.arcadeDrive(fwd, rot);
-//   }
+  /** Resets the drive encoders to currently read a position of 0. */
+  public void resetEncoders() {
+    m_leftEncoder.reset();
+    m_rightEncoder.reset();
+  }
 
-//   /**
-//    * Controls the left and right sides of the drive directly with voltages.
-//    *
-//    * @param leftVolts  the commanded left output
-//    * @param rightVolts the commanded right output
-//    */
-//   public void tankDriveVolts(double leftVolts, double rightVolts) {
-//     m_leftMotors.setVoltage(leftVolts);
-//     m_rightMotors.setVoltage(-rightVolts);
-//     m_drive.feed();
-//   }
+  /** Gets the average distance of the two encoders.
+   * @return the average of the two encoder readings */
+  public double getAverageEncoderDistance() {
+    return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
+  }
 
-//   /**
-//    * Resets the drive encoders to currently read a position of 0.
-//    */
-//   public void resetEncoders() {
-//     m_leftEncoder.reset();
-//     m_rightEncoder.reset();
-//   }
+  /** Gets the left drive encoder.
+   * @return the left drive encoder */
+  public Encoder getLeftEncoder() {
+    return m_leftEncoder;
+  }
 
-//   /**
-//    * Gets the average distance of the two encoders.
-//    *
-//    * @return the average of the two encoder readings
-//    */
-//   public double getAverageEncoderDistance() {
-//     return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
-//   }
+  /** Gets the right drive encoder.
+   * @return the right drive encoder */
+  public Encoder getRightEncoder() {
+    return m_rightEncoder;
+  }
 
-//   /**
-//    * Gets the left drive encoder.
-//    *
-//    * @return the left drive encoder
-//    */
-//   public Encoder getLeftEncoder() {
-//     return m_leftEncoder;
-//   }
+  /** Sets the max output of the drive.  Useful for scaling the drive to drive more slowly.
+   * @param maxOutput the maximum output to which the drive will be constrained */
+  public void setMaxOutput(double maxOutput) {
+    m_drive.setMaxOutput(maxOutput);
+  }
 
-//   /**
-//    * Gets the right drive encoder.
-//    *
-//    * @return the right drive encoder
-//    */
-//   public Encoder getRightEncoder() {
-//     return m_rightEncoder;
-//   }
+  /** Zeroes the heading of the robot. */
+  public void zeroHeading() {
+    m_gyro.reset();
+  }
 
-//   /**
-//    * Sets the max output of the drive.  Useful for scaling the drive to drive more slowly.
-//    *
-//    * @param maxOutput the maximum output to which the drive will be constrained
-//    */
-//   public void setMaxOutput(double maxOutput) {
-//     m_drive.setMaxOutput(maxOutput);
-//   }
+  /** Returns the heading of the robot.
+   * @return the robot's heading in degrees, from -180 to 180 */
+  public double getHeading() {
+    return m_gyro.getRotation2d().getDegrees();
+  }
 
-//   /**
-//    * Zeroes the heading of the robot.
-//    */
-//   public void zeroHeading() {
-//     m_gyro.reset();
-//   }
+  /** Returns the turn rate of the robot.
+   * @return The turn rate of the robot, in degrees per second */
+  public double getTurnRate() {
+    return -m_gyro.getRate();
+  }
 
-//   /**
-//    * Returns the heading of the robot.
-//    *
-//    * @return the robot's heading in degrees, from -180 to 180
-//    */
-//   public double getHeading() {
-//     return m_gyro.getRotation2d().getDegrees();
-//   }
-
-//   /**
-//    * Returns the turn rate of the robot.
-//    *
-//    * @return The turn rate of the robot, in degrees per second
-//    */
-//   public double getTurnRate() {
-//     return -m_gyro.getRate();
-//   }
-// }
+  @Override
+  protected void initDefaultCommand() {
+    //Initialize default command of the subsystem
+  }
+}

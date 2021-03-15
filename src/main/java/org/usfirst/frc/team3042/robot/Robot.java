@@ -3,7 +3,6 @@ package org.usfirst.frc.team3042.robot;
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.*;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
-import org.usfirst.frc.team3042.robot.commands.drivetrain.DrivetrainAuton_Drive;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
@@ -31,7 +30,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
-import org.usfirst.frc.team3042.robot.paths.*;
 import java.io.*;
 import java.nio.file.Path;
 
@@ -85,7 +83,6 @@ public class Robot extends TimedRobot {
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
-		chooser.addOption("Forward 100 Inches", new DrivetrainAuton_Drive(new Forward100().buildPath()));
 
 		buildPath(barrelRacingFile);
 		buildPath(bounceFile);
