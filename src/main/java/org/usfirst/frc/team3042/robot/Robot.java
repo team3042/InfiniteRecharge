@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -30,9 +32,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 import org.usfirst.frc.team3042.robot.paths.*;
-import org.usfirst.frc.team3042.robot.paths.PathUtil.*;
-import org.usfirst.frc.team3042.lib.Path;
 import java.io.*;
+import java.nio.file.Path;
 
 /** Robot *********************************************************************
  * The VM is configured to automatically run this class, and to call the
@@ -77,18 +78,18 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		String barrelRacingFile = "PathWeaver/Paths/BarrelRacingPath";
-		String bounceFile = "PathWeaver/Paths/BouncePath";
-		String slalomFile = "PathWeaver/Paths/SlalomPath";
+		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
+		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
+		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
 
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 		chooser.addOption("Forward 100 Inches", new DrivetrainAuton_Drive(new Forward100().buildPath()));
 
-		buildPath("Barrel Racing", barrelRacingFile);
-		buildPath("Bounce", bounceFile);
-		buildPath("Slalom", slalomFile);
+		buildPath(barrelRacingFile);
+		buildPath(bounceFile);
+		buildPath(slalomFile);
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
@@ -196,64 +197,16 @@ public class Robot extends TimedRobot {
 	} 
 
 	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable path
-	private void buildPath(String name, String waypointFile) {
-		String s;
-
-		double speed = 75;
-		double radius = 0; //turn radius
-
-		String[] splits = new String[6];
-
+	private void buildPath(String trajectoryJSON) {
+		Trajectory trajectory = new Trajectory();
+		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(Filesystem.getDeployDirectory().toPath().resolve(waypointFile).toFile()));
-
-			//The first line of the path is not useful to us -- it has human headers. The computer doesn't need it.
-			br.readLine(); //Read one line to move the pointer forward
-
-			//Now we need the start position so we can make the pathbuilder. Read the second line:
-			s = br.readLine();
-
-			//I want to get the x,y from the second line, so I am going to split up the line like this:
-			splits = s.split(","); //This breaks it up into an array of strings instead based on commas. For Example: "123" | "456" | "789"
-			
-			//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
-			double x = Double.parseDouble(splits[0]) * 12; //Multiply by 12 to convert from feet to inches
-			double y = Double.parseDouble(splits[1]) * 12; //Multiply by 12 to convert from feet to inches
-			PathBuilder pb = new PathBuilder(x,y, false);
-
-			pb.addWaypoint(new Waypoint(x, y, radius, speed));
-
-			double previousX = x;
-			double previousY = y;
-			
-			//Now, what do we do to the rest of the file to add the rest of the waypoints? 
-			//We will need to track outside of just reading the line: 
-			while((s = br.readLine()) != null) {
-				//This breaks it up into an array of strings instead based on commas.
-				//Example: "123" | "456" | "789"
-				splits = s.split(",");
-
-				//But this is like typing "one" instead of the number. So when I put the values into PathBuilder, I need to tell it to make it into doubles:
-				x = Double.parseDouble(splits[0]) * 12;; //Multiply by 12 to convert from feet to inches
-				y =  Double.parseDouble(splits[1]) * 12;; //Multiply by 12 to convert from feet to inches
-
-				//Here is the math part so we don't need to manually do the math each time.
-				radius = (Math.sqrt(Math.pow(x - previousX, 2) + Math.pow(y - previousY, 2)))/(2 * Math.cos(70));
-
-				pb.addWaypoint(new Waypoint(x, y, radius, speed));
-
-				previousX = x;
-				previousY = y;
-			}
-
-			//After the file has been read, build a drivable path:
-			Path pathToDrive = pb.buildPath();
-			chooser.addOption(name, new DrivetrainAuton_Drive(pathToDrive));
-
-			//we have to close the file, it's good practice. It may automatically do it for us, but if we don't, this will only run once.
-			br.close();
+  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
 		} catch (IOException ex) {
-			DriverStation.reportError("Unable to open file: " + waypointFile, ex.getStackTrace());
+  			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
 		}
+
+
 	}
 }
