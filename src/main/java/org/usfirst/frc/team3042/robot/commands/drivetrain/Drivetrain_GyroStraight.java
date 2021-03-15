@@ -8,11 +8,9 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.DrivetrainEncoders;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 
 /** Drivetrain Gyro Straight **************************************************
- * Command for driving straight using gyroscope feedback.
- */
+ * Command for driving straight using gyroscope feedback. */
 public class Drivetrain_GyroStraight extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_GYROSCOPE;
@@ -28,7 +26,6 @@ public class Drivetrain_GyroStraight extends Command {
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
 	DrivetrainEncoders encoders = Robot.drivetrain.getEncoders();
-	Gyroscope gyroscope = Robot.gyroscope;
 	double leftPower, rightPower, lastError, integralError;
 	double goalAngle, goalDistance;
 	
@@ -60,7 +57,7 @@ public class Drivetrain_GyroStraight extends Command {
 		log.add("Initialize", Log.Level.TRACE);
 
 		drivetrain.stop();
-		goalAngle = gyroscope.getAngle();
+		goalAngle = drivetrain.getHeading();
 		lastError = 0.0;
 		integralError = 0.0;
 		encoders.reset();
@@ -70,7 +67,7 @@ public class Drivetrain_GyroStraight extends Command {
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		double error = goalAngle - gyroscope.getAngle();
+		double error = goalAngle - drivetrain.getHeading();
 		integralError += error;
 		double deltaError = error - lastError;
 		

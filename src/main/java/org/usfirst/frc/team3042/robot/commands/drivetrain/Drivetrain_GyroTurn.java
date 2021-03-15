@@ -7,7 +7,6 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 
 /** Drivetrain Gyro Turn ******************************************************
  * Command for turning in place to a set angle.
@@ -24,7 +23,6 @@ public class Drivetrain_GyroTurn extends Command {
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
-	Gyroscope gyroscope = Robot.gyroscope;
 	double lastError, integralError, goalAngle;
 	
 	/** Drivetrain Gyro Turn ************************************************** 
@@ -53,14 +51,14 @@ public class Drivetrain_GyroTurn extends Command {
 		drivetrain.stop();
 		lastError = 0.0;
 		integralError = 0.0;
-		gyroscope.reset();
+		drivetrain.zeroHeading();
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		double error = goalAngle - gyroscope.getAngle();
+		double error = goalAngle - drivetrain.getHeading();
 		integralError += error;
 		double deltaError = error - lastError;
 		
