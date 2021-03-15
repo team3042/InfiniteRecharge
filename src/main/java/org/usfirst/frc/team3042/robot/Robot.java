@@ -20,10 +20,13 @@ import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -122,6 +125,42 @@ public class Robot extends TimedRobot {
 		
 		autonomousCommand = chooser.getSelected();
 
+
+
+
+
+
+		// Create a voltage constraint to ensure we don't accelerate too fast
+		var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(RobotMap.ksVolts, RobotMap.kvVoltSecondsPerMeter, RobotMap.kaVoltSecondsSquaredPerMeter), RobotMap.kDriveKinematics, 10);
+
+    	// Create config for trajectory
+    	TrajectoryConfig config = new TrajectoryConfig(AutoConstants.kMaxSpeedMetersPerSecond, AutoConstants.kMaxAccelerationMetersPerSecondSquared).setKinematics(RobotMap.kDriveKinematics).addConstraint(autoVoltageConstraint);
+
+   		 // Generate a trajectory to follow. All units are in meters!
+    	Trajectory trajectory = new Trajectory();
+		
+		try {
+  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+  			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}
+
+    RamseteCommand ramseteCommand = new RamseteCommand(
+        trajectory, drivetrain::getPose, new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
+        new SimpleMotorFeedforward(RobotMap.ksVolts, RobotMap.kvVoltSecondsPerMeter, RobotMap.kaVoltSecondsSquaredPerMeter), RobotMap.kDriveKinematics, drivetrain::getWheelSpeeds,
+        new PIDController(RobotMap.kPDriveVel, 0, 0), new PIDController(RobotMap.kPDriveVel, 0, 0), m_robotDrive::tankDriveVolts, m_robotDrive);
+
+    	// Reset odometry to the starting pose of the trajectory.
+    	drivetrain.resetOdometry(trajectory.getInitialPose());
+
+   	 	// Run path following command, then stop at the end.
+    	ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
+
+
+
+
+
 		// schedule the autonomous command
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
@@ -195,14 +234,7 @@ public class Robot extends TimedRobot {
 
 	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable path
 	private void buildPath(String trajectoryJSON) {
-		Trajectory trajectory = new Trajectory();
 		
-		try {
-  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-		} catch (IOException ex) {
-  			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-		}
 
 
 	}

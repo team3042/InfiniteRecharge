@@ -5,6 +5,7 @@ import org.usfirst.frc.team3042.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** Gyroscope *****************************************************************
@@ -42,5 +43,8 @@ public class Gyroscope extends Subsystem {
 	}
 	public void calibrate() {
 		gyroscope.calibrate();
+	}
+	public Rotation2d getRotation2d() {
+		return gyroscope.getRotation2d();
 	}
 }
