@@ -45,9 +45,9 @@ public class Drivetrain extends Subsystem {
 
 	private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_LEFT_MOTOR), new PWMTalonSRX(CAN_LEFT_FOLLOWER));
 	private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_RIGHT_MOTOR), new PWMTalonSRX(CAN_RIGHT_FOLLOWER));
-	private final PIDController leftPIDController = new PIDController(1, 0, 0);
-	private final PIDController rightPIDController = new PIDController(1, 0, 0);
-	  
+	private final PIDController leftPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
+	private final PIDController rightPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
+	
 	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1, 3); //TODO: Run Robot Characterization Tool to determine these 2 values
 
 	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor

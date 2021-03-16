@@ -89,8 +89,8 @@ public class Robot extends TimedRobot {
 
 		// AutoNAV Challenge Courses
 		chooser.addOption("Barrel Racing", new Drive_Trajectory(buildTrajectory(barrelRacingFile)));
-		chooser.addOption("Slalom", new Drive_Trajectory(buildTrajectory(bounceFile)));
-		chooser.addOption("Bounce", new Drive_Trajectory(buildTrajectory(slalomFile)));
+		chooser.addOption("Slalom", new Drive_Trajectory(buildTrajectory(slalomFile)));
+		chooser.addOption("Bounce", new Drive_Trajectory(buildTrajectory(bounceFile)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
