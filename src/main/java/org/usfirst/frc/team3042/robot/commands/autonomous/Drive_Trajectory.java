@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 
 public class Drive_Trajectory extends Command {
 
-   // The trajectory to follow.
-   private Trajectory m_trajectory;
+  // The trajectory to follow.
+  private Trajectory m_trajectory;
   
   // The Ramsete Controller to follow the trajectory.
   private final RamseteController m_ramseteController = new RamseteController();
@@ -26,18 +26,18 @@ public class Drive_Trajectory extends Command {
 
   @Override
   protected void initialize() {
-     // Initialize the timer.
-     m_timer = new Timer();
-     m_timer.start();
+    // Initialize the timer.
+    m_timer = new Timer();
+    m_timer.start();
  
-     // Reset the drivetrain's odometry to the starting pose of the trajectory.
-     drivetrain.resetOdometry(m_trajectory.getInitialPose());
+    // Reset the drivetrain's odometry to the starting pose of the trajectory.
+    drivetrain.resetOdometry(m_trajectory.getInitialPose());
   }
 
   @Override
   protected void execute() {
-     // Update odometry.
-     drivetrain.updateOdometry();
+    // Update odometry.
+    drivetrain.updateOdometry();
 
     // Get the desired pose from the trajectory.
     var desiredPose = m_trajectory.sample(m_timer.get());
