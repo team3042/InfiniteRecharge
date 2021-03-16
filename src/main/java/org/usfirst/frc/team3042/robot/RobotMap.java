@@ -52,13 +52,12 @@ public class RobotMap {
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
-	/** Conveyor Settings ****************************************************/
-	// Upper Conveyer Settings
+	/** Upper Conveyor Settings ******************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_UPPER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double UPPER_CONVEYOR_POWER = 0.4; // How much power (as a %) to give the upper conveyor
-	// Lower Conveyer Settings
+	/** Lower Conveyor Settings ******************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR_TOP = true;
 	public static final boolean REVERSE_LOWER_CONVEYOR_BOTTOM = false;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
@@ -73,18 +72,13 @@ public class RobotMap {
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
 	public static final boolean REVERSE_LEFT_MOTOR = false;
 	public static final boolean REVERSE_RIGHT_MOTOR = true;
-	// Maximum Acceleration given in power(volts?) per second
-	public static final double ACCELERATION_MAX = 1.5;
+	public static final double ACCELERATION_MAX = 1.5; // Maximum Acceleration given in power(volts) per second
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
-
-	/** Drivetrain Encoder Settings *******************************************/
 	public static final int COUNTS_PER_REVOLUTION = 1440; // In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
 	public static final int ENCODER_FRAME_RATE = 10; // How often the encoders update on the CAN, in milliseconds
 	public static final boolean SENSOR_PHASE_LEFT = false;
 	public static final boolean SENSOR_PHASE_RIGHT = false;
-
-	/** Drivetrain Autonomous Settings ****************************************/
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
 
