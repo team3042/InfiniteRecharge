@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /** Wait *******************************************************
- * Waits for a certain number of seconds
- */
+ * Waits for a certain number of seconds */
 public class Wait extends Command {
 
 	int duration;
