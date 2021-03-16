@@ -85,9 +85,9 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
-		buildTrajectory(barrelRacingFile);
-		buildTrajectory(bounceFile);
-		buildTrajectory(slalomFile);
+		chooser.addOption("Barrel Racing", new Drive_Trajectory(buildTrajectory(barrelRacingFile)));
+		chooser.addOption("Slalom", new Drive_Trajectory(buildTrajectory(bounceFile)));
+		chooser.addOption("Bounce", new Drive_Trajectory(buildTrajectory(slalomFile)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
@@ -194,8 +194,8 @@ public class Robot extends TimedRobot {
 		}
 	} 
 
-	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable path
-	private void buildTrajectory(String trajectoryJSON) {
+	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable trajectory
+	private Trajectory buildTrajectory(String trajectoryJSON) {
 		
    		// Generate a trajectory to follow. All units should be in meters!
     	Trajectory trajectory = new Trajectory();
@@ -207,8 +207,6 @@ public class Robot extends TimedRobot {
   			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
 		}
 		
-		driveTrajectory = new Drive_Trajectory(trajectory);
-		driveTrajectory.start();
-
+		return trajectory;
 	}
 }
