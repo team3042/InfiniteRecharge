@@ -46,7 +46,7 @@ public class Drive_Trajectory extends Command {
     var refChassisSpeeds = ramseteController.calculate(drivetrain.getPose(), desiredPose);
  
     // Set the linear and angular speeds.
-    drivetrain.setPower(refChassisSpeeds.vxMetersPerSecond, refChassisSpeeds.omegaRadiansPerSecond);
+    drivetrain.drive(refChassisSpeeds.vxMetersPerSecond, refChassisSpeeds.omegaRadiansPerSecond);
   }
 
   @Override
@@ -56,11 +56,11 @@ public class Drive_Trajectory extends Command {
 
   @Override
   protected void end() {
-    drivetrain.setPower(0, 0);
+    drivetrain.stop();
   }
 
   @Override
   protected void interrupted() {
-    drivetrain.setPower(0, 0);
+    drivetrain.stop();
   }
 }

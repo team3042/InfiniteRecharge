@@ -9,10 +9,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** Drivetrain ****************************************************************
@@ -22,30 +29,47 @@ public class Drivetrain extends Subsystem {
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final int CAN_LEFT_MOTOR = RobotMap.CAN_LEFT_MOTOR;
 	private static final int CAN_RIGHT_MOTOR = RobotMap.CAN_RIGHT_MOTOR;
+	private static final int CAN_LEFT_FOLLOWER = RobotMap.CAN_LEFT_FOLLOWER;
+	private static final int CAN_RIGHT_FOLLOWER = RobotMap.CAN_RIGHT_FOLLOWER;
 	private static final NeutralMode BRAKE_MODE = RobotMap.DRIVETRAIN_BRAKE_MODE;
 	private static final boolean REVERSE_LEFT_MOTOR = RobotMap.REVERSE_LEFT_MOTOR;
 	private static final boolean REVERSE_RIGHT_MOTOR = RobotMap.REVERSE_RIGHT_MOTOR;	
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+
 	TalonSRX leftMotor = new TalonSRX(CAN_LEFT_MOTOR);
 	TalonSRX rightMotor = new TalonSRX(CAN_RIGHT_MOTOR);
-	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor
+	TalonSRX leftFollower = new TalonSRX(CAN_LEFT_FOLLOWER);
+	TalonSRX rightFollower = new TalonSRX(CAN_RIGHT_FOLLOWER);	
 
-	DrivetrainFollowers followers;
+	private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_LEFT_MOTOR), new PWMTalonSRX(CAN_LEFT_FOLLOWER));
+	private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_RIGHT_MOTOR), new PWMTalonSRX(CAN_RIGHT_FOLLOWER));
+	private final PIDController leftPIDController = new PIDController(1, 0, 0);
+	private final PIDController rightPIDController = new PIDController(1, 0, 0);
+	  
+	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1, 3); //TODO: Run Robot Characterization Tool to determine these 2 values
+
+	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor
+	DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(RobotMap.ROBOT_WIDTH * 0.0254); // Multiply by 0.0254 to convert inches to meters
+
 	DrivetrainEncoders encoders;
-	DifferentialDriveOdometry odometry; // Odometry class for tracking robot pose
+	DifferentialDriveOdometry odometry; // Odometry class for tracking robot posistion
 	
 	/** Drivetrain ************************************************************
 	 * Set up the talons for desired behavior. */
 	public Drivetrain() {
 		log.add("Constructor", LOG_LEVEL);
 		
-		followers = new DrivetrainFollowers();
 		encoders = new DrivetrainEncoders(leftMotor, rightMotor);
+
+		leftFollower.set(ControlMode.Follower, CAN_LEFT_MOTOR);
+		rightFollower.set(ControlMode.Follower, CAN_RIGHT_MOTOR);
 		
 		initMotor(leftMotor, REVERSE_LEFT_MOTOR);
 		initMotor(rightMotor, REVERSE_RIGHT_MOTOR);
+		initMotor(leftFollower, REVERSE_LEFT_MOTOR);
+		initMotor(rightFollower, REVERSE_RIGHT_MOTOR);
 
 		odometry = new DifferentialDriveOdometry(gyroscope.getRotation2d());
 	}
@@ -77,9 +101,9 @@ public class Drivetrain extends Subsystem {
 		return power;
 	}
 
-	/** Gyroscope/Odometry Methods *****************************/
+	/** Odometry Methods *******************************************************/
   	public void updateOdometry() { // Updates the field-relative position.
-    	odometry.update(gyroscope.getRotation2d(), encoders.getLeftPosition(), encoders.getRightPosition()); //TODO: Are these encoder distances right?
+    	odometry.update(gyroscope.getRotation2d(), encoders.getLeftPosition(), encoders.getRightPosition());
   	}
   	public void resetOdometry(Pose2d pose) { // Resets the field-relative position to a specific location.
     	odometry.resetPosition(pose, gyroscope.getRotation2d());
@@ -88,6 +112,7 @@ public class Drivetrain extends Subsystem {
     	return odometry.getPoseMeters();
   	}
 
+	/** Gyroscope Methods *******************************************************/
   	public void zeroGyro() { // Zeroes the heading of the robot
     	gyroscope.reset();
 	  }
@@ -97,6 +122,25 @@ public class Drivetrain extends Subsystem {
 	public double getTurnRate() { // Returns the turn rate of the robot
 		return -gyroscope.getRate();
 	}
+
+	// Drives the robot with the given linear velocity and angular velocity.
+  	@SuppressWarnings("ParameterName")
+  	public void drive(double xSpeed, double rot) { 
+    	var wheelSpeeds = kinematics.toWheelSpeeds(new ChassisSpeeds(xSpeed, 0.0, rot));
+    	setSpeeds(wheelSpeeds);
+	}
+	 
+	// Sets the desired wheel speeds.
+  	public void setSpeeds(DifferentialDriveWheelSpeeds speeds) { 
+    	final double leftFeedforward = feedforward.calculate(speeds.leftMetersPerSecond);
+    	final double rightFeedforward = feedforward.calculate(speeds.rightMetersPerSecond);
+
+    	final double leftOutput = leftPIDController.calculate(encoders.getLeftSpeed(), speeds.leftMetersPerSecond);
+		final double rightOutput = rightPIDController.calculate(encoders.getRightSpeed(), speeds.rightMetersPerSecond);
+		
+    	leftGroup.setVoltage(leftOutput + leftFeedforward);
+   		rightGroup.setVoltage(rightOutput + rightFeedforward);
+  	}
 	
 	/** Provide commands access to the encoders ****************/
 	public DrivetrainEncoders getEncoders() {
