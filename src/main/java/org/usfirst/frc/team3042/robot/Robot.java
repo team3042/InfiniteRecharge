@@ -77,20 +77,24 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
+		// Trajectory File Locations
 		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
 		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
 		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
 
+		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
+		// AutoNAV Challenge Courses
 		chooser.addOption("Barrel Racing", new Drive_Trajectory(buildTrajectory(barrelRacingFile)));
 		chooser.addOption("Slalom", new Drive_Trajectory(buildTrajectory(bounceFile)));
 		chooser.addOption("Bounce", new Drive_Trajectory(buildTrajectory(slalomFile)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
+		// Start up the webcam and configure its resolution and framerate
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
@@ -165,7 +169,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getSpeed());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
 		SmartDashboard.putNumber("Turret Position:", turret.countsToDegrees(turret.getPosition()));
-		SmartDashboard.putNumber("Drivetrain Speed", drivetrain.getEncoders().getLeftSpeed());
+		SmartDashboard.putNumber("Drivetrain Speed", (drivetrain.getEncoders().getLeftSpeed() + drivetrain.getEncoders().getRightSpeed()) / 2.0); // Average speed of the left and right side
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();
@@ -194,7 +198,7 @@ public class Robot extends TimedRobot {
 		}
 	} 
 
-	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable trajectory
+	// Takes the file location of a PathWeaver json file and builds it into a drivable trajectory
 	private Trajectory buildTrajectory(String trajectoryJSON) {
 		
    		// Generate a trajectory to follow. All units should be in meters!
