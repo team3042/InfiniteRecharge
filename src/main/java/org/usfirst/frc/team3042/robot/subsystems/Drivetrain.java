@@ -79,7 +79,7 @@ public class Drivetrain extends Subsystem {
 
 	/** Gyroscope/Odometry Methods *****************************/
   	public void updateOdometry() { // Updates the field-relative position.
-    	odometry.update(gyroscope.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance()); //TODO: Are these encoder distances right?
+    	odometry.update(gyroscope.getRotation2d(), encoders.getLeftPosition(), encoders.getRightPosition()); //TODO: Are these encoder distances right?
   	}
   	public void resetOdometry(Pose2d pose) { // Resets the field-relative position to a specific location.
     	odometry.resetPosition(pose, gyroscope.getRotation2d());

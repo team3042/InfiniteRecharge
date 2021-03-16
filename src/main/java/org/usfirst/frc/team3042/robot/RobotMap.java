@@ -110,9 +110,6 @@ public class RobotMap {
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final int AUTON_HEADING = 0; // unimplemented feature; set to zero
 
-	/** Drivetrain Trajectory Following Settings *******************************/
-
-
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;
