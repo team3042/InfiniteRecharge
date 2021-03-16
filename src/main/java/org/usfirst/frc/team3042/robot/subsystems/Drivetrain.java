@@ -103,14 +103,22 @@ public class Drivetrain extends Subsystem {
 
 	/** Odometry Methods *******************************************************/
   	public void updateOdometry() { // Updates the field-relative position.
-    	odometry.update(gyroscope.getRotation2d(), encoders.getLeftPosition(), encoders.getRightPosition());
+    	odometry.update(gyroscope.getRotation2d(), positionToMeters(encoders.getLeftPosition()), positionToMeters(encoders.getRightPosition()));
   	}
   	public void resetOdometry(Pose2d pose) { // Resets the field-relative position to a specific location.
     	odometry.resetPosition(pose, gyroscope.getRotation2d());
   	}
   	public Pose2d getPose() { // Returns the position of the robot.
     	return odometry.getPoseMeters();
-  	}
+	  }
+	  
+	//Conversion Methods: Convert to Meters
+	public double positionToMeters(double position) {
+		return position * Math.PI * RobotMap.WHEEL_DIAMETER * 0.0254;
+	}
+	public double speedToMeters(double speed) {
+		return speed / 60 * Math.PI * RobotMap.WHEEL_DIAMETER * 0.0254;
+	}
 
 	/** Gyroscope Methods *******************************************************/
   	public void zeroGyro() { // Zeroes the heading of the robot
@@ -135,8 +143,8 @@ public class Drivetrain extends Subsystem {
     	final double leftFeedforward = feedforward.calculate(speeds.leftMetersPerSecond);
     	final double rightFeedforward = feedforward.calculate(speeds.rightMetersPerSecond);
 
-    	final double leftOutput = leftPIDController.calculate(encoders.getLeftSpeed(), speeds.leftMetersPerSecond);
-		final double rightOutput = rightPIDController.calculate(encoders.getRightSpeed(), speeds.rightMetersPerSecond);
+    	final double leftOutput = leftPIDController.calculate(speedToMeters(encoders.getLeftSpeed()), speeds.leftMetersPerSecond);
+		final double rightOutput = rightPIDController.calculate(speedToMeters(encoders.getRightSpeed()), speeds.rightMetersPerSecond);
 		
     	leftGroup.setVoltage(leftOutput + leftFeedforward);
    		rightGroup.setVoltage(rightOutput + rightFeedforward);
