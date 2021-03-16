@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3042.robot.commands.autonomous;
+package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 
-public class Drive_Trajectory extends Command {
+public class Drivetrain_Trajectory extends Command {
 
   // The trajectory to follow.
   private Trajectory trajectory;
@@ -20,7 +20,7 @@ public class Drive_Trajectory extends Command {
 
   Drivetrain drivetrain;
 
-  public Drive_Trajectory(Trajectory path) {
+  public Drivetrain_Trajectory(Trajectory path) {
     trajectory = path;
   }
 

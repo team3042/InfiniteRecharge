@@ -2,6 +2,7 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.*;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Trajectory;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -88,9 +89,9 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
 		// AutoNAV Challenge Courses
-		chooser.addOption("Barrel Racing", new Drive_Trajectory(buildTrajectory(barrelRacingFile)));
-		chooser.addOption("Slalom", new Drive_Trajectory(buildTrajectory(slalomFile)));
-		chooser.addOption("Bounce", new Drive_Trajectory(buildTrajectory(bounceFile)));
+		chooser.addOption("Barrel Racing", new Drivetrain_Trajectory(buildTrajectory(barrelRacingFile)));
+		chooser.addOption("Slalom", new Drivetrain_Trajectory(buildTrajectory(slalomFile)));
+		chooser.addOption("Bounce", new Drivetrain_Trajectory(buildTrajectory(bounceFile)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
