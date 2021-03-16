@@ -51,7 +51,7 @@ public class Drivetrain extends Subsystem {
 	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1, 3); //TODO: Run Robot Characterization Tool to determine these 2 values
 
 	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor
-	DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(RobotMap.ROBOT_WIDTH * 0.0254); // Multiply by 0.0254 to convert inches to meters
+	DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(RobotMap.ROBOT_WIDTH / 39.3700787); // Divide by 39.3700787 to convert inches to meters
 
 	DrivetrainEncoders encoders;
 	DifferentialDriveOdometry odometry; // Odometry class for tracking robot posistion
@@ -114,10 +114,10 @@ public class Drivetrain extends Subsystem {
 	  
 	//Conversion Methods: Convert to Meters
 	public double positionToMeters(double position) {
-		return position * Math.PI * RobotMap.WHEEL_DIAMETER * 0.0254;
+		return position * Math.PI * RobotMap.WHEEL_DIAMETER / 39.3700787; // Divide by 39.3700787 to convert inches to meters
 	}
 	public double speedToMeters(double speed) {
-		return speed / 60 * Math.PI * RobotMap.WHEEL_DIAMETER * 0.0254;
+		return speed / 60 * Math.PI * RobotMap.WHEEL_DIAMETER / 39.3700787; // Divide by 39.3700787 to convert inches to meters
 	}
 
 	/** Gyroscope Methods *******************************************************/
