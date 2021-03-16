@@ -22,6 +22,7 @@ public class Drivetrain_Trajectory extends Command {
 
   public Drivetrain_Trajectory(Trajectory path) {
     trajectory = path;
+    requires(drivetrain);
   }
 
   @Override
