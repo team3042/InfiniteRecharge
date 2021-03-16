@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
+import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -18,7 +19,7 @@ public class Drivetrain_Trajectory extends Command {
   // The timer to use during the autonomous period.
   private Timer time;
 
-  Drivetrain drivetrain;
+  Drivetrain drivetrain = Robot.drivetrain;
 
   public Drivetrain_Trajectory(Trajectory path) {
     trajectory = path;
