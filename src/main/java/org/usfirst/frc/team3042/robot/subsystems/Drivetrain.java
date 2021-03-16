@@ -53,12 +53,6 @@ public class Drivetrain extends Subsystem {
 		motor.setNeutralMode(BRAKE_MODE);
 		motor.setInverted(reverse); 	// affects percent Vbus mode
 	}
-
-	@Override
-  public void periodic() {
-    // Update the odometry in the periodic block
-    odometry.update(gyroscope.getRotation2d(), encoders.getLeftPosition(), encoders.getRightPosition()); // TODO Are these encoder distances right?
-  }
 	
 	/** initDefaultCommand ****************************************************
 	 * Set the default command for the subsystem. */
@@ -84,14 +78,20 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/** Gyroscope/Odometry Methods *****************************/
-    public void resetOdometry(Pose2d pose) { // Resets the odometry to the specified pose
-    	encoders.reset();
+  	public void updateOdometry() { // Updates the field-relative position.
+    	odometry.update(gyroscope.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance()); //TODO: Are these encoder distances right?
+  	}
+  	public void resetOdometry(Pose2d pose) { // Resets the field-relative position to a specific location.
     	odometry.resetPosition(pose, gyroscope.getRotation2d());
-	  }
-  	public void zeroHeading() { // Zeroes the heading of the robot
+  	}
+  	public Pose2d getPose() { // Returns the position of the robot.
+    	return odometry.getPoseMeters();
+  	}
+
+  	public void zeroGyro() { // Zeroes the heading of the robot
     	gyroscope.reset();
 	  }
-	public double getHeading() { // Returns the heading of the robot
+	public double getAngle() { // Returns the heading of the robot
 		return gyroscope.getRotation2d().getDegrees();
 	}
 	public double getTurnRate() { // Returns the turn rate of the robot

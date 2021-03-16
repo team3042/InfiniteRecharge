@@ -77,6 +77,7 @@ public class RobotMap {
 	public static final double ACCELERATION_MAX = 1.5;
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
+
 	/** Drivetrain Encoder Settings *******************************************/
 	// Encoder counts per revolution
 	// In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
@@ -85,6 +86,7 @@ public class RobotMap {
 	public static final int ENCODER_FRAME_RATE = 10;
 	public static final boolean SENSOR_PHASE_LEFT = false;
 	public static final boolean SENSOR_PHASE_RIGHT = false;
+
 	/** Drivetrain Autonomous Settings ****************************************/
 	public static final int AUTON_PROFILE = 0;
 	public static final double kP_AUTON = 0.4;
@@ -107,6 +109,10 @@ public class RobotMap {
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final int AUTON_HEADING = 0; // unimplemented feature; set to zero
+
+	/** Drivetrain Trajectory Following Settings *******************************/
+
+
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;

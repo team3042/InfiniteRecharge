@@ -51,14 +51,14 @@ public class Drivetrain_GyroTurn extends Command {
 		drivetrain.stop();
 		lastError = 0.0;
 		integralError = 0.0;
-		drivetrain.zeroHeading();
+		drivetrain.zeroGyro();
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		double error = goalAngle - drivetrain.getHeading();
+		double error = goalAngle - drivetrain.getAngle();
 		integralError += error;
 		double deltaError = error - lastError;
 		

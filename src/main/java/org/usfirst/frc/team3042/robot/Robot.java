@@ -8,7 +8,6 @@ import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
 import org.usfirst.frc.team3042.robot.subsystems.ColorSensor;
 import org.usfirst.frc.team3042.robot.subsystems.ControlPanelWheel;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
@@ -20,13 +19,10 @@ import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -49,7 +45,6 @@ public class Robot extends TimedRobot {
 	/** Create Subsystems *****************************************************/
 	private Log log = new Log(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain 			  = new Drivetrain();
-	public static final Gyroscope gyroscope 	   		  = new Gyroscope();
 	public static final ColorSensor colorsensor    		  = new ColorSensor();
 	public static final ControlPanelWheel cpwheel  		  = new ControlPanelWheel();
 	public static final Limelight limelight        		  = new Limelight();
@@ -63,8 +58,11 @@ public class Robot extends TimedRobot {
 	public static final ClimbingHook climbinghook		  = new ClimbingHook();
 	public static final UltrasonicSensor ultrasonicsensor = new UltrasonicSensor();
 	public static OI oi;
+
 	Command autonomousCommand;
 	Command stopAutonomous = new Turret_Stop();
+	Command driveTrajectory;
+
 	SendableChooser<Command> chooser = new SendableChooser<Command>();
 
 	UsbCamera camera1;
@@ -87,9 +85,9 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
-		buildPath(barrelRacingFile);
-		buildPath(bounceFile);
-		buildPath(slalomFile);
+		buildTrajectory(barrelRacingFile);
+		buildTrajectory(bounceFile);
+		buildTrajectory(slalomFile);
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
@@ -124,42 +122,6 @@ public class Robot extends TimedRobot {
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 		
 		autonomousCommand = chooser.getSelected();
-
-
-
-
-
-
-		// Create a voltage constraint to ensure we don't accelerate too fast
-		var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(RobotMap.ksVolts, RobotMap.kvVoltSecondsPerMeter, RobotMap.kaVoltSecondsSquaredPerMeter), RobotMap.kDriveKinematics, 10);
-
-    	// Create config for trajectory
-    	TrajectoryConfig config = new TrajectoryConfig(AutoConstants.kMaxSpeedMetersPerSecond, AutoConstants.kMaxAccelerationMetersPerSecondSquared).setKinematics(RobotMap.kDriveKinematics).addConstraint(autoVoltageConstraint);
-
-   		 // Generate a trajectory to follow. All units are in meters!
-    	Trajectory trajectory = new Trajectory();
-		
-		try {
-  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-		} catch (IOException ex) {
-  			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-		}
-
-    RamseteCommand ramseteCommand = new RamseteCommand(
-        trajectory, drivetrain::getPose, new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
-        new SimpleMotorFeedforward(RobotMap.ksVolts, RobotMap.kvVoltSecondsPerMeter, RobotMap.kaVoltSecondsSquaredPerMeter), RobotMap.kDriveKinematics, drivetrain::getWheelSpeeds,
-        new PIDController(RobotMap.kPDriveVel, 0, 0), new PIDController(RobotMap.kPDriveVel, 0, 0), m_robotDrive::tankDriveVolts, m_robotDrive);
-
-    	// Reset odometry to the starting pose of the trajectory.
-    	drivetrain.resetOdometry(trajectory.getInitialPose());
-
-   	 	// Run path following command, then stop at the end.
-    	ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
-
-
-
-
 
 		// schedule the autonomous command
 		if (autonomousCommand != null) {
@@ -233,9 +195,20 @@ public class Robot extends TimedRobot {
 	} 
 
 	//takes the file location of a PathWeaver file as a parameter and builds it into a drivable path
-	private void buildPath(String trajectoryJSON) {
+	private void buildTrajectory(String trajectoryJSON) {
 		
-
+   		// Generate a trajectory to follow. All units should be in meters!
+    	Trajectory trajectory = new Trajectory();
+		
+		try {
+  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+  			DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+		}
+		
+		driveTrajectory = new Drive_Trajectory(trajectory);
+		driveTrajectory.start();
 
 	}
 }
