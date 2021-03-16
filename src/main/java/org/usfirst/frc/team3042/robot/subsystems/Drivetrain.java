@@ -7,9 +7,9 @@ import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_TankDrive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -43,8 +43,8 @@ public class Drivetrain extends Subsystem {
 	TalonSRX leftFollower = new TalonSRX(CAN_LEFT_FOLLOWER);
 	TalonSRX rightFollower = new TalonSRX(CAN_RIGHT_FOLLOWER);	
 
-	private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_LEFT_MOTOR), new PWMTalonSRX(CAN_LEFT_FOLLOWER));
-	private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(new PWMTalonSRX(CAN_RIGHT_MOTOR), new PWMTalonSRX(CAN_RIGHT_FOLLOWER));
+	private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(new WPI_TalonSRX(CAN_LEFT_MOTOR), new WPI_TalonSRX(CAN_LEFT_FOLLOWER));
+	private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(new WPI_TalonSRX(CAN_RIGHT_MOTOR), new WPI_TalonSRX(CAN_RIGHT_FOLLOWER));
 	private final PIDController leftPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
 	private final PIDController rightPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
 	
