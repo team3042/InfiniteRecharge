@@ -13,7 +13,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
  */
 public class Drivetrain_GyroTurn extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_GYROSCOPE;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;
 	private static final double kI = RobotMap.kI_GYRO;
 	private static final double kD = RobotMap.kD_GYRO;
