@@ -53,7 +53,7 @@ public class Drivetrain_GyroStraight extends Command {
 		log.add("Initialize", Log.Level.TRACE);
 
 		drivetrain.stop();
-		goalAngle = gyroscope.getAngle();
+		goalAngle = drivetrain.getAngle();
 		lastError = 0.0;
 		integralError = 0.0;
 		encoders.reset();
@@ -62,7 +62,7 @@ public class Drivetrain_GyroStraight extends Command {
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		double error = goalAngle - gyroscope.getAngle();
+		double error = goalAngle - drivetrain.getAngle();
 		integralError += error;
 		double deltaError = error - lastError;
 		

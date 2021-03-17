@@ -67,48 +67,27 @@ public class RobotMap {
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
-	// Maximum Acceleration given in power(volts?) per second
-	public static final double ACCELERATION_MAX = 1.5;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
+	public static final double ACCELERATION_MAX = 1.5; // Maximum Acceleration given in power(volts) per second
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
-	/** Drivetrain Encoder Settings *******************************************/
-	// Encoder counts per revolution
-	// In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
-	public static final int COUNTS_PER_REVOLUTION = 1440;
-	// How often the encoders update on the CAN, in milliseconds
-	public static final int ENCODER_FRAME_RATE = 10;
+	public static final int COUNTS_PER_REVOLUTION = 1440; // In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
+	public static final int ENCODER_FRAME_RATE = 10; // How often the encoders update on the CAN, in milliseconds
 	public static final boolean SENSOR_PHASE_LEFT = false;
 	public static final boolean SENSOR_PHASE_RIGHT = false;
-	/** Drivetrain Autonomous Settings ****************************************/
-	public static final int AUTON_PROFILE = 0;
-	public static final double kP_AUTON = 0.4;
-	public static final double kI_AUTON = 0.0;
-	public static final double kD_AUTON = 0.8;
-	public static final int I_ZONE_AUTON = 0;
-	// The rate of pushing motion profile points to the talon, in ms
-	public static final int AUTON_FRAME_RATE = 10;
-	// Parameters for calibrating the F-gain
-	public static final double AUTON_CALIBRATE_POWER = 0.5;
-	public static final double AUTON_CALIBRATE_TIME = 5.0; // seconds
-	public static final int AUTON_COUNT_AVERAGE = 20;
-	// Parameters for motion profile driving
-	public static final int AUTON_DT_MS = 30;
-	public static final double AUTON_DT_SEC = (double)AUTON_DT_MS / 1000.0;
-	public static final double AUTON_ACCEL_TIME = 1.0; // time in sec
-	public static final double AUTON_SMOOTH_TIME = 0.1; // time in sec
-	public static final double AUTON_MAX_ACCEL = 3.0; // rev per sec per sec
-	public static final int AUTON_BUFFER_TRIGGER = 10;
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final int AUTON_HEADING = 0; // unimplemented feature; set to zero
+	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller (Use the Robot Characterization Tool to calculate this!)
+	public static final double ks_DRIVE = 2.14; // Static Gain constant (Use the Robot Characterization Tool to calculate this!)
+	public static final double kv_DRIVE = 1.26; // Velocity Gain constant (Use the Robot Characterization Tool to calculate this!)
+
 	/** Drivetrain Gyro Drive Settings ****************************************/
-	public static final double kP_GYRO = 0.0175;
+	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;
-	public static final double kD_GYRO = 0.0170;
-	public static final double ANGLE_TOLERANCE = 2.0;
-	public static final double MAX_POWER_GYRO = 0.4;
+	public static final double kD_GYRO = 0.017;
+	public static final double ANGLE_TOLERANCE = 14.0;
+	public static final double MAX_POWER_GYRO = 0.48;
 	public static final double kI_GYRO_INTERVAL = 0.0;
 
 	/** Intake Settings *******************************************************/
