@@ -6,7 +6,6 @@ import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
-import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -21,7 +20,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     addParallel(new Shooter_Spin()); //Spin up the shooter
     addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
     addSequential(new Shoot(2.6)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
-    addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
+    addSequential(new StopShooting()); //Stop tracking the target and running the shooter when we don't need to
 
     // Knock down the intake using inertia //
     addSequential(new Drivetrain_GyroStraight(12.0, 100.0)); //Drive forwards

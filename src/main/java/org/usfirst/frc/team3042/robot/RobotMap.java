@@ -53,12 +53,13 @@ public class RobotMap {
 	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.4; // How much power (as a %) to give the upper conveyor
+	public static final double UPPER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the upper conveyor
 	/** Conveyor Settings (Lower) *********************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 	
 	/** DIO channels **********************************************************/
 	public static final int DIO_ULTRASONIC_PING = 8;
@@ -96,8 +97,8 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = -1.1; // Determines normal driving speed of the robot
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = -0.25; // Determines driving speed of the robot when in slow mode
+	public static final double JOYSTICK_DRIVE_SCALE = 1.1; // Determines driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.25; // Determines driving speed of the robot when in slow mode
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
@@ -129,9 +130,6 @@ public class RobotMap {
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
-	/** Ultrasonic Sensor Settings ********************************************/
-	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
-
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
 	public static final int USB_JOYSTICK_RIGHT 	= 1;
@@ -151,14 +149,10 @@ public class RobotMap {
 	public static final Log.Level	LOG_POV_BUTTON						= Log.Level.ERROR;
 	/** Subsystems ************************************************************/
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-	public static final Log.Level	LOG_CONTROL_PANEL_WHEEL				= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LIMELIGHT						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_TURRET							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_INTAKE							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_SHOOTER							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LOWER_CONVEYOR					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_UPPER_CONVEYOR					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CLIMBING_WINCH					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CLIMBING_HOOK					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_ULTRASONIC_SENSOR				= Log.Level.DEBUG;
 }

@@ -8,7 +8,7 @@ import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /** Autonomous Mode Delayed ******************************************************
- * Autonomous mode for driving forwards and then shooting the three pre-loaded balls after waiting a certain number of seconds */
+ * An autonomous routine for driving forwards off the initiation line and then shooting the three pre-loaded balls after waiting a certain number of seconds */
 public class AutonomousMode_Delayed extends CommandGroup {
 
   public AutonomousMode_Delayed() {

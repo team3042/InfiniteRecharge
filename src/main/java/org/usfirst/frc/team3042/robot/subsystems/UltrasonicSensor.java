@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
  * Subsystem for the ultrasonic sensor used to determine the location of power cells within the conveyor */
 public class UltrasonicSensor extends Subsystem {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_ULTRASONIC_SENSOR;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LOWER_CONVEYOR;
 	private static final double distance = RobotMap.POWER_CELL_DISTANCE;
 	private static final int ping = RobotMap.DIO_ULTRASONIC_PING;
 	private static final int echo = RobotMap.DIO_ULTRASONIC_ECHO;

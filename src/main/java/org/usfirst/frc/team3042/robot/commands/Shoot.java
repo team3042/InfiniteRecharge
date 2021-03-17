@@ -13,7 +13,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
 
 /** Shoot *********************************************************************
- * Command for pushing power cells into the shooter wheels */
+ * Command for pushing power cells into the shooter */
 public class Shoot extends Command {
   /** Configuration Constants ***********************************************/
   private static final Log.Level LOG_LEVEL = RobotMap.LOG_UPPER_CONVEYOR;
@@ -42,7 +42,7 @@ public class Shoot extends Command {
     onTarget = false;
     timedShoot = false;
   }
-  //Overloaded constructor that allows us to shoot for a set amount of time, useful for autonomous shooting
+  //Overloaded constructor that allows us to shoot for a set amount of time; useful for autonomous shooting!
   public Shoot(double t) {
     log.add("Constructor", Log.Level.TRACE);
 

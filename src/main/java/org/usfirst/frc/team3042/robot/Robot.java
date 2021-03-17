@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.usfirst.frc.team3042.lib.Log;
-import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Default;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
 import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Trajectory;
-import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
+import org.usfirst.frc.team3042.robot.commands.autonomous.StopShooting;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
@@ -35,8 +35,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory. */
+ * creating this project, you must also update the manifest file in the resource directory. */
 public class Robot extends TimedRobot { 
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
@@ -53,8 +52,9 @@ public class Robot extends TimedRobot {
 	public static final PowerDistributionPanel pdp		  = new PowerDistributionPanel();
 	public static final UltrasonicSensor ultrasonicsensor = new UltrasonicSensor();
 	public static OI oi;
+	
 	Command autonomousCommand;
-	Command stopAutonomous = new Turret_Stop();
+	Command stopAutonomous = new StopShooting();
 	SendableChooser<Command> chooser = new SendableChooser<Command>();
 
 	UsbCamera camera1;
@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
 		String test = "PathWeaver/output/test.wpilib.json";
 		
 		// Infinite Recharge Autonomous Routines
-		chooser.setDefaultOption("Default Auto", new AutonomousMode());
+		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
