@@ -111,9 +111,6 @@ public class RobotMap {
 	public static final double MAX_POWER_GYRO = 0.4;
 	public static final double kI_GYRO_INTERVAL = 0.0;
 
-	/** Gyroscope Settings ****************************************************/
-	public static final double GYROSCOPE_SCALE = 1.0; // Constant for scaling values returned by the gyroscope, leave at 1.0 by default
-
 	/** Intake Settings *******************************************************/
 	public static final boolean REVERSE_INTAKE = true;
 	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
