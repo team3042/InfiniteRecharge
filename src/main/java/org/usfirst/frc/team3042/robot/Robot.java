@@ -193,7 +193,7 @@ public class Robot extends TimedRobot {
 	} 
 
 	// Takes the file location of a PathWeaver json file and builds it into a drivable trajectory
-	private Trajectory buildTrajectory(String trajectoryJSON) {
+	public static Trajectory buildTrajectory(String trajectoryJSON) {
 		
    		// Generate a trajectory to follow. All units should be in meters!
     	Trajectory trajectory = new Trajectory();

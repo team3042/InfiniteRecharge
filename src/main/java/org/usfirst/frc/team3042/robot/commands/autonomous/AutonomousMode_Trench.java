@@ -1,29 +1,48 @@
 package org.usfirst.frc.team3042.robot.commands.autonomous;
 
-import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_GyroStraight;
-import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_GyroTurn;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.*;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
+import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
+import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /** Autonomous Mode Trench ******************************************************
- * Drive forwards, shoot the three pre-loaded balls, drive forwards and collect three from the trench and shoot those */
+ * Drive off the initiation line, shoot the three pre-loaded balls, then drive into the trench to collect three more balls and shoot those */
 public class AutonomousMode_Trench extends CommandGroup {
 
   public AutonomousMode_Trench() {
+    addParallel(new LowerConveyor_Advance()); //Call the conveyor default command since it has been interrupted by this command group
+
+    addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
     addParallel(new Shooter_Spin()); //Spin up the shooter
-    addParallel(new Turret_Continous(true)); //Search for the target and start tracking it
-    addSequential(new Drivetrain_GyroStraight(12.0, -80.0)); //Drive forwards off the initiation line
-    addSequential(new Shoot()); //Shoot the three pre-loaded power cells
-    addSequential(new Drivetrain_GyroTurn(90)); //Spin to knock down the intake
-    addSequential(new Drivetrain_GyroTurn(-90)); //Spin to knock down the intake
+    addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
+    addSequential(new Shoot(2.6)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
+    addSequential(new Turret_Stop()); //Stop tracking the target and running the shooter when we don't need to
+
+    // Knock down the intake using inertia //
+    addSequential(new Drivetrain_GyroStraight(12.0, 100.0)); //Drive forwards
+    addSequential(new Drivetrain_GyroStraight(12.0, -100.0)); //Drive backwards
+
     addParallel(new Intake_Intake(1)); //Start running the intake
-    addSequential(new Drivetrain_GyroStraight(24.0, -40.0)); //Drive forwards into the trench
+
+    // Drive into the trench to collect 3 power cells //
+    //addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory(trajectoryJSON))); // TODO: Implement this trajectory instead of using gyroStraights and gyroTurns, it will be better!
+    addSequential(new Drivetrain_GyroTurn(-70));
+    addSequential(new Drivetrain_GyroStraight(82, 120));
+    addSequential(new Drivetrain_GyroTurn(70));
+    addSequential(new Drivetrain_GyroStraight(120, 80));
+
     addSequential(new Intake_Intake(0)); //Stop running the intake
-    addSequential(new Drivetrain_GyroStraight(24.0, 80.0)); //Drive back to the optimal shooting location
-    addSequential(new Shoot()); //Shoot the three power cells from the trench
+
+    // Drive to the optimal shooting location //
+    addSequential(new Drivetrain_GyroStraight(80, -120)); 
+
+    addParallel(new Shooter_Spin()); //Spin up the shooter
+    addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
+    addSequential(new Shoot()); //Shoot the 3 power cells we collected from the trench
   }
 }

@@ -50,12 +50,11 @@ public class RobotMap {
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
-	/** Conveyor Settings ****************************************************/
-	// Upper Conveyer Settings
+	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double UPPER_CONVEYOR_POWER = 0.4; // How much power (as a %) to give the upper conveyor
-	// Lower Conveyer Settings
+	/** Conveyor Settings (Lower) *********************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the lower conveyor
@@ -78,9 +77,9 @@ public class RobotMap {
 	public static final boolean SENSOR_PHASE_RIGHT = false;
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller (Use the Robot Characterization Tool to calculate this!)
-	public static final double ks_DRIVE = 2.14; // Static Gain constant (Use the Robot Characterization Tool to calculate this!)
-	public static final double kv_DRIVE = 1.26; // Velocity Gain constant (Use the Robot Characterization Tool to calculate this!)
+	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller (TODO: Use the Robot Characterization Tool to calculate this!)
+	public static final double ks_DRIVE = 2.14; // Static Gain constant (TODO: Use the Robot Characterization Tool to calculate this!)
+	public static final double kv_DRIVE = 1.26; // Velocity Gain constant (TODO: Use the Robot Characterization Tool to calculate this!)
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.026;
