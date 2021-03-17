@@ -3,7 +3,6 @@ package org.usfirst.frc.team3042.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc.team3042.lib.Log;
@@ -29,7 +28,7 @@ public class Shooter extends Subsystem {
 
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
-	public TalonSRX motor = new WPI_TalonSRX(CAN_SHOOTER); //initialize motor
+	public WPI_TalonSRX motor = new WPI_TalonSRX(CAN_SHOOTER); //initialize motor
 
 	/** Shooter ***************************************************************/
 	public Shooter() {
@@ -80,6 +79,12 @@ public class Shooter extends Subsystem {
 	}
 	public void stop() {
 		motor.set(ControlMode.PercentOutput, 0.0);
+	}
+
+	/** Voltage Control ********************************************************/
+	public void setVoltage(double volts) { //This needs to be called continiously for voltage compensation to work correctly!
+		double power = Math.min(volts, 12.0); //This ensures that we never give the motor more than 12V
+		motor.setVoltage(power);
 	}
 	
 	/** initDefaultCommand *****************************************************/
