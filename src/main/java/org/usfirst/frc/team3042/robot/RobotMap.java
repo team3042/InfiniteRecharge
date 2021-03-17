@@ -176,11 +176,6 @@ public class RobotMap {
 	public static final Log.Level	LOG_POV_BUTTON						= Log.Level.ERROR;
 	/** Subsystems ************************************************************/
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-	public static final Log.Level	LOG_DRIVETRAIN_FOLLOWERS			= Log.Level.TRACE;
-	public static final Log.Level	LOG_DRIVETRAIN_ENCODERS 			= Log.Level.DEBUG;
-	public static final Log.Level	LOG_DRIVETRAIN_AUTON				= Log.Level.DEBUG;
-	public static final Log.Level	LOG_GYROSCOPE						= Log.Level.DEBUG;
-	public static final Log.Level	LOG_COLOR_SENSOR					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_CONTROL_PANEL_WHEEL				= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LIMELIGHT						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_TURRET							= Log.Level.DEBUG;

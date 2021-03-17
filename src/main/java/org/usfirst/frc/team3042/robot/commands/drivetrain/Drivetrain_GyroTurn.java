@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
@@ -7,13 +7,12 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 
 /** Drivetrain Gyro Turn ******************************************************
  * Command for turning in place to a set angle. */
 public class Drivetrain_GyroTurn extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_GYROSCOPE;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;
 	private static final double kI = RobotMap.kI_GYRO;
 	private static final double kD = RobotMap.kD_GYRO;
@@ -23,7 +22,6 @@ public class Drivetrain_GyroTurn extends Command {
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
-	Gyroscope gyroscope = Robot.gyroscope;
 	double lastError, integralError, goalAngle;
 	
 	/** Drivetrain Gyro Turn ************************************************** 

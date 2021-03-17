@@ -4,7 +4,7 @@ import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.Shoot;

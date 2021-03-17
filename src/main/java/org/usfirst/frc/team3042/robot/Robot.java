@@ -5,7 +5,6 @@ import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;
 import org.usfirst.frc.team3042.robot.subsystems.LowerConveyor;
@@ -37,7 +36,6 @@ public class Robot extends TimedRobot {
 	/** Create Subsystems *****************************************************/
 	private Log log = new Log(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain 			  = new Drivetrain();
-	public static final Gyroscope gyroscope 	   		  = new Gyroscope();
 	public static final Limelight limelight        		  = new Limelight();
 	public static final Turret turret 			  		  = new Turret();
 	public static final Intake intake 			  		  = new Intake();
