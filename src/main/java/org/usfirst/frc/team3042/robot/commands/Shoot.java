@@ -48,6 +48,14 @@ public class Shoot extends Command {
 
     time = t;
     timedShoot = true;
+    onTarget = false;
+  }
+  //Overloaded constructor that allows us to shoot without using the turret for targeting; useful for close-range shots!
+  public Shoot(boolean noTargeting) {
+    log.add("Constructor", Log.Level.TRACE);
+
+    onTarget = noTargeting;
+    timedShoot = false;
   }
 
   /** initialize **************************************************************
