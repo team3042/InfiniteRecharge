@@ -6,11 +6,9 @@ import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_TankDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -38,17 +36,15 @@ public class Drivetrain extends Subsystem {
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 
-	TalonSRX leftMotor = new TalonSRX(CAN_LEFT_MOTOR);
-	TalonSRX rightMotor = new TalonSRX(CAN_RIGHT_MOTOR);
-	TalonSRX leftFollower = new TalonSRX(CAN_LEFT_FOLLOWER);
-	TalonSRX rightFollower = new TalonSRX(CAN_RIGHT_FOLLOWER);	
+	WPI_TalonSRX leftMotor = new WPI_TalonSRX(CAN_LEFT_MOTOR);
+	WPI_TalonSRX rightMotor = new WPI_TalonSRX(CAN_RIGHT_MOTOR);
+	WPI_TalonSRX leftFollower = new WPI_TalonSRX(CAN_LEFT_FOLLOWER);
+	WPI_TalonSRX rightFollower = new WPI_TalonSRX(CAN_RIGHT_FOLLOWER);	
 
-	private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(new WPI_TalonSRX(CAN_LEFT_MOTOR), new WPI_TalonSRX(CAN_LEFT_FOLLOWER));
-	private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(new WPI_TalonSRX(CAN_RIGHT_MOTOR), new WPI_TalonSRX(CAN_RIGHT_FOLLOWER));
-	private final PIDController leftPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
-	private final PIDController rightPIDController = new PIDController(1, 0, 0); //TODO: Use calculated kP from the Robot Characterization Tool
+	private final PIDController leftPIDController = new PIDController(2.57, 0, 0);
+	private final PIDController rightPIDController = new PIDController(2.57, 0, 0);
 	
-	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1, 3); //TODO: Run Robot Characterization Tool to determine these 2 values
+	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(2.14, 1.26);
 
 	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor
 	DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(RobotMap.ROBOT_WIDTH / 39.3700787); // Divide by 39.3700787 to convert inches to meters
@@ -65,7 +61,7 @@ public class Drivetrain extends Subsystem {
 
 		leftFollower.set(ControlMode.Follower, CAN_LEFT_MOTOR);
 		rightFollower.set(ControlMode.Follower, CAN_RIGHT_MOTOR);
-		
+
 		initMotor(leftMotor, REVERSE_LEFT_MOTOR);
 		initMotor(rightMotor, REVERSE_RIGHT_MOTOR);
 		initMotor(leftFollower, REVERSE_LEFT_MOTOR);
@@ -73,7 +69,7 @@ public class Drivetrain extends Subsystem {
 
 		odometry = new DifferentialDriveOdometry(gyroscope.getRotation2d());
 	}
-	private void initMotor(TalonSRX motor, boolean reverse) {
+	private void initMotor(WPI_TalonSRX motor, boolean reverse) {
 		motor.setNeutralMode(BRAKE_MODE);
 		motor.setInverted(reverse); 	// affects percent Vbus mode
 	}
@@ -146,8 +142,8 @@ public class Drivetrain extends Subsystem {
     	final double leftOutput = leftPIDController.calculate(speedToMeters(encoders.getLeftSpeed()), speeds.leftMetersPerSecond);
 		final double rightOutput = rightPIDController.calculate(speedToMeters(encoders.getRightSpeed()), speeds.rightMetersPerSecond);
 		
-    	leftGroup.setVoltage(leftOutput + leftFeedforward);
-   		rightGroup.setVoltage(rightOutput + rightFeedforward);
+    	leftMotor.setVoltage(leftOutput + leftFeedforward);
+   		rightMotor.setVoltage(rightOutput + rightFeedforward);
   	}
 	
 	/** Provide commands access to the encoders ****************/
