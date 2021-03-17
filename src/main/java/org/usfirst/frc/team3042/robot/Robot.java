@@ -1,8 +1,13 @@
 package org.usfirst.frc.team3042.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
+import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Trajectory;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
@@ -18,9 +23,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /** Robot *********************************************************************
@@ -55,17 +63,32 @@ public class Robot extends TimedRobot {
 	boolean ColorRecieved = false;
 
 	/** robotInit *************************************************************
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code. */
+	 * This function is run when the robot is first started up and should be used for any initialization code. */
 	public void robotInit() {
 		log.add("Robot Init", Log.Level.TRACE);
 
 		oi = new OI();
+
+		// Trajectory File Locations
+		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
+		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
+		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
+		String test = "PathWeaver/output/test.wpilib.json";
+		
+		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
-		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
+		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+
+		// AutoNAV Challenge Courses
+		chooser.addOption("Barrel Racing", new Drivetrain_Trajectory(buildTrajectory(barrelRacingFile)));
+		chooser.addOption("Slalom", new Drivetrain_Trajectory(buildTrajectory(slalomFile)));
+		chooser.addOption("Bounce", new Drivetrain_Trajectory(buildTrajectory(bounceFile)));
+		chooser.addOption("test", new Drivetrain_Trajectory(buildTrajectory(test)));
+				
 		SmartDashboard.putData("Auto Mode", chooser);
 
+		// Start up the webcam and configure its resolution and framerate
 		camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
 		camera1.setFPS(15);
@@ -73,8 +96,7 @@ public class Robot extends TimedRobot {
 
 	/** disabledInit **********************************************************
 	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled. */
+	 * You can use it to reset any subsystem information you want to clear when the robot is disabled. */
 	public void disabledInit() {
 		log.add("Disabled Init", Log.Level.TRACE);
 		limelight.led.setNumber(1); //Turn off the Limelight's LEDs
@@ -141,7 +163,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Shooter Speed:", shooter.getSpeed());
 		SmartDashboard.putNumber("Sensor Distance:", ultrasonicsensor.getDistance());
 		SmartDashboard.putNumber("Turret Position:", turret.countsToDegrees(turret.getPosition()));
-		SmartDashboard.putNumber("Drivetrain Speed", drivetrain.getEncoders().getLeftSpeed());
+		SmartDashboard.putNumber("Drivetrain Speed", (drivetrain.getEncoders().getLeftSpeed() + drivetrain.getEncoders().getRightSpeed()) / 2.0); // Average speed of the left and right side
 
 		//Read the assigned control panel color from the FMS and display it on the dashboard
 		color = DriverStation.getInstance().getGameSpecificMessage();
@@ -169,4 +191,20 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putString("Color:", "Capacity Not Reached");
 		}
 	} 
+
+	// Takes the file location of a PathWeaver json file and builds it into a drivable trajectory
+	private Trajectory buildTrajectory(String trajectoryJSON) {
+		
+   		// Generate a trajectory to follow. All units should be in meters!
+    	Trajectory trajectory = new Trajectory();
+		
+		try {
+  			Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+  			trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+		} catch (IOException ex) {
+  			DriverStation.reportError("Unable to access file: " + trajectoryJSON, ex.getStackTrace());
+		}
+		
+		return trajectory;
+	}
 }
