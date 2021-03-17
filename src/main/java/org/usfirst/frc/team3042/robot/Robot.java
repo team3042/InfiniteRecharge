@@ -78,6 +78,9 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
+
 		// Trajectory File Locations
 		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
 		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
@@ -121,6 +124,10 @@ public class Robot extends TimedRobot {
 	 * Runs once at the start of autonomous mode. */
 	public void autonomousInit() {
 		log.add("Autonomous Init", Log.Level.TRACE);
+
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
+
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
@@ -152,6 +159,9 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 
 		stopAutonomous.start();
+
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 
