@@ -15,10 +15,10 @@ public class RobotMap {
 	public static final double ROBOT_WIDTH = 21.5;
 	
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_MOTOR 	= 17;
-	public static final int CAN_RIGHT_MOTOR = 19;
-	public static final int CAN_LEFT_FOLLOWER = 15;
-	public static final int CAN_RIGHT_FOLLOWER = 2;
+	public static final int CAN_LEFT_MOTOR 	= 19;
+	public static final int CAN_RIGHT_MOTOR = 17;
+	public static final int CAN_LEFT_FOLLOWER = 2;
+	public static final int CAN_RIGHT_FOLLOWER = 15;
 	public static final int CAN_TURRET = 26;
 	public static final int CAN_INTAKE = 13;
 	public static final int CAN_SHOOTER = 32;
