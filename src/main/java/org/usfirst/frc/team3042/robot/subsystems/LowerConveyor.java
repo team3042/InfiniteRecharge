@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 /** LowerConveyor *************************************************************
- * Subsystem for the Lower Conveyor that rolls the power cells to the upper conveyor */
+ * Subsystem for the Lower Conveyor that brings the power cells to the upper conveyor */
 public class LowerConveyor extends Subsystem {
 	/** Configuration Constants ***********************************************/
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_LOWER_CONVEYOR;

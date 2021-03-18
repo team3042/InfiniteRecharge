@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
@@ -8,13 +8,12 @@ import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.DrivetrainEncoders;
-import org.usfirst.frc.team3042.robot.subsystems.Gyroscope;
 
 /** Drivetrain Gyro Straight **************************************************
  * Command for driving straight using gyroscope feedback. */
 public class Drivetrain_GyroStraight extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_GYROSCOPE;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;
 	private static final double kI = RobotMap.kI_GYRO;
 	private static final double kD = RobotMap.kD_GYRO;
@@ -27,7 +26,6 @@ public class Drivetrain_GyroStraight extends Command {
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
 	DrivetrainEncoders encoders = Robot.drivetrain.getEncoders();
-	Gyroscope gyroscope = Robot.gyroscope;
 	double leftPower, rightPower, lastError, integralError;
 	double goalAngle, goalDistance;
 	
@@ -55,7 +53,7 @@ public class Drivetrain_GyroStraight extends Command {
 		log.add("Initialize", Log.Level.TRACE);
 
 		drivetrain.stop();
-		goalAngle = gyroscope.getAngle();
+		goalAngle = drivetrain.getAngle();
 		lastError = 0.0;
 		integralError = 0.0;
 		encoders.reset();
@@ -64,7 +62,7 @@ public class Drivetrain_GyroStraight extends Command {
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		double error = goalAngle - gyroscope.getAngle();
+		double error = goalAngle - drivetrain.getAngle();
 		integralError += error;
 		double deltaError = error - lastError;
 		

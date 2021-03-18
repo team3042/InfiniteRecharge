@@ -1,10 +1,10 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /** Wait *******************************************************
- * Waits for a certain number of seconds; useful for autonomous command groups */
+ * Waits for a certain number of seconds; useful for autonomous command groups! */
 public class Wait extends Command {
 
 	int duration;

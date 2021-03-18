@@ -1,88 +1,103 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 import org.usfirst.frc.team3042.lib.Log;
+import org.usfirst.frc.team3042.robot.OI;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3042.robot.subsystems.DrivetrainEncoders;
 
-/** Drivetrain Calibrate ******************************************************
- * Determine the F-Gain for the left and right motors of the drivetrain. */
-public class Drivetrain_Calibrate extends Command {
+/** Drivetrain Tank Drive *****************************************************
+ * Use joystick input to drive the robot. */
+public class Drivetrain_TankDrive extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN_AUTON;
-	private static final double CALIBRATE_POWER = RobotMap.AUTON_CALIBRATE_POWER;
-	private static final double CALIBRATE_TIME = RobotMap.AUTON_CALIBRATE_TIME;
-	private static final int COUNT_AVERAGE = RobotMap.AUTON_COUNT_AVERAGE;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
+	private static final double ACCELERATION_MAX = RobotMap.ACCELERATION_MAX;
 	
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
-	DrivetrainEncoders encoders = Robot.drivetrain.getEncoders();
+	OI oi = Robot.oi;
+	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();
-	int count;
-	double leftSum, rightSum;
 	
-	/** Drivetrain Calibrate **************************************************/
-	public Drivetrain_Calibrate() {
+	/** Drivetrain Tank Drive *************************************************
+	 * Required subsystems will cancel commands when this command is run. */
+	public Drivetrain_TankDrive() {
 		log.add("Constructor", Log.Level.TRACE);
 		
 		requires(drivetrain);
 	}
-	
+
 	/** initialize ************************************************************
 	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
+				
+		drivetrain.stop();
+		leftPowerOld = 0.0;
+		rightPowerOld = 0.0;
 		
 		timer.start();
 		timer.reset();
-		drivetrain.setPower(CALIBRATE_POWER, CALIBRATE_POWER);
-		count = 0;
-		leftSum = 0.0;
-		rightSum = 0.0;
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		if (timer.get() > CALIBRATE_TIME) {
-			leftSum += encoders.getLeftSpeed();
-			rightSum += encoders.getRightSpeed();
-			count ++;
-		}
+		double leftPower = oi.getDriveLeft();
+		double rightPower = oi.getDriveRight();
+		
+		double dt = timer.get();
+		timer.reset();
+		leftPower = restrictAcceleration(leftPower, leftPowerOld, dt);
+		rightPower = restrictAcceleration(rightPower, rightPowerOld, dt);	
+		
+		drivetrain.setPower(leftPower, rightPower);
+		
+		leftPowerOld = leftPower;
+		rightPowerOld = rightPower;
+	}
+	
+	/** restrictAcceleration **************************************************/
+	private double restrictAcceleration(double goalPower, 
+		double currentPower, double dt) {
+		double maxDeltaPower = ACCELERATION_MAX * dt;
+		double deltaPower = Math.abs(goalPower - currentPower);
+		double deltaSign = (goalPower < currentPower) ? -1.0 : 1.0;
+		
+		deltaPower = Math.min(maxDeltaPower, deltaPower);
+		goalPower = currentPower + deltaSign * deltaPower;
+
+		return goalPower;
 	}
 	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
-		return count >= COUNT_AVERAGE;
+		return false;
 	}
 
 	/** end *******************************************************************
 	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
-		drivetrain.stop();
-		
-		log.add("Left kF", findF(leftSum), LOG_LEVEL);
-		log.add("Right kF", findF(rightSum), LOG_LEVEL);
+		terminate();
 	}
-	private double findF (double rpmSum) {
-		double rpmAvg = rpmSum / count;
-		double kF = encoders.rpmToF(rpmAvg, CALIBRATE_POWER);
-		return kF;
-	}
-	
+
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
 	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
+		terminate();
+	}
+	
+	/** Graceful End **********************************************************/
+	private void terminate() {
 		drivetrain.stop();
 	}
 }

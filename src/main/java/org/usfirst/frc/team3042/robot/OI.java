@@ -4,7 +4,7 @@ import org.usfirst.frc.team3042.lib.Log;
 
 import org.usfirst.frc.team3042.robot.commands.Turret_Manual;
 import org.usfirst.frc.team3042.robot.commands.UpperConveyor_Test;
-import org.usfirst.frc.team3042.robot.commands.Drivetrain_Scale_Toggle;
+import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Scale_Toggle;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Test;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
@@ -57,23 +57,25 @@ public class OI {
 		gamepad.LT.whileActive(new Intake_Intake(-1)); //reverse intake
 
 		//Spit out balls
-		gamepad.RT.whileActive(new UpperConveyor_Test(-1)); //reverse upper conveyor
-		gamepad.RT.whileActive(new LowerConveyor_Test(-1)); //reverse lower conveyor
-		gamepad.RT.whileActive(new Intake_Intake(-1)); //reverse intake
+		gamepad.A.whileHeld(new UpperConveyor_Test(-1)); //reverse upper conveyor
+		gamepad.A.whileHeld(new LowerConveyor_Test(-1)); //reverse lower conveyor
+		gamepad.A.whileHeld(new Intake_Intake(-1)); //reverse intake
 
 		//Turret Controls
 		gamepad.POVRight.whileActive(new Turret_Manual(1));
 		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 
-		//Shooting Controls
+		//Shoot
 		gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
-		gamepad.RB.whileActive(new Shoot());
+		gamepad.RB.whileHeld(new Shoot());
+		//Shoot without targeting
+		gamepad.RT.whileActive(new Shooter_Spin());
+		gamepad.RT.whileActive(new Shoot(true));
 
-		//Initial Testing
+		//Initial Testing Stuff
 		gamepad.X.whileHeld(new UpperConveyor_Test(1));
 		gamepad.Y.whileHeld(new LowerConveyor_Test(1));
-
 	}
 	
 	/** Access to the driving axes values *****************************

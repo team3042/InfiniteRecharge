@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
  * The encoders for the drivetrain. */
 public class DrivetrainEncoders extends Subsystem {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN_ENCODERS;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final int COUNTS_PER_REVOLUTION = RobotMap.COUNTS_PER_REVOLUTION;
 	private static final int FRAME_RATE = RobotMap.ENCODER_FRAME_RATE;
 	private static final int TIMEOUT = RobotMap.AUTON_TIMEOUT;

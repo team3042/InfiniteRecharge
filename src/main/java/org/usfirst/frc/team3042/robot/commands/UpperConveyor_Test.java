@@ -12,8 +12,8 @@ import org.usfirst.frc.team3042.robot.subsystems.UpperConveyor;
  * Test Upper Conveyor */
 public class UpperConveyor_Test extends Command {
 	/** Configuration Constants ***********************************************/
-	private static final Log.Level LOG_LEVEL = RobotMap.LOG_COLOR_SENSOR;
-	private static final double speed = RobotMap.LOWER_CONVEYOR_POWER;
+	private static final Log.Level LOG_LEVEL = RobotMap.LOG_UPPER_CONVEYOR;
+	private static final double speed = RobotMap.UPPER_CONVEYOR_POWER;
 	
 	/** Instance Variables ****************************************************/
 	UpperConveyor conveyor = Robot.upperconveyor;
@@ -37,8 +37,7 @@ public class UpperConveyor_Test extends Command {
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
-	protected void execute() {
-	}
+	protected void execute() {}
 	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute() */

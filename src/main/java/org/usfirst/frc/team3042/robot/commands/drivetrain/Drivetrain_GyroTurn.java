@@ -1,103 +1,93 @@
-package org.usfirst.frc.team3042.robot.commands;
+package org.usfirst.frc.team3042.robot.commands.drivetrain;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 
 import org.usfirst.frc.team3042.lib.Log;
-import org.usfirst.frc.team3042.robot.OI;
 import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.RobotMap;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
-/** Drivetrain Tank Drive *****************************************************
- * Use joystick input to drive the robot. */
-public class Drivetrain_TankDrive extends Command {
+/** Drivetrain Gyro Turn ******************************************************
+ * Command for turning in place to a set angle. */
+public class Drivetrain_GyroTurn extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
-	private static final double ACCELERATION_MAX = RobotMap.ACCELERATION_MAX;
+	private static final double kP = RobotMap.kP_GYRO;
+	private static final double kI = RobotMap.kI_GYRO;
+	private static final double kD = RobotMap.kD_GYRO;
+	private static final double ANGLE_TOLERANCE = RobotMap.ANGLE_TOLERANCE;
+	private static final double MAX_POWER = RobotMap.MAX_POWER_GYRO;
 	
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
-	OI oi = Robot.oi;
-	double leftPowerOld, rightPowerOld;
-	Timer timer = new Timer();
+	double lastError, integralError, goalAngle;
 	
-	/** Drivetrain Tank Drive *************************************************
-	 * Required subsystems will cancel commands when this command is run. */
-	public Drivetrain_TankDrive() {
+	/** Drivetrain Gyro Turn ************************************************** 
+	 * Required subsystems will cancel commands when this command is run.
+	 * distance is given in physical units matching the wheel diameter unit
+	 * speed is given in physical units per second. The physical units should 
+	 * match that of the Wheel diameter.
+	 * @param angle (degrees) */
+	public Drivetrain_GyroTurn(double angle) {
 		log.add("Constructor", Log.Level.TRACE);
-		
 		requires(drivetrain);
-	}
 
+		goalAngle = angle;
+	}
+	
 	/** initialize ************************************************************
 	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-				
 		drivetrain.stop();
-		leftPowerOld = 0.0;
-		rightPowerOld = 0.0;
-		
-		timer.start();
-		timer.reset();
+		lastError = 0.0;
+		integralError = 0.0;
+		drivetrain.zeroGyro();
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		double leftPower = oi.getDriveLeft();
-		double rightPower = oi.getDriveRight();
+		double error = goalAngle - drivetrain.getAngle();
+		integralError += error;
+		double deltaError = error - lastError;
 		
-		double dt = timer.get();
-		timer.reset();
-		leftPower = restrictAcceleration(leftPower, leftPowerOld, dt);
-		rightPower = restrictAcceleration(rightPower, rightPowerOld, dt);	
+		double Pterm = kP * error;
+		double Iterm = (Math.abs(error) <= RobotMap.kI_GYRO_INTERVAL)? kI * integralError: 0.0;
+		double Dterm = kD * deltaError;
 		
-		drivetrain.setPower(leftPower, rightPower);
+		double correction = Pterm + Iterm + Dterm;
 		
-		leftPowerOld = leftPower;
-		rightPowerOld = rightPower;
-	}
+		correction = Math.min(MAX_POWER, correction);
+		correction = Math.max(-MAX_POWER, correction);
 	
-	/** restrictAcceleration **************************************************/
-	private double restrictAcceleration(double goalPower, 
-		double currentPower, double dt) {
-		double maxDeltaPower = ACCELERATION_MAX * dt;
-		double deltaPower = Math.abs(goalPower - currentPower);
-		double deltaSign = (goalPower < currentPower) ? -1.0 : 1.0;
+		drivetrain.setPower(correction, -correction);
 		
-		deltaPower = Math.min(maxDeltaPower, deltaPower);
-		goalPower = currentPower + deltaSign * deltaPower;
+		log.add("***** " + correction, Log.Level.DEBUG);
 
-		return goalPower;
+		lastError = error;
 	}
 	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute() */
 	protected boolean isFinished() {
-		return false;
+		return Math.abs(lastError) < ANGLE_TOLERANCE;
 	}
-
+	
 	/** end *******************************************************************
 	 * Called once after isFinished returns true */
 	protected void end() {
 		log.add("End", Log.Level.TRACE);
-		terminate();
+		drivetrain.stop();
 	}
-
+	
 	/** interrupted ***********************************************************
 	 * Called when another command which requires one or more of the same
 	 * subsystems is scheduled to run */
 	protected void interrupted() {
 		log.add("Interrupted", Log.Level.TRACE);
-		terminate();
-	}
-	
-	/** Graceful End **********************************************************/
-	private void terminate() {
 		drivetrain.stop();
 	}
 }

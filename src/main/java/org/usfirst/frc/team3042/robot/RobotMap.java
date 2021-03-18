@@ -11,12 +11,12 @@ public class RobotMap {
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
 	 * in inches, position will be in inches and speed in inches per second. */
-	public static final double WHEEL_DIAMETER = 6.0;
-	public static final double ROBOT_WIDTH = 27.0;
+	public static final double WHEEL_DIAMETER = 5.5;
+	public static final double ROBOT_WIDTH = 21.5;
 	
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_MOTOR 	= 17;
-	public static final int CAN_RIGHT_MOTOR = 19;
+	public static final int CAN_LEFT_MOTOR 	= 19;
+	public static final int CAN_RIGHT_MOTOR = 17;
 	public static final int CAN_LEFT_FOLLOWER = 2;
 	public static final int CAN_RIGHT_FOLLOWER = 15;
 	public static final int CAN_TURRET = 26;
@@ -50,16 +50,16 @@ public class RobotMap {
 	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean CPWHEEL_SENSOR_PHASE = false;
 	
-	/** Conveyor Settings ****************************************************/
-	// Upper Conveyer Settings
+	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.4; // How much power (as a %) to give the upper conveyor
-	// Lower Conveyer Settings
+	public static final double UPPER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the upper conveyor
+	/** Conveyor Settings (Lower) *********************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the lower conveyor
 	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 	
 	/** DIO channels **********************************************************/
 	public static final int DIO_ULTRASONIC_PING = 8;
@@ -67,52 +67,28 @@ public class RobotMap {
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
-	// Maximum Acceleration given in power(volts?) per second
-	public static final double ACCELERATION_MAX = 1.5;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
+	public static final double ACCELERATION_MAX = 1.5; // Maximum Acceleration given in power(volts) per second
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;
-	/** Drivetrain Encoder Settings *******************************************/
-	// Encoder counts per revolution
-	// In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
-	public static final int COUNTS_PER_REVOLUTION = 1440;
-	// How often the encoders update on the CAN, in milliseconds
-	public static final int ENCODER_FRAME_RATE = 10;
+	public static final int COUNTS_PER_REVOLUTION = 1440; // In quadrature mode, actual counts will be 4x the cycles; e.g., 360 -> 1440
+	public static final int ENCODER_FRAME_RATE = 10; // How often the encoders update on the CAN, in milliseconds
 	public static final boolean SENSOR_PHASE_LEFT = false;
 	public static final boolean SENSOR_PHASE_RIGHT = false;
-	/** Drivetrain Autonomous Settings ****************************************/
-	public static final int AUTON_PROFILE = 0;
-	public static final double kP_AUTON = 0.4;
-	public static final double kI_AUTON = 0.0;
-	public static final double kD_AUTON = 0.8;
-	public static final int I_ZONE_AUTON = 0;
-	// The rate of pushing motion profile points to the talon, in ms
-	public static final int AUTON_FRAME_RATE = 10;
-	// Parameters for calibrating the F-gain
-	public static final double AUTON_CALIBRATE_POWER = 0.5;
-	public static final double AUTON_CALIBRATE_TIME = 5.0; // seconds
-	public static final int AUTON_COUNT_AVERAGE = 20;
-	// Parameters for motion profile driving
-	public static final int AUTON_DT_MS = 30;
-	public static final double AUTON_DT_SEC = (double)AUTON_DT_MS / 1000.0;
-	public static final double AUTON_ACCEL_TIME = 1.0; // time in sec
-	public static final double AUTON_SMOOTH_TIME = 0.1; // time in sec
-	public static final double AUTON_MAX_ACCEL = 3.0; // rev per sec per sec
-	public static final int AUTON_BUFFER_TRIGGER = 10;
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final int AUTON_HEADING = 0; // unimplemented feature; set to zero
-	/** Drivetrain Gyro Drive Settings ****************************************/
-	public static final double kP_GYRO = 0.0175;
-	public static final double kI_GYRO = 0.0;
-	public static final double kD_GYRO = 0.0170;
-	public static final double ANGLE_TOLERANCE = 2.0;
-	public static final double MAX_POWER_GYRO = 0.4;
-	public static final double kI_GYRO_INTERVAL = 0.0;
+	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller (TODO: Use the Robot Characterization Tool to calculate this!)
+	public static final double ks_DRIVE = 2.14; // Static Gain constant (TODO: Use the Robot Characterization Tool to calculate this!)
+	public static final double kv_DRIVE = 1.26; // Velocity Gain constant (TODO: Use the Robot Characterization Tool to calculate this!)
 
-	/** Gyroscope Settings ****************************************************/
-	public static final double GYROSCOPE_SCALE = 1.0; // Constant for scaling values returned by the gyroscope, leave at 1.0 by default
+	/** Drivetrain Gyro Drive Settings ****************************************/
+	public static final double kP_GYRO = 0.026;
+	public static final double kI_GYRO = 0.0;
+	public static final double kD_GYRO = 0.017;
+	public static final double ANGLE_TOLERANCE = 14.0;
+	public static final double MAX_POWER_GYRO = 0.48;
+	public static final double kI_GYRO_INTERVAL = 0.0;
 
 	/** Intake Settings *******************************************************/
 	public static final boolean REVERSE_INTAKE = true;
@@ -121,8 +97,8 @@ public class RobotMap {
 
 	/** OI Settings ***********************************************************/
 	public static final boolean USE_JOYSTICKS = true;
-	public static final double JOYSTICK_DRIVE_SCALE = -1.1; // Determines normal driving speed of the robot
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = -0.25; // Determines driving speed of the robot when in slow mode
+	public static final double JOYSTICK_DRIVE_SCALE = 1.1; // Determines driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.25; // Determines driving speed of the robot when in slow mode
 	public static final double TRIGGER_SPINNER_SCALE = 0.1;
 	public static final double JOYSTICK_DEAD_ZONE = 0.0;
 	
@@ -154,9 +130,6 @@ public class RobotMap {
 	public static final int TURRET_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
 	public static final boolean TURRET_SENSOR_PHASE = false;
 	
-	/** Ultrasonic Sensor Settings ********************************************/
-	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
-
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
 	public static final int USB_JOYSTICK_RIGHT 	= 1;
@@ -176,19 +149,10 @@ public class RobotMap {
 	public static final Log.Level	LOG_POV_BUTTON						= Log.Level.ERROR;
 	/** Subsystems ************************************************************/
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-	public static final Log.Level	LOG_DRIVETRAIN_FOLLOWERS			= Log.Level.TRACE;
-	public static final Log.Level	LOG_DRIVETRAIN_ENCODERS 			= Log.Level.DEBUG;
-	public static final Log.Level	LOG_DRIVETRAIN_AUTON				= Log.Level.DEBUG;
-	public static final Log.Level	LOG_GYROSCOPE						= Log.Level.DEBUG;
-	public static final Log.Level	LOG_COLOR_SENSOR					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CONTROL_PANEL_WHEEL				= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LIMELIGHT						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_TURRET							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_INTAKE							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_SHOOTER							= Log.Level.DEBUG;
 	public static final Log.Level	LOG_LOWER_CONVEYOR					= Log.Level.DEBUG;
 	public static final Log.Level	LOG_UPPER_CONVEYOR					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CLIMBING_WINCH					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CLIMBING_HOOK					= Log.Level.DEBUG;
-	public static final Log.Level	LOG_ULTRASONIC_SENSOR				= Log.Level.DEBUG;
 }
