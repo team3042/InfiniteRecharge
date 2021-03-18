@@ -76,7 +76,6 @@ public class OI {
 		//Initial Testing Stuff
 		gamepad.X.whileHeld(new UpperConveyor_Test(1));
 		gamepad.Y.whileHeld(new LowerConveyor_Test(1));
-
 	}
 	
 	/** Access to the driving axes values *****************************

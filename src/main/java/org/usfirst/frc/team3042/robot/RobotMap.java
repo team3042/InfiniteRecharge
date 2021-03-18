@@ -11,14 +11,14 @@ public class RobotMap {
 	 * The units of the wheel diameter determine the units of the position 
 	 * and speed closed-loop commands. For example, if the diameter is given 
 	 * in inches, position will be in inches and speed in inches per second. */
-	public static final double WHEEL_DIAMETER = 6.0;
-	public static final double ROBOT_WIDTH = 27.0;
+	public static final double WHEEL_DIAMETER = 5.5;
+	public static final double ROBOT_WIDTH = 21.5;
 	
 	/** CAN ID numbers ********************************************************/
 	public static final int CAN_LEFT_MOTOR 	= 17;
 	public static final int CAN_RIGHT_MOTOR = 19;
-	public static final int CAN_LEFT_FOLLOWER = 2;
-	public static final int CAN_RIGHT_FOLLOWER = 15;
+	public static final int CAN_LEFT_FOLLOWER = 15;
+	public static final int CAN_RIGHT_FOLLOWER = 2;
 	public static final int CAN_TURRET = 26;
 	public static final int CAN_INTAKE = 13;
 	public static final int CAN_SHOOTER = 32;
@@ -67,8 +67,8 @@ public class RobotMap {
 	
 	/** Drivetrain Settings ***************************************************/
 	public static final NeutralMode DRIVETRAIN_BRAKE_MODE = NeutralMode.Brake;
-	public static final boolean REVERSE_LEFT_MOTOR = false;
-	public static final boolean REVERSE_RIGHT_MOTOR = true;
+	public static final boolean REVERSE_LEFT_MOTOR = true;
+	public static final boolean REVERSE_RIGHT_MOTOR = false;
 	public static final double ACCELERATION_MAX = 1.5; // Maximum Acceleration given in power(volts) per second
 	public static final double kF_DRIVE_LEFT = 0.1817180616740088;
 	public static final double kF_DRIVE_RIGHT = 0.16686239968682717;

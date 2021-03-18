@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -35,9 +36,12 @@ public class Drivetrain extends Subsystem {
 	private static final NeutralMode BRAKE_MODE = RobotMap.DRIVETRAIN_BRAKE_MODE;
 	private static final boolean REVERSE_LEFT_MOTOR = RobotMap.REVERSE_LEFT_MOTOR;
 	private static final boolean REVERSE_RIGHT_MOTOR = RobotMap.REVERSE_RIGHT_MOTOR;	
+	private static final int SOLENOID_ID = RobotMap.DRIVETRAIN_SOLENOID;
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
+
+	Solenoid shifter = new Solenoid(SOLENOID_ID);
 
 	WPI_TalonSRX leftMotor = new WPI_TalonSRX(CAN_LEFT_MOTOR);
 	WPI_TalonSRX rightMotor = new WPI_TalonSRX(CAN_RIGHT_MOTOR);
@@ -54,6 +58,8 @@ public class Drivetrain extends Subsystem {
 
 	DrivetrainEncoders encoders;
 	DifferentialDriveOdometry odometry; // Odometry class for tracking robot posistion
+
+	Boolean isHighGear = false;
 	
 	/** Drivetrain ************************************************************
 	 * Set up the talons for desired behavior. */
@@ -71,6 +77,8 @@ public class Drivetrain extends Subsystem {
 		initMotor(rightFollower, REVERSE_RIGHT_MOTOR);
 
 		odometry = new DifferentialDriveOdometry(gyroscope.getRotation2d());
+
+		setLowGear();
 	}
 	private void initMotor(WPI_TalonSRX motor, boolean reverse) {
 		motor.setNeutralMode(BRAKE_MODE);
@@ -146,7 +154,25 @@ public class Drivetrain extends Subsystem {
 		
     	leftMotor.setVoltage(leftOutput + leftFeedforward);
    		rightMotor.setVoltage(rightOutput + rightFeedforward);
-  	}
+	  }
+	  
+	  /* Methods for the pneumatic gearbox shifter */
+	public void setHighGear(){
+    	shifter.set(true);
+    	isHighGear = true;
+    }
+    public void setLowGear(){
+    	shifter.set(false);
+    	isHighGear = false;
+    }
+    public void toggleGear(){
+    	if (isHighGear){
+    		setLowGear();
+    	}
+    	else {
+    		setHighGear();
+    	}
+    }
 	
 	/** Give commands access to the drivetrain encoders ****************/
 	public DrivetrainEncoders getEncoders() {

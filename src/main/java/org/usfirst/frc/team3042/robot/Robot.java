@@ -69,11 +69,13 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
+
 		// Trajectory File Locations
 		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
 		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
 		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
-		String test = "PathWeaver/output/test.wpilib.json";
 		
 		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
@@ -84,7 +86,6 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Barrel Racing", new Drivetrain_Trajectory(buildTrajectory(barrelRacingFile)));
 		chooser.addOption("Slalom", new Drivetrain_Trajectory(buildTrajectory(slalomFile)));
 		chooser.addOption("Bounce", new Drivetrain_Trajectory(buildTrajectory(bounceFile)));
-		chooser.addOption("test", new Drivetrain_Trajectory(buildTrajectory(test)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 
@@ -115,6 +116,9 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 		SmartDashboard.putString("Color:", "Capacity Not Reached");
 
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
+
 		turret.reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
@@ -143,6 +147,9 @@ public class Robot extends TimedRobot {
 		ColorRecieved = false;
 
 		stopAutonomous.start();
+
+		drivetrain.zeroGyro();
+		drivetrain.getEncoders().reset();
 
 		limelight.pipeline.setNumber(0); //Set the Limelight to the default pipeline
 
