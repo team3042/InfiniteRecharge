@@ -31,7 +31,10 @@ public class Drivetrain extends Subsystem {
 	private static final int CAN_RIGHT_FOLLOWER = RobotMap.CAN_RIGHT_FOLLOWER;
 	private static final NeutralMode BRAKE_MODE = RobotMap.DRIVETRAIN_BRAKE_MODE;
 	private static final boolean REVERSE_LEFT_MOTOR = RobotMap.REVERSE_LEFT_MOTOR;
-	private static final boolean REVERSE_RIGHT_MOTOR = RobotMap.REVERSE_RIGHT_MOTOR;	
+	private static final boolean REVERSE_RIGHT_MOTOR = RobotMap.REVERSE_RIGHT_MOTOR;
+	private static final double kP = RobotMap.kP_DRIVE;
+	private static final double ks = RobotMap.ks_DRIVE;
+	private static final double kv = RobotMap.kv_DRIVE;	
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
@@ -41,10 +44,10 @@ public class Drivetrain extends Subsystem {
 	WPI_TalonSRX leftFollower = new WPI_TalonSRX(CAN_LEFT_FOLLOWER);
 	WPI_TalonSRX rightFollower = new WPI_TalonSRX(CAN_RIGHT_FOLLOWER);	
 
-	private final PIDController leftPIDController = new PIDController(2.57, 0, 0);
-	private final PIDController rightPIDController = new PIDController(2.57, 0, 0);
+	private final PIDController leftPIDController = new PIDController(kP, 0.0, 0.0);
+	private final PIDController rightPIDController = new PIDController(kP, 0.0, 0.0);
 	
-	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(2.14, 1.26);
+	private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv);
 
 	Gyro gyroscope = new ADXRS450_Gyro(); // The gyroscope sensor
 	DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(RobotMap.ROBOT_WIDTH / 39.3700787); // Divide by 39.3700787 to convert inches to meters
