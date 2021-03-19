@@ -91,7 +91,7 @@ public class Drivetrain extends Subsystem {
 		setDefaultCommand(new Drivetrain_TankDrive());
 	}
 	
-	/** Methods for setting the motors in Percent Vbus mode ********************/
+	/** Methods for setting the motors in % power mode ********************/
 	public void setPower(double leftPower, double rightPower) {
 		leftPower = safetyCheck(leftPower);
 		rightPower = safetyCheck(rightPower);
@@ -119,7 +119,7 @@ public class Drivetrain extends Subsystem {
     	return odometry.getPoseMeters();
 	  }
 	  
-	//Conversion Methods: Convert to Meters
+	// Conversion Methods: Convert to Meters
 	public double positionToMeters(double position) {
 		return position * Math.PI * RobotMap.WHEEL_DIAMETER / 39.3700787; // Divide by 39.3700787 to convert inches to meters
 	}
@@ -156,7 +156,7 @@ public class Drivetrain extends Subsystem {
    		rightMotor.setVoltage(rightOutput + rightFeedforward);
 	  }
 	  
-	  /* Methods for the pneumatic gearbox shifter */
+	/* Methods for the pneumatic gearbox shifter */
 	public void setHighGear(){
     	shifter.set(true);
     	isHighGear = true;
