@@ -58,7 +58,7 @@ public class RobotMap {
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
 	public static final double LOWER_CONVEYOR_POWER = 0.75; // How much power (as a %) to give the lower conveyor
-	public static final double CONVEYOR_ADVANCE_DURATION = 0.4; // How long (in seconds) to run the lower conveyor when a power cell is intaked
+	public static final double CONVEYOR_ADVANCE_DURATION = 0.25; // How long (in seconds) to run the lower conveyor when a power cell is intaked
 	public static final double POWER_CELL_DISTANCE = 4; // If the ultrasonic sensor returns a distance smaller than this (units is inches) then there is a power cell in front of it
 	
 	/** DIO channels **********************************************************/
