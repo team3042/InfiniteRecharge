@@ -31,12 +31,13 @@ public class Shooter_Spin extends Command {
 	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		shooter.setSpeed(SPEED);
 	}
 
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
-	protected void execute() {}
+	protected void execute() {
+		shooter.setSpeed(SPEED);
+	}
 
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute() */
