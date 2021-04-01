@@ -37,7 +37,6 @@ public class Shooter_Spin extends Command {
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
 		shooter.setSpeed(SPEED);
-		//shooter.setVoltage(10.0); // TODO: If the above method doesn't work well, try this instead! (Obviously the number of volts will need to be tuned)
 	}
 
 	/** isFinished ************************************************************	
