@@ -53,7 +53,7 @@ public class RobotMap {
 	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.9; // How much power (as a %) to give the upper conveyor
+	public static final double UPPER_CONVEYOR_POWER = 0.7; // How much power (as a %) to give the upper conveyor
 	/** Conveyor Settings (Lower) *********************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
@@ -104,7 +104,7 @@ public class RobotMap {
 	
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true; // Used to reverse the direction of the shooter motor
-	public static final double SHOOTER_VELOCITY = 4000; // Shooter velocity in RPM
+	public static final double SHOOTER_VELOCITY = 4100; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
@@ -118,7 +118,7 @@ public class RobotMap {
 	public static final NeutralMode TURRET_BRAKE_MODE = NeutralMode.Brake;
 	public static final int TURRET_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int TURRET_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_TURRET = 0.016; // P constant for the target-tracking PID loop
+	public static final double kP_TURRET = 0.016; // // P constant for the target-tracking PID loop
 	public static final double kI_TURRET = 0.004; // I constant for the target-tracking PID loop
 	public static final double kD_TURRET = 0.0; // D constant for the target-tracking PID loop
 	public static final double TURRET_MAX_POWER = 0.4; // The maximum power (as a %) the turret will be given when running the target-tracking PID loop
