@@ -28,28 +28,6 @@ public class RobotMap {
 	/** PCM channels **********************************************************/
 	public static final int DRIVETRAIN_SOLENOID = 0;
 	
-	/** Climbing Winch Settings ***********************************************/
-	public static final boolean REVERSE_CLIMBING_WINCH = false;
-	public static final NeutralMode CLIMBING_WINCH_BRAKE_MODE = NeutralMode.Brake;
-	public static final double CLIMBING_WINCH_POWER = 0.95; // How much power (as a %) to give the climbing winch
-	
-	/** Climbing Hook Settings ************************************************/
-	public static final boolean REVERSE_CLIMBING_HOOK = true;
-	public static final NeutralMode CLIMBING_HOOK_BRAKE_MODE = NeutralMode.Brake; 
-	public static final double CLIMBING_HOOK_POWER = 0.6; // How much power (as a %) to give the climbing hook
-
-	/** Control Panel Wheel Settings ******************************************/
-	public static final boolean REVERSE_CONTROL_PANEL_WHEEL = true;
-	public static final NeutralMode CPWHEEL_BRAKE_MODE = NeutralMode.Brake;
-	public static final int CPWHEEL_TIMEOUT = 0; // timeout in ms; set to zero
-	public static final int CPWHEEL_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final int CPWHEEL_REVOLUTIONS = 25; // Number of revolutions for wheel to spin when performing rotation control
-	public static final double POSITION_CONTROL_POWER = .4; // How much power (as a %) to give the Control Panel Wheel when performing position control
-	public static final double ROTATION_CONTROL_POWER = .4; // How much power (as a %) to give the Control Panel Wheel when performing rotation control
-	public static final int CPWHEEL_ENCODER_FRAME_RATE = 10;
-	public static final int CPWHEEL_ENCODER_COUNTS_PER_REV = 1440; // The number of encoder counts equal to one full revolution of the encoder 
-	public static final boolean CPWHEEL_SENSOR_PHASE = false;
-	
 	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
