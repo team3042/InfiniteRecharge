@@ -31,7 +31,7 @@ public class RobotMap {
 	/** Conveyor Settings (Upper) *********************************************/
 	public static final boolean REVERSE_UPPER_CONVEYOR = true;
 	public static final NeutralMode UPPER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double UPPER_CONVEYOR_POWER = 0.7; // How much power (as a %) to give the upper conveyor
+	public static final double UPPER_CONVEYOR_POWER = 0.9; // How much power (as a %) to give the upper conveyor
 	/** Conveyor Settings (Lower) *********************************************/
 	public static final boolean REVERSE_LOWER_CONVEYOR = true;
 	public static final NeutralMode LOWER_CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
@@ -82,13 +82,13 @@ public class RobotMap {
 	
 	/** Shooter Settings ******************************************************/
 	public static final boolean REVERSE_SHOOTER = true; // Used to reverse the direction of the shooter motor
-	public static final double SHOOTER_VELOCITY = 4100; // Shooter velocity in RPM
+	public static final double SHOOTER_VELOCITY = 4000; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
 	public static final double kP_SHOOTER_SPEED = 0.05; // Proportional term, tune this 2nd so the loop can respond to change more quickly
 	public static final double kI_SHOOTER_SPEED = 0.0; // Intergal term, keep at 0 if not using, but if using it should be around 1/4 * kP
 	public static final double kD_SHOOTER_SPEED = 0.05; // Derivative term, keep at 0 if not using, but if using it should be around 5 * kP
-	public static final double kF_SHOOTER_SPEED = 0.036; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
+	public static final double kF_SHOOTER_SPEED = 0.035; // Feed Forward term, tune this 1st! This value alone should get you very close to your target velocity
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
