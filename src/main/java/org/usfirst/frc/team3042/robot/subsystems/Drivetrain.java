@@ -75,13 +75,13 @@ public class Drivetrain extends Subsystem {
 		
 		encoders = new DrivetrainEncoders(leftMotor, rightMotor);
 
-		leftFollower.set(ControlMode.Follower, CAN_LEFT_MOTOR);
-		rightFollower.set(ControlMode.Follower, CAN_RIGHT_MOTOR);
-
 		initMotor(leftMotor, REVERSE_LEFT_MOTOR);
 		initMotor(rightMotor, REVERSE_RIGHT_MOTOR);
 		initMotor(leftFollower, REVERSE_LEFT_MOTOR);
 		initMotor(rightFollower, REVERSE_RIGHT_MOTOR);
+
+		leftFollower.set(ControlMode.Follower, CAN_LEFT_MOTOR);
+		rightFollower.set(ControlMode.Follower, CAN_RIGHT_MOTOR);
 
 		odometry = new DifferentialDriveOdometry(gyroscope.getRotation2d());
 
@@ -163,7 +163,7 @@ public class Drivetrain extends Subsystem {
    		rightMotorGroup.setVoltage(rightOutput + rightFeedforward);
 	  }
 	  
-	/* Methods for the pneumatic gearbox shifter */
+	/* Methods for controlling the pneumatic gearbox shifter */
 	public void setHighGear(){
     	shifter.set(true);
     	isHighGear = true;
