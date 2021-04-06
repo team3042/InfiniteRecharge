@@ -13,7 +13,6 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 public class Shooter_Spin extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
-	private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
 	
 	/** Instance Variables ****************************************************/
 	Shooter shooter = Robot.shooter;
@@ -36,7 +35,7 @@ public class Shooter_Spin extends Command {
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		shooter.setSpeed(SPEED);
+		shooter.setVoltage(10.0); // TODO: Tune this number of volts so that the shooter reaches our desired speed!
 	}
 
 	/** isFinished ************************************************************	

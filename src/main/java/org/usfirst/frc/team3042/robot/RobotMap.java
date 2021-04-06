@@ -78,9 +78,9 @@ public class RobotMap {
 	public static final boolean SENSOR_PHASE_RIGHT = false;
 	public static final int AUTON_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int AUTON_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller // TODO: Use the Robot Characterization Tool to calculate this value?
-	public static final double ks_DRIVE = 2.14; // Static Gain constant // TODO: Use the Robot Characterization Tool to calculate this value?
-	public static final double kv_DRIVE = 1.26; // Velocity Gain constant // TODO: Use the Robot Characterization Tool to calculate this value?
+	public static final double kP_DRIVE = 2.57; // P value for the drivetrain PID controller // TODO: Use the Robot Characterization Tool to calculate this value for Phoenix
+	public static final double ks_DRIVE = 2.14; // Static Gain constant // TODO: Use the Robot Characterization Tool to calculate this value for Phoenix
+	public static final double kv_DRIVE = 1.26; // Velocity Gain constant // TODO: Use the Robot Characterization Tool to calculate this value for Phoenix
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.026;
