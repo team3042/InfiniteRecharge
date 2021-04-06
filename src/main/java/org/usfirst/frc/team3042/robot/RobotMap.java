@@ -64,9 +64,8 @@ public class RobotMap {
 	public static final double kP_GYRO = 0.026;
 	public static final double kI_GYRO = 0.0;
 	public static final double kD_GYRO = 0.017;
-	public static final double ANGLE_TOLERANCE = 14.0;
-	public static final double MAX_POWER_GYRO = 0.48;
-	public static final double kI_GYRO_INTERVAL = 0.0;
+	public static final double ANGLE_TOLERANCE = 2.0;
+	public static final double MAX_POWER_GYRO = 0.5;
 
 	/** Intake Settings *******************************************************/
 	public static final boolean REVERSE_INTAKE = true;

@@ -55,7 +55,7 @@ public class Drivetrain_GyroTurn extends Command {
 		double deltaError = error - lastError;
 		
 		double Pterm = kP * error;
-		double Iterm = (Math.abs(error) <= RobotMap.kI_GYRO_INTERVAL)? kI * integralError: 0.0;
+		double Iterm = kI * integralError;
 		double Dterm = kD * deltaError;
 		
 		double correction = Pterm + Iterm + Dterm;
