@@ -73,9 +73,9 @@ public class Robot extends TimedRobot {
 		drivetrain.getEncoders().reset();
 
 		// Trajectory File Locations
-		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
-		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
-		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
+		String barrelRacingFile = "BarrelRacing/PathWeaver/output/BarrelRacing.wpilib.json";
+		String bounceFile = "Bounce/PathWeaver/output/Bounce.wpilib.json";
+		String slalomFile = "Slalom/PathWeaver/output/Slalom.wpilib.json";
 		
 		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
