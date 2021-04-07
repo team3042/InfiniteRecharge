@@ -2,7 +2,6 @@ package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.*;
-import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Trajectory;
 import org.usfirst.frc.team3042.robot.commands.Turret_Stop;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingHook;
 import org.usfirst.frc.team3042.robot.subsystems.ClimbingWinch;
@@ -80,24 +79,12 @@ public class Robot extends TimedRobot {
 
 		drivetrain.zeroGyro();
 		drivetrain.getEncoders().reset();
-
-		// Trajectory File Locations
-		String barrelRacingFile = "PathWeaver/output/BarrelRacingPath.wpilib.json";
-		String bounceFile = "PathWeaver/output/BouncePath.wpilib.json";
-		String slalomFile = "PathWeaver/output/SlalomPath.wpilib.json";
-		String test = "PathWeaver/output/test.wpilib.json";
 		
 		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 
-		// AutoNAV Challenge Courses
-		chooser.addOption("Barrel Racing", new Drivetrain_Trajectory(buildTrajectory(barrelRacingFile)));
-		chooser.addOption("Slalom", new Drivetrain_Trajectory(buildTrajectory(slalomFile)));
-		chooser.addOption("Bounce", new Drivetrain_Trajectory(buildTrajectory(bounceFile)));
-		chooser.addOption("test", new Drivetrain_Trajectory(buildTrajectory(test)));
-				
 		SmartDashboard.putData("Auto Mode", chooser);
 
 		// Start up the webcam and configure its resolution and framerate
