@@ -29,7 +29,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     addParallel(new Intake_Intake(1)); //Start running the intake
 
     // Drive into the trench to collect 3 power cells //
-    //addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory(trajectoryJSON))); // TODO: Implement this trajectory instead of using gyroStraights and gyroTurns, it will be better!
+    //addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory("trajectory file path"))); // TODO: Implement this trajectory instead of using gyroStraights and gyroTurns, it will be better!
     addSequential(new Drivetrain_GyroTurn(-70));
     addSequential(new Drivetrain_GyroStraight(82, 120));
     addSequential(new Drivetrain_GyroTurn(70));

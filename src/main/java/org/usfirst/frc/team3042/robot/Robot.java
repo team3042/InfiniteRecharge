@@ -7,7 +7,6 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Default;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
-import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_Trajectory;
 import org.usfirst.frc.team3042.robot.commands.autonomous.StopShooting;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
@@ -71,21 +70,11 @@ public class Robot extends TimedRobot {
 
 		drivetrain.zeroGyro();
 		drivetrain.getEncoders().reset();
-
-		// Trajectory File Locations
-		String barrelRacingFile = "BarrelRacing/PathWeaver/output/BarrelRacing.wpilib.json";
-		String bounceFile = "Bounce/PathWeaver/output/Bounce.wpilib.json";
-		String slalomFile = "Slalom/PathWeaver/output/Slalom.wpilib.json";
 		
 		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
 		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
 		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
-
-		// AutoNAV Challenge Courses
-		chooser.addOption("Barrel Racing", new Drivetrain_Trajectory(buildTrajectory(barrelRacingFile)));
-		chooser.addOption("Slalom", new Drivetrain_Trajectory(buildTrajectory(slalomFile)));
-		chooser.addOption("Bounce", new Drivetrain_Trajectory(buildTrajectory(bounceFile)));
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 

@@ -22,7 +22,6 @@ public class Shooter_Spin extends Command {
 	 * Required subsystems will cancel commands when this command is run. */
 	public Shooter_Spin() {
 		log.add("Constructor", Log.Level.TRACE);
-		
 		requires(shooter);
 	}
 
