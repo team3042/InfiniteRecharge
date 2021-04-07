@@ -18,10 +18,6 @@ public class Shooter extends Subsystem {
   	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
 	private static final int CAN_SHOOTER = RobotMap.CAN_SHOOTER;
 	private static final boolean REVERSE_MOTOR = RobotMap.REVERSE_SHOOTER;
-	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
-	private static final double kI = RobotMap.kI_SHOOTER_SPEED;
-	private static final double kD = RobotMap.kD_SHOOTER_SPEED;
-	private static final double kF = RobotMap.kF_SHOOTER_SPEED;
 	private static final int kPIDLoopIdx = RobotMap.SHOOTER_PIDIDX;
 	private static final int kTimeoutMs = RobotMap.SHOOTER_TIMEOUT;
 	private static final int COUNTS_PER_REV = RobotMap.SHOOTER_ENCODER_COUNTS_PER_REV;
@@ -51,22 +47,10 @@ public class Shooter extends Subsystem {
 		motor.configNominalOutputForward(0, kTimeoutMs);
 		motor.configNominalOutputReverse(0, kTimeoutMs);
 		motor.configPeakOutputForward(1, kTimeoutMs);
-		motor.configPeakOutputReverse(-1, kTimeoutMs);
-
-		// set PID coefficients
-		motor.config_kF(kPIDLoopIdx, kF, kTimeoutMs);
-		motor.config_kP(kPIDLoopIdx, kP, kTimeoutMs);
-		motor.config_kI(kPIDLoopIdx, kI, kTimeoutMs);
-		motor.config_kD(kPIDLoopIdx, kD, kTimeoutMs);
+		motor.configPeakOutputReverse(0, kTimeoutMs);
 	}
   
     /** Velocity Control *****************************************************/
-  	public void setSpeed(double rpm) {
-		/*** Convert specified RPM to encoder units per 100ms ***/
-		double targetVelocity_UnitsPer100ms = rpm * COUNTS_PER_REV / 600;
-
-		motor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
-	}
 	public double getSpeed() {
 		double targetVelocity_UnitsPer100ms = motor.getSelectedSensorVelocity(kPIDLoopIdx);
 

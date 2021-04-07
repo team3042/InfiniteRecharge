@@ -13,10 +13,15 @@ import org.usfirst.frc.team3042.robot.subsystems.Shooter;
 public class Shooter_Spin extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_SHOOTER;
+	private static final double kP = RobotMap.kP_SHOOTER_SPEED;
+	private static final double SPEED = RobotMap.SHOOTER_VELOCITY;
 	
 	/** Instance Variables ****************************************************/
 	Shooter shooter = Robot.shooter;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(shooter));
+
+	double error;
+	double correction;
 	
 	/** Shooter Spin **********************************************************
 	 * Required subsystems will cancel commands when this command is run. */
@@ -34,7 +39,14 @@ public class Shooter_Spin extends Command {
 	/** execute ***************************************************************
 	 * Called repeatedly when this Command is scheduled to run */
 	protected void execute() {
-		shooter.setVoltage(10.0); // TODO: Tune this number of volts so that the shooter reaches our desired speed!
+		error = (SPEED - shooter.getSpeed());
+
+		correction = kP * error;
+
+		correction = Math.min(1, correction);
+		correction = Math.max(0, correction);
+
+		shooter.setPower(correction);
 	}
 
 	/** isFinished ************************************************************	
