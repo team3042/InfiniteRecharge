@@ -6,6 +6,7 @@ import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 
 public class Drivetrain_Trajectory extends Command {
@@ -42,13 +43,13 @@ public class Drivetrain_Trajectory extends Command {
     drivetrain.updateOdometry();
 
     // Get the desired pose from the trajectory.
-    var desiredPose = trajectory.sample(time.get());
+    Trajectory.State desiredPose = trajectory.sample(time.get());
  
     // Get the reference chassis speeds from the Ramsete controller.
-    var refChassisSpeeds = ramseteController.calculate(drivetrain.getPose(), desiredPose);
+    ChassisSpeeds adjustedSpeeds = ramseteController.calculate(drivetrain.getPose(), desiredPose);
  
     // Set the linear and angular speeds.
-    drivetrain.drive(refChassisSpeeds.vxMetersPerSecond, refChassisSpeeds.omegaRadiansPerSecond);
+    drivetrain.drive(adjustedSpeeds.vxMetersPerSecond, adjustedSpeeds.omegaRadiansPerSecond);
   }
 
   @Override

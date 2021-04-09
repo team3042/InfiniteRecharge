@@ -148,7 +148,7 @@ public class Drivetrain extends Subsystem {
 	// Drives the robot with the given linear velocity and angular velocity.
   	@SuppressWarnings("ParameterName")
   	public void drive(double xSpeed, double rot) { 
-    	var wheelSpeeds = kinematics.toWheelSpeeds(new ChassisSpeeds(xSpeed, 0.0, rot));
+    	DifferentialDriveWheelSpeeds wheelSpeeds = kinematics.toWheelSpeeds(new ChassisSpeeds(xSpeed, 0.0, rot));
     	setSpeeds(wheelSpeeds);
 	}
 	// Sets the desired wheel speeds.
