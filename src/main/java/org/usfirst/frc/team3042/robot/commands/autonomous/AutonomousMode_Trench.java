@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3042.robot.commands.autonomous;
 
 import org.usfirst.frc.team3042.robot.commands.drivetrain.*;
+import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
@@ -18,8 +19,8 @@ public class AutonomousMode_Trench extends CommandGroup {
 
     addParallel(new Turret_Continous(true)); //Start tracking the target with the turret
     addParallel(new Shooter_Spin()); //Spin up the shooter
-    addSequential(new Drivetrain_GyroStraight(12.0, 120.0)); //Drive forwards off the initiation line
-    addSequential(new Shoot(2.6)); //Shoot the 3 pre-loaded power cells; first parameter is time in seconds
+    addSequential(new Drivetrain_GyroStraight(18.0, 120.0)); //Drive forwards off the initiation line
+    addSequential(new Shoot(2.6)); //Shoot the 3 pre-loaded power cells; Parameter is time in seconds
     addSequential(new StopShooting()); //Stop tracking the target and running the shooter when we don't need to
 
     // Knock down the intake using inertia //
@@ -29,15 +30,11 @@ public class AutonomousMode_Trench extends CommandGroup {
     addParallel(new Intake_Intake(1)); //Start running the intake
 
     // Drive into the trench to collect 3 power cells //
-    //addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory("trajectory file path"))); // TODO: Implement this trajectory instead of using gyroStraights and gyroTurns, it will be better!
-    addSequential(new Drivetrain_GyroTurn(-70));
-    addSequential(new Drivetrain_GyroStraight(82, 120));
-    addSequential(new Drivetrain_GyroTurn(70));
-    addSequential(new Drivetrain_GyroStraight(120, 80));
+    addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory("PathWeaver/output/EnterTrench.wpilib.json"))); // TODO: Test this trajectory!
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
 
-    // Drive to the optimal shooting location //
+    // Drive closer to the power port before shooting //
     addSequential(new Drivetrain_GyroStraight(80, -120)); 
 
     addParallel(new Shooter_Spin()); //Spin up the shooter
