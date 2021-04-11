@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -50,11 +49,6 @@ public class Drivetrain extends Subsystem {
 	WPI_TalonSRX rightMotor = new WPI_TalonSRX(CAN_RIGHT_MOTOR);
 	WPI_TalonSRX leftFollower = new WPI_TalonSRX(CAN_LEFT_FOLLOWER);
 	WPI_TalonSRX rightFollower = new WPI_TalonSRX(CAN_RIGHT_FOLLOWER);	
-
-	// The motors on the left side of the drivetrain.
-	private final SpeedControllerGroup leftMotorGroup = new SpeedControllerGroup(leftMotor, leftFollower);
- 	// The motors on the right side of the drivetrain.
- 	private final SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(rightMotor, rightFollower);
 
 	private final PIDController leftPIDController = new PIDController(kP, 0.0, 0.0);
 	private final PIDController rightPIDController = new PIDController(kP, 0.0, 0.0);
@@ -160,8 +154,8 @@ public class Drivetrain extends Subsystem {
     	final double leftOutput = leftPIDController.calculate(speedToMeters(encoders.getLeftSpeed()), speeds.leftMetersPerSecond);
 		final double rightOutput = rightPIDController.calculate(speedToMeters(encoders.getRightSpeed()), speeds.rightMetersPerSecond);
 		
-    	leftMotorGroup.setVoltage(leftOutput + leftFeedforward);
-   		rightMotorGroup.setVoltage(rightOutput + rightFeedforward);
+    	leftMotor.setVoltage(leftOutput + leftFeedforward);
+   		rightMotor.setVoltage(rightOutput + rightFeedforward);
 	  }
 	  
 	/* Methods for controlling the pneumatic gearbox shifter */
