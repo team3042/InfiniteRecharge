@@ -66,7 +66,7 @@ public class OI {
 		gamepad.POVLeft.whileActive(new Turret_Manual(-1));
 
 		//Shoot
-		gamepad.RB.whileHeld(new Turret_Continous(false));
+		//gamepad.RB.whileHeld(new Turret_Continous(false));
 		gamepad.RB.whileHeld(new Shooter_Spin());
 		gamepad.RB.whileHeld(new Shoot());
 		//Shoot without targeting

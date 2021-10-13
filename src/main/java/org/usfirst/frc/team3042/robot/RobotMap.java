@@ -86,7 +86,7 @@ public class RobotMap {
 	public static final double SHOOTER_VELOCITY = 4000; // Shooter velocity in RPM
 	public static final int SHOOTER_TIMEOUT = 0; // timeout in ms; set to zero
 	public static final int SHOOTER_PIDIDX = 0; // used for cascading PID; set to zero
-	public static final double kP_SHOOTER_SPEED = 0.5; // Proportional term // TODO: Tune this value so that the shooter velocity ramps up quickly but does not overshoot by much
+	public static final double kP_SHOOTER_SPEED = 8; // Proportional term
 	public static final int SHOOTER_ENCODER_COUNTS_PER_REV = 4096; // The number of encoder counts equal to one full revolution of the encoder
 	
 	/** Turret Settings *******************************************************/
