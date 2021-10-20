@@ -44,7 +44,7 @@ public class Shooter_Spin extends Command {
 		correction = kP * error;
 
 		correction = Math.min(1, correction);
-		correction = Math.max(0, correction);
+		correction = Math.max(0.4, correction);
 
 		shooter.setPower(correction);
 	}
