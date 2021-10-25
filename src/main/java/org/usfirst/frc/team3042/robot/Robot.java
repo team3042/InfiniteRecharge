@@ -7,7 +7,7 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Default;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Delayed;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Trench;
-import org.usfirst.frc.team3042.robot.commands.autonomous.StopShooting;
+import org.usfirst.frc.team3042.robot.commands.autonomous.helperCommands.StopShooting;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3042.robot.subsystems.Intake;
 import org.usfirst.frc.team3042.robot.subsystems.Limelight;

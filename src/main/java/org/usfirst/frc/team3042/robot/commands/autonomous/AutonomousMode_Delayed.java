@@ -4,6 +4,7 @@ import org.usfirst.frc.team3042.robot.commands.drivetrain.Drivetrain_GyroStraigh
 import org.usfirst.frc.team3042.robot.commands.Shoot;
 import org.usfirst.frc.team3042.robot.commands.Shooter_Spin;
 import org.usfirst.frc.team3042.robot.commands.Turret_Continous;
+import org.usfirst.frc.team3042.robot.commands.autonomous.helperCommands.Wait;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
