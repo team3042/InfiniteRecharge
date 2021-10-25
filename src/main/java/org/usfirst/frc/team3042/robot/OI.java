@@ -56,7 +56,7 @@ public class OI {
 		gamepad.LB.whileHeld(new Intake_Intake(1)); //run intake
 		gamepad.LT.whileActive(new Intake_Intake(-1)); //reverse intake
 
-		//Spit out balls (hasn't been tested yet!)
+		//Spit out balls (hasn't been tested very much yet!)
 		gamepad.A.whileHeld(new UpperConveyor_Test(-1)); //reverse upper conveyor
 		gamepad.A.whileHeld(new LowerConveyor_Test(-1)); //reverse lower conveyor
 		gamepad.A.whileHeld(new Intake_Intake(-1)); //reverse intake
@@ -73,7 +73,7 @@ public class OI {
 		gamepad.RT.whileActive(new Shooter_Spin());
 		gamepad.RT.whileActive(new Shoot(true));
 
-		//Initial Testing Stuff
+		//Manual Testing Stuff
 		gamepad.X.whileHeld(new UpperConveyor_Test(1));
 		gamepad.Y.whileHeld(new LowerConveyor_Test(1));
 	}
