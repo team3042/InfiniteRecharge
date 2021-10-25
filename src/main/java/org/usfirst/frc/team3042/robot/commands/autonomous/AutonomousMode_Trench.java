@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3042.robot.commands.autonomous;
 
 import org.usfirst.frc.team3042.robot.commands.drivetrain.*;
-import org.usfirst.frc.team3042.robot.Robot;
 import org.usfirst.frc.team3042.robot.commands.Intake_Intake;
 import org.usfirst.frc.team3042.robot.commands.LowerConveyor_Advance;
 import org.usfirst.frc.team3042.robot.commands.Shoot;
@@ -30,7 +29,7 @@ public class AutonomousMode_Trench extends CommandGroup {
     addParallel(new Intake_Intake(1)); //Start running the intake
 
     // Drive into the trench to collect 3 power cells //
-    addSequential(new Drivetrain_Trajectory(Robot.buildTrajectory("PathWeaver/output/EnterTrench.wpilib.json"))); // TODO: Test this trajectory!
+    addSequential(new Drivetrain_GyroStraight(80, 220)); 
 
     addSequential(new Intake_Intake(0)); //Stop running the intake
 
