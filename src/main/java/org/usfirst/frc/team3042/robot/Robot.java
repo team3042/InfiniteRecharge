@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
 		
 		// Infinite Recharge Autonomous Routines
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
-		chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
-		chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
+		//chooser.addOption("Trench Six Balls", new AutonomousMode_Trench());
+		//chooser.addOption("Delayed Shoot", new AutonomousMode_Delayed());
 				
 		SmartDashboard.putData("Auto Mode", chooser);
 

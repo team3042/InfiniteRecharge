@@ -35,7 +35,7 @@ public class LowerConveyor_Test extends Command {
 	 * Called just before this Command runs the first time */
 	protected void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		conveyor.setPower(direction * speed);
+		conveyor.setPower(direction * speed * 0.5);
 	}
 
 	/** execute ***************************************************************
